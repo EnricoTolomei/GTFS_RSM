@@ -1,0 +1,2 @@
+route_id,service_id,trip_id,trip_headsign,trip_short_name,direction_id,block_id,shape_id,wheelchair_accessible,bikes_allowed
+687,0,VJ29c7db3062d3c34fa5dcd6a5da4e0669b312668a,"TOR VERGATA/SCHIAVONETTI","",0,387a55975271bb02810f74c46288aee1857fe2dc,RP6168c09deb96f8cf5cd1c00185d95c8115975082,0,

@@ -1,0 +1,42 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="AtacFeed.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="UrlVehicle" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://romamobilita.it/sites/default/files/rome_rtgtfs_vehicle_positions_feed.pb</Value>
+    </Setting>
+    <Setting Name="UrlTrip" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://romamobilita.it/sites/default/files/rome_rtgtfs_trip_updates_feed.pb</Value>
+    </Setting>
+    <Setting Name="DeltaTSec" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">60</Value>
+    </Setting>
+    <Setting Name="Duplicati" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Vuote" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SalvaCSV" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SalvaXlsx" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SalvaGrafico" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SalvaMonitoraggio" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SalvaAlert" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="RadioRaggruppamento" Type="System.String" Scope="User">
+      <Value Profile="(Default)">radioNonRaggruppare</Value>
+    </Setting>
+    <Setting Name="UrlAlert" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://romamobilita.it/sites/default/files/rome_rtgtfs_service_alerts_feed.pb</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

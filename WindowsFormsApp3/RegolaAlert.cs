@@ -1,0 +1,52 @@
+﻿using CsvHelper;
+using CsvHelper.Configuration;
+using CsvHelper.TypeConversion;
+using System;
+using System.Globalization;
+
+namespace AtacFeed
+{
+    public class RegolaAlert
+    {
+        public RegolaAlert() { }
+        public RegolaAlert(string linea, string giorno, TimeSpan? da, TimeSpan? a, int? vetturaDa, int? vetturaA)
+        {
+            Linea = linea;
+            Giorno = giorno;
+            Da = da;
+            A = a;
+            VetturaDa = vetturaDa;
+            VetturaA = vetturaA;
+        }
+
+        public string Linea { get; set; }
+        public string Giorno { get; set; }
+        public TimeSpan? Da { get; set; }
+        public TimeSpan? A { get; set; }
+        public int? VetturaDa { get; set; }
+        public int? VetturaA { get; set; }
+    }
+
+    public class MyBooleanConverter : BooleanConverter
+    {
+        public override object ConvertFromString(string text, IReaderRow row, MemberMapData memberMapData)
+        {
+            return string.IsNullOrEmpty(text) || text == "+";
+        }
+    }
+
+    public sealed class RegolaAlertMap : ClassMap<RegolaAlert>
+    {
+        public RegolaAlertMap()
+        {
+            AutoMap(CultureInfo.InvariantCulture);
+            //Map(m => m.Linea);
+            //Map(m => m.Giorno);
+            //Map(m => m.Da);
+            //Map(m => m.A);                        
+            //Map(m => m.VetturaDa);
+            //Map(m => m.VetturaA);
+
+        }
+    }
+}

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtacFeed", "WindowsFormsApp3\AtacFeed.csproj", "{60668EB4-88EA-4ABA-BBCA-72C0F4316C19}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtacFeed", "AtacFeed\AtacFeed.csproj", "{60668EB4-88EA-4ABA-BBCA-72C0F4316C19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

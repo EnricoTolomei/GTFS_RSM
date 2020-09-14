@@ -34,8 +34,23 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGTFS_RSM));
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridVetture = new System.Windows.Forms.DataGridView();
+            this.idVetturaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.matricolaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.routeIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lineaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gestoreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.currentStopSequenceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.congestionLevelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.occupancyStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tripIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.primaVoltaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ultimaVoltaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rimessaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.euroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modelloDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Longitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.extendedVehicleInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button3 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -104,30 +119,6 @@
             this.tabGriglia = new System.Windows.Forms.TabPage();
             this.tabMonitoraggio = new System.Windows.Forms.TabPage();
             this.dataGridViolazioni = new System.Windows.Forms.DataGridView();
-            this.labelTotaleMatricolaATAC = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.labelTotaleMatricolaTPL = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolTipFeedTrip = new System.Windows.Forms.ToolTip(this.components);
-            this.button4 = new System.Windows.Forms.Button();
-            this.idVetturaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.matricolaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.routeIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lineaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gestoreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.currentStopSequenceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.congestionLevelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.occupancyStatusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tripIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.primaVoltaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ultimaVoltaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rimessaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.euroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modelloDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.extendedVehicleInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.lineaDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -138,7 +129,17 @@
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lineaMonitorataBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.labelTotaleMatricolaATAC = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.labelTotaleMatricolaTPL = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolTipFeedTrip = new System.Windows.Forms.ToolTip(this.components);
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVetture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).BeginInit();
             this.tabGrafico.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -153,7 +154,6 @@
             this.tabGriglia.SuspendLayout();
             this.tabMonitoraggio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViolazioni)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lineaMonitorataBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -206,6 +206,104 @@
             this.dataGridVetture.Size = new System.Drawing.Size(1022, 648);
             this.dataGridVetture.TabIndex = 8;
             // 
+            // idVetturaDataGridViewTextBoxColumn
+            // 
+            this.idVetturaDataGridViewTextBoxColumn.DataPropertyName = "IdVettura";
+            this.idVetturaDataGridViewTextBoxColumn.HeaderText = "IdVettura";
+            this.idVetturaDataGridViewTextBoxColumn.Name = "idVetturaDataGridViewTextBoxColumn";
+            this.idVetturaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // matricolaDataGridViewTextBoxColumn
+            // 
+            this.matricolaDataGridViewTextBoxColumn.DataPropertyName = "Matricola";
+            this.matricolaDataGridViewTextBoxColumn.HeaderText = "Matricola";
+            this.matricolaDataGridViewTextBoxColumn.Name = "matricolaDataGridViewTextBoxColumn";
+            this.matricolaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // routeIdDataGridViewTextBoxColumn
+            // 
+            this.routeIdDataGridViewTextBoxColumn.DataPropertyName = "RouteId";
+            this.routeIdDataGridViewTextBoxColumn.HeaderText = "RouteId";
+            this.routeIdDataGridViewTextBoxColumn.Name = "routeIdDataGridViewTextBoxColumn";
+            this.routeIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // lineaDataGridViewTextBoxColumn
+            // 
+            this.lineaDataGridViewTextBoxColumn.DataPropertyName = "Linea";
+            this.lineaDataGridViewTextBoxColumn.HeaderText = "Linea";
+            this.lineaDataGridViewTextBoxColumn.Name = "lineaDataGridViewTextBoxColumn";
+            this.lineaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // gestoreDataGridViewTextBoxColumn
+            // 
+            this.gestoreDataGridViewTextBoxColumn.DataPropertyName = "Gestore";
+            this.gestoreDataGridViewTextBoxColumn.HeaderText = "Gestore";
+            this.gestoreDataGridViewTextBoxColumn.Name = "gestoreDataGridViewTextBoxColumn";
+            this.gestoreDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // currentStopSequenceDataGridViewTextBoxColumn
+            // 
+            this.currentStopSequenceDataGridViewTextBoxColumn.DataPropertyName = "CurrentStopSequence";
+            this.currentStopSequenceDataGridViewTextBoxColumn.HeaderText = "CurrentStopSequence";
+            this.currentStopSequenceDataGridViewTextBoxColumn.Name = "currentStopSequenceDataGridViewTextBoxColumn";
+            this.currentStopSequenceDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // congestionLevelDataGridViewTextBoxColumn
+            // 
+            this.congestionLevelDataGridViewTextBoxColumn.DataPropertyName = "CongestionLevel";
+            this.congestionLevelDataGridViewTextBoxColumn.HeaderText = "CongestionLevel";
+            this.congestionLevelDataGridViewTextBoxColumn.Name = "congestionLevelDataGridViewTextBoxColumn";
+            this.congestionLevelDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // occupancyStatusDataGridViewTextBoxColumn
+            // 
+            this.occupancyStatusDataGridViewTextBoxColumn.DataPropertyName = "OccupancyStatus";
+            this.occupancyStatusDataGridViewTextBoxColumn.HeaderText = "OccupancyStatus";
+            this.occupancyStatusDataGridViewTextBoxColumn.Name = "occupancyStatusDataGridViewTextBoxColumn";
+            this.occupancyStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // tripIdDataGridViewTextBoxColumn
+            // 
+            this.tripIdDataGridViewTextBoxColumn.DataPropertyName = "TripId";
+            this.tripIdDataGridViewTextBoxColumn.HeaderText = "TripId";
+            this.tripIdDataGridViewTextBoxColumn.Name = "tripIdDataGridViewTextBoxColumn";
+            this.tripIdDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // primaVoltaDataGridViewTextBoxColumn
+            // 
+            this.primaVoltaDataGridViewTextBoxColumn.DataPropertyName = "PrimaVolta";
+            this.primaVoltaDataGridViewTextBoxColumn.HeaderText = "PrimaVolta";
+            this.primaVoltaDataGridViewTextBoxColumn.Name = "primaVoltaDataGridViewTextBoxColumn";
+            this.primaVoltaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // ultimaVoltaDataGridViewTextBoxColumn
+            // 
+            this.ultimaVoltaDataGridViewTextBoxColumn.DataPropertyName = "UltimaVolta";
+            this.ultimaVoltaDataGridViewTextBoxColumn.HeaderText = "UltimaVolta";
+            this.ultimaVoltaDataGridViewTextBoxColumn.Name = "ultimaVoltaDataGridViewTextBoxColumn";
+            this.ultimaVoltaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // rimessaDataGridViewTextBoxColumn
+            // 
+            this.rimessaDataGridViewTextBoxColumn.DataPropertyName = "Rimessa";
+            this.rimessaDataGridViewTextBoxColumn.HeaderText = "Rimessa";
+            this.rimessaDataGridViewTextBoxColumn.Name = "rimessaDataGridViewTextBoxColumn";
+            this.rimessaDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // euroDataGridViewTextBoxColumn
+            // 
+            this.euroDataGridViewTextBoxColumn.DataPropertyName = "Euro";
+            this.euroDataGridViewTextBoxColumn.HeaderText = "Euro";
+            this.euroDataGridViewTextBoxColumn.Name = "euroDataGridViewTextBoxColumn";
+            this.euroDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // modelloDataGridViewTextBoxColumn
+            // 
+            this.modelloDataGridViewTextBoxColumn.DataPropertyName = "Modello";
+            this.modelloDataGridViewTextBoxColumn.HeaderText = "Modello";
+            this.modelloDataGridViewTextBoxColumn.Name = "modelloDataGridViewTextBoxColumn";
+            this.modelloDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // Latitude
             // 
             this.Latitude.DataPropertyName = "Latitude";
@@ -219,6 +317,10 @@
             this.Longitude.HeaderText = "Longitude";
             this.Longitude.Name = "Longitude";
             this.Longitude.ReadOnly = true;
+            // 
+            // extendedVehicleInfoBindingSource
+            // 
+            this.extendedVehicleInfoBindingSource.DataSource = typeof(AtacFeed.ExtendedVehicleInfo);
             // 
             // timer1
             // 
@@ -664,6 +766,7 @@
             this.checkReset.TabIndex = 24;
             this.checkReset.Text = "Azzera e riavvia il monitoraggio alle ";
             this.checkReset.UseVisualStyleBackColor = true;
+            this.checkReset.CheckedChanged += new System.EventHandler(this.CheckReset_CheckedChanged);
             // 
             // radioLineaRegola
             // 
@@ -1033,6 +1136,78 @@
             this.dataGridViolazioni.Size = new System.Drawing.Size(1022, 648);
             this.dataGridViolazioni.TabIndex = 0;
             // 
+            // lineaDataGridViewTextBoxColumn2
+            // 
+            this.lineaDataGridViewTextBoxColumn2.DataPropertyName = "Linea";
+            this.lineaDataGridViewTextBoxColumn2.HeaderText = "Linea";
+            this.lineaDataGridViewTextBoxColumn2.Name = "lineaDataGridViewTextBoxColumn2";
+            this.lineaDataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Giorno";
+            this.dataGridViewTextBoxColumn3.HeaderText = "Giorno";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Da";
+            this.dataGridViewTextBoxColumn4.HeaderText = "Da";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "A";
+            this.dataGridViewTextBoxColumn5.HeaderText = "A";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "TempoBonus";
+            this.dataGridViewTextBoxColumn6.HeaderText = "TempoBonus";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "VetturePreviste";
+            this.dataGridViewTextBoxColumn7.HeaderText = "VetturePreviste";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn8
+            // 
+            this.dataGridViewTextBoxColumn8.DataPropertyName = "VettureRilevate";
+            this.dataGridViewTextBoxColumn8.HeaderText = "VettureRilevate";
+            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
+            this.dataGridViewTextBoxColumn8.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "OraPrimaViolazione";
+            dataGridViewCellStyle1.Format = "HH:mm:ss";
+            dataGridViewCellStyle1.NullValue = null;
+            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewTextBoxColumn9.HeaderText = "OraPrimaViolazione";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "OraUltimaViolazione";
+            dataGridViewCellStyle2.Format = "HH:mm:ss";
+            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewTextBoxColumn10.HeaderText = "OraUltimaViolazione";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            // 
+            // lineaMonitorataBindingSource
+            // 
+            this.lineaMonitorataBindingSource.DataSource = typeof(AtacFeed.LineaMonitorata);
+            // 
             // labelTotaleMatricolaATAC
             // 
             this.labelTotaleMatricolaATAC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1117,180 +1292,6 @@
             this.button4.Visible = false;
             this.button4.Click += new System.EventHandler(this.ResetAcquisizione);
             // 
-            // idVetturaDataGridViewTextBoxColumn
-            // 
-            this.idVetturaDataGridViewTextBoxColumn.DataPropertyName = "IdVettura";
-            this.idVetturaDataGridViewTextBoxColumn.HeaderText = "IdVettura";
-            this.idVetturaDataGridViewTextBoxColumn.Name = "idVetturaDataGridViewTextBoxColumn";
-            this.idVetturaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // matricolaDataGridViewTextBoxColumn
-            // 
-            this.matricolaDataGridViewTextBoxColumn.DataPropertyName = "Matricola";
-            this.matricolaDataGridViewTextBoxColumn.HeaderText = "Matricola";
-            this.matricolaDataGridViewTextBoxColumn.Name = "matricolaDataGridViewTextBoxColumn";
-            this.matricolaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // routeIdDataGridViewTextBoxColumn
-            // 
-            this.routeIdDataGridViewTextBoxColumn.DataPropertyName = "RouteId";
-            this.routeIdDataGridViewTextBoxColumn.HeaderText = "RouteId";
-            this.routeIdDataGridViewTextBoxColumn.Name = "routeIdDataGridViewTextBoxColumn";
-            this.routeIdDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // lineaDataGridViewTextBoxColumn
-            // 
-            this.lineaDataGridViewTextBoxColumn.DataPropertyName = "Linea";
-            this.lineaDataGridViewTextBoxColumn.HeaderText = "Linea";
-            this.lineaDataGridViewTextBoxColumn.Name = "lineaDataGridViewTextBoxColumn";
-            this.lineaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // gestoreDataGridViewTextBoxColumn
-            // 
-            this.gestoreDataGridViewTextBoxColumn.DataPropertyName = "Gestore";
-            this.gestoreDataGridViewTextBoxColumn.HeaderText = "Gestore";
-            this.gestoreDataGridViewTextBoxColumn.Name = "gestoreDataGridViewTextBoxColumn";
-            this.gestoreDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // currentStopSequenceDataGridViewTextBoxColumn
-            // 
-            this.currentStopSequenceDataGridViewTextBoxColumn.DataPropertyName = "CurrentStopSequence";
-            this.currentStopSequenceDataGridViewTextBoxColumn.HeaderText = "CurrentStopSequence";
-            this.currentStopSequenceDataGridViewTextBoxColumn.Name = "currentStopSequenceDataGridViewTextBoxColumn";
-            this.currentStopSequenceDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // congestionLevelDataGridViewTextBoxColumn
-            // 
-            this.congestionLevelDataGridViewTextBoxColumn.DataPropertyName = "CongestionLevel";
-            this.congestionLevelDataGridViewTextBoxColumn.HeaderText = "CongestionLevel";
-            this.congestionLevelDataGridViewTextBoxColumn.Name = "congestionLevelDataGridViewTextBoxColumn";
-            this.congestionLevelDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // occupancyStatusDataGridViewTextBoxColumn
-            // 
-            this.occupancyStatusDataGridViewTextBoxColumn.DataPropertyName = "OccupancyStatus";
-            this.occupancyStatusDataGridViewTextBoxColumn.HeaderText = "OccupancyStatus";
-            this.occupancyStatusDataGridViewTextBoxColumn.Name = "occupancyStatusDataGridViewTextBoxColumn";
-            this.occupancyStatusDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // tripIdDataGridViewTextBoxColumn
-            // 
-            this.tripIdDataGridViewTextBoxColumn.DataPropertyName = "TripId";
-            this.tripIdDataGridViewTextBoxColumn.HeaderText = "TripId";
-            this.tripIdDataGridViewTextBoxColumn.Name = "tripIdDataGridViewTextBoxColumn";
-            this.tripIdDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // primaVoltaDataGridViewTextBoxColumn
-            // 
-            this.primaVoltaDataGridViewTextBoxColumn.DataPropertyName = "PrimaVolta";
-            this.primaVoltaDataGridViewTextBoxColumn.HeaderText = "PrimaVolta";
-            this.primaVoltaDataGridViewTextBoxColumn.Name = "primaVoltaDataGridViewTextBoxColumn";
-            this.primaVoltaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // ultimaVoltaDataGridViewTextBoxColumn
-            // 
-            this.ultimaVoltaDataGridViewTextBoxColumn.DataPropertyName = "UltimaVolta";
-            this.ultimaVoltaDataGridViewTextBoxColumn.HeaderText = "UltimaVolta";
-            this.ultimaVoltaDataGridViewTextBoxColumn.Name = "ultimaVoltaDataGridViewTextBoxColumn";
-            this.ultimaVoltaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // rimessaDataGridViewTextBoxColumn
-            // 
-            this.rimessaDataGridViewTextBoxColumn.DataPropertyName = "Rimessa";
-            this.rimessaDataGridViewTextBoxColumn.HeaderText = "Rimessa";
-            this.rimessaDataGridViewTextBoxColumn.Name = "rimessaDataGridViewTextBoxColumn";
-            this.rimessaDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // euroDataGridViewTextBoxColumn
-            // 
-            this.euroDataGridViewTextBoxColumn.DataPropertyName = "Euro";
-            this.euroDataGridViewTextBoxColumn.HeaderText = "Euro";
-            this.euroDataGridViewTextBoxColumn.Name = "euroDataGridViewTextBoxColumn";
-            this.euroDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // modelloDataGridViewTextBoxColumn
-            // 
-            this.modelloDataGridViewTextBoxColumn.DataPropertyName = "Modello";
-            this.modelloDataGridViewTextBoxColumn.HeaderText = "Modello";
-            this.modelloDataGridViewTextBoxColumn.Name = "modelloDataGridViewTextBoxColumn";
-            this.modelloDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // extendedVehicleInfoBindingSource
-            // 
-            this.extendedVehicleInfoBindingSource.DataSource = typeof(AtacFeed.ExtendedVehicleInfo);
-            // 
-            // lineaDataGridViewTextBoxColumn2
-            // 
-            this.lineaDataGridViewTextBoxColumn2.DataPropertyName = "Linea";
-            this.lineaDataGridViewTextBoxColumn2.HeaderText = "Linea";
-            this.lineaDataGridViewTextBoxColumn2.Name = "lineaDataGridViewTextBoxColumn2";
-            this.lineaDataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Giorno";
-            this.dataGridViewTextBoxColumn3.HeaderText = "Giorno";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "Da";
-            this.dataGridViewTextBoxColumn4.HeaderText = "Da";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "A";
-            this.dataGridViewTextBoxColumn5.HeaderText = "A";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "TempoBonus";
-            this.dataGridViewTextBoxColumn6.HeaderText = "TempoBonus";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "VetturePreviste";
-            this.dataGridViewTextBoxColumn7.HeaderText = "VetturePreviste";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn8
-            // 
-            this.dataGridViewTextBoxColumn8.DataPropertyName = "VettureRilevate";
-            this.dataGridViewTextBoxColumn8.HeaderText = "VettureRilevate";
-            this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
-            this.dataGridViewTextBoxColumn8.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "OraPrimaViolazione";
-            dataGridViewCellStyle1.Format = "HH:mm:ss";
-            dataGridViewCellStyle1.NullValue = null;
-            this.dataGridViewTextBoxColumn9.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewTextBoxColumn9.HeaderText = "OraPrimaViolazione";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "OraUltimaViolazione";
-            dataGridViewCellStyle2.Format = "HH:mm:ss";
-            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewTextBoxColumn10.HeaderText = "OraUltimaViolazione";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            // 
-            // lineaMonitorataBindingSource
-            // 
-            this.lineaMonitorataBindingSource.DataSource = typeof(AtacFeed.LineaMonitorata);
-            // 
             // FormGTFS_RSM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1331,6 +1332,7 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVetture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).EndInit();
             this.tabGrafico.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
@@ -1350,7 +1352,6 @@
             this.tabGriglia.ResumeLayout(false);
             this.tabMonitoraggio.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViolazioni)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lineaMonitorataBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

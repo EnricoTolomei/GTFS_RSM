@@ -40,6 +40,7 @@ namespace AtacFeed
         private string fileName;
         private DateTime? LastdataFeedVehicle;
         private DateTime? FirstdataFeedVehicle;
+        private DateTime? DataResetMonitoraggio;
 
         public FormGTFS_RSM()
         {
@@ -52,7 +53,7 @@ namespace AtacFeed
         {
             try
             {
-                DateTime oraAcquisizione = dateTimeReset.Value;
+                
                 string routeID = comboBox1.SelectedValue.ToString();
                 WebRequest req = HttpWebRequest.Create(urlVehicle.Text);
                 req.Timeout = 10000;
@@ -61,11 +62,13 @@ namespace AtacFeed
                     throw new Exception( "Il feed letto è vuoto");
                 DateTime dataFeedVehicle = t0.AddSeconds(feedVehicleCompleto.Header.Timestamp).ToLocalTime();
                 //dataFeedVehicle = DateTime.Now;
-                
-                if (checkReset.Checked  && dataFeedVehicle.TimeOfDay >= dateTimeReset.Value.TimeOfDay 
-                                        && dateTimeReset.Value.TimeOfDay > FirstdataFeedVehicle.GetValueOrDefault(dateTimeReset.Value).TimeOfDay)
+
+                //dataFeedVehicle = dataFeedVehicle.AddHours(4);
+
+                if (dataFeedVehicle > DataResetMonitoraggio.GetValueOrDefault() )
                 {
                     ResetAcquisizione(null, null);
+                    DataResetMonitoraggio.Value.AddDays(1);
                 }
                 
                 if (LastdataFeedVehicle.GetValueOrDefault() != dataFeedVehicle)
@@ -1247,6 +1250,20 @@ namespace AtacFeed
         private void RileggiRegole(object sender, EventArgs e)
         {
             LeggiRegoleAlertDaFile();
+        }
+
+        private void CheckReset_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkReset.Checked)
+            {
+                TimeSpan oraReset = dateTimeReset.Value.AddSeconds(01).TimeOfDay;
+                DateTime now = DateTime.Now;
+                if (now.TimeOfDay > oraReset)
+                    now = now.AddDays(1);
+                DataResetMonitoraggio = new DateTime(now.Year, now.Month, now.Day, oraReset.Hours, oraReset.Minutes, oraReset.Seconds);
+            }
+            else
+                DataResetMonitoraggio = null;
         }
     }
 }

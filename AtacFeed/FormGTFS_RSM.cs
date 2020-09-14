@@ -65,7 +65,7 @@ namespace AtacFeed
 
                 //dataFeedVehicle = dataFeedVehicle.AddHours(4);
 
-                if (dataFeedVehicle > DataResetMonitoraggio.GetValueOrDefault() )
+                if (DataResetMonitoraggio.HasValue && dataFeedVehicle > DataResetMonitoraggio.GetValueOrDefault() )
                 {
                     ResetAcquisizione(null, null);
                     DataResetMonitoraggio = DataResetMonitoraggio.Value.AddDays(1);

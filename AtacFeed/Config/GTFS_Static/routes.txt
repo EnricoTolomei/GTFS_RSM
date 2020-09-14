@@ -272,6 +272,7 @@ route_id,agency_id,route_short_name,route_long_name,route_type,route_url,route_c
 94,OP1,"070","",3,"",890827,ffffff
 103,OP1,"Roma Viterbo","",106,"",65b357,000000
 234,OP1,"C13","",3,"",890827,ffffff
+1685,OP1,"01","",3,"",890827,ffffff
 144,OP1,"C9","",3,"",890827,ffffff
 112,OP1,"C7","",3,"",890827,ffffff
 134,OP1,"012","",3,"",890827,ffffff
@@ -473,3 +474,4 @@ route_id,agency_id,route_short_name,route_long_name,route_type,route_url,route_c
 142,OP1,"F20","",3,"",890827,ffffff
 204,OP1,"F10","",3,"",890827,ffffff
 205,OP1,"F01","",3,"",890827,ffffff
+3499,OP1,"424","",3,"",890827,ffffff

@@ -38,5 +38,11 @@
     <Setting Name="UrlAlert" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://romamobilita.it/sites/default/files/rome_rtgtfs_service_alerts_feed.pb</Value>
     </Setting>
+    <Setting Name="StoricoAlert" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CheckTrip" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

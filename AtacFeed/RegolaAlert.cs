@@ -40,13 +40,6 @@ namespace AtacFeed
         public RegolaAlertMap()
         {
             AutoMap(CultureInfo.InvariantCulture);
-            //Map(m => m.Linea);
-            //Map(m => m.Giorno);
-            //Map(m => m.Da);
-            //Map(m => m.A);                        
-            //Map(m => m.VetturaDa);
-            //Map(m => m.VetturaA);
-
         }
     }
 }

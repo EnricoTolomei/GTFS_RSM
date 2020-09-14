@@ -167,5 +167,29 @@ namespace AtacFeed.Properties {
                 this["UrlAlert"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool StoricoAlert {
+            get {
+                return ((bool)(this["StoricoAlert"]));
+            }
+            set {
+                this["StoricoAlert"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CheckTrip {
+            get {
+                return ((bool)(this["CheckTrip"]));
+            }
+            set {
+                this["CheckTrip"] = value;
+            }
+        }
     }
 }

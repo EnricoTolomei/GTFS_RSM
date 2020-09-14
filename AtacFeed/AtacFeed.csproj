@@ -50,6 +50,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Flaticonmaker-Flat-Style-Bus.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="CsvHelper, Version=15.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
       <HintPath>..\packages\CsvHelper.15.0.5\lib\net47\CsvHelper.dll</HintPath>
@@ -118,6 +121,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlertDaControllare.cs" />
     <Compile Include="DettagliVettura.cs" />
     <Compile Include="ExtendedVehicleInfo.cs" />
     <Compile Include="FormGTFS_RSM.cs">
@@ -197,6 +201,7 @@
     <Content Include="Config\Regole_Alert\Garantite.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Flaticonmaker-Flat-Style-Bus.ico" />
     <Content Include="OUTPUT\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

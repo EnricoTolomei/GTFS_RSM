@@ -30,9 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGTFS_RSM));
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridVetture = new System.Windows.Forms.DataGridView();
+            this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Longitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.button3 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -66,6 +69,8 @@
             this.checkCSV = new System.Windows.Forms.CheckBox();
             this.checkGrafico = new System.Windows.Forms.CheckBox();
             this.groupBoxMonitoraggio = new System.Windows.Forms.GroupBox();
+            this.buttonResetRegole = new System.Windows.Forms.Button();
+            this.checkBoxStorico = new System.Windows.Forms.CheckBox();
             this.labelRaggruppaAlert = new System.Windows.Forms.Label();
             this.radioNonRaggruppare = new System.Windows.Forms.RadioButton();
             this.checkReset = new System.Windows.Forms.CheckBox();
@@ -77,11 +82,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.checkTripDuplicati = new System.Windows.Forms.CheckBox();
             this.groupBoxServerRSM = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.checkFeedTrip = new System.Windows.Forms.CheckBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.urlVehicle = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.urlAlert = new System.Windows.Forms.TextBox();
             this.urlTrip = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.secondi = new System.Windows.Forms.NumericUpDown();
@@ -104,11 +111,8 @@
             this.label14 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.buttonResetAcquisizione = new System.Windows.Forms.Button();
-            this.Latitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Longitude = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.urlAlert = new System.Windows.Forms.TextBox();
-            this.label20 = new System.Windows.Forms.Label();
+            this.toolTipFeedTrip = new System.Windows.Forms.ToolTip(this.components);
+            this.button4 = new System.Windows.Forms.Button();
             this.idVetturaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.matricolaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.routeIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -202,6 +206,20 @@
             this.dataGridVetture.Size = new System.Drawing.Size(1022, 648);
             this.dataGridVetture.TabIndex = 8;
             // 
+            // Latitude
+            // 
+            this.Latitude.DataPropertyName = "Latitude";
+            this.Latitude.HeaderText = "Latitude";
+            this.Latitude.Name = "Latitude";
+            this.Latitude.ReadOnly = true;
+            // 
+            // Longitude
+            // 
+            this.Longitude.DataPropertyName = "Longitude";
+            this.Longitude.HeaderText = "Longitude";
+            this.Longitude.Name = "Longitude";
+            this.Longitude.ReadOnly = true;
+            // 
             // timer1
             // 
             this.timer1.Interval = 5000;
@@ -214,10 +232,10 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(102, 23);
             this.button3.TabIndex = 28;
-            this.button3.Text = "button3";
+            this.button3.Text = "Dati Random";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Visible = false;
-            this.button3.Click += new System.EventHandler(this.Button3_Click);
+            this.button3.Click += new System.EventHandler(this.Random);
             // 
             // label9
             // 
@@ -577,6 +595,8 @@
             // 
             this.groupBoxMonitoraggio.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxMonitoraggio.Controls.Add(this.buttonResetRegole);
+            this.groupBoxMonitoraggio.Controls.Add(this.checkBoxStorico);
             this.groupBoxMonitoraggio.Controls.Add(this.labelRaggruppaAlert);
             this.groupBoxMonitoraggio.Controls.Add(this.radioNonRaggruppare);
             this.groupBoxMonitoraggio.Controls.Add(this.checkReset);
@@ -594,10 +614,31 @@
             this.groupBoxMonitoraggio.TabStop = false;
             this.groupBoxMonitoraggio.Text = "Impostazioni Monitoraggio";
             // 
+            // buttonResetRegole
+            // 
+            this.buttonResetRegole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonResetRegole.Location = new System.Drawing.Point(911, 30);
+            this.buttonResetRegole.Name = "buttonResetRegole";
+            this.buttonResetRegole.Size = new System.Drawing.Size(83, 23);
+            this.buttonResetRegole.TabIndex = 48;
+            this.buttonResetRegole.Text = "Rleggi regole";
+            this.buttonResetRegole.UseVisualStyleBackColor = true;
+            this.buttonResetRegole.Click += new System.EventHandler(this.RileggiRegole);
+            // 
+            // checkBoxStorico
+            // 
+            this.checkBoxStorico.AutoSize = true;
+            this.checkBoxStorico.Location = new System.Drawing.Point(661, 68);
+            this.checkBoxStorico.Name = "checkBoxStorico";
+            this.checkBoxStorico.Size = new System.Drawing.Size(138, 17);
+            this.checkBoxStorico.TabIndex = 32;
+            this.checkBoxStorico.Text = "Mostra storico violazioni";
+            this.checkBoxStorico.UseVisualStyleBackColor = true;
+            // 
             // labelRaggruppaAlert
             // 
             this.labelRaggruppaAlert.AutoSize = true;
-            this.labelRaggruppaAlert.Location = new System.Drawing.Point(729, 43);
+            this.labelRaggruppaAlert.Location = new System.Drawing.Point(658, 30);
             this.labelRaggruppaAlert.Name = "labelRaggruppaAlert";
             this.labelRaggruppaAlert.Size = new System.Drawing.Size(114, 13);
             this.labelRaggruppaAlert.TabIndex = 31;
@@ -606,7 +647,7 @@
             // radioNonRaggruppare
             // 
             this.radioNonRaggruppare.AutoSize = true;
-            this.radioNonRaggruppare.Location = new System.Drawing.Point(847, 62);
+            this.radioNonRaggruppare.Location = new System.Drawing.Point(776, 49);
             this.radioNonRaggruppare.Margin = new System.Windows.Forms.Padding(1);
             this.radioNonRaggruppare.Name = "radioNonRaggruppare";
             this.radioNonRaggruppare.Size = new System.Drawing.Size(105, 17);
@@ -617,7 +658,7 @@
             // checkReset
             // 
             this.checkReset.AutoSize = true;
-            this.checkReset.Location = new System.Drawing.Point(295, 73);
+            this.checkReset.Location = new System.Drawing.Point(295, 67);
             this.checkReset.Name = "checkReset";
             this.checkReset.Size = new System.Drawing.Size(193, 17);
             this.checkReset.TabIndex = 24;
@@ -628,7 +669,7 @@
             // 
             this.radioLineaRegola.AutoSize = true;
             this.radioLineaRegola.Checked = true;
-            this.radioLineaRegola.Location = new System.Drawing.Point(847, 43);
+            this.radioLineaRegola.Location = new System.Drawing.Point(776, 30);
             this.radioLineaRegola.Margin = new System.Windows.Forms.Padding(1);
             this.radioLineaRegola.Name = "radioLineaRegola";
             this.radioLineaRegola.Size = new System.Drawing.Size(97, 17);
@@ -640,7 +681,7 @@
             // radioLinea
             // 
             this.radioLinea.AutoSize = true;
-            this.radioLinea.Location = new System.Drawing.Point(847, 24);
+            this.radioLinea.Location = new System.Drawing.Point(776, 11);
             this.radioLinea.Margin = new System.Windows.Forms.Padding(1);
             this.radioLinea.Name = "radioLinea";
             this.radioLinea.Size = new System.Drawing.Size(51, 17);
@@ -652,7 +693,7 @@
             // 
             this.dateTimeReset.CustomFormat = "HH:mm";
             this.dateTimeReset.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimeReset.Location = new System.Drawing.Point(489, 71);
+            this.dateTimeReset.Location = new System.Drawing.Point(488, 67);
             this.dateTimeReset.Name = "dateTimeReset";
             this.dateTimeReset.ShowUpDown = true;
             this.dateTimeReset.Size = new System.Drawing.Size(50, 20);
@@ -662,7 +703,7 @@
             // checkTripVuoti
             // 
             this.checkTripVuoti.AutoSize = true;
-            this.checkTripVuoti.Location = new System.Drawing.Point(295, 25);
+            this.checkTripVuoti.Location = new System.Drawing.Point(295, 21);
             this.checkTripVuoti.Name = "checkTripVuoti";
             this.checkTripVuoti.Size = new System.Drawing.Size(188, 17);
             this.checkTripVuoti.TabIndex = 21;
@@ -690,7 +731,7 @@
             // checkTripDuplicati
             // 
             this.checkTripDuplicati.AutoSize = true;
-            this.checkTripDuplicati.Location = new System.Drawing.Point(295, 50);
+            this.checkTripDuplicati.Location = new System.Drawing.Point(295, 44);
             this.checkTripDuplicati.Name = "checkTripDuplicati";
             this.checkTripDuplicati.Size = new System.Drawing.Size(317, 17);
             this.checkTripDuplicati.TabIndex = 14;
@@ -702,8 +743,8 @@
             // 
             this.groupBoxServerRSM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxServerRSM.Controls.Add(this.checkFeedTrip);
             this.groupBoxServerRSM.Controls.Add(this.label20);
-            this.groupBoxServerRSM.Controls.Add(this.label1);
             this.groupBoxServerRSM.Controls.Add(this.label6);
             this.groupBoxServerRSM.Controls.Add(this.label7);
             this.groupBoxServerRSM.Controls.Add(this.urlVehicle);
@@ -720,20 +761,34 @@
             this.groupBoxServerRSM.TabStop = false;
             this.groupBoxServerRSM.Text = "Impostazioni Server RSM";
             // 
-            // label1
+            // checkFeedTrip
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(66, 63);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(52, 13);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Feed Trip";
+            this.checkFeedTrip.AutoSize = true;
+            this.checkFeedTrip.Location = new System.Drawing.Point(47, 63);
+            this.checkFeedTrip.Name = "checkFeedTrip";
+            this.checkFeedTrip.Size = new System.Drawing.Size(71, 17);
+            this.checkFeedTrip.TabIndex = 20;
+            this.checkFeedTrip.Text = "Feed Trip";
+            this.toolTipFeedTrip.SetToolTip(this.checkFeedTrip, "Può essere tranquillamnte disabilitato. Al momento l\'informazione del feed non è " +
+        "utilizzata per il conteggio delle vetture");
+            this.checkFeedTrip.UseVisualStyleBackColor = true;
+            this.checkFeedTrip.CheckedChanged += new System.EventHandler(this.CheckFeedTrip_CheckedChanged);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(63, 85);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(55, 13);
+            this.label20.TabIndex = 6;
+            this.label20.Text = "Feed Alert";
+            this.label20.Visible = false;
             // 
             // label6
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(908, 33);
+            this.label6.Location = new System.Drawing.Point(908, 30);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 13);
             this.label6.TabIndex = 18;
@@ -743,7 +798,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(824, 33);
+            this.label7.Location = new System.Drawing.Point(824, 30);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(34, 13);
             this.label7.TabIndex = 19;
@@ -767,6 +822,16 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Feed Vehicle";
             // 
+            // urlAlert
+            // 
+            this.urlAlert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.urlAlert.Location = new System.Drawing.Point(124, 82);
+            this.urlAlert.Name = "urlAlert";
+            this.urlAlert.Size = new System.Drawing.Size(569, 20);
+            this.urlAlert.TabIndex = 3;
+            this.urlAlert.Visible = false;
+            // 
             // urlTrip
             // 
             this.urlTrip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -775,12 +840,13 @@
             this.urlTrip.Name = "urlTrip";
             this.urlTrip.Size = new System.Drawing.Size(569, 20);
             this.urlTrip.TabIndex = 3;
+            this.toolTipFeedTrip.SetToolTip(this.urlTrip, "Url opzionale, al momento usato solo per fini statistici");
             // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(719, 33);
+            this.label5.Location = new System.Drawing.Point(717, 30);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(57, 13);
             this.label5.TabIndex = 17;
@@ -789,7 +855,7 @@
             // secondi
             // 
             this.secondi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.secondi.Location = new System.Drawing.Point(864, 31);
+            this.secondi.Location = new System.Drawing.Point(864, 28);
             this.secondi.Maximum = new decimal(new int[] {
             59,
             0,
@@ -807,7 +873,7 @@
             // minuti
             // 
             this.minuti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.minuti.Location = new System.Drawing.Point(780, 31);
+            this.minuti.Location = new System.Drawing.Point(780, 27);
             this.minuti.Name = "minuti";
             this.minuti.Size = new System.Drawing.Size(38, 20);
             this.minuti.TabIndex = 15;
@@ -917,7 +983,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1036, 680);
             this.tabControl1.TabIndex = 27;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
             // 
             // tabGriglia
             // 
@@ -1035,51 +1101,21 @@
             this.dataGridViewTextBoxColumn2.HeaderText = "RegolaViolata";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
-            // buttonResetAcquisizione
+            // toolTipFeedTrip
             // 
-            this.buttonResetAcquisizione.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonResetAcquisizione.Location = new System.Drawing.Point(1058, 666);
-            this.buttonResetAcquisizione.Name = "buttonResetAcquisizione";
-            this.buttonResetAcquisizione.Size = new System.Drawing.Size(102, 23);
-            this.buttonResetAcquisizione.TabIndex = 48;
-            this.buttonResetAcquisizione.Text = "Non mi vedrai";
-            this.buttonResetAcquisizione.UseVisualStyleBackColor = true;
-            this.buttonResetAcquisizione.Visible = false;
-            this.buttonResetAcquisizione.Click += new System.EventHandler(this.ResetAcquisizione);
+            this.toolTipFeedTrip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.toolTipFeedTrip.ToolTipTitle = "GTFS TRIP";
             // 
-            // Latitude
+            // button4
             // 
-            this.Latitude.DataPropertyName = "Latitude";
-            this.Latitude.HeaderText = "Latitude";
-            this.Latitude.Name = "Latitude";
-            this.Latitude.ReadOnly = true;
-            // 
-            // Longitude
-            // 
-            this.Longitude.DataPropertyName = "Longitude";
-            this.Longitude.HeaderText = "Longitude";
-            this.Longitude.Name = "Longitude";
-            this.Longitude.ReadOnly = true;
-            // 
-            // urlAlert
-            // 
-            this.urlAlert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.urlAlert.Location = new System.Drawing.Point(439, 80);
-            this.urlAlert.Name = "urlAlert";
-            this.urlAlert.Size = new System.Drawing.Size(569, 20);
-            this.urlAlert.TabIndex = 3;
-            this.urlAlert.Visible = false;
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(379, 80);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(55, 13);
-            this.label20.TabIndex = 6;
-            this.label20.Text = "Feed Alert";
-            this.label20.Visible = false;
+            this.button4.Location = new System.Drawing.Point(1060, 663);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(100, 23);
+            this.button4.TabIndex = 48;
+            this.button4.Text = "buttonReset";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Visible = false;
+            this.button4.Click += new System.EventHandler(this.ResetAcquisizione);
             // 
             // idVetturaDataGridViewTextBoxColumn
             // 
@@ -1245,6 +1281,8 @@
             // dataGridViewTextBoxColumn10
             // 
             this.dataGridViewTextBoxColumn10.DataPropertyName = "OraUltimaViolazione";
+            dataGridViewCellStyle2.Format = "HH:mm:ss";
+            this.dataGridViewTextBoxColumn10.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewTextBoxColumn10.HeaderText = "OraUltimaViolazione";
             this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
             this.dataGridViewTextBoxColumn10.ReadOnly = true;
@@ -1259,7 +1297,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1169, 705);
-            this.Controls.Add(this.buttonResetAcquisizione);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.labelTotaleMatricolaTPL);
             this.Controls.Add(this.label18);
@@ -1356,7 +1394,6 @@
         private System.Windows.Forms.TextBox urlVehicle;
         private System.Windows.Forms.TextBox urlTrip;
         private System.Windows.Forms.CheckBox checkCSV;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkXlsx;
         private System.Windows.Forms.NumericUpDown minuti;
         private System.Windows.Forms.CheckBox checkTripVuoti;
@@ -1385,16 +1422,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private System.Windows.Forms.BindingSource lineaMonitorataBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lineaDataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
-        private System.Windows.Forms.Button buttonResetAcquisizione;
+        private System.Windows.Forms.Button buttonResetRegole;
         private System.Windows.Forms.GroupBox groupBoxServerRSM;
         private System.Windows.Forms.GroupBox groupBoxMonitoraggio;
         private System.Windows.Forms.GroupBox groupBoxExport;
@@ -1424,6 +1452,19 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Longitude;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox urlAlert;
+        private System.Windows.Forms.CheckBox checkBoxStorico;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lineaDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn10;
+        private System.Windows.Forms.ToolTip toolTipFeedTrip;
+        private System.Windows.Forms.CheckBox checkFeedTrip;
+        private System.Windows.Forms.Button button4;
     }
 }
 

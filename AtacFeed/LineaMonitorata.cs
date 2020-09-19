@@ -27,9 +27,7 @@ namespace AtacFeed
             this.RegolaViolata = RegolaViolata;
             this.VettureRilevate = VettureRilevate;
         }
-
         
-
         public bool Equals(LineaMonitorata other)
         {
             if (other is null)

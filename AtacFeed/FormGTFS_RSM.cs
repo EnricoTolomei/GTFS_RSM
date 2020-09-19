@@ -8,6 +8,7 @@ using OfficeOpenXml.Drawing.Chart;
 using OfficeOpenXml.Table;
 using ProtoBuf;
 using ScottPlot;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -51,24 +52,26 @@ namespace AtacFeed
 
         private void Acquisizione()
         {
+            WebRequest req = HttpWebRequest.Create(urlVehicle.Text);
+            req.Timeout = 10000;
             try
-            {
-                
+            {                
                 string routeID = comboBox1.SelectedValue.ToString();
-                WebRequest req = HttpWebRequest.Create(urlVehicle.Text);
-                req.Timeout = 10000;
                 FeedMessage feedVehicleCompleto = Serializer.Deserialize<FeedMessage>(req.GetResponse().GetResponseStream());
                 if (feedVehicleCompleto.Entities.Count == 0)
-                    throw new Exception( "Il feed letto è vuoto");
+                {
+                    Log.Error("Feed VUOTO alle {DateTime:HH:mm:ss}" ,DateTime.Now);
+                    throw new Exception("Il feed letto è vuoto");                    
+                }
                 DateTime dataFeedVehicle = t0.AddSeconds(feedVehicleCompleto.Header.Timestamp).ToLocalTime();
-                //dataFeedVehicle = DateTime.Now;
-
-                //dataFeedVehicle = dataFeedVehicle.AddHours(4);
+                dataFeedVehicle = DateTime.Now;                
 
                 if (DataResetMonitoraggio.HasValue && dataFeedVehicle > DataResetMonitoraggio.GetValueOrDefault() )
                 {
                     ResetAcquisizione(null, null);
                     DataResetMonitoraggio = DataResetMonitoraggio.Value.AddDays(1);
+
+                    Log.Information("Prossimo data reset: {DataResetMonitoraggio:dd/MM/yyyy HH:mm:ss}", DataResetMonitoraggio);
                 }
                 
                 if (LastdataFeedVehicle.GetValueOrDefault() != dataFeedVehicle)
@@ -76,7 +79,7 @@ namespace AtacFeed
                     LastdataFeedVehicle = dataFeedVehicle;
                     textBox1.Text = string.Empty;
                     textBox2.Text = string.Empty;
-                    lblOraLettura.Text = $"{ dataFeedVehicle: HH:mm:ss}";
+                    lblOraLettura.Text = $"{dataFeedVehicle:HH:mm:ss}";
                     labelFeedLetti.Text = (int.Parse(labelFeedLetti.Text) + 1).ToString();
                     List<FeedEntity> feedEntities = feedVehicleCompleto.Entities
                         .Where(x => (int.Parse(routeID) < 0 || x.Vehicle.Trip?.RouteId == routeID)
@@ -498,61 +501,66 @@ namespace AtacFeed
             catch (WebException ex) when ((ex.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
             {
                 textBox1.AppendText($"{ex.Message}: {Environment.NewLine}Feed Non trovato al seguente indirizzo");
-                textBox1.AppendText($"{Environment.NewLine}{ex.Response.ResponseUri}");
-                textBox1.AppendText($"{Environment.NewLine}{Environment.NewLine}==== Informazioni di Debug per gli sviluppatori ===");
-                textBox1.AppendText($"{Environment.NewLine}{Environment.NewLine}{ex.StackTrace}");
-                textBox1.AppendText($"{Environment.NewLine}===================================================");
+                textBox1.AppendText($"{Environment.NewLine}{ex.Response.ResponseUri}{Environment.NewLine}");
+                
+                Log.Error(ex, "Feed {UrlFeed} Non trovato ", ex.Response.ResponseUri);                
             }
             catch (WebException ex) when (ex.Status == WebExceptionStatus.Timeout)
             {
-                textBox1.AppendText($"{ex.Message}: Problemi di connessione con il server di RSM");
-                textBox1.AppendText($"{Environment.NewLine}{Environment.NewLine}==== Informazioni di Debug per gli sviluppatori ===");
-                textBox1.AppendText($"{Environment.NewLine}{ex.StackTrace}");
-                textBox1.AppendText($"{Environment.NewLine}===================================================");
+                textBox1.AppendText($"{ex.Message}: Problemi di connessione con il server di RSM");                
+                Log.Error(ex, "Errore Connessione Server {UrlRemoto}", req.RequestUri );
 
             }
             catch (Exception ex)
             {
                 textBox1.AppendText($"{ex.Message} {Environment.NewLine} {ex.StackTrace}");
-                textBox1.AppendText($"{Environment.NewLine}{Environment.NewLine}==== Informazioni di Debug per gli sviluppatori ===");
-                textBox1.AppendText($"{Environment.NewLine}{ex.StackTrace}");
-                textBox1.AppendText($"{Environment.NewLine}===================================================");
+                Log.Error(ex, "Errore Generico");
             }
         }
         
-        private void Button1_Click(object sender, EventArgs e)
+        private void ButtonPlayPause_Click(object sender, EventArgs e)
         {
             if (!checkCSV.Checked && !checkXlsx.Checked)
             {
-                DialogResult dialog = MessageBox.Show("Avviare il monitoraggio senza export dei dati?",
-                "Avvio Monitoraggio",
-                 MessageBoxButtons.YesNo,
-                 MessageBoxIcon.Question);
+                DialogResult dialog = MessageBox.Show(
+                    "Avviare il monitoraggio senza export dei dati?",
+                    "Avvio Monitoraggio",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
                 if (dialog == DialogResult.No)
-                    return;
+                    return;                
             }
-            Timer1_Tick(sender, e);
+            
             int deltaSec = (int)(1000 * (60 * minuti.Value + secondi.Value));
-            if (!timer1.Enabled && deltaSec > 0)
+            if (deltaSec == 0)
             {
+                Log.Information("Acquisizione singola");                
+                Acquisizione();
+            }
+            if (!timerAcquisizione.Enabled && deltaSec > 0)
+            {
+                Acquisizione();
                 minuti.Enabled = false;
                 secondi.Enabled = false;
-                timer1.Interval = deltaSec;
-                timer1.Enabled = true;
-                timer1.Start();
-                button1.BackgroundImage = Properties.Resources.pause;
+                timerAcquisizione.Interval = deltaSec;
+                timerAcquisizione.Enabled = true;
+                timerAcquisizione.Start();
+                buttonPlayPause.BackgroundImage = Properties.Resources.pause;
                 comboBox1.Enabled = false;
                 buttonResetRegole.Enabled = false;
+                Log.Information("Acquisizione attiva");
             }
             else
             {
                 minuti.Enabled = true;
                 secondi.Enabled = true;
-                timer1.Enabled = false;
-                timer1.Stop();
-                button1.BackgroundImage = Properties.Resources.play;
+                timerAcquisizione.Enabled = false;
+                timerAcquisizione.Stop();
+                buttonPlayPause.BackgroundImage = Properties.Resources.play;
                 comboBox1.Enabled = true;
                 buttonResetRegole.Enabled = true;
+                if (deltaSec>0)
+                    Log.Information("Acquisizione in pausa");
             }
         }
 
@@ -688,6 +696,7 @@ namespace AtacFeed
             catch
             {                
                 tabControl1.TabPages.Remove(tabMonitoraggio);
+                Log.Information("Rimosso tab RegoleMonitoraggio");
             }
             
             LeggiRegoleAlertDaFile();
@@ -858,7 +867,7 @@ namespace AtacFeed
             }
         }
 
-        private void Timer1_Tick(object sender, EventArgs e)
+        private void TimerAcquisizione_Tick(object sender, EventArgs e)
         {
             Acquisizione();
         }
@@ -886,7 +895,7 @@ namespace AtacFeed
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (timer1.Enabled)
+            if (timerAcquisizione.Enabled)
             {
                 DialogResult dialog = MessageBox.Show("Interrompere il monitoraggio ed uscire? ",
                                 "Conferma chiusura programma",
@@ -1105,7 +1114,6 @@ namespace AtacFeed
                     csv.WriteRecords(ElencoAggregatoVetture);
                 }
             }
-
         }
 
 
@@ -1124,6 +1132,7 @@ namespace AtacFeed
                 catch (Exception exc)
                 {                    
                     SaveAs(altFileName);
+                    Log.Error("{Exception}", exc);
                 }
             });
         }

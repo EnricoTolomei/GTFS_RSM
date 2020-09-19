@@ -45,7 +45,7 @@ namespace AtacFeed
         public string TripId { get; set; }
 
         [Ignore]
-        private bool StrictMode;
+        private readonly bool StrictMode;
 
         [Index(11)]
         public DateTime PrimaVolta { get; set; }

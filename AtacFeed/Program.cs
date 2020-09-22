@@ -23,8 +23,12 @@ namespace AtacFeed
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormGTFS_RSM());
-            
+            FormGTFS_RSM formGTFS_RSM = new FormGTFS_RSM();
+            Application.Run(formGTFS_RSM);
+
+            if (formGTFS_RSM.ToRestart)
+                Application.Restart();
+
             Log.Information("Uscita Programma");
             Log.CloseAndFlush();
         }

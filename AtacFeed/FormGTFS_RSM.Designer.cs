@@ -30,7 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGTFS_RSM));
-            this.buttonPlayPause = new System.Windows.Forms.Button();
             this.dataGridVetture = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -136,6 +135,9 @@
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolTipFeedTrip = new System.Windows.Forms.ToolTip(this.components);
             this.button4 = new System.Windows.Forms.Button();
+            this.labelVer = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.buttonPlayPause = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVetture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).BeginInit();
             this.tabGrafico.SuspendLayout();
@@ -154,21 +156,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViolazioni)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lineaMonitorataBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // buttonPlayPause
-            // 
-            this.buttonPlayPause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPlayPause.BackgroundImage = global::AtacFeed.Properties.Resources.play;
-            this.buttonPlayPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonPlayPause.FlatAppearance.BorderSize = 0;
-            this.buttonPlayPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPlayPause.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayPause.Location = new System.Drawing.Point(1085, 557);
-            this.buttonPlayPause.Name = "buttonPlayPause";
-            this.buttonPlayPause.Size = new System.Drawing.Size(50, 46);
-            this.buttonPlayPause.TabIndex = 0;
-            this.buttonPlayPause.UseVisualStyleBackColor = true;
-            this.buttonPlayPause.Click += new System.EventHandler(this.ButtonPlayPause_Click);
             // 
             // dataGridVetture
             // 
@@ -328,7 +315,7 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(1058, 479);
+            this.button3.Location = new System.Drawing.Point(1053, 227);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(102, 23);
             this.button3.TabIndex = 28;
@@ -341,7 +328,7 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(1048, 398);
+            this.label9.Location = new System.Drawing.Point(1050, 444);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(45, 13);
             this.label9.TabIndex = 24;
@@ -351,7 +338,7 @@
             // labelTotaleIdVettura
             // 
             this.labelTotaleIdVettura.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleIdVettura.Location = new System.Drawing.Point(1120, 376);
+            this.labelTotaleIdVettura.Location = new System.Drawing.Point(1118, 422);
             this.labelTotaleIdVettura.Name = "labelTotaleIdVettura";
             this.labelTotaleIdVettura.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleIdVettura.Size = new System.Drawing.Size(40, 13);
@@ -362,7 +349,7 @@
             // labelTotaleMatricola
             // 
             this.labelTotaleMatricola.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleMatricola.Location = new System.Drawing.Point(1120, 333);
+            this.labelTotaleMatricola.Location = new System.Drawing.Point(1118, 379);
             this.labelTotaleMatricola.Name = "labelTotaleMatricola";
             this.labelTotaleMatricola.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleMatricola.Size = new System.Drawing.Size(40, 13);
@@ -374,7 +361,7 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(1048, 376);
+            this.label10.Location = new System.Drawing.Point(1050, 422);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(60, 13);
             this.label10.TabIndex = 26;
@@ -384,7 +371,7 @@
             // labelTotaleRighe
             // 
             this.labelTotaleRighe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleRighe.Location = new System.Drawing.Point(1120, 398);
+            this.labelTotaleRighe.Location = new System.Drawing.Point(1118, 444);
             this.labelTotaleRighe.Name = "labelTotaleRighe";
             this.labelTotaleRighe.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleRighe.Size = new System.Drawing.Size(40, 13);
@@ -396,7 +383,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1048, 333);
+            this.label3.Location = new System.Drawing.Point(1050, 375);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 13);
             this.label3.TabIndex = 12;
@@ -406,7 +393,7 @@
             // labelFeedLetti
             // 
             this.labelFeedLetti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelFeedLetti.Location = new System.Drawing.Point(1120, 253);
+            this.labelFeedLetti.Location = new System.Drawing.Point(1118, 299);
             this.labelFeedLetti.MinimumSize = new System.Drawing.Size(15, 0);
             this.labelFeedLetti.Name = "labelFeedLetti";
             this.labelFeedLetti.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -419,7 +406,7 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1048, 253);
+            this.label8.Location = new System.Drawing.Point(1050, 299);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(41, 13);
             this.label8.TabIndex = 20;
@@ -431,7 +418,7 @@
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(1057, 35);
+            this.label12.Location = new System.Drawing.Point(1055, 86);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(100, 13);
             this.label12.TabIndex = 29;
@@ -442,7 +429,7 @@
             // 
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(1052, 79);
+            this.label13.Location = new System.Drawing.Point(1050, 130);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(35, 13);
             this.label13.TabIndex = 39;
@@ -452,7 +439,7 @@
             // labelTot
             // 
             this.labelTot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTot.Location = new System.Drawing.Point(1120, 148);
+            this.labelTot.Location = new System.Drawing.Point(1118, 199);
             this.labelTot.Name = "labelTot";
             this.labelTot.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTot.Size = new System.Drawing.Size(40, 13);
@@ -464,7 +451,7 @@
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(1052, 102);
+            this.label15.Location = new System.Drawing.Point(1050, 153);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(27, 13);
             this.label15.TabIndex = 37;
@@ -474,7 +461,7 @@
             // labelTPL
             // 
             this.labelTPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTPL.Location = new System.Drawing.Point(1120, 102);
+            this.labelTPL.Location = new System.Drawing.Point(1118, 153);
             this.labelTPL.Name = "labelTPL";
             this.labelTPL.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTPL.Size = new System.Drawing.Size(40, 13);
@@ -485,7 +472,7 @@
             // lblOraLettura
             // 
             this.lblOraLettura.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblOraLettura.Location = new System.Drawing.Point(1082, 56);
+            this.lblOraLettura.Location = new System.Drawing.Point(1080, 107);
             this.lblOraLettura.MinimumSize = new System.Drawing.Size(15, 0);
             this.lblOraLettura.Name = "lblOraLettura";
             this.lblOraLettura.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -498,7 +485,7 @@
             // 
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(1052, 148);
+            this.label19.Location = new System.Drawing.Point(1050, 199);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(37, 13);
             this.label19.TabIndex = 33;
@@ -508,7 +495,7 @@
             // labelAtac
             // 
             this.labelAtac.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelAtac.Location = new System.Drawing.Point(1120, 79);
+            this.labelAtac.Location = new System.Drawing.Point(1118, 130);
             this.labelAtac.Name = "labelAtac";
             this.labelAtac.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelAtac.Size = new System.Drawing.Size(40, 13);
@@ -520,7 +507,7 @@
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(1052, 56);
+            this.label11.Location = new System.Drawing.Point(1050, 107);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(35, 13);
             this.label11.TabIndex = 40;
@@ -530,7 +517,7 @@
             // labelWait
             // 
             this.labelWait.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelWait.Location = new System.Drawing.Point(1120, 125);
+            this.labelWait.Location = new System.Drawing.Point(1118, 176);
             this.labelWait.Name = "labelWait";
             this.labelWait.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelWait.Size = new System.Drawing.Size(40, 13);
@@ -542,7 +529,7 @@
             // 
             this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(1052, 125);
+            this.label16.Location = new System.Drawing.Point(1050, 176);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(49, 13);
             this.label16.TabIndex = 41;
@@ -717,7 +704,7 @@
             // buttonResetRegole
             // 
             this.buttonResetRegole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonResetRegole.Location = new System.Drawing.Point(911, 30);
+            this.buttonResetRegole.Location = new System.Drawing.Point(925, 63);
             this.buttonResetRegole.Name = "buttonResetRegole";
             this.buttonResetRegole.Size = new System.Drawing.Size(83, 23);
             this.buttonResetRegole.TabIndex = 48;
@@ -1063,7 +1050,7 @@
             // buttonSalvaImpostazioni
             // 
             this.buttonSalvaImpostazioni.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSalvaImpostazioni.Location = new System.Drawing.Point(898, 257);
+            this.buttonSalvaImpostazioni.Location = new System.Drawing.Point(898, 310);
             this.buttonSalvaImpostazioni.Name = "buttonSalvaImpostazioni";
             this.buttonSalvaImpostazioni.Size = new System.Drawing.Size(122, 23);
             this.buttonSalvaImpostazioni.TabIndex = 20;
@@ -1206,7 +1193,7 @@
             // labelTotaleMatricolaATAC
             // 
             this.labelTotaleMatricolaATAC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleMatricolaATAC.Location = new System.Drawing.Point(1120, 277);
+            this.labelTotaleMatricolaATAC.Location = new System.Drawing.Point(1118, 323);
             this.labelTotaleMatricolaATAC.Name = "labelTotaleMatricolaATAC";
             this.labelTotaleMatricolaATAC.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleMatricolaATAC.Size = new System.Drawing.Size(40, 13);
@@ -1218,7 +1205,7 @@
             // 
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(1048, 277);
+            this.label17.Location = new System.Drawing.Point(1050, 323);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(45, 13);
             this.label17.TabIndex = 43;
@@ -1228,7 +1215,7 @@
             // labelTotaleMatricolaTPL
             // 
             this.labelTotaleMatricolaTPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleMatricolaTPL.Location = new System.Drawing.Point(1120, 305);
+            this.labelTotaleMatricolaTPL.Location = new System.Drawing.Point(1118, 351);
             this.labelTotaleMatricolaTPL.Name = "labelTotaleMatricolaTPL";
             this.labelTotaleMatricolaTPL.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleMatricolaTPL.Size = new System.Drawing.Size(40, 13);
@@ -1240,7 +1227,7 @@
             // 
             this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(1048, 305);
+            this.label18.Location = new System.Drawing.Point(1050, 351);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(37, 13);
             this.label18.TabIndex = 45;
@@ -1252,7 +1239,7 @@
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(1057, 228);
+            this.label14.Location = new System.Drawing.Point(1055, 274);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(88, 13);
             this.label14.TabIndex = 47;
@@ -1278,7 +1265,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(1060, 663);
+            this.button4.Location = new System.Drawing.Point(1057, 663);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(100, 23);
             this.button4.TabIndex = 48;
@@ -1287,12 +1274,55 @@
             this.button4.Visible = false;
             this.button4.Click += new System.EventHandler(this.ResetAcquisizione);
             // 
+            // labelVer
+            // 
+            this.labelVer.AutoSize = true;
+            this.labelVer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVer.Location = new System.Drawing.Point(949, 7);
+            this.labelVer.MinimumSize = new System.Drawing.Size(100, 24);
+            this.labelVer.Name = "labelVer";
+            this.labelVer.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelVer.Size = new System.Drawing.Size(100, 24);
+            this.labelVer.TabIndex = 50;
+            this.labelVer.Text = "label1";
+            this.labelVer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // button1
+            // 
+            this.button1.Image = global::AtacFeed.Properties.Resources.available_updates_16;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(1055, 7);
+            this.button1.Name = "button1";
+            this.button1.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.button1.Size = new System.Drawing.Size(100, 24);
+            this.button1.TabIndex = 49;
+            this.button1.Text = "Verifica";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // buttonPlayPause
+            // 
+            this.buttonPlayPause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPlayPause.BackgroundImage = global::AtacFeed.Properties.Resources.play;
+            this.buttonPlayPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonPlayPause.FlatAppearance.BorderSize = 0;
+            this.buttonPlayPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPlayPause.ForeColor = System.Drawing.Color.Black;
+            this.buttonPlayPause.Location = new System.Drawing.Point(1083, 510);
+            this.buttonPlayPause.Name = "buttonPlayPause";
+            this.buttonPlayPause.Size = new System.Drawing.Size(50, 46);
+            this.buttonPlayPause.TabIndex = 0;
+            this.buttonPlayPause.UseVisualStyleBackColor = true;
+            this.buttonPlayPause.Click += new System.EventHandler(this.ButtonPlayPause_Click);
+            // 
             // FormGTFS_RSM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1169, 705);
+            this.Controls.Add(this.labelVer);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.labelTotaleMatricolaTPL);
@@ -1488,6 +1518,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn vettureRilevateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn oraPrimaViolazioneDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn oraUltimaViolazioneDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label labelVer;
     }
 }
 

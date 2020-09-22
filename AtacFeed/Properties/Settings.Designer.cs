@@ -62,7 +62,7 @@ namespace AtacFeed.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool Duplicati {
             get {
                 return ((bool)(this["Duplicati"]));
@@ -189,6 +189,30 @@ namespace AtacFeed.Properties {
             }
             set {
                 this["CheckTrip"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/EnricoTolomei/GTFS_RSM/releases/latest")]
+        public string UrlDownload {
+            get {
+                return ((string)(this["UrlDownload"]));
+            }
+            set {
+                this["UrlDownload"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://github.com/EnricoTolomei/GTFS_RSM")]
+        public string UrlHome {
+            get {
+                return ((string)(this["UrlHome"]));
+            }
+            set {
+                this["UrlHome"] = value;
             }
         }
     }

@@ -15,6 +15,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -26,8 +27,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationVersion>1.3.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -77,6 +77,9 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Octokit, Version=0.48.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Octokit.0.48.0\lib\net46\Octokit.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -154,6 +157,12 @@
       <DependentUpon>FormGTFS_RSM.cs</DependentUpon>
     </Compile>
     <Compile Include="LineaAgenzia.cs" />
+    <Compile Include="UpdateBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UpdateBox.Designer.cs">
+      <DependentUpon>UpdateBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="ViolazioneAlert.cs" />
     <Compile Include="LineaMonitorata.cs" />
     <Compile Include="MonitoraggioVettureGrafico.cs" />
@@ -168,6 +177,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UpdateBox.resx">
+      <DependentUpon>UpdateBox.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Config\GTFS_Static\DettagliVettura.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -228,6 +240,18 @@
     <Content Include="OUTPUT\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\power-2-16.png" />
+    <None Include="Resources\restart-icon-32266.png" />
+    <None Include="Resources\cloud-download-16.png" />
+    <None Include="Resources\cloud-download-24.png" />
+    <None Include="Resources\github-10-64.png" />
+    <None Include="Resources\github-10-48.png" />
+    <None Include="Resources\github-10-32.png" />
+    <None Include="Resources\github-10-24.png" />
+    <None Include="Resources\available-updates-161.png" />
+    <None Include="Resources\available-updates-16.png" />
+    <None Include="Resources\github_321.png" />
+    <None Include="Resources\github_32.png" />
     <None Include="Resources\pinpng.com-pause-button-png-2974367 %281%29.png" />
     <None Include="Resources\pinpng.com-video-play-button-png-472328.png" />
   </ItemGroup>

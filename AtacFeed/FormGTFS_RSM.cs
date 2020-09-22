@@ -26,6 +26,10 @@ namespace AtacFeed
 {
     public partial class FormGTFS_RSM : Form
     {
+
+        public bool ToRestart = false;
+
+
         private static readonly DateTime t0 = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         private List<ExtendedVehicleInfo> ElencoAggregatoVetture;
         private List<ExtendedVehicleInfo> ElencoPrecedente;
@@ -615,17 +619,12 @@ namespace AtacFeed
             ElencoAggregatoVetture = new List<ExtendedVehicleInfo>();
             ElencoPrecedente = new List<ExtendedVehicleInfo>();
             ElencoVettureGrafico = new List<MonitoraggioVettureGrafico>();
-            RegoleMonitoraggio = new List<RegolaMonitoraggio>();
+            
             ElencoLineeMonitorate = new List<LineaMonitorata>();
-
             AlertsDaControllare = new List<AlertDaControllare>();
 
-            var reader = new GTFSReader<GTFSFeed>();
-            staticData = reader.Read($"Config{Path.DirectorySeparatorChar}GTFS_Static");
-
-            List<Route> elencoLinee = staticData.Routes
-                .OrderBy(k => k.ShortName)
-                .ToList();
+            Version actualVersion = Assembly.GetExecutingAssembly().GetName().Version;
+            labelVer.Text = String.Format("Vers. {0}.{1:00}", actualVersion.Major, actualVersion.Minor);
 
             #region Load default settings
             urlVehicle.Text = Properties.Settings.Default.UrlVehicle;
@@ -651,6 +650,24 @@ namespace AtacFeed
             secondi.Value = totalSeconds % 60;
             #endregion
 
+
+
+            LeggiFileConfigurazione();
+
+            LeggiRegoleAlertDaFile();
+
+        }
+        
+        private void LeggiFileConfigurazione() {
+            
+            RegoleMonitoraggio = new List<RegolaMonitoraggio>();
+
+            var reader = new GTFSReader<GTFSFeed>();
+            staticData = reader.Read($"Config{Path.DirectorySeparatorChar}GTFS_Static");
+
+            List<Route> elencoLinee = staticData.Routes
+                .OrderBy(k => k.ShortName)
+                .ToList();
             Route route = staticData.Routes.Take(1).FirstOrDefault();
             Route copia = new Route
             {
@@ -694,14 +711,15 @@ namespace AtacFeed
                 }
             }
             catch
-            {                
-                tabControl1.TabPages.Remove(tabMonitoraggio);
-                Log.Information("Rimosso tab RegoleMonitoraggio");
+            {
+                if (tabControl1.TabPages.Contains(tabMonitoraggio))
+                {
+                    tabControl1.TabPages.Remove(tabMonitoraggio);
+                    Log.Information("Rimosso tab RegoleMonitoraggio");
+                }
             }
-            
-            LeggiRegoleAlertDaFile();
-
         }
+
 
         private void LeggiRegoleAlertDaFile()
         {
@@ -897,24 +915,28 @@ namespace AtacFeed
         {
             if (timerAcquisizione.Enabled)
             {
-                DialogResult dialog = MessageBox.Show("Interrompere il monitoraggio ed uscire? ",
-                                "Conferma chiusura programma",
+                string t0 = "dd";
+                string t1 = "dd";
+
+                DialogResult dialog = MessageBox.Show($"Interrompere il monitoraggio {(ToRestart? "e riavviare" : "ed uscire")} ? ",
+                                $"Conferma {(ToRestart? "Riavvio" : "Uscita")}",
                                  MessageBoxButtons.YesNo,
                                  MessageBoxIcon.Question);
                 if (dialog == DialogResult.No)
                 {
                     e.Cancel = true;
+                    ToRestart = false;
                 }
-
-                if (!string.IsNullOrEmpty(fileName))
+                else if (!string.IsNullOrEmpty(fileName))
                 {
                     ExportGrid();
                 }
+
             }
         }
 
 
-        private void SaveAs(FileInfo outputFile) {
+        private async void SaveAs(FileInfo outputFile) {
             if (checkXlsx.Checked)
             {
                 using (ExcelPackage excel = new ExcelPackage(outputFile))
@@ -1111,7 +1133,7 @@ namespace AtacFeed
                 using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 {
                     csv.Configuration.Delimiter = ";";
-                    csv.WriteRecords(ElencoAggregatoVetture);
+                    await csv.WriteRecordsAsync(ElencoAggregatoVetture);
                 }
             }
         }
@@ -1230,7 +1252,12 @@ namespace AtacFeed
 
         private void ResetAcquisizione(object sender, EventArgs e)
         {
-            
+            // Application.Restart();
+            ToRestart = true;
+            this.Close();
+
+
+            /*
             LastdataFeedVehicle = null;
             FirstdataFeedVehicle = null;
             fileName = string.Empty;
@@ -1261,14 +1288,15 @@ namespace AtacFeed
             labelTPL.Text = "0";
             labelWait.Text = "0";
             labelTot.Text = "0";
-            
+
+            LeggiFileConfigurazione();
             LeggiRegoleAlertDaFile();
 
             foreach (var alert in AlertsDaControllare)
             {
                 alert.ViolazioniAlert.Clear();
             }
-
+            */
         }
 
         private void CheckFeedTrip_CheckedChanged(object sender, EventArgs e)
@@ -1293,6 +1321,19 @@ namespace AtacFeed
             }
             else
                 DataResetMonitoraggio = null;
+        }
+
+        private void Button1_Click(object sender, EventArgs e)
+        {
+            UpdateBox updateBox = new UpdateBox();
+            var result = updateBox.ShowDialog();
+            if (result == DialogResult.Yes) {
+                //Application.Restart();
+                ToRestart = true;
+                Close();
+            }
+            else
+                ToRestart = false;
         }
     }
 }

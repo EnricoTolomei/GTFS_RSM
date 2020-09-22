@@ -12,7 +12,7 @@
       <Value Profile="(Default)">60</Value>
     </Setting>
     <Setting Name="Duplicati" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="Vuote" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -43,6 +43,12 @@
     </Setting>
     <Setting Name="CheckTrip" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UrlDownload" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://github.com/EnricoTolomei/GTFS_RSM/releases/latest</Value>
+    </Setting>
+    <Setting Name="UrlHome" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://github.com/EnricoTolomei/GTFS_RSM</Value>
     </Setting>
   </Settings>
 </SettingsFile>

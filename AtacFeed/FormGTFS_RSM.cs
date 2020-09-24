@@ -55,7 +55,7 @@ namespace AtacFeed
 
         private GTFSFeed staticData = new GTFSFeed();
 
-        private async Task AcquisizioneAsync()
+        private void Acquisizione()
         {
             WebRequest req = HttpWebRequest.Create(urlVehicle.Text);
             req.Timeout = 10000;
@@ -70,7 +70,9 @@ namespace AtacFeed
                     throw new Exception("Il feed letto è vuoto");                    
                 }
                 DateTime dataFeedVehicle = t0.AddSeconds(feedVehicleCompleto.Header.Timestamp).ToLocalTime();
-                dataFeedVehicle = DateTime.Now;
+                
+                // Rimuovere il commento solo per attività di Testing
+                //dataFeedVehicle = DateTime.Now;
 
                 if (DataResetMonitoraggio.HasValue && dataFeedVehicle > DataResetMonitoraggio.GetValueOrDefault() )
                 {
@@ -440,7 +442,7 @@ namespace AtacFeed
                                     alert.Griglia.DataSource = violazioniAlertAttuali.ToList(); 
                             }
                         }
-                        await ExportGrid();
+                        ExportGrid();
                         ElencoPrecedente = elencoVetture;
                         LastdataFeedVehicle = dataFeedVehicle;
                     }
@@ -551,11 +553,11 @@ namespace AtacFeed
             if (deltaSec == 0)
             {
                 Log.Information("Acquisizione singola");                
-                AcquisizioneAsync();
+                Acquisizione();
             }
             if (!timerAcquisizione.Enabled && deltaSec > 0)
             {
-                AcquisizioneAsync();
+                Acquisizione();
                 minuti.Enabled = false;
                 secondi.Enabled = false;
                 timerAcquisizione.Interval = deltaSec;
@@ -901,7 +903,7 @@ namespace AtacFeed
 
         private void TimerAcquisizione_Tick(object sender, EventArgs e)
         {
-            AcquisizioneAsync();
+            Acquisizione();
         }
 
         private void SalvaImpostazioni(object sender, EventArgs e)
@@ -1246,8 +1248,6 @@ namespace AtacFeed
                     row.Cells[6].Style.ForeColor = ColorTranslator.FromHtml("#155724");
                     row.Cells[6].Style.BackColor = ColorTranslator.FromHtml("#d4edda");
                 }
-
-
             }
             dataGridViolazioni.ResumeLayout();
         }
@@ -1350,14 +1350,11 @@ namespace AtacFeed
         private void advancedDataGridView1_SortStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.SortEventArgs e)
         {
             this.extendedVehicleInfoBindingSource.Sort = advancedDataGridView1.SortString;
-
-
         }
 
         private void advancedDataGridView1_FilterStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.FilterEventArgs e)
         {
             this.extendedVehicleInfoBindingSource.Filter = advancedDataGridView1.FilterString;
-
         }
     }
 }

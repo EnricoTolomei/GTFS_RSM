@@ -215,5 +215,29 @@ namespace AtacFeed.Properties {
                 this["UrlHome"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool tabGriglia {
+            get {
+                return ((bool)(this["tabGriglia"]));
+            }
+            set {
+                this["tabGriglia"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool tabGrigliaFiltrata {
+            get {
+                return ((bool)(this["tabGrigliaFiltrata"]));
+            }
+            set {
+                this["tabGrigliaFiltrata"] = value;
+            }
+        }
     }
 }

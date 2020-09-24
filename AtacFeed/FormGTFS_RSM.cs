@@ -1,5 +1,6 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration.Attributes;
+using FastMember;
 using GTFS;
 using GTFS.Entities;
 using GTFS.IO;
@@ -54,7 +55,7 @@ namespace AtacFeed
 
         private GTFSFeed staticData = new GTFSFeed();
 
-        private void Acquisizione()
+        private async Task AcquisizioneAsync()
         {
             WebRequest req = HttpWebRequest.Create(urlVehicle.Text);
             req.Timeout = 10000;
@@ -62,13 +63,14 @@ namespace AtacFeed
             {                
                 string routeID = comboBox1.SelectedValue.ToString();
                 FeedMessage feedVehicleCompleto = Serializer.Deserialize<FeedMessage>(req.GetResponse().GetResponseStream());
+                
                 if (feedVehicleCompleto.Entities.Count == 0)
                 {
                     Log.Error("Feed VUOTO alle {DateTime:HH:mm:ss}" ,DateTime.Now);
                     throw new Exception("Il feed letto è vuoto");                    
                 }
                 DateTime dataFeedVehicle = t0.AddSeconds(feedVehicleCompleto.Header.Timestamp).ToLocalTime();
-                dataFeedVehicle = DateTime.Now;                
+                dataFeedVehicle = DateTime.Now;
 
                 if (DataResetMonitoraggio.HasValue && dataFeedVehicle > DataResetMonitoraggio.GetValueOrDefault() )
                 {
@@ -170,6 +172,16 @@ namespace AtacFeed
                     labelTotaleMatricolaTPL.Text = TotaleMatricolaTPL.ToString();
 
                     dataGridVetture.DataSource = ElencoAggregatoVetture;
+                    
+                    DataTable dt = new DataTable();
+                    using (var reader = ObjectReader.Create(ElencoAggregatoVetture))
+                    {
+                        dt.Load(reader);
+                    }
+                    
+                    extendedVehicleInfoBindingSource.DataSource = dt;
+                    advancedDataGridView1.DataSource = this.extendedVehicleInfoBindingSource;
+                    
                     List<string> urlTripList = new List<string>();
                     List<string> urlVehicleList = new List<string>();
                     foreach (FeedEntity entity in feedEntities)
@@ -217,7 +229,7 @@ namespace AtacFeed
                         };
                         ElencoVettureGrafico.Add(nuovoMonitoraggio);
 
-                        if (tabControl1.TabPages.Contains(tabMonitoraggio))
+                        if (tabMainForm.TabPages.Contains(tabMonitoraggio))
                         {
                             int giornosettimana = (int)dataFeedVehicle.DayOfWeek;
                             var vettureSuLinea = elencoVetture
@@ -280,7 +292,7 @@ namespace AtacFeed
                                 .ToList()
                                 ;
                             
-                            dataGridViolazioni.DataSource = situazioneAttualeEdAlert; // ElencoLineeMonitorate;
+                            dataGridViolazioni.DataSource = situazioneAttualeEdAlert;
                             Colora();
                             
                             foreach (var alert in AlertsDaControllare)
@@ -428,7 +440,7 @@ namespace AtacFeed
                                     alert.Griglia.DataSource = violazioniAlertAttuali.ToList(); 
                             }
                         }
-                        ExportGrid();
+                        await ExportGrid();
                         ElencoPrecedente = elencoVetture;
                         LastdataFeedVehicle = dataFeedVehicle;
                     }
@@ -519,7 +531,7 @@ namespace AtacFeed
             {
                 textBox1.AppendText($"{ex.Message} {Environment.NewLine} {ex.StackTrace}");
                 Log.Error(ex, "Errore Generico");
-            }
+            }        
         }
         
         private void ButtonPlayPause_Click(object sender, EventArgs e)
@@ -539,11 +551,11 @@ namespace AtacFeed
             if (deltaSec == 0)
             {
                 Log.Information("Acquisizione singola");                
-                Acquisizione();
+                AcquisizioneAsync();
             }
             if (!timerAcquisizione.Enabled && deltaSec > 0)
             {
-                Acquisizione();
+                AcquisizioneAsync();
                 minuti.Enabled = false;
                 secondi.Enabled = false;
                 timerAcquisizione.Interval = deltaSec;
@@ -648,14 +660,16 @@ namespace AtacFeed
             int totalSeconds = Properties.Settings.Default.DeltaTSec;
             minuti.Value = totalSeconds / 60;
             secondi.Value = totalSeconds % 60;
+
+            if (!Properties.Settings.Default.tabGriglia )
+                tabMainForm.TabPages.Remove(tabGriglia);
+            if (!Properties.Settings.Default.tabGrigliaFiltrata) 
+                tabMainForm.TabPages.Remove(tabGrigliaFiltrata);
+
             #endregion
 
-
-
             LeggiFileConfigurazione();
-
             LeggiRegoleAlertDaFile();
-
         }
         
         private void LeggiFileConfigurazione() {
@@ -712,9 +726,9 @@ namespace AtacFeed
             }
             catch
             {
-                if (tabControl1.TabPages.Contains(tabMonitoraggio))
+                if (tabMainForm.TabPages.Contains(tabMonitoraggio))
                 {
-                    tabControl1.TabPages.Remove(tabMonitoraggio);
+                    tabMainForm.TabPages.Remove(tabMonitoraggio);
                     Log.Information("Rimosso tab RegoleMonitoraggio");
                 }
             }
@@ -843,7 +857,7 @@ namespace AtacFeed
                                 myNewdataGridVetture.ReadOnly = true;
 
                                 myNewTabItem.Controls.Add(myNewdataGridVetture);
-                                tabControl1.TabPages.Add(myNewTabItem);
+                                tabMainForm.TabPages.Add(myNewTabItem);
 
                                 //myNewdataGridVetture.DataSource = listaRegole.OrderBy(x => x.Linea).ToList();
                             }
@@ -887,7 +901,7 @@ namespace AtacFeed
 
         private void TimerAcquisizione_Tick(object sender, EventArgs e)
         {
-            Acquisizione();
+            AcquisizioneAsync();
         }
 
         private void SalvaImpostazioni(object sender, EventArgs e)
@@ -915,9 +929,6 @@ namespace AtacFeed
         {
             if (timerAcquisizione.Enabled)
             {
-                string t0 = "dd";
-                string t1 = "dd";
-
                 DialogResult dialog = MessageBox.Show($"Interrompere il monitoraggio {(ToRestart? "e riavviare" : "ed uscire")} ? ",
                                 $"Conferma {(ToRestart? "Riavvio" : "Uscita")}",
                                  MessageBoxButtons.YesNo,
@@ -1043,7 +1054,7 @@ namespace AtacFeed
                         lineChartTPL.SetPosition(14, 3, 0, 3);
                     }
 
-                    if (tabControl1.TabPages.Contains(tabMonitoraggio) && checkMonitoraggio.Checked)
+                    if (tabMainForm.TabPages.Contains(tabMonitoraggio) && checkMonitoraggio.Checked)
                     {
                         foreach (ExcelWorksheet sheet in excel.Workbook.Worksheets)
                         {
@@ -1334,6 +1345,19 @@ namespace AtacFeed
             }
             else
                 ToRestart = false;
+        }
+
+        private void advancedDataGridView1_SortStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.SortEventArgs e)
+        {
+            this.extendedVehicleInfoBindingSource.Sort = advancedDataGridView1.SortString;
+
+
+        }
+
+        private void advancedDataGridView1_FilterStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.FilterEventArgs e)
+        {
+            this.extendedVehicleInfoBindingSource.Filter = advancedDataGridView1.FilterString;
+
         }
     }
 }

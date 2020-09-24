@@ -30,24 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGTFS_RSM));
-            this.dataGridVetture = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.latitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.longitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.extendedVehicleInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.timerAcquisizione = new System.Windows.Forms.Timer(this.components);
             this.button3 = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -69,11 +51,22 @@
             this.label11 = new System.Windows.Forms.Label();
             this.labelWait = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
-            this.tabGrafico = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.formsPlotTPL = new ScottPlot.FormsPlot();
-            this.formsPlotAtac = new ScottPlot.FormsPlot();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.labelTotaleMatricolaATAC = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.labelTotaleMatricolaTPL = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolTipFeedTrip = new System.Windows.Forms.ToolTip(this.components);
+            this.checkFeedTrip = new System.Windows.Forms.CheckBox();
+            this.urlTrip = new System.Windows.Forms.TextBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.labelVer = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.buttonPlayPause = new System.Windows.Forms.Button();
+            this.tabMainForm = new System.Windows.Forms.TabControl();
+            this.tabImpostazioni = new System.Windows.Forms.TabPage();
             this.groupBoxExport = new System.Windows.Forms.GroupBox();
             this.checkAlert = new System.Windows.Forms.CheckBox();
             this.checkMonitoraggio = new System.Windows.Forms.CheckBox();
@@ -94,14 +87,12 @@
             this.label4 = new System.Windows.Forms.Label();
             this.checkTripDuplicati = new System.Windows.Forms.CheckBox();
             this.groupBoxServerRSM = new System.Windows.Forms.GroupBox();
-            this.checkFeedTrip = new System.Windows.Forms.CheckBox();
             this.label20 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.urlVehicle = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.urlAlert = new System.Windows.Forms.TextBox();
-            this.urlTrip = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.secondi = new System.Windows.Forms.NumericUpDown();
             this.minuti = new System.Windows.Forms.NumericUpDown();
@@ -112,8 +103,47 @@
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonSalvaImpostazioni = new System.Windows.Forms.Button();
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabGrafico = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.formsPlotTPL = new ScottPlot.FormsPlot();
+            this.formsPlotAtac = new ScottPlot.FormsPlot();
             this.tabGriglia = new System.Windows.Forms.TabPage();
+            this.dataGridVetture = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.latitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.longitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.extendedVehicleInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tabGrigliaFiltrata = new System.Windows.Forms.TabPage();
+            this.advancedDataGridView1 = new Zuby.ADGV.AdvancedDataGridView();
+            this.idVetturaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.matricolaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.routeIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lineaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gestoreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.directionIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.currentStopSequenceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.congestionLevelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tripIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.primaVoltaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ultimaVoltaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rimessaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.euroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modelloDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.latitudeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.longitudeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabMonitoraggio = new System.Windows.Forms.TabPage();
             this.dataGridViolazioni = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -126,23 +156,8 @@
             this.oraPrimaViolazioneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.oraUltimaViolazioneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lineaMonitorataBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.labelTotaleMatricolaATAC = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.labelTotaleMatricolaTPL = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.toolTipFeedTrip = new System.Windows.Forms.ToolTip(this.components);
-            this.button4 = new System.Windows.Forms.Button();
-            this.labelVer = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.buttonPlayPause = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridVetture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).BeginInit();
-            this.tabGrafico.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabMainForm.SuspendLayout();
+            this.tabImpostazioni.SuspendLayout();
             this.groupBoxExport.SuspendLayout();
             this.groupBoxMonitoraggio.SuspendLayout();
             this.groupBoxServerRSM.SuspendLayout();
@@ -150,162 +165,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.minuti)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            this.tabControl1.SuspendLayout();
+            this.tabGrafico.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.tabGriglia.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridVetture)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).BeginInit();
+            this.tabGrigliaFiltrata.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView1)).BeginInit();
             this.tabMonitoraggio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViolazioni)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lineaMonitorataBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dataGridVetture
-            // 
-            this.dataGridVetture.AllowUserToAddRows = false;
-            this.dataGridVetture.AllowUserToDeleteRows = false;
-            this.dataGridVetture.AllowUserToOrderColumns = true;
-            this.dataGridVetture.AutoGenerateColumns = false;
-            this.dataGridVetture.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridVetture.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridVetture.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridVetture.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn11,
-            this.dataGridViewTextBoxColumn12,
-            this.dataGridViewTextBoxColumn13,
-            this.dataGridViewTextBoxColumn14,
-            this.dataGridViewTextBoxColumn15,
-            this.dataGridViewTextBoxColumn16,
-            this.dataGridViewTextBoxColumn17,
-            this.dataGridViewTextBoxColumn18,
-            this.dataGridViewTextBoxColumn19,
-            this.dataGridViewTextBoxColumn20,
-            this.dataGridViewTextBoxColumn21,
-            this.dataGridViewTextBoxColumn22,
-            this.dataGridViewTextBoxColumn23,
-            this.dataGridViewTextBoxColumn24,
-            this.latitudeDataGridViewTextBoxColumn,
-            this.longitudeDataGridViewTextBoxColumn});
-            this.dataGridVetture.DataSource = this.extendedVehicleInfoBindingSource;
-            this.dataGridVetture.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridVetture.Location = new System.Drawing.Point(3, 3);
-            this.dataGridVetture.Name = "dataGridVetture";
-            this.dataGridVetture.ReadOnly = true;
-            this.dataGridVetture.Size = new System.Drawing.Size(1022, 648);
-            this.dataGridVetture.TabIndex = 8;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "IdVettura";
-            this.dataGridViewTextBoxColumn11.HeaderText = "IdVettura";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "Matricola";
-            this.dataGridViewTextBoxColumn12.HeaderText = "Matricola";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "RouteId";
-            this.dataGridViewTextBoxColumn13.HeaderText = "RouteId";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "Linea";
-            this.dataGridViewTextBoxColumn14.HeaderText = "Linea";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "Gestore";
-            this.dataGridViewTextBoxColumn15.HeaderText = "Gestore";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.DataPropertyName = "CurrentStopSequence";
-            this.dataGridViewTextBoxColumn16.HeaderText = "CurrentStopSequence";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.DataPropertyName = "CongestionLevel";
-            this.dataGridViewTextBoxColumn17.HeaderText = "CongestionLevel";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn18
-            // 
-            this.dataGridViewTextBoxColumn18.DataPropertyName = "OccupancyStatus";
-            this.dataGridViewTextBoxColumn18.HeaderText = "OccupancyStatus";
-            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            this.dataGridViewTextBoxColumn18.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn19
-            // 
-            this.dataGridViewTextBoxColumn19.DataPropertyName = "TripId";
-            this.dataGridViewTextBoxColumn19.HeaderText = "TripId";
-            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            this.dataGridViewTextBoxColumn19.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            this.dataGridViewTextBoxColumn20.DataPropertyName = "PrimaVolta";
-            this.dataGridViewTextBoxColumn20.HeaderText = "PrimaVolta";
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            this.dataGridViewTextBoxColumn20.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn21
-            // 
-            this.dataGridViewTextBoxColumn21.DataPropertyName = "UltimaVolta";
-            this.dataGridViewTextBoxColumn21.HeaderText = "UltimaVolta";
-            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
-            this.dataGridViewTextBoxColumn21.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn22
-            // 
-            this.dataGridViewTextBoxColumn22.DataPropertyName = "Rimessa";
-            this.dataGridViewTextBoxColumn22.HeaderText = "Rimessa";
-            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-            this.dataGridViewTextBoxColumn22.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn23
-            // 
-            this.dataGridViewTextBoxColumn23.DataPropertyName = "Euro";
-            this.dataGridViewTextBoxColumn23.HeaderText = "Euro";
-            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
-            this.dataGridViewTextBoxColumn23.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn24
-            // 
-            this.dataGridViewTextBoxColumn24.DataPropertyName = "Modello";
-            this.dataGridViewTextBoxColumn24.HeaderText = "Modello";
-            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
-            this.dataGridViewTextBoxColumn24.ReadOnly = true;
-            // 
-            // latitudeDataGridViewTextBoxColumn
-            // 
-            this.latitudeDataGridViewTextBoxColumn.DataPropertyName = "Latitude";
-            this.latitudeDataGridViewTextBoxColumn.HeaderText = "Latitude";
-            this.latitudeDataGridViewTextBoxColumn.Name = "latitudeDataGridViewTextBoxColumn";
-            this.latitudeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // longitudeDataGridViewTextBoxColumn
-            // 
-            this.longitudeDataGridViewTextBoxColumn.DataPropertyName = "Longitude";
-            this.longitudeDataGridViewTextBoxColumn.HeaderText = "Longitude";
-            this.longitudeDataGridViewTextBoxColumn.Name = "longitudeDataGridViewTextBoxColumn";
-            this.longitudeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // extendedVehicleInfoBindingSource
-            // 
-            this.extendedVehicleInfoBindingSource.DataSource = typeof(AtacFeed.ExtendedVehicleInfo);
             // 
             // timerAcquisizione
             // 
@@ -536,67 +406,188 @@
             this.label16.Text = "In Attesa";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tabGrafico
+            // labelTotaleMatricolaATAC
             // 
-            this.tabGrafico.Controls.Add(this.tableLayoutPanel2);
-            this.tabGrafico.Location = new System.Drawing.Point(4, 22);
-            this.tabGrafico.Margin = new System.Windows.Forms.Padding(0);
-            this.tabGrafico.Name = "tabGrafico";
-            this.tabGrafico.Size = new System.Drawing.Size(1028, 654);
-            this.tabGrafico.TabIndex = 2;
-            this.tabGrafico.Text = "Grafico";
-            this.tabGrafico.UseVisualStyleBackColor = true;
+            this.labelTotaleMatricolaATAC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTotaleMatricolaATAC.Location = new System.Drawing.Point(1118, 323);
+            this.labelTotaleMatricolaATAC.Name = "labelTotaleMatricolaATAC";
+            this.labelTotaleMatricolaATAC.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTotaleMatricolaATAC.Size = new System.Drawing.Size(40, 13);
+            this.labelTotaleMatricolaATAC.TabIndex = 44;
+            this.labelTotaleMatricolaATAC.Text = "0";
+            this.labelTotaleMatricolaATAC.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // tableLayoutPanel2
+            // label17
             // 
-            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(1050, 323);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(45, 13);
+            this.label17.TabIndex = 43;
+            this.label17.Text = "# ATAC";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelTotaleMatricolaTPL
+            // 
+            this.labelTotaleMatricolaTPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTotaleMatricolaTPL.Location = new System.Drawing.Point(1118, 351);
+            this.labelTotaleMatricolaTPL.Name = "labelTotaleMatricolaTPL";
+            this.labelTotaleMatricolaTPL.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTotaleMatricolaTPL.Size = new System.Drawing.Size(40, 13);
+            this.labelTotaleMatricolaTPL.TabIndex = 46;
+            this.labelTotaleMatricolaTPL.Text = "0";
+            this.labelTotaleMatricolaTPL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label18
+            // 
+            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(1050, 351);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(37, 13);
+            this.label18.TabIndex = 45;
+            this.label18.Text = "# TPL";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label14
+            // 
+            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(1055, 274);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(88, 13);
+            this.label14.TabIndex = 47;
+            this.label14.Text = "Dati Aggregati";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "RegolaViolata";
+            this.dataGridViewTextBoxColumn1.HeaderText = "RegolaViolata";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "RegolaViolata";
+            this.dataGridViewTextBoxColumn2.HeaderText = "RegolaViolata";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            // 
+            // toolTipFeedTrip
+            // 
+            this.toolTipFeedTrip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.toolTipFeedTrip.ToolTipTitle = "GTFS TRIP";
+            // 
+            // checkFeedTrip
+            // 
+            this.checkFeedTrip.AutoSize = true;
+            this.checkFeedTrip.Location = new System.Drawing.Point(47, 63);
+            this.checkFeedTrip.Name = "checkFeedTrip";
+            this.checkFeedTrip.Size = new System.Drawing.Size(71, 17);
+            this.checkFeedTrip.TabIndex = 20;
+            this.checkFeedTrip.Text = "Feed Trip";
+            this.toolTipFeedTrip.SetToolTip(this.checkFeedTrip, "Può essere tranquillamnte disabilitato. Al momento l\'informazione del feed non è " +
+        "utilizzata per il conteggio delle vetture");
+            this.checkFeedTrip.UseVisualStyleBackColor = true;
+            this.checkFeedTrip.CheckedChanged += new System.EventHandler(this.CheckFeedTrip_CheckedChanged);
+            // 
+            // urlTrip
+            // 
+            this.urlTrip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.urlTrip.Location = new System.Drawing.Point(124, 60);
+            this.urlTrip.Name = "urlTrip";
+            this.urlTrip.Size = new System.Drawing.Size(569, 20);
+            this.urlTrip.TabIndex = 3;
+            this.toolTipFeedTrip.SetToolTip(this.urlTrip, "Url opzionale, al momento usato solo per fini statistici");
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(1057, 663);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(100, 23);
+            this.button4.TabIndex = 48;
+            this.button4.Text = "buttonReset";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Visible = false;
+            this.button4.Click += new System.EventHandler(this.ResetAcquisizione);
+            // 
+            // labelVer
+            // 
+            this.labelVer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelVer.AutoSize = true;
+            this.labelVer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVer.Location = new System.Drawing.Point(949, 7);
+            this.labelVer.MinimumSize = new System.Drawing.Size(100, 24);
+            this.labelVer.Name = "labelVer";
+            this.labelVer.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelVer.Size = new System.Drawing.Size(100, 24);
+            this.labelVer.TabIndex = 50;
+            this.labelVer.Text = "label1";
+            this.labelVer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Image = global::AtacFeed.Properties.Resources.available_updates_16;
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(1055, 7);
+            this.button1.Name = "button1";
+            this.button1.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
+            this.button1.Size = new System.Drawing.Size(100, 24);
+            this.button1.TabIndex = 49;
+            this.button1.Text = "Verifica";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // buttonPlayPause
+            // 
+            this.buttonPlayPause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPlayPause.BackgroundImage = global::AtacFeed.Properties.Resources.play;
+            this.buttonPlayPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonPlayPause.FlatAppearance.BorderSize = 0;
+            this.buttonPlayPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPlayPause.ForeColor = System.Drawing.Color.Black;
+            this.buttonPlayPause.Location = new System.Drawing.Point(1083, 510);
+            this.buttonPlayPause.Name = "buttonPlayPause";
+            this.buttonPlayPause.Size = new System.Drawing.Size(50, 46);
+            this.buttonPlayPause.TabIndex = 0;
+            this.buttonPlayPause.UseVisualStyleBackColor = true;
+            this.buttonPlayPause.Click += new System.EventHandler(this.ButtonPlayPause_Click);
+            // 
+            // tabMainForm
+            // 
+            this.tabMainForm.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel2.ColumnCount = 1;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel2.Controls.Add(this.formsPlotTPL, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.formsPlotAtac, 0, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 2;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1022, 648);
-            this.tableLayoutPanel2.TabIndex = 1;
+            this.tabMainForm.Controls.Add(this.tabImpostazioni);
+            this.tabMainForm.Controls.Add(this.tabGrafico);
+            this.tabMainForm.Controls.Add(this.tabGriglia);
+            this.tabMainForm.Controls.Add(this.tabGrigliaFiltrata);
+            this.tabMainForm.Controls.Add(this.tabMonitoraggio);
+            this.tabMainForm.Location = new System.Drawing.Point(13, 13);
+            this.tabMainForm.Name = "tabMainForm";
+            this.tabMainForm.SelectedIndex = 0;
+            this.tabMainForm.Size = new System.Drawing.Size(1036, 680);
+            this.tabMainForm.TabIndex = 27;
+            this.tabMainForm.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
             // 
-            // formsPlotTPL
+            // tabImpostazioni
             // 
-            this.formsPlotTPL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlotTPL.Location = new System.Drawing.Point(0, 324);
-            this.formsPlotTPL.Margin = new System.Windows.Forms.Padding(0);
-            this.formsPlotTPL.Name = "formsPlotTPL";
-            this.formsPlotTPL.Size = new System.Drawing.Size(1022, 324);
-            this.formsPlotTPL.TabIndex = 1;
-            // 
-            // formsPlotAtac
-            // 
-            this.formsPlotAtac.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.formsPlotAtac.Location = new System.Drawing.Point(0, 0);
-            this.formsPlotAtac.Margin = new System.Windows.Forms.Padding(0);
-            this.formsPlotAtac.Name = "formsPlotAtac";
-            this.formsPlotAtac.Size = new System.Drawing.Size(1022, 324);
-            this.formsPlotAtac.TabIndex = 2;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.BackColor = System.Drawing.Color.Transparent;
-            this.tabPage1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.tabPage1.Controls.Add(this.groupBoxExport);
-            this.tabPage1.Controls.Add(this.groupBoxMonitoraggio);
-            this.tabPage1.Controls.Add(this.groupBoxServerRSM);
-            this.tabPage1.Controls.Add(this.tableLayoutPanel1);
-            this.tabPage1.Controls.Add(this.buttonSalvaImpostazioni);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1028, 654);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Impostazioni";
+            this.tabImpostazioni.BackColor = System.Drawing.Color.Transparent;
+            this.tabImpostazioni.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tabImpostazioni.Controls.Add(this.groupBoxExport);
+            this.tabImpostazioni.Controls.Add(this.groupBoxMonitoraggio);
+            this.tabImpostazioni.Controls.Add(this.groupBoxServerRSM);
+            this.tabImpostazioni.Controls.Add(this.tableLayoutPanel1);
+            this.tabImpostazioni.Controls.Add(this.buttonSalvaImpostazioni);
+            this.tabImpostazioni.Location = new System.Drawing.Point(4, 22);
+            this.tabImpostazioni.Name = "tabImpostazioni";
+            this.tabImpostazioni.Padding = new System.Windows.Forms.Padding(3);
+            this.tabImpostazioni.Size = new System.Drawing.Size(1028, 654);
+            this.tabImpostazioni.TabIndex = 0;
+            this.tabImpostazioni.Text = "Impostazioni";
             // 
             // groupBoxExport
             // 
@@ -850,19 +841,6 @@
             this.groupBoxServerRSM.TabStop = false;
             this.groupBoxServerRSM.Text = "Impostazioni Server RSM";
             // 
-            // checkFeedTrip
-            // 
-            this.checkFeedTrip.AutoSize = true;
-            this.checkFeedTrip.Location = new System.Drawing.Point(47, 63);
-            this.checkFeedTrip.Name = "checkFeedTrip";
-            this.checkFeedTrip.Size = new System.Drawing.Size(71, 17);
-            this.checkFeedTrip.TabIndex = 20;
-            this.checkFeedTrip.Text = "Feed Trip";
-            this.toolTipFeedTrip.SetToolTip(this.checkFeedTrip, "Può essere tranquillamnte disabilitato. Al momento l\'informazione del feed non è " +
-        "utilizzata per il conteggio delle vetture");
-            this.checkFeedTrip.UseVisualStyleBackColor = true;
-            this.checkFeedTrip.CheckedChanged += new System.EventHandler(this.CheckFeedTrip_CheckedChanged);
-            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -920,16 +898,6 @@
             this.urlAlert.Size = new System.Drawing.Size(569, 20);
             this.urlAlert.TabIndex = 3;
             this.urlAlert.Visible = false;
-            // 
-            // urlTrip
-            // 
-            this.urlTrip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.urlTrip.Location = new System.Drawing.Point(124, 60);
-            this.urlTrip.Name = "urlTrip";
-            this.urlTrip.Size = new System.Drawing.Size(569, 20);
-            this.urlTrip.TabIndex = 3;
-            this.toolTipFeedTrip.SetToolTip(this.urlTrip, "Url opzionale, al momento usato solo per fini statistici");
             // 
             // label5
             // 
@@ -1058,25 +1026,56 @@
             this.buttonSalvaImpostazioni.UseVisualStyleBackColor = true;
             this.buttonSalvaImpostazioni.Click += new System.EventHandler(this.SalvaImpostazioni);
             // 
-            // tabControl1
+            // tabGrafico
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tabGrafico.Controls.Add(this.tableLayoutPanel2);
+            this.tabGrafico.Location = new System.Drawing.Point(4, 22);
+            this.tabGrafico.Margin = new System.Windows.Forms.Padding(0);
+            this.tabGrafico.Name = "tabGrafico";
+            this.tabGrafico.Size = new System.Drawing.Size(1028, 654);
+            this.tabGrafico.TabIndex = 2;
+            this.tabGrafico.Text = "Grafico";
+            this.tabGrafico.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabGrafico);
-            this.tabControl1.Controls.Add(this.tabGriglia);
-            this.tabControl1.Controls.Add(this.tabMonitoraggio);
-            this.tabControl1.Location = new System.Drawing.Point(13, 13);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1036, 680);
-            this.tabControl1.TabIndex = 27;
-            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel2.Controls.Add(this.formsPlotTPL, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.formsPlotAtac, 0, 0);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1022, 648);
+            this.tableLayoutPanel2.TabIndex = 1;
+            // 
+            // formsPlotTPL
+            // 
+            this.formsPlotTPL.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.formsPlotTPL.Location = new System.Drawing.Point(0, 324);
+            this.formsPlotTPL.Margin = new System.Windows.Forms.Padding(0);
+            this.formsPlotTPL.Name = "formsPlotTPL";
+            this.formsPlotTPL.Size = new System.Drawing.Size(1022, 324);
+            this.formsPlotTPL.TabIndex = 1;
+            // 
+            // formsPlotAtac
+            // 
+            this.formsPlotAtac.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.formsPlotAtac.Location = new System.Drawing.Point(0, 0);
+            this.formsPlotAtac.Margin = new System.Windows.Forms.Padding(0);
+            this.formsPlotAtac.Name = "formsPlotAtac";
+            this.formsPlotAtac.Size = new System.Drawing.Size(1022, 324);
+            this.formsPlotAtac.TabIndex = 2;
             // 
             // tabGriglia
             // 
             this.tabGriglia.Controls.Add(this.dataGridVetture);
+            this.tabGriglia.DataBindings.Add(new System.Windows.Forms.Binding("Visible", global::AtacFeed.Properties.Settings.Default, "tabGriglia", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tabGriglia.Location = new System.Drawing.Point(4, 22);
             this.tabGriglia.Name = "tabGriglia";
             this.tabGriglia.Padding = new System.Windows.Forms.Padding(3);
@@ -1084,6 +1083,351 @@
             this.tabGriglia.TabIndex = 3;
             this.tabGriglia.Text = "Griglia";
             this.tabGriglia.UseVisualStyleBackColor = true;
+            // 
+            // dataGridVetture
+            // 
+            this.dataGridVetture.AllowUserToAddRows = false;
+            this.dataGridVetture.AllowUserToDeleteRows = false;
+            this.dataGridVetture.AllowUserToOrderColumns = true;
+            this.dataGridVetture.AutoGenerateColumns = false;
+            this.dataGridVetture.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridVetture.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridVetture.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridVetture.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn11,
+            this.dataGridViewTextBoxColumn12,
+            this.dataGridViewTextBoxColumn13,
+            this.dataGridViewTextBoxColumn14,
+            this.dataGridViewTextBoxColumn15,
+            this.dataGridViewTextBoxColumn16,
+            this.dataGridViewTextBoxColumn17,
+            this.dataGridViewTextBoxColumn18,
+            this.dataGridViewTextBoxColumn19,
+            this.dataGridViewTextBoxColumn20,
+            this.dataGridViewTextBoxColumn21,
+            this.dataGridViewTextBoxColumn22,
+            this.dataGridViewTextBoxColumn23,
+            this.dataGridViewTextBoxColumn24,
+            this.latitudeDataGridViewTextBoxColumn,
+            this.longitudeDataGridViewTextBoxColumn});
+            this.dataGridVetture.DataSource = this.extendedVehicleInfoBindingSource;
+            this.dataGridVetture.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridVetture.Location = new System.Drawing.Point(3, 3);
+            this.dataGridVetture.Name = "dataGridVetture";
+            this.dataGridVetture.ReadOnly = true;
+            this.dataGridVetture.Size = new System.Drawing.Size(1022, 648);
+            this.dataGridVetture.TabIndex = 8;
+            this.dataGridVetture.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "IdVettura";
+            this.dataGridViewTextBoxColumn11.HeaderText = "IdVettura";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "Matricola";
+            this.dataGridViewTextBoxColumn12.HeaderText = "Matricola";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "RouteId";
+            this.dataGridViewTextBoxColumn13.HeaderText = "RouteId";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "Linea";
+            this.dataGridViewTextBoxColumn14.HeaderText = "Linea";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "Gestore";
+            this.dataGridViewTextBoxColumn15.HeaderText = "Gestore";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.DataPropertyName = "CurrentStopSequence";
+            this.dataGridViewTextBoxColumn16.HeaderText = "CurrentStopSequence";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.DataPropertyName = "CongestionLevel";
+            this.dataGridViewTextBoxColumn17.HeaderText = "CongestionLevel";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            this.dataGridViewTextBoxColumn18.DataPropertyName = "OccupancyStatus";
+            this.dataGridViewTextBoxColumn18.HeaderText = "OccupancyStatus";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            this.dataGridViewTextBoxColumn18.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            this.dataGridViewTextBoxColumn19.DataPropertyName = "TripId";
+            this.dataGridViewTextBoxColumn19.HeaderText = "TripId";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            this.dataGridViewTextBoxColumn19.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.DataPropertyName = "PrimaVolta";
+            this.dataGridViewTextBoxColumn20.HeaderText = "PrimaVolta";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            this.dataGridViewTextBoxColumn20.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn21
+            // 
+            this.dataGridViewTextBoxColumn21.DataPropertyName = "UltimaVolta";
+            this.dataGridViewTextBoxColumn21.HeaderText = "UltimaVolta";
+            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            this.dataGridViewTextBoxColumn21.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn22
+            // 
+            this.dataGridViewTextBoxColumn22.DataPropertyName = "Rimessa";
+            this.dataGridViewTextBoxColumn22.HeaderText = "Rimessa";
+            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+            this.dataGridViewTextBoxColumn22.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn23
+            // 
+            this.dataGridViewTextBoxColumn23.DataPropertyName = "Euro";
+            this.dataGridViewTextBoxColumn23.HeaderText = "Euro";
+            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
+            this.dataGridViewTextBoxColumn23.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn24
+            // 
+            this.dataGridViewTextBoxColumn24.DataPropertyName = "Modello";
+            this.dataGridViewTextBoxColumn24.HeaderText = "Modello";
+            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
+            this.dataGridViewTextBoxColumn24.ReadOnly = true;
+            // 
+            // latitudeDataGridViewTextBoxColumn
+            // 
+            this.latitudeDataGridViewTextBoxColumn.DataPropertyName = "Latitude";
+            this.latitudeDataGridViewTextBoxColumn.HeaderText = "Latitude";
+            this.latitudeDataGridViewTextBoxColumn.Name = "latitudeDataGridViewTextBoxColumn";
+            this.latitudeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // longitudeDataGridViewTextBoxColumn
+            // 
+            this.longitudeDataGridViewTextBoxColumn.DataPropertyName = "Longitude";
+            this.longitudeDataGridViewTextBoxColumn.HeaderText = "Longitude";
+            this.longitudeDataGridViewTextBoxColumn.Name = "longitudeDataGridViewTextBoxColumn";
+            this.longitudeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // extendedVehicleInfoBindingSource
+            // 
+            this.extendedVehicleInfoBindingSource.DataSource = typeof(AtacFeed.ExtendedVehicleInfo);
+            // 
+            // tabGrigliaFiltrata
+            // 
+            this.tabGrigliaFiltrata.Controls.Add(this.advancedDataGridView1);
+            this.tabGrigliaFiltrata.DataBindings.Add(new System.Windows.Forms.Binding("Visible", global::AtacFeed.Properties.Settings.Default, "tabGrigliaFiltrata", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tabGrigliaFiltrata.Location = new System.Drawing.Point(4, 22);
+            this.tabGrigliaFiltrata.Name = "tabGrigliaFiltrata";
+            this.tabGrigliaFiltrata.Padding = new System.Windows.Forms.Padding(3);
+            this.tabGrigliaFiltrata.Size = new System.Drawing.Size(1028, 654);
+            this.tabGrigliaFiltrata.TabIndex = 5;
+            this.tabGrigliaFiltrata.Text = "Griglia";
+            this.tabGrigliaFiltrata.UseVisualStyleBackColor = true;
+            // 
+            // advancedDataGridView1
+            // 
+            this.advancedDataGridView1.AllowUserToAddRows = false;
+            this.advancedDataGridView1.AllowUserToDeleteRows = false;
+            this.advancedDataGridView1.AutoGenerateColumns = false;
+            this.advancedDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.advancedDataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.advancedDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.advancedDataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idVetturaDataGridViewTextBoxColumn,
+            this.matricolaDataGridViewTextBoxColumn,
+            this.routeIdDataGridViewTextBoxColumn,
+            this.lineaDataGridViewTextBoxColumn,
+            this.gestoreDataGridViewTextBoxColumn,
+            this.directionIdDataGridViewTextBoxColumn,
+            this.currentStopSequenceDataGridViewTextBoxColumn,
+            this.congestionLevelDataGridViewTextBoxColumn,
+            this.tripIdDataGridViewTextBoxColumn,
+            this.primaVoltaDataGridViewTextBoxColumn,
+            this.ultimaVoltaDataGridViewTextBoxColumn,
+            this.rimessaDataGridViewTextBoxColumn,
+            this.euroDataGridViewTextBoxColumn,
+            this.modelloDataGridViewTextBoxColumn,
+            this.latitudeDataGridViewTextBoxColumn1,
+            this.longitudeDataGridViewTextBoxColumn1});
+            this.advancedDataGridView1.DataSource = this.extendedVehicleInfoBindingSource;
+            this.advancedDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.advancedDataGridView1.FilterAndSortEnabled = true;
+            this.advancedDataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.advancedDataGridView1.Name = "advancedDataGridView1";
+            this.advancedDataGridView1.ReadOnly = true;
+            this.advancedDataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.advancedDataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            this.advancedDataGridView1.Size = new System.Drawing.Size(1022, 648);
+            this.advancedDataGridView1.TabIndex = 0;
+            this.advancedDataGridView1.SortStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.SortEventArgs>(this.advancedDataGridView1_SortStringChanged);
+            this.advancedDataGridView1.FilterStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.FilterEventArgs>(this.advancedDataGridView1_FilterStringChanged);
+            // 
+            // idVetturaDataGridViewTextBoxColumn
+            // 
+            this.idVetturaDataGridViewTextBoxColumn.DataPropertyName = "IdVettura";
+            this.idVetturaDataGridViewTextBoxColumn.HeaderText = "IdVettura";
+            this.idVetturaDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.idVetturaDataGridViewTextBoxColumn.Name = "idVetturaDataGridViewTextBoxColumn";
+            this.idVetturaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idVetturaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // matricolaDataGridViewTextBoxColumn
+            // 
+            this.matricolaDataGridViewTextBoxColumn.DataPropertyName = "Matricola";
+            this.matricolaDataGridViewTextBoxColumn.HeaderText = "Matricola";
+            this.matricolaDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.matricolaDataGridViewTextBoxColumn.Name = "matricolaDataGridViewTextBoxColumn";
+            this.matricolaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.matricolaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // routeIdDataGridViewTextBoxColumn
+            // 
+            this.routeIdDataGridViewTextBoxColumn.DataPropertyName = "RouteId";
+            this.routeIdDataGridViewTextBoxColumn.HeaderText = "RouteId";
+            this.routeIdDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.routeIdDataGridViewTextBoxColumn.Name = "routeIdDataGridViewTextBoxColumn";
+            this.routeIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.routeIdDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // lineaDataGridViewTextBoxColumn
+            // 
+            this.lineaDataGridViewTextBoxColumn.DataPropertyName = "Linea";
+            this.lineaDataGridViewTextBoxColumn.HeaderText = "Linea";
+            this.lineaDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.lineaDataGridViewTextBoxColumn.Name = "lineaDataGridViewTextBoxColumn";
+            this.lineaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lineaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // gestoreDataGridViewTextBoxColumn
+            // 
+            this.gestoreDataGridViewTextBoxColumn.DataPropertyName = "Gestore";
+            this.gestoreDataGridViewTextBoxColumn.HeaderText = "Gestore";
+            this.gestoreDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.gestoreDataGridViewTextBoxColumn.Name = "gestoreDataGridViewTextBoxColumn";
+            this.gestoreDataGridViewTextBoxColumn.ReadOnly = true;
+            this.gestoreDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // directionIdDataGridViewTextBoxColumn
+            // 
+            this.directionIdDataGridViewTextBoxColumn.DataPropertyName = "DirectionId";
+            this.directionIdDataGridViewTextBoxColumn.HeaderText = "DirectionId";
+            this.directionIdDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.directionIdDataGridViewTextBoxColumn.Name = "directionIdDataGridViewTextBoxColumn";
+            this.directionIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.directionIdDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // currentStopSequenceDataGridViewTextBoxColumn
+            // 
+            this.currentStopSequenceDataGridViewTextBoxColumn.DataPropertyName = "CurrentStopSequence";
+            this.currentStopSequenceDataGridViewTextBoxColumn.HeaderText = "CurrentStopSequence";
+            this.currentStopSequenceDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.currentStopSequenceDataGridViewTextBoxColumn.Name = "currentStopSequenceDataGridViewTextBoxColumn";
+            this.currentStopSequenceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.currentStopSequenceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // congestionLevelDataGridViewTextBoxColumn
+            // 
+            this.congestionLevelDataGridViewTextBoxColumn.DataPropertyName = "CongestionLevel";
+            this.congestionLevelDataGridViewTextBoxColumn.HeaderText = "CongestionLevel";
+            this.congestionLevelDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.congestionLevelDataGridViewTextBoxColumn.Name = "congestionLevelDataGridViewTextBoxColumn";
+            this.congestionLevelDataGridViewTextBoxColumn.ReadOnly = true;
+            this.congestionLevelDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // tripIdDataGridViewTextBoxColumn
+            // 
+            this.tripIdDataGridViewTextBoxColumn.DataPropertyName = "TripId";
+            this.tripIdDataGridViewTextBoxColumn.HeaderText = "TripId";
+            this.tripIdDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.tripIdDataGridViewTextBoxColumn.Name = "tripIdDataGridViewTextBoxColumn";
+            this.tripIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.tripIdDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // primaVoltaDataGridViewTextBoxColumn
+            // 
+            this.primaVoltaDataGridViewTextBoxColumn.DataPropertyName = "PrimaVolta";
+            this.primaVoltaDataGridViewTextBoxColumn.HeaderText = "PrimaVolta";
+            this.primaVoltaDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.primaVoltaDataGridViewTextBoxColumn.Name = "primaVoltaDataGridViewTextBoxColumn";
+            this.primaVoltaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.primaVoltaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // ultimaVoltaDataGridViewTextBoxColumn
+            // 
+            this.ultimaVoltaDataGridViewTextBoxColumn.DataPropertyName = "UltimaVolta";
+            this.ultimaVoltaDataGridViewTextBoxColumn.HeaderText = "UltimaVolta";
+            this.ultimaVoltaDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.ultimaVoltaDataGridViewTextBoxColumn.Name = "ultimaVoltaDataGridViewTextBoxColumn";
+            this.ultimaVoltaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ultimaVoltaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // rimessaDataGridViewTextBoxColumn
+            // 
+            this.rimessaDataGridViewTextBoxColumn.DataPropertyName = "Rimessa";
+            this.rimessaDataGridViewTextBoxColumn.HeaderText = "Rimessa";
+            this.rimessaDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.rimessaDataGridViewTextBoxColumn.Name = "rimessaDataGridViewTextBoxColumn";
+            this.rimessaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.rimessaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // euroDataGridViewTextBoxColumn
+            // 
+            this.euroDataGridViewTextBoxColumn.DataPropertyName = "Euro";
+            this.euroDataGridViewTextBoxColumn.HeaderText = "Euro";
+            this.euroDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.euroDataGridViewTextBoxColumn.Name = "euroDataGridViewTextBoxColumn";
+            this.euroDataGridViewTextBoxColumn.ReadOnly = true;
+            this.euroDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // modelloDataGridViewTextBoxColumn
+            // 
+            this.modelloDataGridViewTextBoxColumn.DataPropertyName = "Modello";
+            this.modelloDataGridViewTextBoxColumn.HeaderText = "Modello";
+            this.modelloDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.modelloDataGridViewTextBoxColumn.Name = "modelloDataGridViewTextBoxColumn";
+            this.modelloDataGridViewTextBoxColumn.ReadOnly = true;
+            this.modelloDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // latitudeDataGridViewTextBoxColumn1
+            // 
+            this.latitudeDataGridViewTextBoxColumn1.DataPropertyName = "Latitude";
+            this.latitudeDataGridViewTextBoxColumn1.HeaderText = "Latitude";
+            this.latitudeDataGridViewTextBoxColumn1.MinimumWidth = 22;
+            this.latitudeDataGridViewTextBoxColumn1.Name = "latitudeDataGridViewTextBoxColumn1";
+            this.latitudeDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.latitudeDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // longitudeDataGridViewTextBoxColumn1
+            // 
+            this.longitudeDataGridViewTextBoxColumn1.DataPropertyName = "Longitude";
+            this.longitudeDataGridViewTextBoxColumn1.HeaderText = "Longitude";
+            this.longitudeDataGridViewTextBoxColumn1.MinimumWidth = 22;
+            this.longitudeDataGridViewTextBoxColumn1.Name = "longitudeDataGridViewTextBoxColumn1";
+            this.longitudeDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.longitudeDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // tabMonitoraggio
             // 
@@ -1190,131 +1534,6 @@
             this.lineaMonitorataBindingSource.AllowNew = false;
             this.lineaMonitorataBindingSource.DataSource = typeof(AtacFeed.LineaMonitorata);
             // 
-            // labelTotaleMatricolaATAC
-            // 
-            this.labelTotaleMatricolaATAC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleMatricolaATAC.Location = new System.Drawing.Point(1118, 323);
-            this.labelTotaleMatricolaATAC.Name = "labelTotaleMatricolaATAC";
-            this.labelTotaleMatricolaATAC.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelTotaleMatricolaATAC.Size = new System.Drawing.Size(40, 13);
-            this.labelTotaleMatricolaATAC.TabIndex = 44;
-            this.labelTotaleMatricolaATAC.Text = "0";
-            this.labelTotaleMatricolaATAC.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label17
-            // 
-            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(1050, 323);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(45, 13);
-            this.label17.TabIndex = 43;
-            this.label17.Text = "# ATAC";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelTotaleMatricolaTPL
-            // 
-            this.labelTotaleMatricolaTPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleMatricolaTPL.Location = new System.Drawing.Point(1118, 351);
-            this.labelTotaleMatricolaTPL.Name = "labelTotaleMatricolaTPL";
-            this.labelTotaleMatricolaTPL.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelTotaleMatricolaTPL.Size = new System.Drawing.Size(40, 13);
-            this.labelTotaleMatricolaTPL.TabIndex = 46;
-            this.labelTotaleMatricolaTPL.Text = "0";
-            this.labelTotaleMatricolaTPL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label18
-            // 
-            this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(1050, 351);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(37, 13);
-            this.label18.TabIndex = 45;
-            this.label18.Text = "# TPL";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label14
-            // 
-            this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(1055, 274);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(88, 13);
-            this.label14.TabIndex = 47;
-            this.label14.Text = "Dati Aggregati";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "RegolaViolata";
-            this.dataGridViewTextBoxColumn1.HeaderText = "RegolaViolata";
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "RegolaViolata";
-            this.dataGridViewTextBoxColumn2.HeaderText = "RegolaViolata";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            // 
-            // toolTipFeedTrip
-            // 
-            this.toolTipFeedTrip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.toolTipFeedTrip.ToolTipTitle = "GTFS TRIP";
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(1057, 663);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 23);
-            this.button4.TabIndex = 48;
-            this.button4.Text = "buttonReset";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Visible = false;
-            this.button4.Click += new System.EventHandler(this.ResetAcquisizione);
-            // 
-            // labelVer
-            // 
-            this.labelVer.AutoSize = true;
-            this.labelVer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelVer.Location = new System.Drawing.Point(949, 7);
-            this.labelVer.MinimumSize = new System.Drawing.Size(100, 24);
-            this.labelVer.Name = "labelVer";
-            this.labelVer.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelVer.Size = new System.Drawing.Size(100, 24);
-            this.labelVer.TabIndex = 50;
-            this.labelVer.Text = "label1";
-            this.labelVer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // button1
-            // 
-            this.button1.Image = global::AtacFeed.Properties.Resources.available_updates_16;
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(1055, 7);
-            this.button1.Name = "button1";
-            this.button1.Padding = new System.Windows.Forms.Padding(12, 0, 0, 0);
-            this.button1.Size = new System.Drawing.Size(100, 24);
-            this.button1.TabIndex = 49;
-            this.button1.Text = "Verifica";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.Button1_Click);
-            // 
-            // buttonPlayPause
-            // 
-            this.buttonPlayPause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPlayPause.BackgroundImage = global::AtacFeed.Properties.Resources.play;
-            this.buttonPlayPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonPlayPause.FlatAppearance.BorderSize = 0;
-            this.buttonPlayPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPlayPause.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayPause.Location = new System.Drawing.Point(1083, 510);
-            this.buttonPlayPause.Name = "buttonPlayPause";
-            this.buttonPlayPause.Size = new System.Drawing.Size(50, 46);
-            this.buttonPlayPause.TabIndex = 0;
-            this.buttonPlayPause.UseVisualStyleBackColor = true;
-            this.buttonPlayPause.Click += new System.EventHandler(this.ButtonPlayPause_Click);
-            // 
             // FormGTFS_RSM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1341,7 +1560,7 @@
             this.Controls.Add(this.labelAtac);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.button3);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabMainForm);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.labelTotaleMatricola);
             this.Controls.Add(this.label9);
@@ -1356,11 +1575,8 @@
             this.Text = "Monitoraggio Trasporti  Roma";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridVetture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).EndInit();
-            this.tabGrafico.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tabMainForm.ResumeLayout(false);
+            this.tabImpostazioni.ResumeLayout(false);
             this.groupBoxExport.ResumeLayout(false);
             this.groupBoxExport.PerformLayout();
             this.groupBoxMonitoraggio.ResumeLayout(false);
@@ -1373,8 +1589,13 @@
             this.tableLayoutPanel1.PerformLayout();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
+            this.tabGrafico.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.tabGriglia.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridVetture)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).EndInit();
+            this.tabGrigliaFiltrata.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView1)).EndInit();
             this.tabMonitoraggio.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViolazioni)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lineaMonitorataBindingSource)).EndInit();
@@ -1409,7 +1630,7 @@
         private System.Windows.Forms.Label labelWait;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TabPage tabGrafico;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabImpostazioni;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
@@ -1431,7 +1652,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl tabMainForm;
         private System.Windows.Forms.CheckBox checkGrafico;
         private System.Windows.Forms.TabPage tabGriglia;
         private System.Windows.Forms.Label labelTotaleMatricolaATAC;
@@ -1520,6 +1741,24 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn oraUltimaViolazioneDataGridViewTextBoxColumn;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label labelVer;
+        private System.Windows.Forms.TabPage tabGrigliaFiltrata;
+        private Zuby.ADGV.AdvancedDataGridView advancedDataGridView1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idVetturaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn matricolaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn routeIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lineaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn gestoreDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn directionIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn currentStopSequenceDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn congestionLevelDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tripIdDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn primaVoltaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ultimaVoltaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rimessaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn euroDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn modelloDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn latitudeDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn longitudeDataGridViewTextBoxColumn1;
     }
 }
 

@@ -28,8 +28,7 @@ namespace AtacFeed
     public partial class FormGTFS_RSM : Form
     {
 
-        public bool ToRestart = false;
-
+        public bool needToRestart = false;        
 
         private static readonly DateTime t0 = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         private List<ExtendedVehicleInfo> ElencoAggregatoVetture;
@@ -72,11 +71,12 @@ namespace AtacFeed
                 DateTime dataFeedVehicle = t0.AddSeconds(feedVehicleCompleto.Header.Timestamp).ToLocalTime();
                 
                 // Rimuovere il commento solo per attività di Testing
-                //dataFeedVehicle = DateTime.Now;
+                dataFeedVehicle = DateTime.Now;
 
                 if (DataResetMonitoraggio.HasValue && dataFeedVehicle > DataResetMonitoraggio.GetValueOrDefault() )
                 {
-                    ResetAcquisizione(null, null);
+                    
+                    RestartFile();
                     DataResetMonitoraggio = DataResetMonitoraggio.Value.AddDays(1);
 
                     Log.Information("Prossimo data reset: {DataResetMonitoraggio:dd/MM/yyyy HH:mm:ss}", DataResetMonitoraggio);
@@ -531,11 +531,53 @@ namespace AtacFeed
             }
             catch (Exception ex)
             {
-                textBox1.AppendText($"{ex.Message} {Environment.NewLine} {ex.StackTrace}");
+                //textBox1.AppendText($"{ex.Message} {Environment.NewLine} {ex.StackTrace}");
                 Log.Error(ex, "Errore Generico");
             }        
         }
-        
+
+        private void RestartFile()
+        {
+            LastdataFeedVehicle = null;
+            FirstdataFeedVehicle = null;
+            fileName = string.Empty;
+
+            ElencoLineeMonitorate.Clear();
+            ElencoAggregatoVetture.Clear();
+            ElencoPrecedente.Clear();
+            ElencoVettureGrafico.Clear();
+
+            dataGridViolazioni.Invalidate();
+            dataGridViolazioni.DataSource = null;
+
+            dataGridVetture.Invalidate();
+            dataGridVetture.DataSource = null;
+
+            formsPlotTPL.Reset();
+            formsPlotAtac.Reset();
+
+            labelFeedLetti.Text = "0";
+            labelTotaleRighe.Text = ElencoAggregatoVetture.Count.ToString();
+            labelTotaleIdVettura.Text = "0";
+            labelTotaleMatricola.Text = "0";
+            labelTotaleMatricolaATAC.Text = "0";
+            labelTotaleMatricolaTPL.Text = "0";
+
+            lblOraLettura.Text = "--:--:--";
+            labelAtac.Text = "0";
+            labelTPL.Text = "0";
+            labelWait.Text = "0";
+            labelTot.Text = "0";
+
+            LeggiFileConfigurazione();
+            LeggiRegoleAlertDaFile();
+
+            foreach (var alert in AlertsDaControllare)
+            {
+                alert.ViolazioniAlert.Clear();
+            }
+        }
+
         private void ButtonPlayPause_Click(object sender, EventArgs e)
         {
             if (!checkCSV.Checked && !checkXlsx.Checked)
@@ -760,8 +802,10 @@ namespace AtacFeed
                         {
                             csv.Configuration.Delimiter = ",";
                             csv.Configuration.HeaderValidated = null;
+                            csv.Configuration.TrimOptions = CsvHelper.Configuration.TrimOptions.Trim;
                             csv.Configuration.MissingFieldFound = null;
                             csv.Configuration.RegisterClassMap<RegolaAlertMap>();
+                            csv.Configuration.AllowComments = true;
                             List<RegolaAlert> listaRegole = csv.GetRecords<RegolaAlert>().ToList();
                             TabPage myNewTabItem = new TabPage
                             {
@@ -931,14 +975,14 @@ namespace AtacFeed
         {
             if (timerAcquisizione.Enabled)
             {
-                DialogResult dialog = MessageBox.Show($"Interrompere il monitoraggio {(ToRestart? "e riavviare" : "ed uscire")} ? ",
-                                $"Conferma {(ToRestart? "Riavvio" : "Uscita")}",
+                DialogResult dialog = MessageBox.Show($"Interrompere il monitoraggio {(needToRestart? "e riavviare" : "ed uscire")} ? ",
+                                $"Conferma {(needToRestart? "Riavvio" : "Uscita")}",
                                  MessageBoxButtons.YesNo,
                                  MessageBoxIcon.Question);
                 if (dialog == DialogResult.No)
                 {
                     e.Cancel = true;
-                    ToRestart = false;
+                    needToRestart = false;
                 }
                 else if (!string.IsNullOrEmpty(fileName))
                 {
@@ -1264,7 +1308,7 @@ namespace AtacFeed
         private void ResetAcquisizione(object sender, EventArgs e)
         {
             // Application.Restart();
-            ToRestart = true;
+            needToRestart = true;
             this.Close();
 
 
@@ -1340,11 +1384,11 @@ namespace AtacFeed
             var result = updateBox.ShowDialog();
             if (result == DialogResult.Yes) {
                 //Application.Restart();
-                ToRestart = true;
+                needToRestart = true;
                 Close();
             }
             else
-                ToRestart = false;
+                needToRestart = false;
         }
 
         private void advancedDataGridView1_SortStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.SortEventArgs e)

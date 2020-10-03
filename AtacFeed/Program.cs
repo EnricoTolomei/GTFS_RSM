@@ -1,8 +1,6 @@
 ﻿using Serilog;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace AtacFeed
@@ -17,7 +15,7 @@ namespace AtacFeed
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .WriteTo.File("logs\\GTFS_RSM_.log", rollingInterval: RollingInterval.Day)
+                .WriteTo.File($"logs{Path.DirectorySeparatorChar}GTFS_RSM_.log", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
             Log.Information("Avvio Programma");
 
@@ -27,9 +25,12 @@ namespace AtacFeed
             Application.Run(formGTFS_RSM);
 
             if (formGTFS_RSM.needToRestart)
+            {
                 Application.Restart();
-
-            Log.Information("Uscita Programma");
+                Log.Information("Riavvio Programma");
+            }
+            else
+                Log.Information("Uscita Programma");
             Log.CloseAndFlush();
         }
     }

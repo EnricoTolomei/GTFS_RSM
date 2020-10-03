@@ -128,28 +128,34 @@ namespace AtacFeed
         {
             try
             {
+                progressBar.Value = 0;
                 Uri uriRoutes = new Uri("https://raw.githubusercontent.com/EnricoTolomei/GTFS_RSM/master/AtacFeed/Config/GTFS_Static/routes.txt");
                 string localRoutes = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}routes.txt.new";
 
                 Uri uriDettagli = new Uri("https://raw.githubusercontent.com/EnricoTolomei/GTFS_RSM/master/AtacFeed/Config/GTFS_Static/DettagliVettura.csv");
                 string localDettagli = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}DettagliVettura.csv.new";
 
-                Uri uriVersion = new Uri("https://raw.githubusercontent.com/EnricoTolomei/GTFS_RSM/master/AtacFeed/Config/GTFS_Static/LatestVersion.txt");
+                Uri uriCriterioMedia = new Uri("https://raw.githubusercontent.com/EnricoTolomei/GTFS_RSM/master/AtacFeed/Config/CriterioMediaPonderata.txt");
+                string localCriterioMedia = $"Config{Path.DirectorySeparatorChar}CriterioMediaPonderata.txt.new";
+
                 string localVersion = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}LatestVersion.txt.new";
 
                 string vers = string.Empty;
                 using (WebClient wc = new WebClient())
                 {
                     wc.DownloadProgressChanged += Wc_DownloadProgressChanged;
-                    //wc.DownloadFileCompleted += Wc_DownloadFileCompleted;
                     await wc.DownloadFileTaskAsync(uriRoutes, localRoutes);
                     await wc.DownloadFileTaskAsync(uriDettagli, localDettagli);
+                    await wc.DownloadFileTaskAsync(uriCriterioMedia, localCriterioMedia);
                 }
                 File.Copy(localRoutes, Path.GetDirectoryName(localRoutes) + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(localRoutes), true);
                 File.Delete(localRoutes);
 
                 File.Copy(localDettagli, Path.GetDirectoryName(localDettagli) + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(localDettagli), true);
                 File.Delete(localDettagli);
+
+                File.Copy(localCriterioMedia, Path.GetDirectoryName(localCriterioMedia) + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(localCriterioMedia), true);
+                File.Delete(localCriterioMedia);
 
                 if (File.Exists(localVersion))
                 {
@@ -163,8 +169,8 @@ namespace AtacFeed
             {
                 Log.Error(exc, "ERRORE UPDATE CONFIGURATION FILES");
                 labelResultConfUpdate.Text = $"si è verificato un errore durante l'aggiornamento dei files.{Environment.NewLine}Riprovare più tardi.";
+                labelResultConfUpdate.Visible = true;
             }
-            //this.Close();
         }
 
         private void LinkUrlDownload_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

@@ -154,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AlertDaControllare.cs" />
+    <Compile Include="CriterioMediaPonderata.cs" />
     <Compile Include="DettagliVettura.cs" />
     <Compile Include="ExtendedVehicleInfo.cs" />
     <Compile Include="FormGTFS_RSM.cs">
@@ -215,6 +216,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\CriterioMediaPonderata.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Config\GTFS_Static\agency.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

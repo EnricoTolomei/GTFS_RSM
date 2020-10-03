@@ -109,6 +109,15 @@
             this.formsPlotAtac = new ScottPlot.FormsPlot();
             this.tabGriglia = new System.Windows.Forms.TabPage();
             this.dataGridVetture = new System.Windows.Forms.DataGridView();
+            this.tabGrigliaFiltrata = new System.Windows.Forms.TabPage();
+            this.advancedDataGridView1 = new Zuby.ADGV.AdvancedDataGridView();
+            this.tabMonitoraggio = new System.Windows.Forms.TabPage();
+            this.dataGridViolazioni = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelPonderatiATAC = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.labelPonderatiTPL = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -126,8 +135,6 @@
             this.latitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.longitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.extendedVehicleInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tabGrigliaFiltrata = new System.Windows.Forms.TabPage();
-            this.advancedDataGridView1 = new Zuby.ADGV.AdvancedDataGridView();
             this.idVetturaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.matricolaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.routeIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -144,8 +151,6 @@
             this.modelloDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.latitudeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.longitudeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabMonitoraggio = new System.Windows.Forms.TabPage();
-            this.dataGridViolazioni = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.giornoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.daDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -169,11 +174,11 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.tabGriglia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVetture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).BeginInit();
             this.tabGrigliaFiltrata.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView1)).BeginInit();
             this.tabMonitoraggio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViolazioni)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lineaMonitorataBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -185,7 +190,7 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(1053, 227);
+            this.button3.Location = new System.Drawing.Point(1051, 389);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(102, 23);
             this.button3.TabIndex = 28;
@@ -198,7 +203,8 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(1050, 444);
+            this.label9.Location = new System.Drawing.Point(1055, 514);
+            this.label9.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(45, 13);
             this.label9.TabIndex = 24;
@@ -208,7 +214,7 @@
             // labelTotaleIdVettura
             // 
             this.labelTotaleIdVettura.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleIdVettura.Location = new System.Drawing.Point(1118, 422);
+            this.labelTotaleIdVettura.Location = new System.Drawing.Point(1118, 478);
             this.labelTotaleIdVettura.Name = "labelTotaleIdVettura";
             this.labelTotaleIdVettura.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleIdVettura.Size = new System.Drawing.Size(40, 13);
@@ -219,7 +225,7 @@
             // labelTotaleMatricola
             // 
             this.labelTotaleMatricola.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleMatricola.Location = new System.Drawing.Point(1118, 379);
+            this.labelTotaleMatricola.Location = new System.Drawing.Point(1118, 496);
             this.labelTotaleMatricola.Name = "labelTotaleMatricola";
             this.labelTotaleMatricola.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleMatricola.Size = new System.Drawing.Size(40, 13);
@@ -231,7 +237,8 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(1050, 422);
+            this.label10.Location = new System.Drawing.Point(1055, 478);
+            this.label10.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(60, 13);
             this.label10.TabIndex = 26;
@@ -241,7 +248,7 @@
             // labelTotaleRighe
             // 
             this.labelTotaleRighe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleRighe.Location = new System.Drawing.Point(1118, 444);
+            this.labelTotaleRighe.Location = new System.Drawing.Point(1118, 514);
             this.labelTotaleRighe.Name = "labelTotaleRighe";
             this.labelTotaleRighe.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleRighe.Size = new System.Drawing.Size(40, 13);
@@ -253,7 +260,8 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1050, 375);
+            this.label3.Location = new System.Drawing.Point(1055, 496);
+            this.label3.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 13);
             this.label3.TabIndex = 12;
@@ -263,7 +271,7 @@
             // labelFeedLetti
             // 
             this.labelFeedLetti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelFeedLetti.Location = new System.Drawing.Point(1118, 299);
+            this.labelFeedLetti.Location = new System.Drawing.Point(1118, 460);
             this.labelFeedLetti.MinimumSize = new System.Drawing.Size(15, 0);
             this.labelFeedLetti.Name = "labelFeedLetti";
             this.labelFeedLetti.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -276,7 +284,7 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1050, 299);
+            this.label8.Location = new System.Drawing.Point(1055, 460);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(41, 13);
             this.label8.TabIndex = 20;
@@ -288,7 +296,7 @@
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(1055, 86);
+            this.label12.Location = new System.Drawing.Point(1055, 47);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(100, 13);
             this.label12.TabIndex = 29;
@@ -299,7 +307,7 @@
             // 
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(1050, 130);
+            this.label13.Location = new System.Drawing.Point(1050, 91);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(35, 13);
             this.label13.TabIndex = 39;
@@ -309,7 +317,7 @@
             // labelTot
             // 
             this.labelTot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTot.Location = new System.Drawing.Point(1118, 199);
+            this.labelTot.Location = new System.Drawing.Point(1118, 160);
             this.labelTot.Name = "labelTot";
             this.labelTot.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTot.Size = new System.Drawing.Size(40, 13);
@@ -321,7 +329,7 @@
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(1050, 153);
+            this.label15.Location = new System.Drawing.Point(1050, 114);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(27, 13);
             this.label15.TabIndex = 37;
@@ -331,7 +339,7 @@
             // labelTPL
             // 
             this.labelTPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTPL.Location = new System.Drawing.Point(1118, 153);
+            this.labelTPL.Location = new System.Drawing.Point(1118, 114);
             this.labelTPL.Name = "labelTPL";
             this.labelTPL.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTPL.Size = new System.Drawing.Size(40, 13);
@@ -342,7 +350,7 @@
             // lblOraLettura
             // 
             this.lblOraLettura.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblOraLettura.Location = new System.Drawing.Point(1080, 107);
+            this.lblOraLettura.Location = new System.Drawing.Point(1080, 68);
             this.lblOraLettura.MinimumSize = new System.Drawing.Size(15, 0);
             this.lblOraLettura.Name = "lblOraLettura";
             this.lblOraLettura.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -355,7 +363,7 @@
             // 
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(1050, 199);
+            this.label19.Location = new System.Drawing.Point(1050, 160);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(37, 13);
             this.label19.TabIndex = 33;
@@ -365,7 +373,7 @@
             // labelAtac
             // 
             this.labelAtac.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelAtac.Location = new System.Drawing.Point(1118, 130);
+            this.labelAtac.Location = new System.Drawing.Point(1118, 91);
             this.labelAtac.Name = "labelAtac";
             this.labelAtac.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelAtac.Size = new System.Drawing.Size(40, 13);
@@ -377,7 +385,7 @@
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(1050, 107);
+            this.label11.Location = new System.Drawing.Point(1050, 68);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(35, 13);
             this.label11.TabIndex = 40;
@@ -387,7 +395,7 @@
             // labelWait
             // 
             this.labelWait.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelWait.Location = new System.Drawing.Point(1118, 176);
+            this.labelWait.Location = new System.Drawing.Point(1118, 137);
             this.labelWait.Name = "labelWait";
             this.labelWait.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelWait.Size = new System.Drawing.Size(40, 13);
@@ -399,7 +407,7 @@
             // 
             this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(1050, 176);
+            this.label16.Location = new System.Drawing.Point(1050, 137);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(49, 13);
             this.label16.TabIndex = 41;
@@ -409,7 +417,7 @@
             // labelTotaleMatricolaATAC
             // 
             this.labelTotaleMatricolaATAC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleMatricolaATAC.Location = new System.Drawing.Point(1118, 323);
+            this.labelTotaleMatricolaATAC.Location = new System.Drawing.Point(1118, 227);
             this.labelTotaleMatricolaATAC.Name = "labelTotaleMatricolaATAC";
             this.labelTotaleMatricolaATAC.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleMatricolaATAC.Size = new System.Drawing.Size(40, 13);
@@ -421,7 +429,7 @@
             // 
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(1050, 323);
+            this.label17.Location = new System.Drawing.Point(1050, 228);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(45, 13);
             this.label17.TabIndex = 43;
@@ -431,7 +439,7 @@
             // labelTotaleMatricolaTPL
             // 
             this.labelTotaleMatricolaTPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleMatricolaTPL.Location = new System.Drawing.Point(1118, 351);
+            this.labelTotaleMatricolaTPL.Location = new System.Drawing.Point(1118, 255);
             this.labelTotaleMatricolaTPL.Name = "labelTotaleMatricolaTPL";
             this.labelTotaleMatricolaTPL.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleMatricolaTPL.Size = new System.Drawing.Size(40, 13);
@@ -443,7 +451,7 @@
             // 
             this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(1050, 351);
+            this.label18.Location = new System.Drawing.Point(1050, 255);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(37, 13);
             this.label18.TabIndex = 45;
@@ -455,7 +463,7 @@
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(1055, 274);
+            this.label14.Location = new System.Drawing.Point(1055, 202);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(88, 13);
             this.label14.TabIndex = 47;
@@ -549,7 +557,7 @@
             this.buttonPlayPause.FlatAppearance.BorderSize = 0;
             this.buttonPlayPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPlayPause.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayPause.Location = new System.Drawing.Point(1083, 510);
+            this.buttonPlayPause.Location = new System.Drawing.Point(1083, 596);
             this.buttonPlayPause.Name = "buttonPlayPause";
             this.buttonPlayPause.Size = new System.Drawing.Size(50, 46);
             this.buttonPlayPause.TabIndex = 0;
@@ -1119,6 +1127,151 @@
             this.dataGridVetture.TabIndex = 8;
             this.dataGridVetture.Visible = false;
             // 
+            // tabGrigliaFiltrata
+            // 
+            this.tabGrigliaFiltrata.Controls.Add(this.advancedDataGridView1);
+            this.tabGrigliaFiltrata.DataBindings.Add(new System.Windows.Forms.Binding("Visible", global::AtacFeed.Properties.Settings.Default, "tabGrigliaFiltrata", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.tabGrigliaFiltrata.Location = new System.Drawing.Point(4, 22);
+            this.tabGrigliaFiltrata.Name = "tabGrigliaFiltrata";
+            this.tabGrigliaFiltrata.Padding = new System.Windows.Forms.Padding(3);
+            this.tabGrigliaFiltrata.Size = new System.Drawing.Size(1028, 654);
+            this.tabGrigliaFiltrata.TabIndex = 5;
+            this.tabGrigliaFiltrata.Text = "Griglia";
+            this.tabGrigliaFiltrata.UseVisualStyleBackColor = true;
+            // 
+            // advancedDataGridView1
+            // 
+            this.advancedDataGridView1.AllowUserToAddRows = false;
+            this.advancedDataGridView1.AllowUserToDeleteRows = false;
+            this.advancedDataGridView1.AutoGenerateColumns = false;
+            this.advancedDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.advancedDataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.advancedDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.advancedDataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idVetturaDataGridViewTextBoxColumn,
+            this.matricolaDataGridViewTextBoxColumn,
+            this.routeIdDataGridViewTextBoxColumn,
+            this.lineaDataGridViewTextBoxColumn,
+            this.gestoreDataGridViewTextBoxColumn,
+            this.directionIdDataGridViewTextBoxColumn,
+            this.currentStopSequenceDataGridViewTextBoxColumn,
+            this.congestionLevelDataGridViewTextBoxColumn,
+            this.tripIdDataGridViewTextBoxColumn,
+            this.primaVoltaDataGridViewTextBoxColumn,
+            this.ultimaVoltaDataGridViewTextBoxColumn,
+            this.rimessaDataGridViewTextBoxColumn,
+            this.euroDataGridViewTextBoxColumn,
+            this.modelloDataGridViewTextBoxColumn,
+            this.latitudeDataGridViewTextBoxColumn1,
+            this.longitudeDataGridViewTextBoxColumn1});
+            this.advancedDataGridView1.DataSource = this.extendedVehicleInfoBindingSource;
+            this.advancedDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.advancedDataGridView1.FilterAndSortEnabled = true;
+            this.advancedDataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.advancedDataGridView1.Name = "advancedDataGridView1";
+            this.advancedDataGridView1.ReadOnly = true;
+            this.advancedDataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.advancedDataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            this.advancedDataGridView1.Size = new System.Drawing.Size(1022, 648);
+            this.advancedDataGridView1.TabIndex = 0;
+            this.advancedDataGridView1.SortStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.SortEventArgs>(this.AdvancedDataGridView1_SortStringChanged);
+            this.advancedDataGridView1.FilterStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.FilterEventArgs>(this.AdvancedDataGridView1_FilterStringChanged);
+            // 
+            // tabMonitoraggio
+            // 
+            this.tabMonitoraggio.Controls.Add(this.dataGridViolazioni);
+            this.tabMonitoraggio.Location = new System.Drawing.Point(4, 22);
+            this.tabMonitoraggio.Name = "tabMonitoraggio";
+            this.tabMonitoraggio.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMonitoraggio.Size = new System.Drawing.Size(1028, 654);
+            this.tabMonitoraggio.TabIndex = 4;
+            this.tabMonitoraggio.Text = "Monitoraggio Linee";
+            this.tabMonitoraggio.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViolazioni
+            // 
+            this.dataGridViolazioni.AllowUserToAddRows = false;
+            this.dataGridViolazioni.AllowUserToDeleteRows = false;
+            this.dataGridViolazioni.AllowUserToOrderColumns = true;
+            this.dataGridViolazioni.AutoGenerateColumns = false;
+            this.dataGridViolazioni.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViolazioni.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViolazioni.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn25,
+            this.giornoDataGridViewTextBoxColumn,
+            this.daDataGridViewTextBoxColumn,
+            this.aDataGridViewTextBoxColumn,
+            this.tempoBonusDataGridViewTextBoxColumn,
+            this.vetturePrevisteDataGridViewTextBoxColumn,
+            this.vettureRilevateDataGridViewTextBoxColumn,
+            this.oraPrimaViolazioneDataGridViewTextBoxColumn,
+            this.oraUltimaViolazioneDataGridViewTextBoxColumn});
+            this.dataGridViolazioni.DataSource = this.lineaMonitorataBindingSource;
+            this.dataGridViolazioni.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViolazioni.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViolazioni.Name = "dataGridViolazioni";
+            this.dataGridViolazioni.ReadOnly = true;
+            this.dataGridViolazioni.Size = new System.Drawing.Size(1022, 648);
+            this.dataGridViolazioni.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(1050, 327);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(45, 13);
+            this.label1.TabIndex = 43;
+            this.label1.Text = "# ATAC";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelPonderatiATAC
+            // 
+            this.labelPonderatiATAC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelPonderatiATAC.Location = new System.Drawing.Point(1118, 326);
+            this.labelPonderatiATAC.Name = "labelPonderatiATAC";
+            this.labelPonderatiATAC.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelPonderatiATAC.Size = new System.Drawing.Size(40, 13);
+            this.labelPonderatiATAC.TabIndex = 44;
+            this.labelPonderatiATAC.Text = "- -";
+            this.labelPonderatiATAC.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label22
+            // 
+            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(1050, 354);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(37, 13);
+            this.label22.TabIndex = 45;
+            this.label22.Text = "# TPL";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelPonderatiTPL
+            // 
+            this.labelPonderatiTPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelPonderatiTPL.Location = new System.Drawing.Point(1118, 354);
+            this.labelPonderatiTPL.Name = "labelPonderatiTPL";
+            this.labelPonderatiTPL.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelPonderatiTPL.Size = new System.Drawing.Size(40, 13);
+            this.labelPonderatiTPL.TabIndex = 46;
+            this.labelPonderatiTPL.Text = "- -";
+            this.labelPonderatiTPL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label24
+            // 
+            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(1055, 301);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(88, 13);
+            this.label24.TabIndex = 47;
+            this.label24.Text = "Dati Ponderati";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTipFeedTrip.SetToolTip(this.label24, "I dati saranno visualizzaati dopo aver raggiunto il numero minimo di campioni nec" +
+        "essari pe il calcolo della media ponderata");
+            // 
             // dataGridViewTextBoxColumn11
             // 
             this.dataGridViewTextBoxColumn11.DataPropertyName = "IdVettura";
@@ -1234,56 +1387,6 @@
             // extendedVehicleInfoBindingSource
             // 
             this.extendedVehicleInfoBindingSource.DataSource = typeof(AtacFeed.ExtendedVehicleInfo);
-            // 
-            // tabGrigliaFiltrata
-            // 
-            this.tabGrigliaFiltrata.Controls.Add(this.advancedDataGridView1);
-            this.tabGrigliaFiltrata.DataBindings.Add(new System.Windows.Forms.Binding("Visible", global::AtacFeed.Properties.Settings.Default, "tabGrigliaFiltrata", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.tabGrigliaFiltrata.Location = new System.Drawing.Point(4, 22);
-            this.tabGrigliaFiltrata.Name = "tabGrigliaFiltrata";
-            this.tabGrigliaFiltrata.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGrigliaFiltrata.Size = new System.Drawing.Size(1028, 654);
-            this.tabGrigliaFiltrata.TabIndex = 5;
-            this.tabGrigliaFiltrata.Text = "Griglia";
-            this.tabGrigliaFiltrata.UseVisualStyleBackColor = true;
-            // 
-            // advancedDataGridView1
-            // 
-            this.advancedDataGridView1.AllowUserToAddRows = false;
-            this.advancedDataGridView1.AllowUserToDeleteRows = false;
-            this.advancedDataGridView1.AutoGenerateColumns = false;
-            this.advancedDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.advancedDataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.advancedDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.advancedDataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idVetturaDataGridViewTextBoxColumn,
-            this.matricolaDataGridViewTextBoxColumn,
-            this.routeIdDataGridViewTextBoxColumn,
-            this.lineaDataGridViewTextBoxColumn,
-            this.gestoreDataGridViewTextBoxColumn,
-            this.directionIdDataGridViewTextBoxColumn,
-            this.currentStopSequenceDataGridViewTextBoxColumn,
-            this.congestionLevelDataGridViewTextBoxColumn,
-            this.tripIdDataGridViewTextBoxColumn,
-            this.primaVoltaDataGridViewTextBoxColumn,
-            this.ultimaVoltaDataGridViewTextBoxColumn,
-            this.rimessaDataGridViewTextBoxColumn,
-            this.euroDataGridViewTextBoxColumn,
-            this.modelloDataGridViewTextBoxColumn,
-            this.latitudeDataGridViewTextBoxColumn1,
-            this.longitudeDataGridViewTextBoxColumn1});
-            this.advancedDataGridView1.DataSource = this.extendedVehicleInfoBindingSource;
-            this.advancedDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.advancedDataGridView1.FilterAndSortEnabled = true;
-            this.advancedDataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.advancedDataGridView1.Name = "advancedDataGridView1";
-            this.advancedDataGridView1.ReadOnly = true;
-            this.advancedDataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.advancedDataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            this.advancedDataGridView1.Size = new System.Drawing.Size(1022, 648);
-            this.advancedDataGridView1.TabIndex = 0;
-            this.advancedDataGridView1.SortStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.SortEventArgs>(this.advancedDataGridView1_SortStringChanged);
-            this.advancedDataGridView1.FilterStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.FilterEventArgs>(this.advancedDataGridView1_FilterStringChanged);
             // 
             // idVetturaDataGridViewTextBoxColumn
             // 
@@ -1429,43 +1532,6 @@
             this.longitudeDataGridViewTextBoxColumn1.ReadOnly = true;
             this.longitudeDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
-            // tabMonitoraggio
-            // 
-            this.tabMonitoraggio.Controls.Add(this.dataGridViolazioni);
-            this.tabMonitoraggio.Location = new System.Drawing.Point(4, 22);
-            this.tabMonitoraggio.Name = "tabMonitoraggio";
-            this.tabMonitoraggio.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMonitoraggio.Size = new System.Drawing.Size(1028, 654);
-            this.tabMonitoraggio.TabIndex = 4;
-            this.tabMonitoraggio.Text = "Monitoraggio Linee";
-            this.tabMonitoraggio.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViolazioni
-            // 
-            this.dataGridViolazioni.AllowUserToAddRows = false;
-            this.dataGridViolazioni.AllowUserToDeleteRows = false;
-            this.dataGridViolazioni.AllowUserToOrderColumns = true;
-            this.dataGridViolazioni.AutoGenerateColumns = false;
-            this.dataGridViolazioni.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViolazioni.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViolazioni.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn25,
-            this.giornoDataGridViewTextBoxColumn,
-            this.daDataGridViewTextBoxColumn,
-            this.aDataGridViewTextBoxColumn,
-            this.tempoBonusDataGridViewTextBoxColumn,
-            this.vetturePrevisteDataGridViewTextBoxColumn,
-            this.vettureRilevateDataGridViewTextBoxColumn,
-            this.oraPrimaViolazioneDataGridViewTextBoxColumn,
-            this.oraUltimaViolazioneDataGridViewTextBoxColumn});
-            this.dataGridViolazioni.DataSource = this.lineaMonitorataBindingSource;
-            this.dataGridViolazioni.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViolazioni.Location = new System.Drawing.Point(3, 3);
-            this.dataGridViolazioni.Name = "dataGridViolazioni";
-            this.dataGridViolazioni.ReadOnly = true;
-            this.dataGridViolazioni.Size = new System.Drawing.Size(1022, 648);
-            this.dataGridViolazioni.TabIndex = 0;
-            // 
             // dataGridViewTextBoxColumn25
             // 
             this.dataGridViewTextBoxColumn25.DataPropertyName = "Linea";
@@ -1543,9 +1609,14 @@
             this.Controls.Add(this.labelVer);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button4);
+            this.Controls.Add(this.label24);
             this.Controls.Add(this.label14);
+            this.Controls.Add(this.labelPonderatiTPL);
             this.Controls.Add(this.labelTotaleMatricolaTPL);
+            this.Controls.Add(this.label22);
+            this.Controls.Add(this.labelPonderatiATAC);
             this.Controls.Add(this.label18);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.labelTotaleMatricolaATAC);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.labelWait);
@@ -1593,11 +1664,11 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tabGriglia.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVetture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).EndInit();
             this.tabGrigliaFiltrata.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView1)).EndInit();
             this.tabMonitoraggio.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViolazioni)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lineaMonitorataBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1759,6 +1830,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn modelloDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn latitudeDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn longitudeDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelPonderatiATAC;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label labelPonderatiTPL;
+        private System.Windows.Forms.Label label24;
     }
 }
 

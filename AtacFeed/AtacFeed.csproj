@@ -228,6 +228,7 @@
     <Content Include="Config\GTFS_Static\calendar_dates.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Config\GTFS_Static\LatestVersion.txt" />
     <Content Include="Config\MonitoraggioLinee\RegoleMonitoraggio.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

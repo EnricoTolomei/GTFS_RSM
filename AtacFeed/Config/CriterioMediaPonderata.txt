@@ -1,6 +1,7 @@
 ﻿# La prima riga si indica il peso delle ultime n letture
 # la seconda riga il peso delle m precedenti e così via...
-NumeroCampioni,		Peso
-	2,				0.5
-	1,				0.3
+NumeroCampioni,     Peso
+	2,              0.5
 	1,				0.2
+	1,				0.15
+	1,				0.05

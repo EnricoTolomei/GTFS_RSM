@@ -50,11 +50,11 @@
     <Setting Name="UrlHome" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://github.com/EnricoTolomei/GTFS_RSM</Value>
     </Setting>
-    <Setting Name="tabGriglia" Type="System.Boolean" Scope="User">
+    <Setting Name="tabGrigliaOld" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="tabGrigliaFiltrata" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+    <Setting Name="ExtraSetting" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

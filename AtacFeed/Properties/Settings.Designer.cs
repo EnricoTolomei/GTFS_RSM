@@ -219,24 +219,24 @@ namespace AtacFeed.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool tabGriglia {
+        public bool tabGrigliaOld {
             get {
-                return ((bool)(this["tabGriglia"]));
+                return ((bool)(this["tabGrigliaOld"]));
             }
             set {
-                this["tabGriglia"] = value;
+                this["tabGrigliaOld"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool tabGrigliaFiltrata {
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ExtraSetting {
             get {
-                return ((bool)(this["tabGrigliaFiltrata"]));
+                return ((bool)(this["ExtraSetting"]));
             }
             set {
-                this["tabGrigliaFiltrata"] = value;
+                this["ExtraSetting"] = value;
             }
         }
     }

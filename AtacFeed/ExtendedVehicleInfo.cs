@@ -30,8 +30,7 @@ namespace AtacFeed
         [Ignore]
         public uint? DirectionId { get; set; }
 
-        [Index(7)]
-        [Ignore]
+        [Index(7)]        
         public uint CurrentStopSequence { get; set; }
 
         [Index(8)]
@@ -47,6 +46,9 @@ namespace AtacFeed
         [Ignore]
         private readonly bool StrictMode;
 
+        [Ignore]
+        private readonly bool SuperStrictMode;
+        
         [Index(11)]
         public DateTime PrimaVolta { get; set; }
 
@@ -73,7 +75,7 @@ namespace AtacFeed
         public VehiclePosition.VehicleStopStatus InTransitTo { get; set; }
 
 
-        public ExtendedVehicleInfo(string idVettura, string matricola, string licensePlate, string routeId, string linea, string gestore, uint? directionId, uint currentStopSequence, VehiclePosition.CongestionLevel congestionLevel, VehiclePosition.OccupancyStatus occupancyStatus, string tripId, bool strict, DateTime data, string rimessa, string euro, string modello, float latitude , float longitude, VehiclePosition.VehicleStopStatus inTransitTo)
+        public ExtendedVehicleInfo(string idVettura, string matricola, string licensePlate, string routeId, string linea, string gestore, uint? directionId, uint currentStopSequence, VehiclePosition.CongestionLevel congestionLevel, VehiclePosition.OccupancyStatus occupancyStatus, string tripId, bool strict, DateTime data, string rimessa, string euro, string modello, float latitude , float longitude, VehiclePosition.VehicleStopStatus inTransitTo, bool superStrictMode=false)
         {
             IdVettura = idVettura;
             Matricola = matricola;
@@ -95,13 +97,17 @@ namespace AtacFeed
             Latitude = latitude;
             Longitude = longitude;
             InTransitTo = inTransitTo;
+            SuperStrictMode = superStrictMode;
         }
 
         public bool Equals(ExtendedVehicleInfo other)
         {
             if (other is null)
                 return false;
-            if (this.StrictMode)
+
+            if (this.SuperStrictMode)
+                return this.IdVettura == other.IdVettura && (this.TripId == other.TripId) && (this.CurrentStopSequence == other.CurrentStopSequence) ;
+            else if (this.StrictMode)
                 return this.IdVettura == other.IdVettura && (this.TripId == other.TripId); 
             else
                 return this.IdVettura == other.IdVettura;
@@ -109,7 +115,9 @@ namespace AtacFeed
 
         public override bool Equals(object obj) => Equals(obj as ExtendedVehicleInfo);
         public override int GetHashCode() {
-            if (this.StrictMode)
+            if (this.SuperStrictMode)
+                return (IdVettura, TripId, CurrentStopSequence).GetHashCode();
+            else if (this.StrictMode)
                 return (IdVettura, TripId).GetHashCode();
             else
                 return IdVettura.GetHashCode();

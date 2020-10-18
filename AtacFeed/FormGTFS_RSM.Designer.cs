@@ -61,6 +61,7 @@
             this.toolTipFeedTrip = new System.Windows.Forms.ToolTip(this.components);
             this.checkFeedTrip = new System.Windows.Forms.CheckBox();
             this.urlTrip = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.labelVer = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -85,6 +86,7 @@
             this.checkTripVuoti = new System.Windows.Forms.CheckBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.checkTuttoPercorso = new System.Windows.Forms.CheckBox();
             this.checkTripDuplicati = new System.Windows.Forms.CheckBox();
             this.groupBoxServerRSM = new System.Windows.Forms.GroupBox();
             this.label20 = new System.Windows.Forms.Label();
@@ -117,7 +119,6 @@
             this.labelPonderatiATAC = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.labelPonderatiTPL = new System.Windows.Forms.Label();
-            this.label24 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -510,6 +511,20 @@
             this.urlTrip.TabIndex = 3;
             this.toolTipFeedTrip.SetToolTip(this.urlTrip, "Url opzionale, al momento usato solo per fini statistici");
             // 
+            // label24
+            // 
+            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(1055, 301);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(88, 13);
+            this.label24.TabIndex = 47;
+            this.label24.Text = "Dati Ponderati";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTipFeedTrip.SetToolTip(this.label24, "I dati saranno visualizzaati dopo aver raggiunto il numero minimo di campioni nec" +
+        "essari pe il calcolo della media ponderata");
+            // 
             // button4
             // 
             this.button4.Location = new System.Drawing.Point(1057, 663);
@@ -692,6 +707,7 @@
             this.groupBoxMonitoraggio.Controls.Add(this.checkTripVuoti);
             this.groupBoxMonitoraggio.Controls.Add(this.comboBox1);
             this.groupBoxMonitoraggio.Controls.Add(this.label4);
+            this.groupBoxMonitoraggio.Controls.Add(this.checkTuttoPercorso);
             this.groupBoxMonitoraggio.Controls.Add(this.checkTripDuplicati);
             this.groupBoxMonitoraggio.Location = new System.Drawing.Point(6, 120);
             this.groupBoxMonitoraggio.Name = "groupBoxMonitoraggio";
@@ -744,7 +760,7 @@
             // checkReset
             // 
             this.checkReset.AutoSize = true;
-            this.checkReset.Location = new System.Drawing.Point(295, 67);
+            this.checkReset.Location = new System.Drawing.Point(295, 61);
             this.checkReset.Name = "checkReset";
             this.checkReset.Size = new System.Drawing.Size(193, 17);
             this.checkReset.TabIndex = 24;
@@ -780,7 +796,7 @@
             // 
             this.dateTimeReset.CustomFormat = "HH:mm";
             this.dateTimeReset.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimeReset.Location = new System.Drawing.Point(488, 67);
+            this.dateTimeReset.Location = new System.Drawing.Point(489, 63);
             this.dateTimeReset.Name = "dateTimeReset";
             this.dateTimeReset.ShowUpDown = true;
             this.dateTimeReset.Size = new System.Drawing.Size(50, 20);
@@ -791,7 +807,7 @@
             // checkTripVuoti
             // 
             this.checkTripVuoti.AutoSize = true;
-            this.checkTripVuoti.Location = new System.Drawing.Point(295, 21);
+            this.checkTripVuoti.Location = new System.Drawing.Point(295, 12);
             this.checkTripVuoti.Name = "checkTripVuoti";
             this.checkTripVuoti.Size = new System.Drawing.Size(188, 17);
             this.checkTripVuoti.TabIndex = 21;
@@ -802,7 +818,7 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(124, 22);
+            this.comboBox1.Location = new System.Drawing.Point(124, 28);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(165, 21);
             this.comboBox1.TabIndex = 5;
@@ -810,16 +826,29 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(77, 25);
+            this.label4.Location = new System.Drawing.Point(85, 31);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(33, 13);
             this.label4.TabIndex = 13;
             this.label4.Text = "Linea";
             // 
+            // checkTuttoPercorso
+            // 
+            this.checkTuttoPercorso.AutoSize = true;
+            this.checkTuttoPercorso.DataBindings.Add(new System.Windows.Forms.Binding("Visible", global::AtacFeed.Properties.Settings.Default, "ExtraSetting", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
+            this.checkTuttoPercorso.Location = new System.Drawing.Point(295, 44);
+            this.checkTuttoPercorso.Name = "checkTuttoPercorso";
+            this.checkTuttoPercorso.Size = new System.Drawing.Size(213, 17);
+            this.checkTuttoPercorso.TabIndex = 14;
+            this.checkTuttoPercorso.Text = "Traccia la vettura lungo tutto il percorso";
+            this.checkTuttoPercorso.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkTuttoPercorso.UseVisualStyleBackColor = true;
+            this.checkTuttoPercorso.Visible = global::AtacFeed.Properties.Settings.Default.ExtraSetting;
+            // 
             // checkTripDuplicati
             // 
             this.checkTripDuplicati.AutoSize = true;
-            this.checkTripDuplicati.Location = new System.Drawing.Point(295, 44);
+            this.checkTripDuplicati.Location = new System.Drawing.Point(295, 28);
             this.checkTripDuplicati.Name = "checkTripDuplicati";
             this.checkTripDuplicati.Size = new System.Drawing.Size(317, 17);
             this.checkTripDuplicati.TabIndex = 14;
@@ -1130,7 +1159,6 @@
             // tabGrigliaFiltrata
             // 
             this.tabGrigliaFiltrata.Controls.Add(this.advancedDataGridView1);
-            this.tabGrigliaFiltrata.DataBindings.Add(new System.Windows.Forms.Binding("Visible", global::AtacFeed.Properties.Settings.Default, "tabGrigliaFiltrata", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
             this.tabGrigliaFiltrata.Location = new System.Drawing.Point(4, 22);
             this.tabGrigliaFiltrata.Name = "tabGrigliaFiltrata";
             this.tabGrigliaFiltrata.Padding = new System.Windows.Forms.Padding(3);
@@ -1257,20 +1285,6 @@
             this.labelPonderatiTPL.TabIndex = 46;
             this.labelPonderatiTPL.Text = "- -";
             this.labelPonderatiTPL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label24
-            // 
-            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label24.AutoSize = true;
-            this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(1055, 301);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(88, 13);
-            this.label24.TabIndex = 47;
-            this.label24.Text = "Dati Ponderati";
-            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.toolTipFeedTrip.SetToolTip(this.label24, "I dati saranno visualizzaati dopo aver raggiunto il numero minimo di campioni nec" +
-        "essari pe il calcolo della media ponderata");
             // 
             // dataGridViewTextBoxColumn11
             // 
@@ -1835,6 +1849,7 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label labelPonderatiTPL;
         private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.CheckBox checkTuttoPercorso;
     }
 }
 

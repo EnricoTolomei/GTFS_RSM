@@ -63,6 +63,7 @@ namespace AtacFeed
                 {
                     labelUpdateConf.Text = "I file di configurazione sono aggiornati";
                     labelConfResult.Text = "E' comunque possibile reimpostare i file con l'ultima versione rilasciata.";
+                    buttonAggiorna.ForeColor = System.Drawing.SystemColors.ControlDark;
                 }
             }
             catch (Exception exc) {

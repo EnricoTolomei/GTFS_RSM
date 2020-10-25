@@ -198,18 +198,19 @@ namespace AtacFeed
                             textBox1.AppendText(entity.Vehicle.Vehicle.Id + Environment.NewLine);
                         }
                     }
-                    //List<FeedEntity> busLinea = feedEntities.Where(x => x.Vehicle.Trip != null).ToList();
-                    List<ExtendedVehicleInfo> busLinea = elencoVetture.Where(x => x.TripId != null).ToList();
-                    //int numVettureFeedVehicle = feedEntities.Where(x => x.Vehicle.Vehicle != null && !string.IsNullOrEmpty(x.Vehicle.Vehicle.Id)).Count();
-                    //int numVettureTPLFeedVehicle = busLinea.Where(x => x.Vehicle.Vehicle != null && !string.IsNullOrEmpty(x.Vehicle.Vehicle.Id) && x.Vehicle.Vehicle.Id.Length > 4).Count();
-                    int numVettureTPLFeedVehicle = elencoVetture.Where(x => x.Gestore != null && x.Gestore == "TPL").Count();
+                    
+                    List<ExtendedVehicleInfo> listaBusLinea = elencoVetture.Where(x => x.TripId != null).ToList();
+                    List<ExtendedVehicleInfo> listaBusAttesa = elencoVetture.Where(x => x.TripId == null).ToList();
+                    
+                    int numVettureTPLFeedVehicle = elencoVetture.Where(x => x.Gestore != null && x.Gestore.ToLower() == "tpl").Count();
                     //int numVettureTPLATAC = elencoVetture.Where(x => x.Gestore != null && x.Gestore == "ATAC").Count();
 
-                    int busAttesa = feedEntities.Where(x => x.Vehicle.Trip == null).Count();
-                    int busTotale = busLinea.Count + busAttesa;
+                    int busLinea = listaBusLinea.Count;
+                    int busAttesa = listaBusAttesa.Count;
+                    int busTotale = busLinea + busAttesa;
                     textBox1.AppendText($"Totale Vetture Rilevate sul Feed Vehicle {busTotale}" + Environment.NewLine);
                     textBox1.AppendText($"\tATAC {busTotale - numVettureTPLFeedVehicle}\tTPL {numVettureTPLFeedVehicle}" + Environment.NewLine);
-                    textBox1.AppendText($"\tSu Linea {busLinea.Count()}\tIn Attesa {busAttesa}" + Environment.NewLine);
+                    textBox1.AppendText($"\tSu Linea {busLinea}\tIn Attesa {busAttesa}" + Environment.NewLine);
                     labelTPL.Text = $"{numVettureTPLFeedVehicle}";
                     labelAtac.Text = $"{busTotale - numVettureTPLFeedVehicle}";
                     labelWait.Text = $"{busAttesa}";
@@ -720,6 +721,7 @@ namespace AtacFeed
 
             Version actualVersion = Assembly.GetExecutingAssembly().GetName().Version;
             labelVer.Text = String.Format("Vers. {0}.{1:00}", actualVersion.Major, actualVersion.Minor);
+            //button1.Text = String.Format("Vers. {0}.{1:00}", actualVersion.Major, actualVersion.Minor);
 
             #region Load default settings
             urlVehicle.Text = Properties.Settings.Default.UrlVehicle;
@@ -952,9 +954,7 @@ namespace AtacFeed
                                 myNewdataGridVetture.ReadOnly = true;
 
                                 myNewTabItem.Controls.Add(myNewdataGridVetture);
-                                tabMainForm.TabPages.Add(myNewTabItem);
-
-                                //myNewdataGridVetture.DataSource = listaRegole.OrderBy(x => x.Linea).ToList();
+                                tabMainForm.TabPages.Add(myNewTabItem);                                
                             }
                         }
                     }

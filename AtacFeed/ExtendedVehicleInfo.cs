@@ -27,7 +27,6 @@ namespace AtacFeed
         public string Gestore { get; set; }
 
         [Index(6)]
-        [Ignore]
         public uint? DirectionId { get; set; }
 
         [Index(7)]        
@@ -114,6 +113,7 @@ namespace AtacFeed
         }
 
         public override bool Equals(object obj) => Equals(obj as ExtendedVehicleInfo);
+        
         public override int GetHashCode() {
             if (this.SuperStrictMode)
                 return (IdVettura, TripId, CurrentStopSequence).GetHashCode();

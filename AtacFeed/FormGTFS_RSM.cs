@@ -160,8 +160,7 @@ namespace AtacFeed
                         var presente = ElencoAggregatoVetture
                             .FirstOrDefault(x => x.IdVettura == vettura.IdVettura
                                                  && (!checkTripDuplicati.Checked || x.TripId == vettura.TripId)
-                                                 && (x.CurrentStopSequence == vettura.CurrentStopSequence)
-
+                                                 && (!(checkTuttoPercorso.Visible && checkTuttoPercorso.Checked) || x.CurrentStopSequence == vettura.CurrentStopSequence)
                                                  );
                         if (presente != null)
                             vettura.PrimaVolta = presente.PrimaVolta;

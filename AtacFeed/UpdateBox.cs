@@ -81,7 +81,8 @@ namespace AtacFeed
                 Release latastRelease = await github.Repository.Release.GetLatest("EnricoTolomei", "GTFS_RSM");
 
                 string versione = latastRelease.Name.Replace("Release", "").Trim();
-                var listStrLineElements = versione.Split('.').ToList();
+                string versioneTag = latastRelease.TagName.Replace("v_", "").Trim();
+                var listStrLineElements = versioneTag.Split('.').ToList();
                 version = new Version(
                     int.Parse(listStrLineElements?.ElementAtOrDefault(0) ?? "0"),
                     int.Parse(listStrLineElements?.ElementAtOrDefault(1) ?? "0"),

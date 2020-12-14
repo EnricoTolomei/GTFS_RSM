@@ -239,5 +239,17 @@ namespace AtacFeed.Properties {
                 this["ExtraSetting"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CheckAnomalie {
+            get {
+                return ((bool)(this["CheckAnomalie"]));
+            }
+            set {
+                this["CheckAnomalie"] = value;
+            }
+        }
     }
 }

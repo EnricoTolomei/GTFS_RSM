@@ -69,6 +69,7 @@
             this.tabMainForm = new System.Windows.Forms.TabControl();
             this.tabImpostazioni = new System.Windows.Forms.TabPage();
             this.groupBoxExport = new System.Windows.Forms.GroupBox();
+            this.checkAnomalie = new System.Windows.Forms.CheckBox();
             this.checkAlert = new System.Windows.Forms.CheckBox();
             this.checkMonitoraggio = new System.Windows.Forms.CheckBox();
             this.checkXlsx = new System.Windows.Forms.CheckBox();
@@ -102,7 +103,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.RichTextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonSalvaImpostazioni = new System.Windows.Forms.Button();
             this.tabGrafico = new System.Windows.Forms.TabPage();
@@ -527,6 +528,7 @@
             // 
             // button4
             // 
+            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button4.Location = new System.Drawing.Point(1057, 663);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(100, 23);
@@ -615,6 +617,7 @@
             // 
             this.groupBoxExport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxExport.Controls.Add(this.checkAnomalie);
             this.groupBoxExport.Controls.Add(this.checkAlert);
             this.groupBoxExport.Controls.Add(this.checkMonitoraggio);
             this.groupBoxExport.Controls.Add(this.checkXlsx);
@@ -627,12 +630,25 @@
             this.groupBoxExport.TabStop = false;
             this.groupBoxExport.Text = "Impostazioni Export";
             // 
+            // checkAnomalie
+            // 
+            this.checkAnomalie.AutoSize = true;
+            this.checkAnomalie.Checked = true;
+            this.checkAnomalie.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkAnomalie.Location = new System.Drawing.Point(139, 100);
+            this.checkAnomalie.Name = "checkAnomalie";
+            this.checkAnomalie.Size = new System.Drawing.Size(133, 17);
+            this.checkAnomalie.TabIndex = 28;
+            this.checkAnomalie.Text = "Includi anomalie GTFS";
+            this.checkAnomalie.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkAnomalie.UseVisualStyleBackColor = true;
+            // 
             // checkAlert
             // 
             this.checkAlert.AutoSize = true;
             this.checkAlert.Checked = true;
             this.checkAlert.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkAlert.Location = new System.Drawing.Point(133, 97);
+            this.checkAlert.Location = new System.Drawing.Point(139, 79);
             this.checkAlert.Name = "checkAlert";
             this.checkAlert.Size = new System.Drawing.Size(93, 17);
             this.checkAlert.TabIndex = 27;
@@ -643,7 +659,7 @@
             // checkMonitoraggio
             // 
             this.checkMonitoraggio.AutoSize = true;
-            this.checkMonitoraggio.Location = new System.Drawing.Point(133, 68);
+            this.checkMonitoraggio.Location = new System.Drawing.Point(139, 58);
             this.checkMonitoraggio.Name = "checkMonitoraggio";
             this.checkMonitoraggio.Size = new System.Drawing.Size(152, 17);
             this.checkMonitoraggio.TabIndex = 26;
@@ -656,7 +672,7 @@
             this.checkXlsx.AutoSize = true;
             this.checkXlsx.Checked = true;
             this.checkXlsx.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkXlsx.Location = new System.Drawing.Point(118, 19);
+            this.checkXlsx.Location = new System.Drawing.Point(124, 14);
             this.checkXlsx.Name = "checkXlsx";
             this.checkXlsx.Size = new System.Drawing.Size(114, 17);
             this.checkXlsx.TabIndex = 22;
@@ -670,7 +686,7 @@
             this.checkCSV.AutoSize = true;
             this.checkCSV.Checked = true;
             this.checkCSV.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkCSV.Location = new System.Drawing.Point(560, 19);
+            this.checkCSV.Location = new System.Drawing.Point(579, 14);
             this.checkCSV.Name = "checkCSV";
             this.checkCSV.Size = new System.Drawing.Size(114, 17);
             this.checkCSV.TabIndex = 23;
@@ -683,7 +699,7 @@
             this.checkGrafico.AutoSize = true;
             this.checkGrafico.Checked = true;
             this.checkGrafico.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkGrafico.Location = new System.Drawing.Point(133, 42);
+            this.checkGrafico.Location = new System.Drawing.Point(139, 37);
             this.checkGrafico.Name = "checkGrafico";
             this.checkGrafico.Size = new System.Drawing.Size(99, 17);
             this.checkGrafico.TabIndex = 25;
@@ -977,9 +993,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.ColumnCount = 3;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tableLayoutPanel1.Controls.Add(this.textBox3, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox4, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 0);
@@ -994,21 +1010,21 @@
             // textBox3
             // 
             this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox3.Location = new System.Drawing.Point(343, 3);
+            this.textBox3.Location = new System.Drawing.Point(411, 3);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox3.Size = new System.Drawing.Size(334, 306);
+            this.textBox3.Size = new System.Drawing.Size(300, 306);
             this.textBox3.TabIndex = 9;
             // 
             // textBox4
             // 
             this.textBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox4.Location = new System.Drawing.Point(683, 3);
+            this.textBox4.Location = new System.Drawing.Point(717, 3);
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
             this.textBox4.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox4.Size = new System.Drawing.Size(334, 306);
+            this.textBox4.Size = new System.Drawing.Size(300, 306);
             this.textBox4.TabIndex = 10;
             // 
             // tableLayoutPanel3
@@ -1022,22 +1038,20 @@
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 2;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(340, 312);
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.1282F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 69.8718F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(408, 312);
             this.tableLayoutPanel3.TabIndex = 11;
             // 
             // textBox2
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(3, 159);
-            this.textBox2.Multiline = true;
+            this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox2.Location = new System.Drawing.Point(3, 96);
             this.textBox2.Name = "textBox2";
-            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(334, 150);
-            this.textBox2.TabIndex = 2;
+            this.textBox2.Size = new System.Drawing.Size(402, 213);
+            this.textBox2.TabIndex = 28;
+            this.textBox2.Text = "";
+            this.textBox2.WordWrap = false;
             // 
             // textBox1
             // 
@@ -1047,8 +1061,8 @@
             this.textBox1.Location = new System.Drawing.Point(3, 3);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(334, 150);
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox1.Size = new System.Drawing.Size(402, 87);
             this.textBox1.TabIndex = 4;
             // 
             // buttonSalvaImpostazioni
@@ -1719,7 +1733,6 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox urlVehicle;
         private System.Windows.Forms.TextBox urlTrip;
@@ -1849,6 +1862,8 @@
         private System.Windows.Forms.Label labelPonderatiTPL;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.CheckBox checkTuttoPercorso;
+        private System.Windows.Forms.RichTextBox textBox2;
+        private System.Windows.Forms.CheckBox checkAnomalie;
     }
 }
 

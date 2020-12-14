@@ -1,9 +1,5 @@
 ﻿using CsvHelper.Configuration.Attributes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AtacFeed
 {
@@ -16,11 +12,6 @@ namespace AtacFeed
         public DateTime? OraPrimaViolazione { get; set; }
         [Ignore] 
         public DateTime? OraUltimaViolazione { get; set; }
-
-        //[Ignore]
-        //internal RegolaAlert RegolaAlert { get; set; }
-
-
 
         public ViolazioneAlert(DateTime? oraPrimaViolazione, DateTime? oraUltimaViolazione, RegolaAlert regolaAlert, string vetturaSbagliata)
         {
@@ -40,8 +31,6 @@ namespace AtacFeed
         {
             this.OraPrimaViolazione = OraPrimaViolazione;
             this.OraUltimaViolazione = OraUltimaViolazione;
-            //this.RegolaAlert = new RegolaAlert { Linea = linea, Giorno = "", Da = null, A = null, VetturaDa = null, VetturaA = null };
-            //this.VetturaSbagliata = VetturaSbagliata;
             this.Linea = linea;
             this.Giorno = "";
             this.Da = null;

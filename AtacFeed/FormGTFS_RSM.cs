@@ -33,6 +33,7 @@ namespace AtacFeed
         private static readonly DateTime t0 = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         private List<ExtendedVehicleInfo> ElencoAggregatoVetture;
         private List<ExtendedVehicleInfo> ElencoPrecedente;
+        private List<ErroriGTFS> AnomaliaGTFS;
         private List<LineaAgenzia> ElencoLineaAgenzia;
         private List<DettagliVettura> ElencoDettagliVettura;
         private List<MonitoraggioVettureGrafico> ElencoVettureGrafico;
@@ -56,21 +57,21 @@ namespace AtacFeed
 
         private GTFSFeed staticData = new GTFSFeed();
 
-        private void Acquisizione()
+        private async Task AcquisizioneAsync()
         {
             WebRequest req = HttpWebRequest.Create(urlVehicle.Text);
             req.Timeout = 10000;
             try
             {                
                 string routeID = comboBox1.SelectedValue.ToString();
-                FeedMessage feedVehicleCompleto = Serializer.Deserialize<FeedMessage>(req.GetResponse().GetResponseStream());
+                FeedMessage actualFeedVehicle = Serializer.Deserialize<FeedMessage>(req.GetResponse().GetResponseStream());
                 
-                if (feedVehicleCompleto.Entities.Count == 0)
+                if (actualFeedVehicle.Entities.Count == 0)
                 {
                     Log.Error("Feed VUOTO alle {DateTime:HH:mm:ss}" ,DateTime.Now);
                     throw new Exception("Il feed letto è vuoto");                    
                 }
-                DateTime dataFeedVehicle = t0.AddSeconds(feedVehicleCompleto.Header.Timestamp).ToLocalTime();
+                DateTime dataFeedVehicle = t0.AddSeconds(actualFeedVehicle.Header.Timestamp).ToLocalTime();
                 
                 if (DataResetMonitoraggio.HasValue && dataFeedVehicle > DataResetMonitoraggio.GetValueOrDefault() )
                 {
@@ -88,7 +89,7 @@ namespace AtacFeed
                     textBox2.Clear();
                     lblOraLettura.Text = $"{dataFeedVehicle:HH:mm:ss}";
                     labelFeedLetti.Text = (int.Parse(labelFeedLetti.Text) + 1).ToString();
-                    List<FeedEntity> feedEntities = feedVehicleCompleto.Entities
+                    List<FeedEntity> feedEntities = actualFeedVehicle.Entities
                         .Where(x => (int.Parse(routeID) < 0 || x.Vehicle.Trip?.RouteId == routeID)
                                 && (!checkTripVuoti.Checked || x.Vehicle?.Trip?.TripId.Length > 0)
                            )
@@ -136,11 +137,11 @@ namespace AtacFeed
 
                     var vettureAggiunteTolte =
                         from tolte in vettureTolte
-                        join aggiunte in vettureAggiunte on tolte.IdVettura equals aggiunte.IdVettura
-                        select new { tolte.IdVettura };
+                        join aggiunte in vettureAggiunte on tolte.Matricola equals aggiunte.Matricola
+                        select new { tolte.Matricola };
 
-                    vettureTolte = vettureTolte.Where(x => !vettureAggiunteTolte.Any(c => c.IdVettura == x.IdVettura)).ToList();
-                    vettureAggiunte = vettureAggiunte.Where(x => !vettureAggiunteTolte.Any(c => c.IdVettura == x.IdVettura)).ToList();
+                    vettureTolte = vettureTolte.Where(x => !vettureAggiunteTolte.Any(c => c.Matricola == x.Matricola)).ToList();
+                    vettureAggiunte = vettureAggiunte.Where(x => !vettureAggiunteTolte.Any(c => c.Matricola == x.Matricola)).ToList();
 
                     if (ElencoPrecedente.Count > 0)
                     {
@@ -153,12 +154,126 @@ namespace AtacFeed
                         {
                             textBox4.AppendText($"{vettura.IdVettura} - {vettura.Matricola} NON rilevata alle {dataFeedVehicle:HH:mm:ss} {Environment.NewLine}");
                         }
+
+                        /// Controllo accuratezza GTFS rispetto al precedente letto
+                        
+                        
+                        
+                        List<ExtendedVehicleInfo> vettureFresche = elencoVetture
+                                .Where(x => !ElencoPrecedente.Any(c => c.Matricola == x.Matricola && c.TripId == x.TripId))
+                                .ToList();
+                                                
+                        List<ExtendedVehicleInfo> partenzaAvanzata = vettureFresche
+                            .Where(x => x.CurrentStopSequence>1 && !ElencoAggregatoVetture.Any(c => c.Matricola == x.Matricola && c.TripId == x.TripId))
+                            .ToList();
+                        if (partenzaAvanzata.Count() > 0)
+                        {
+                            textBox2.AppendText($"Vetture con 'partenza avanzata'{Environment.NewLine}");
+                            foreach (ExtendedVehicleInfo errore in partenzaAvanzata)
+                            {
+                                textBox2.AppendText($"Matricola {errore.Matricola} Linea {errore.Linea} Fermata {errore.CurrentStopSequence}{Environment.NewLine}");
+                                int lineNumberToSelect = textBox2.Lines.Count() - 2;
+                                int start = textBox2.GetFirstCharIndexFromLine(lineNumberToSelect);
+                                int length = textBox2.Lines[lineNumberToSelect].Length;
+                                textBox2.Select(start, length);
+                                textBox2.SelectionColor = Color.CornflowerBlue;
+                                textBox2.SelectionIndent = 10;
+                                AnomaliaGTFS.Add(new ErroriGTFS(errore, (int)errore.CurrentStopSequence));
+                            }
+                            textBox2.AppendText($"{Environment.NewLine}");
+                        }
+
+                        
+                        List<ExtendedVehicleInfo> vettureRiagganciate = vettureFresche
+                            .Where(x => ElencoAggregatoVetture.Any(c => c.Matricola == x.Matricola && c.TripId == x.TripId))
+                            .ToList();
+                        //.Except(partenzaAvanzata)
+                        //.Where(x => x.CurrentStopSequence > 1)
+                        //.ToList();
+                        if (vettureRiagganciate.Count() > 0)
+                        {
+                            textBox2.AppendText($"Vetture 'riagganciate'{Environment.NewLine}");
+                            foreach (ExtendedVehicleInfo errore in vettureRiagganciate)
+                            {
+                                textBox2.AppendText($"Matricola {errore.Matricola} Linea {errore.Linea} Fermata {errore.CurrentStopSequence}{Environment.NewLine}");
+                                int lineNumberToSelect = textBox2.Lines.Count() - 2;
+                                int start = textBox2.GetFirstCharIndexFromLine(lineNumberToSelect);
+                                int length = textBox2.Lines[lineNumberToSelect].Length;
+                                textBox2.Select(start, length);
+                                textBox2.SelectionColor = Color.CornflowerBlue;
+                                textBox2.SelectionIndent = 10;
+                                uint ultimaFermataRilevata = ElencoAggregatoVetture
+                                        .Where(x => x.TripId == errore.TripId && x.Matricola == errore.Matricola)
+                                        .Max(x => x.CurrentStopSequence);
+                                //   .OrderByDescending(x => x.CurrentStopSequence).FirstOrDefault();
+                                int delta = (int)(errore.CurrentStopSequence - ultimaFermataRilevata);
+                                AnomaliaGTFS.Add(new ErroriGTFS(errore, delta));
+                            }
+                            textBox2.AppendText($"{Environment.NewLine}");
+                        }
+
+                        var percorsoAnomalo =
+                            from act in elencoVetture
+                            join prec in ElencoPrecedente 
+                                on (act.Matricola, act.TripId) equals (prec.Matricola, prec.TripId)
+                            where (act.CurrentStopSequence - prec.CurrentStopSequence > 2) || (act.CurrentStopSequence - prec.CurrentStopSequence < 0)
+                            select new { Vehicle = act, Delta = (int)(act.CurrentStopSequence - prec.CurrentStopSequence) };
+                        if (percorsoAnomalo.Count() > 0)
+                        {
+                            textBox2.AppendText($"Vetture con progressivo fermate 'bucato'{Environment.NewLine}");
+                            foreach (var errore in percorsoAnomalo)
+                            {
+                                textBox2.AppendText(text: $"Matricola {errore.Vehicle.Matricola} Linea {errore.Vehicle.Linea} Fermata {errore.Vehicle.CurrentStopSequence} => 'balzo' di {errore.Delta}{Environment.NewLine}");
+                                int delta = errore.Delta;
+                                int lineNumberToSelect = textBox2.Lines.Count() - 2;
+                                int start = textBox2.GetFirstCharIndexFromLine(lineNumberToSelect);
+                                int length = textBox2.Lines[lineNumberToSelect].Length;
+                                textBox2.Select(start, length);
+                                if (delta < 0)
+                                {
+                                    textBox2.SelectionColor = Color.OrangeRed;
+                                    textBox2.SelectionFont = new Font(textBox2.SelectionFont, FontStyle.Bold);
+                                }
+                                else
+                                {
+                                    textBox2.SelectionColor = Color.DarkOrange;
+                                }
+                                textBox2.SelectionIndent = 10;
+                                AnomaliaGTFS.Add(new ErroriGTFS(errore.Vehicle, errore.Delta));
+                            }
+                            textBox2.AppendText($"{Environment.NewLine}");
+                        }
                     }
+
+                    /// Controllo accuratezza GTFS (Verifica TripId Duplicati)
+                    IEnumerable<string> tripDuplicatiFeedVehicle = from trip in feedEntities
+                                                                   where trip.Vehicle.Trip?.TripId != null
+                                                                   group trip by trip.Vehicle.Trip.TripId into grp
+                                                                   where grp.Count() > 1
+                                                                   select grp.Key;
+                    if (tripDuplicatiFeedVehicle.Count() > 0)
+                    {
+                        textBox2.AppendText($"Trip Duplicati{Environment.NewLine}");
+                        foreach (string tripDuplicato in tripDuplicatiFeedVehicle)
+                        {
+                            var elencoVettureSuTripIdDuplicato = string.Join(", ", feedEntities.Where(x => x.Vehicle.Trip.TripId == tripDuplicato).Select(x => x.Vehicle.Vehicle.Label));
+                            textBox2.AppendText($"Trip {tripDuplicato}\tVetture:[{elencoVettureSuTripIdDuplicato}]{Environment.NewLine}");
+                            int lineNumberToSelect = textBox2.Lines.Count() - 2;
+                            int start = textBox2.GetFirstCharIndexFromLine(lineNumberToSelect);
+                            int length = textBox2.Lines[lineNumberToSelect].Length;
+                            textBox2.Select(start, length);
+                            textBox2.SelectionColor = Color.Tomato;
+                            textBox2.SelectionIndent = 10;
+                        }
+                        textBox2.AppendText($"{Environment.NewLine}");
+                    }
+                    textBox2.Select(0, 0);
+
 
                     foreach (ExtendedVehicleInfo vettura in elencoVetture)
                     {
                         var presente = ElencoAggregatoVetture
-                            .FirstOrDefault(x => x.IdVettura == vettura.IdVettura
+                            .FirstOrDefault(x => x.Matricola == vettura.Matricola
                                                  && (!checkTripDuplicati.Checked || x.TripId == vettura.TripId)
                                                  && (!(checkTuttoPercorso.Visible && checkTuttoPercorso.Checked) || x.CurrentStopSequence == vettura.CurrentStopSequence)
                                                  );
@@ -201,8 +316,7 @@ namespace AtacFeed
                     List<ExtendedVehicleInfo> listaBusLinea = elencoVetture.Where(x => x.TripId != null).ToList();
                     List<ExtendedVehicleInfo> listaBusAttesa = elencoVetture.Where(x => x.TripId == null).ToList();
                     
-                    int numVettureTPLFeedVehicle = elencoVetture.Where(x => x.Gestore != null && x.Gestore.ToLower() == "tpl").Count();
-                    //int numVettureTPLATAC = elencoVetture.Where(x => x.Gestore != null && x.Gestore == "ATAC").Count();
+                    int numVettureTPLFeedVehicle = elencoVetture.Where(x => x.Gestore != null && x.Gestore.ToLower() == "tpl").Count();                    
 
                     int busLinea = listaBusLinea.Count;
                     int busAttesa = listaBusAttesa.Count;
@@ -214,6 +328,7 @@ namespace AtacFeed
                     labelAtac.Text = $"{busTotale - numVettureTPLFeedVehicle}";
                     labelWait.Text = $"{busAttesa}";
                     labelTot.Text = $"{busTotale}";
+
 
                     if (vettureAggiunte.Count > 0 || vettureTolte.Count > 0 || ElencoPrecedente.Count == 0 || elencoVetture.Count > 0)
                     {
@@ -478,7 +593,8 @@ namespace AtacFeed
                             }
                         }
 
-                        _ = ExportGrid();
+                        await ExportGrid();
+                        
                         ElencoPrecedente = elencoVetture;
                         LastdataFeedVehicle = dataFeedVehicle;
                     }
@@ -506,27 +622,17 @@ namespace AtacFeed
                             .Where(x => x.TripUpdate.Vehicle != null && !string.IsNullOrEmpty(x.TripUpdate.Vehicle.Id) && x.TripUpdate.Vehicle.Id.Length > 4)
                             .Count();
 
-                        textBox1.AppendText(
-                            $"Totale Vetture Rilevate sul Feed Trip: {numVettureFeedTrip} TPL({numVettureTPLFeedTrip})  feed.Entities.Count{feedTrip.Entities.Count}" + Environment.NewLine
-                        );
+                        textBox1.AppendText($"Totale Vetture Rilevate sul Feed Trip: {numVettureFeedTrip}{Environment.NewLine}");
+
+                        textBox1.AppendText($"\tATAC {numVettureFeedTrip - numVettureTPLFeedTrip}\tTPL {numVettureTPLFeedVehicle}{Environment.NewLine}");
 
                         List<FeedEntity> soloVehicle = feedEntities
-                            .Where(vehicle => !feedTrip.Entities.Any(trip => vehicle.Vehicle.Vehicle.Id == trip.TripUpdate.Vehicle.Id))
+                            .Where(vehicle => !feedTrip.Entities.Any(trip => vehicle.Vehicle.Vehicle.Label == trip.TripUpdate.Vehicle.Label))
                             .ToList();
 
-                        IEnumerable<string> tripDuplicatiFeedVehicle = from trip in feedEntities
-                                                                       where trip.Vehicle.Trip?.TripId != null
-                                                                       group trip by trip.Vehicle.Trip.TripId into grp
-                                                                       where grp.Count() > 1
-                                                                       select grp.Key;
-                        foreach (string tripDuplicato in tripDuplicatiFeedVehicle)
-                        {
-                            textBox2.AppendText($"Trip Duplicato sul Feed Vehicle: {tripDuplicato}" + Environment.NewLine);
-                            var dup = feedEntities.Where(x => x.Vehicle.Trip?.TripId == tripDuplicato).ToList();
-                        }
 
                         List<FeedEntity> soloTrip = feedTrip.Entities
-                            .Where(trip => !feedEntities.Any(vehicle => vehicle.Vehicle.Vehicle.Id == trip.TripUpdate.Vehicle.Id))
+                            .Where(trip => !feedEntities.Any(vehicle => vehicle.Vehicle.Vehicle.Label == trip.TripUpdate.Vehicle.Label))
                             .ToList();
                         IEnumerable<string> tripDuplicatiFeedTrip = from trip in feedTrip.Entities
                                                                     group trip by trip.TripUpdate.Trip.TripId into grp
@@ -534,12 +640,12 @@ namespace AtacFeed
                                                                     select grp.Key;
                         foreach (FeedEntity trip in soloTrip)
                         {
-                            textBox2.AppendText($"Solo sul Feed Trip: {trip.TripUpdate.Vehicle.Id}" + Environment.NewLine);
+                            textBox2.AppendText($"Solo sul Feed Trip: {trip.TripUpdate.Vehicle.Label}" + Environment.NewLine);
                         }
 
                         foreach (FeedEntity vehicle in soloVehicle)
                         {
-                            textBox2.AppendText($"Solo sul Feed Vehicle: {vehicle.Vehicle.Vehicle.Id}" + Environment.NewLine);
+                            textBox2.AppendText($"Solo sul Feed Vehicle: {vehicle.Vehicle.Vehicle.Label}" + Environment.NewLine);
                         }
                         foreach (string tripDuplicato in tripDuplicatiFeedTrip)
                         {
@@ -550,6 +656,7 @@ namespace AtacFeed
                         textBox1.AppendText($"Vetture rilevate solo sul feed Trip: {soloTrip.Count}" + Environment.NewLine);
                         textBox1.AppendText($"Vetture rilevate solo sul feed Vehicle: {soloVehicle.Count}" + Environment.NewLine);
                     }
+
                 }
                 else {
                     string msg= $"Il feed letto dal server di RSM alle {DateTime.Now:HH:mm:ss} {Environment.NewLine}è stato scartato in quanto ha il timestamp delle {LastdataFeedVehicle.GetValueOrDefault():HH:mm:ss} ed è stato acquisito in precedenza";
@@ -560,14 +667,13 @@ namespace AtacFeed
             catch (WebException ex) when ((ex.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
             {
                 textBox1.AppendText($"{ex.Message}: {Environment.NewLine}Feed Non trovato al seguente indirizzo");
-                textBox1.AppendText($"{Environment.NewLine}{ex.Response.ResponseUri}{Environment.NewLine}");
-                
+                textBox1.AppendText($"{Environment.NewLine}{ex.Response.ResponseUri}{Environment.NewLine}");                
                 Log.Error(ex, "Feed {UrlFeed} Non trovato ", ex.Response.ResponseUri);                
             }
             catch (WebException ex) when (ex.Status == WebExceptionStatus.Timeout)
             {
-                textBox1.AppendText($"{ex.Message}: Problemi di connessione con il server di RSM");                
-                Log.Error(ex, "Errore Connessione Server {UrlRemoto}", req.RequestUri );
+                textBox1.AppendText($"{ex.Message} Problemi di connessione con il server di RSM{Environment.NewLine}");
+                Log.Error(ex, "Errore Connessione Server {UrlRemoto}", req.RequestUri);
 
             }
             catch (Exception ex)
@@ -586,6 +692,7 @@ namespace AtacFeed
             ElencoLineeMonitorate.Clear();
             ElencoAggregatoVetture.Clear();
             ElencoPrecedente.Clear();
+            AnomaliaGTFS.Clear();
             ElencoVettureGrafico.Clear();
 
             dataGridViolazioni.Invalidate();
@@ -635,12 +742,12 @@ namespace AtacFeed
             int deltaMilliSec = (int)(1000 * (60 * minuti.Value + secondi.Value));
             if (deltaMilliSec == 0)
             {
-                Log.Information("Acquisizione singola");                
-                Acquisizione();
+                Log.Information("Acquisizione singola");
+                _ = AcquisizioneAsync();
             }
             if (!timerAcquisizione.Enabled && deltaMilliSec > 0)
             {
-                Acquisizione();
+                _ = AcquisizioneAsync();
                 minuti.Enabled = false;
                 secondi.Enabled = false;
                 timerAcquisizione.Interval = deltaMilliSec;
@@ -711,6 +818,7 @@ namespace AtacFeed
             
             ElencoAggregatoVetture = new List<ExtendedVehicleInfo>();
             ElencoPrecedente = new List<ExtendedVehicleInfo>();
+            AnomaliaGTFS = new List<ErroriGTFS>();
             ElencoVettureGrafico = new List<MonitoraggioVettureGrafico>();
             
             ElencoLineeMonitorate = new List<LineaMonitorata>();
@@ -740,7 +848,7 @@ namespace AtacFeed
                 .Controls.OfType<RadioButton>()
                 .FirstOrDefault(r => r.Name.Equals(Properties.Settings.Default.RadioRaggruppamento));
             radioRaggruppamento.Checked = true;
-
+            checkAnomalie.Checked = Properties.Settings.Default.CheckAnomalie;
             int totalSeconds = Properties.Settings.Default.DeltaTSec;
             minuti.Value = totalSeconds / 60;
             secondi.Value = totalSeconds % 60;
@@ -1020,7 +1128,7 @@ namespace AtacFeed
 
         private void TimerAcquisizione_Tick(object sender, EventArgs e)
         {
-            Acquisizione();
+            _ = AcquisizioneAsync();
         }
 
         private void SalvaImpostazioni(object sender, EventArgs e)
@@ -1037,6 +1145,7 @@ namespace AtacFeed
             Properties.Settings.Default.SalvaMonitoraggio = checkMonitoraggio.Checked;
             Properties.Settings.Default.SalvaAlert = checkAlert.Checked;
             Properties.Settings.Default.StoricoAlert = checkBoxStorico.Checked;
+            Properties.Settings.Default.CheckAnomalie = checkAnomalie.Checked;
             var radioRaggruppamento = groupBoxMonitoraggio
                 .Controls.OfType<RadioButton>()
                 .FirstOrDefault(r => r.Checked);
@@ -1069,7 +1178,7 @@ namespace AtacFeed
             bool retVal = true;
             if (checkXlsx.Checked)
             {
-                using (ExcelPackage excel = new ExcelPackage(outputFile))
+                using (ExcelPackage excel = new ExcelPackage(outputFile)) 
                     try
                     {
                         ExcelWorksheet workSheet;
@@ -1255,6 +1364,50 @@ namespace AtacFeed
                             }
                         }
 
+
+
+
+                        if (true)
+                        {
+                            string excelSheetName = "AnomalieGTFS";
+                            foreach (ExcelWorksheet sheet in excel.Workbook.Worksheets)
+                            {
+                                if (sheet.Name == excelSheetName)
+                                {
+                                    excel.Workbook.Worksheets.Delete(excelSheetName);
+                                    break;
+                                }
+                            }
+                            workSheet = excel.Workbook.Worksheets.Add(excelSheetName);
+
+
+                            Ammessi = new List<string> { "Matricola", "Linea", "PrimaVolta", "TripId", "CurrentStopSequence", "Delta" };
+                            membersToInclude = typeof(ErroriGTFS)
+                                .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                                .Where(p => !Attribute.IsDefined(p, typeof(IgnoreAttribute))
+                                 && Ammessi.Contains(p.Name)                        
+                                )
+                                .ToArray();
+
+                            range = workSheet.Cells[1, 1].LoadFromCollection(
+                                AnomaliaGTFS
+                                , true
+                                , TableStyles.Medium2
+                                , BindingFlags.Public | BindingFlags.Instance
+                                , membersToInclude);
+
+                            colNumber = 1;
+
+                            foreach (PropertyInfo exportedProperty in membersToInclude)
+                            {
+                                if (exportedProperty.PropertyType == typeof(DateTime) || exportedProperty.PropertyType == typeof(DateTime?))
+                                {
+                                    workSheet.Column(colNumber).Style.Numberformat.Format = "MM/dd/yyyy HH:mm:ss";
+                                }
+                                colNumber++;
+                            }
+                            workSheet.Cells.AutoFitColumns();
+                        }
                         excel.Save();
                     }
                     catch (Exception exc)
@@ -1391,7 +1544,7 @@ namespace AtacFeed
         private void ResetAcquisizione(object sender, EventArgs e)
         {
             // Application.Restart();
-            needToRestart = true;
+            needToRestart = true;            
             this.Close();
 
             /*

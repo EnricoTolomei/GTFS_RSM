@@ -1,5 +1,4 @@
-agency_id,agency_name,agency_url,agency_timezone,agency_lang,agency_phone
-OP1,"ATAC","https://romamobilita.it/it",Europe/Rome,,""
-OP2,"Roma TPL","https://romamobilita.it/it",Europe/Rome,IT,"06 57003"
-OP34,"Atac","https://romamobilita.it/it",Europe/Rome,IT,"06 57003"
-OP3,"Trenitalia","http://www.trenitalia.com/",Europe/Rome,IT,""
+agency_id,agency_name,agency_url,agency_timezone,agency_lang,agency_phone,agency_fare_url
+OP1,Atac,http://www.atac.roma.it,Europe/Rome,it,06 57003,
+OP2,Roma TPL,http://romatpl.it,Europe/Rome,it,06 57003,
+OP3,Trenitalia,http://www.trenitalia.com/,Europe/Rome,it,,

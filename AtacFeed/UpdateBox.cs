@@ -41,18 +41,14 @@ namespace AtacFeed
         
         public async void CheckConf() {
             try
-            {
-                
+            {                
                 decimal latestVersion = await GetLatestConfVersionAcync();
                 decimal actualVersion = 0;
-                //labelActualVersion.Text = String.Format("Versione in uso {0}", actualVersion);            
-                //labelLastVersion.Text = String.Format("Ultima Release {0}", latestVersion);
                 string filepath = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}LatestVersion.txt";
                 if (File.Exists(filepath)){
                     string localVersion = File.ReadAllLines(filepath).FirstOrDefault();
                     decimal.TryParse(localVersion, out actualVersion);
                 }
-
 
                 if (actualVersion < latestVersion)
                 {
@@ -117,7 +113,6 @@ namespace AtacFeed
 
         private void Wc_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
         {
-            //Thread.Sleep(400); 
             progressBar.Value = 0;
         }
 

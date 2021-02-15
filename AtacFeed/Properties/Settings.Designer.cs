@@ -50,7 +50,7 @@ namespace AtacFeed.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
         public int DeltaTSec {
             get {
                 return ((int)(this["DeltaTSec"]));
@@ -249,6 +249,18 @@ namespace AtacFeed.Properties {
             }
             set {
                 this["CheckAnomalie"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CheckSovraffollamento {
+            get {
+                return ((bool)(this["CheckSovraffollamento"]));
+            }
+            set {
+                this["CheckSovraffollamento"] = value;
             }
         }
     }

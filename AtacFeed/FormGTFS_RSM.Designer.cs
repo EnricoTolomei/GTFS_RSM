@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGTFS_RSM));
             this.timerAcquisizione = new System.Windows.Forms.Timer(this.components);
             this.button3 = new System.Windows.Forms.Button();
@@ -49,8 +50,6 @@
             this.label19 = new System.Windows.Forms.Label();
             this.labelAtac = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.labelWait = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
             this.labelTotaleMatricolaATAC = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.labelTotaleMatricolaTPL = new System.Windows.Forms.Label();
@@ -62,6 +61,9 @@
             this.checkFeedTrip = new System.Windows.Forms.CheckBox();
             this.urlTrip = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.labelVer = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -69,9 +71,11 @@
             this.tabMainForm = new System.Windows.Forms.TabControl();
             this.tabImpostazioni = new System.Windows.Forms.TabPage();
             this.groupBoxExport = new System.Windows.Forms.GroupBox();
-            this.checkAnomalie = new System.Windows.Forms.CheckBox();
+            this.checkAnomalieGTFS = new System.Windows.Forms.CheckBox();
             this.checkAlert = new System.Windows.Forms.CheckBox();
+            this.checkSovraffollamento = new System.Windows.Forms.CheckBox();
             this.checkMonitoraggio = new System.Windows.Forms.CheckBox();
+            this.buttonSalvaImpostazioni = new System.Windows.Forms.Button();
             this.checkXlsx = new System.Windows.Forms.CheckBox();
             this.checkCSV = new System.Windows.Forms.CheckBox();
             this.checkGrafico = new System.Windows.Forms.CheckBox();
@@ -105,13 +109,36 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.textBox2 = new System.Windows.Forms.RichTextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.buttonSalvaImpostazioni = new System.Windows.Forms.Button();
             this.tabGrafico = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.formsPlotTPL = new ScottPlot.FormsPlot();
             this.formsPlotAtac = new ScottPlot.FormsPlot();
             this.tabGriglia = new System.Windows.Forms.TabPage();
             this.dataGridVetture = new System.Windows.Forms.DataGridView();
+            this.tabGrigliaFiltrata = new System.Windows.Forms.TabPage();
+            this.advancedDataGridView1 = new Zuby.ADGV.AdvancedDataGridView();
+            this.OccupancyStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabMonitoraggio = new System.Windows.Forms.TabPage();
+            this.dataGridViolazioni = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelPonderatiATAC = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.labelPonderatiTPL = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.labelBUS = new System.Windows.Forms.Label();
+            this.labelTRAM = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.labelFILOBUS = new System.Windows.Forms.Label();
+            this.labelFerro = new System.Windows.Forms.Label();
+            this.labelMiniBusEle = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.labelFurgoncino = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label30 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
+            this.labelAltro = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -129,8 +156,6 @@
             this.latitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.longitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.extendedVehicleInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.tabGrigliaFiltrata = new System.Windows.Forms.TabPage();
-            this.advancedDataGridView1 = new Zuby.ADGV.AdvancedDataGridView();
             this.idVetturaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.matricolaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.routeIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -147,8 +172,6 @@
             this.modelloDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.latitudeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.longitudeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabMonitoraggio = new System.Windows.Forms.TabPage();
-            this.dataGridViolazioni = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.giornoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.daDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -159,10 +182,6 @@
             this.oraPrimaViolazioneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.oraUltimaViolazioneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lineaMonitorataBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.labelPonderatiATAC = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.labelPonderatiTPL = new System.Windows.Forms.Label();
             this.tabMainForm.SuspendLayout();
             this.tabImpostazioni.SuspendLayout();
             this.groupBoxExport.SuspendLayout();
@@ -176,11 +195,11 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.tabGriglia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVetture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).BeginInit();
             this.tabGrigliaFiltrata.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView1)).BeginInit();
             this.tabMonitoraggio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViolazioni)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lineaMonitorataBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -192,7 +211,7 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(1051, 419);
+            this.button3.Location = new System.Drawing.Point(1059, 524);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(102, 23);
             this.button3.TabIndex = 28;
@@ -205,7 +224,7 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(1055, 514);
+            this.label9.Location = new System.Drawing.Point(1058, 617);
             this.label9.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(45, 13);
@@ -216,7 +235,7 @@
             // labelTotaleIdVettura
             // 
             this.labelTotaleIdVettura.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleIdVettura.Location = new System.Drawing.Point(1118, 478);
+            this.labelTotaleIdVettura.Location = new System.Drawing.Point(1121, 581);
             this.labelTotaleIdVettura.Name = "labelTotaleIdVettura";
             this.labelTotaleIdVettura.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleIdVettura.Size = new System.Drawing.Size(40, 13);
@@ -227,7 +246,7 @@
             // labelTotaleMatricola
             // 
             this.labelTotaleMatricola.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleMatricola.Location = new System.Drawing.Point(1118, 496);
+            this.labelTotaleMatricola.Location = new System.Drawing.Point(1121, 599);
             this.labelTotaleMatricola.Name = "labelTotaleMatricola";
             this.labelTotaleMatricola.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleMatricola.Size = new System.Drawing.Size(40, 13);
@@ -239,7 +258,7 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(1055, 478);
+            this.label10.Location = new System.Drawing.Point(1058, 581);
             this.label10.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(60, 13);
@@ -250,7 +269,7 @@
             // labelTotaleRighe
             // 
             this.labelTotaleRighe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleRighe.Location = new System.Drawing.Point(1118, 514);
+            this.labelTotaleRighe.Location = new System.Drawing.Point(1121, 617);
             this.labelTotaleRighe.Name = "labelTotaleRighe";
             this.labelTotaleRighe.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleRighe.Size = new System.Drawing.Size(40, 13);
@@ -262,7 +281,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1055, 496);
+            this.label3.Location = new System.Drawing.Point(1058, 599);
             this.label3.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 13);
@@ -273,7 +292,7 @@
             // labelFeedLetti
             // 
             this.labelFeedLetti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelFeedLetti.Location = new System.Drawing.Point(1118, 460);
+            this.labelFeedLetti.Location = new System.Drawing.Point(1121, 563);
             this.labelFeedLetti.MinimumSize = new System.Drawing.Size(15, 0);
             this.labelFeedLetti.Name = "labelFeedLetti";
             this.labelFeedLetti.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -286,7 +305,7 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1055, 460);
+            this.label8.Location = new System.Drawing.Point(1058, 563);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(41, 13);
             this.label8.TabIndex = 20;
@@ -309,7 +328,7 @@
             // 
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(1050, 121);
+            this.label13.Location = new System.Drawing.Point(1051, 158);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(35, 13);
             this.label13.TabIndex = 39;
@@ -319,7 +338,7 @@
             // labelTot
             // 
             this.labelTot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTot.Location = new System.Drawing.Point(1118, 190);
+            this.labelTot.Location = new System.Drawing.Point(1107, 118);
             this.labelTot.Name = "labelTot";
             this.labelTot.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTot.Size = new System.Drawing.Size(40, 13);
@@ -331,7 +350,7 @@
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(1050, 144);
+            this.label15.Location = new System.Drawing.Point(1052, 138);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(27, 13);
             this.label15.TabIndex = 37;
@@ -341,7 +360,7 @@
             // labelTPL
             // 
             this.labelTPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTPL.Location = new System.Drawing.Point(1118, 144);
+            this.labelTPL.Location = new System.Drawing.Point(1107, 138);
             this.labelTPL.Name = "labelTPL";
             this.labelTPL.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTPL.Size = new System.Drawing.Size(40, 13);
@@ -365,7 +384,7 @@
             // 
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(1050, 190);
+            this.label19.Location = new System.Drawing.Point(1051, 118);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(37, 13);
             this.label19.TabIndex = 33;
@@ -375,7 +394,7 @@
             // labelAtac
             // 
             this.labelAtac.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelAtac.Location = new System.Drawing.Point(1118, 121);
+            this.labelAtac.Location = new System.Drawing.Point(1107, 158);
             this.labelAtac.Name = "labelAtac";
             this.labelAtac.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelAtac.Size = new System.Drawing.Size(40, 13);
@@ -394,32 +413,10 @@
             this.label11.Text = "Orario";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // labelWait
-            // 
-            this.labelWait.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelWait.Location = new System.Drawing.Point(1118, 167);
-            this.labelWait.Name = "labelWait";
-            this.labelWait.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelWait.Size = new System.Drawing.Size(40, 13);
-            this.labelWait.TabIndex = 42;
-            this.labelWait.Text = "0";
-            this.labelWait.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label16
-            // 
-            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(1050, 167);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(49, 13);
-            this.label16.TabIndex = 41;
-            this.label16.Text = "In Attesa";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // labelTotaleMatricolaATAC
             // 
             this.labelTotaleMatricolaATAC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleMatricolaATAC.Location = new System.Drawing.Point(1118, 257);
+            this.labelTotaleMatricolaATAC.Location = new System.Drawing.Point(1121, 355);
             this.labelTotaleMatricolaATAC.Name = "labelTotaleMatricolaATAC";
             this.labelTotaleMatricolaATAC.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleMatricolaATAC.Size = new System.Drawing.Size(40, 13);
@@ -431,17 +428,18 @@
             // 
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(1050, 258);
+            this.label17.Location = new System.Drawing.Point(1053, 356);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(45, 13);
             this.label17.TabIndex = 43;
             this.label17.Text = "# ATAC";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTipFeedTrip.SetToolTip(this.label17, "Nel calcolo delle vetture aggregate è esclusa la categoria FERRO");
             // 
             // labelTotaleMatricolaTPL
             // 
             this.labelTotaleMatricolaTPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleMatricolaTPL.Location = new System.Drawing.Point(1118, 285);
+            this.labelTotaleMatricolaTPL.Location = new System.Drawing.Point(1121, 383);
             this.labelTotaleMatricolaTPL.Name = "labelTotaleMatricolaTPL";
             this.labelTotaleMatricolaTPL.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleMatricolaTPL.Size = new System.Drawing.Size(40, 13);
@@ -453,7 +451,7 @@
             // 
             this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(1050, 285);
+            this.label18.Location = new System.Drawing.Point(1053, 383);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(37, 13);
             this.label18.TabIndex = 45;
@@ -464,13 +462,15 @@
             // 
             this.label14.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(1055, 232);
+            this.label14.Location = new System.Drawing.Point(1058, 330);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(88, 13);
             this.label14.TabIndex = 47;
             this.label14.Text = "Dati Aggregati";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTipFeedTrip.SetToolTip(this.label14, "Nel calcolo delle vetture aggregate è esclusa la categoria FERRO");
             // 
             // dataGridViewTextBoxColumn1
             // 
@@ -486,8 +486,9 @@
             // 
             // toolTipFeedTrip
             // 
+            this.toolTipFeedTrip.IsBalloon = true;
             this.toolTipFeedTrip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.toolTipFeedTrip.ToolTipTitle = "GTFS TRIP";
+            this.toolTipFeedTrip.ToolTipTitle = "Monitoraggio feed GTFS ";
             // 
             // checkFeedTrip
             // 
@@ -517,19 +518,62 @@
             this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(1055, 331);
+            this.label24.Location = new System.Drawing.Point(1058, 445);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(88, 13);
             this.label24.TabIndex = 47;
             this.label24.Text = "Dati Ponderati";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolTipFeedTrip.SetToolTip(this.label24, "I dati saranno visualizzaati dopo aver raggiunto il numero minimo di campioni nec" +
-        "essari pe il calcolo della media ponderata");
+        "essari pe il calcolo della media ponderata.\r\nNel calcolo per ATAC non si tiene c" +
+        "onto della categoria FERRO.");
+            // 
+            // label16
+            // 
+            this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.Transparent;
+            this.label16.Location = new System.Drawing.Point(1068, 250);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(31, 13);
+            this.label16.TabIndex = 58;
+            this.label16.Text = "Ferro";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTipFeedTrip.SetToolTip(this.label16, "La categoria FERRO include, se presenti nel feed, le informazioni relative a:\r\n- " +
+        "le linee della metro\r\n- Roma Lido\r\n- Roma Viterbo\r\n- Roma Giardinetti");
+            // 
+            // label23
+            // 
+            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label23.AutoSize = true;
+            this.label23.BackColor = System.Drawing.Color.Transparent;
+            this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(1141, 328);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(12, 13);
+            this.label23.TabIndex = 29;
+            this.label23.Text = "*";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTipFeedTrip.SetToolTip(this.label23, "Nel calcolo delle vetture aggregate è esclusa la categoria FERRO");
+            // 
+            // label33
+            // 
+            this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label33.AutoSize = true;
+            this.label33.BackColor = System.Drawing.Color.Transparent;
+            this.label33.Location = new System.Drawing.Point(1068, 265);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(28, 13);
+            this.label33.TabIndex = 58;
+            this.label33.Text = "Altro";
+            this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTipFeedTrip.SetToolTip(this.label33, "Bus Atac in servizio, ma non ancora catalogati.\r\nNei prossimi giorni verifica se " +
+        "sono presenti dei file di configurazione aggiornati.");
             // 
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(1057, 663);
+            this.button4.Location = new System.Drawing.Point(706, 0);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(100, 23);
             this.button4.TabIndex = 48;
@@ -557,11 +601,11 @@
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Image = global::AtacFeed.Properties.Resources.available_updates_16;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(1083, 27);
+            this.button1.Location = new System.Drawing.Point(1061, 27);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 24);
+            this.button1.Size = new System.Drawing.Size(100, 37);
             this.button1.TabIndex = 49;
-            this.button1.Text = "    Verifica";
+            this.button1.Text = "   Verifica\r\n  Aggiornamenti";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.Button1_Click);
             // 
@@ -573,7 +617,7 @@
             this.buttonPlayPause.FlatAppearance.BorderSize = 0;
             this.buttonPlayPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPlayPause.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayPause.Location = new System.Drawing.Point(1083, 596);
+            this.buttonPlayPause.Location = new System.Drawing.Point(1083, 640);
             this.buttonPlayPause.Name = "buttonPlayPause";
             this.buttonPlayPause.Size = new System.Drawing.Size(50, 46);
             this.buttonPlayPause.TabIndex = 0;
@@ -605,7 +649,6 @@
             this.tabImpostazioni.Controls.Add(this.groupBoxMonitoraggio);
             this.tabImpostazioni.Controls.Add(this.groupBoxServerRSM);
             this.tabImpostazioni.Controls.Add(this.tableLayoutPanel1);
-            this.tabImpostazioni.Controls.Add(this.buttonSalvaImpostazioni);
             this.tabImpostazioni.Location = new System.Drawing.Point(4, 22);
             this.tabImpostazioni.Name = "tabImpostazioni";
             this.tabImpostazioni.Padding = new System.Windows.Forms.Padding(3);
@@ -617,38 +660,40 @@
             // 
             this.groupBoxExport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBoxExport.Controls.Add(this.checkAnomalie);
+            this.groupBoxExport.Controls.Add(this.checkAnomalieGTFS);
             this.groupBoxExport.Controls.Add(this.checkAlert);
+            this.groupBoxExport.Controls.Add(this.checkSovraffollamento);
             this.groupBoxExport.Controls.Add(this.checkMonitoraggio);
+            this.groupBoxExport.Controls.Add(this.buttonSalvaImpostazioni);
             this.groupBoxExport.Controls.Add(this.checkXlsx);
             this.groupBoxExport.Controls.Add(this.checkCSV);
             this.groupBoxExport.Controls.Add(this.checkGrafico);
             this.groupBoxExport.Location = new System.Drawing.Point(6, 219);
             this.groupBoxExport.Name = "groupBoxExport";
-            this.groupBoxExport.Size = new System.Drawing.Size(886, 119);
+            this.groupBoxExport.Size = new System.Drawing.Size(1014, 102);
             this.groupBoxExport.TabIndex = 28;
             this.groupBoxExport.TabStop = false;
             this.groupBoxExport.Text = "Impostazioni Export";
             // 
-            // checkAnomalie
+            // checkAnomalieGTFS
             // 
-            this.checkAnomalie.AutoSize = true;
-            this.checkAnomalie.Checked = true;
-            this.checkAnomalie.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkAnomalie.Location = new System.Drawing.Point(139, 100);
-            this.checkAnomalie.Name = "checkAnomalie";
-            this.checkAnomalie.Size = new System.Drawing.Size(133, 17);
-            this.checkAnomalie.TabIndex = 28;
-            this.checkAnomalie.Text = "Includi anomalie GTFS";
-            this.checkAnomalie.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.checkAnomalie.UseVisualStyleBackColor = true;
+            this.checkAnomalieGTFS.AutoSize = true;
+            this.checkAnomalieGTFS.Checked = true;
+            this.checkAnomalieGTFS.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkAnomalieGTFS.Location = new System.Drawing.Point(209, 37);
+            this.checkAnomalieGTFS.Name = "checkAnomalieGTFS";
+            this.checkAnomalieGTFS.Size = new System.Drawing.Size(133, 17);
+            this.checkAnomalieGTFS.TabIndex = 28;
+            this.checkAnomalieGTFS.Text = "Includi anomalie GTFS";
+            this.checkAnomalieGTFS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkAnomalieGTFS.UseVisualStyleBackColor = true;
             // 
             // checkAlert
             // 
             this.checkAlert.AutoSize = true;
             this.checkAlert.Checked = true;
             this.checkAlert.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkAlert.Location = new System.Drawing.Point(139, 79);
+            this.checkAlert.Location = new System.Drawing.Point(88, 60);
             this.checkAlert.Name = "checkAlert";
             this.checkAlert.Size = new System.Drawing.Size(93, 17);
             this.checkAlert.TabIndex = 27;
@@ -656,23 +701,46 @@
             this.checkAlert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkAlert.UseVisualStyleBackColor = true;
             // 
+            // checkSovraffollamento
+            // 
+            this.checkSovraffollamento.AutoSize = true;
+            this.checkSovraffollamento.Location = new System.Drawing.Point(209, 60);
+            this.checkSovraffollamento.Name = "checkSovraffollamento";
+            this.checkSovraffollamento.Size = new System.Drawing.Size(192, 17);
+            this.checkSovraffollamento.TabIndex = 26;
+            this.checkSovraffollamento.Text = "Includi il monitoraggio linee affollate";
+            this.checkSovraffollamento.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.checkSovraffollamento.UseVisualStyleBackColor = true;
+            // 
             // checkMonitoraggio
             // 
             this.checkMonitoraggio.AutoSize = true;
-            this.checkMonitoraggio.Location = new System.Drawing.Point(139, 58);
+            this.checkMonitoraggio.Location = new System.Drawing.Point(209, 77);
             this.checkMonitoraggio.Name = "checkMonitoraggio";
             this.checkMonitoraggio.Size = new System.Drawing.Size(152, 17);
             this.checkMonitoraggio.TabIndex = 26;
             this.checkMonitoraggio.Text = "Includi il monitoraggio linee";
             this.checkMonitoraggio.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkMonitoraggio.UseVisualStyleBackColor = true;
+            this.checkMonitoraggio.Visible = false;
+            // 
+            // buttonSalvaImpostazioni
+            // 
+            this.buttonSalvaImpostazioni.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonSalvaImpostazioni.Location = new System.Drawing.Point(886, 73);
+            this.buttonSalvaImpostazioni.Name = "buttonSalvaImpostazioni";
+            this.buttonSalvaImpostazioni.Size = new System.Drawing.Size(122, 23);
+            this.buttonSalvaImpostazioni.TabIndex = 20;
+            this.buttonSalvaImpostazioni.Text = "Salva Impostazioni";
+            this.buttonSalvaImpostazioni.UseVisualStyleBackColor = true;
+            this.buttonSalvaImpostazioni.Click += new System.EventHandler(this.SalvaImpostazioni);
             // 
             // checkXlsx
             // 
             this.checkXlsx.AutoSize = true;
             this.checkXlsx.Checked = true;
             this.checkXlsx.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkXlsx.Location = new System.Drawing.Point(124, 14);
+            this.checkXlsx.Location = new System.Drawing.Point(159, 14);
             this.checkXlsx.Name = "checkXlsx";
             this.checkXlsx.Size = new System.Drawing.Size(114, 17);
             this.checkXlsx.TabIndex = 22;
@@ -699,7 +767,7 @@
             this.checkGrafico.AutoSize = true;
             this.checkGrafico.Checked = true;
             this.checkGrafico.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkGrafico.Location = new System.Drawing.Point(139, 37);
+            this.checkGrafico.Location = new System.Drawing.Point(88, 37);
             this.checkGrafico.Name = "checkGrafico";
             this.checkGrafico.Size = new System.Drawing.Size(99, 17);
             this.checkGrafico.TabIndex = 25;
@@ -733,10 +801,10 @@
             // 
             // buttonResetRegole
             // 
-            this.buttonResetRegole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonResetRegole.Location = new System.Drawing.Point(925, 63);
+            this.buttonResetRegole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonResetRegole.Location = new System.Drawing.Point(886, 64);
             this.buttonResetRegole.Name = "buttonResetRegole";
-            this.buttonResetRegole.Size = new System.Drawing.Size(83, 23);
+            this.buttonResetRegole.Size = new System.Drawing.Size(122, 23);
             this.buttonResetRegole.TabIndex = 48;
             this.buttonResetRegole.Text = "Rleggi regole";
             this.buttonResetRegole.UseVisualStyleBackColor = true;
@@ -999,12 +1067,12 @@
             this.tableLayoutPanel1.Controls.Add(this.textBox3, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox4, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 341);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 324);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1020, 312);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1020, 329);
             this.tableLayoutPanel1.TabIndex = 24;
             // 
             // textBox3
@@ -1014,7 +1082,7 @@
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox3.Size = new System.Drawing.Size(300, 306);
+            this.textBox3.Size = new System.Drawing.Size(300, 323);
             this.textBox3.TabIndex = 9;
             // 
             // textBox4
@@ -1024,7 +1092,7 @@
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
             this.textBox4.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox4.Size = new System.Drawing.Size(300, 306);
+            this.textBox4.Size = new System.Drawing.Size(300, 323);
             this.textBox4.TabIndex = 10;
             // 
             // tableLayoutPanel3
@@ -1040,15 +1108,15 @@
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.1282F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 69.8718F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(408, 312);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(408, 329);
             this.tableLayoutPanel3.TabIndex = 11;
             // 
             // textBox2
             // 
             this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(3, 96);
+            this.textBox2.Location = new System.Drawing.Point(3, 102);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(402, 213);
+            this.textBox2.Size = new System.Drawing.Size(402, 224);
             this.textBox2.TabIndex = 28;
             this.textBox2.Text = "";
             this.textBox2.WordWrap = false;
@@ -1062,19 +1130,8 @@
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(402, 87);
+            this.textBox1.Size = new System.Drawing.Size(402, 93);
             this.textBox1.TabIndex = 4;
-            // 
-            // buttonSalvaImpostazioni
-            // 
-            this.buttonSalvaImpostazioni.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSalvaImpostazioni.Location = new System.Drawing.Point(898, 310);
-            this.buttonSalvaImpostazioni.Name = "buttonSalvaImpostazioni";
-            this.buttonSalvaImpostazioni.Size = new System.Drawing.Size(122, 23);
-            this.buttonSalvaImpostazioni.TabIndex = 20;
-            this.buttonSalvaImpostazioni.Text = "Salva Impostazioni";
-            this.buttonSalvaImpostazioni.UseVisualStyleBackColor = true;
-            this.buttonSalvaImpostazioni.Click += new System.EventHandler(this.SalvaImpostazioni);
             // 
             // tabGrafico
             // 
@@ -1168,6 +1225,324 @@
             this.dataGridVetture.Size = new System.Drawing.Size(1022, 648);
             this.dataGridVetture.TabIndex = 8;
             this.dataGridVetture.Visible = false;
+            // 
+            // tabGrigliaFiltrata
+            // 
+            this.tabGrigliaFiltrata.Controls.Add(this.advancedDataGridView1);
+            this.tabGrigliaFiltrata.Location = new System.Drawing.Point(4, 22);
+            this.tabGrigliaFiltrata.Name = "tabGrigliaFiltrata";
+            this.tabGrigliaFiltrata.Padding = new System.Windows.Forms.Padding(3);
+            this.tabGrigliaFiltrata.Size = new System.Drawing.Size(1028, 654);
+            this.tabGrigliaFiltrata.TabIndex = 5;
+            this.tabGrigliaFiltrata.Text = "Griglia";
+            this.tabGrigliaFiltrata.UseVisualStyleBackColor = true;
+            // 
+            // advancedDataGridView1
+            // 
+            this.advancedDataGridView1.AllowUserToAddRows = false;
+            this.advancedDataGridView1.AllowUserToDeleteRows = false;
+            this.advancedDataGridView1.AutoGenerateColumns = false;
+            this.advancedDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.advancedDataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.advancedDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.advancedDataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.idVetturaDataGridViewTextBoxColumn,
+            this.matricolaDataGridViewTextBoxColumn,
+            this.routeIdDataGridViewTextBoxColumn,
+            this.lineaDataGridViewTextBoxColumn,
+            this.gestoreDataGridViewTextBoxColumn,
+            this.directionIdDataGridViewTextBoxColumn,
+            this.currentStopSequenceDataGridViewTextBoxColumn,
+            this.congestionLevelDataGridViewTextBoxColumn,
+            this.OccupancyStatus,
+            this.tripIdDataGridViewTextBoxColumn,
+            this.primaVoltaDataGridViewTextBoxColumn,
+            this.ultimaVoltaDataGridViewTextBoxColumn,
+            this.rimessaDataGridViewTextBoxColumn,
+            this.euroDataGridViewTextBoxColumn,
+            this.modelloDataGridViewTextBoxColumn,
+            this.latitudeDataGridViewTextBoxColumn1,
+            this.longitudeDataGridViewTextBoxColumn1});
+            this.advancedDataGridView1.DataSource = this.extendedVehicleInfoBindingSource;
+            this.advancedDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.advancedDataGridView1.FilterAndSortEnabled = true;
+            this.advancedDataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.advancedDataGridView1.Name = "advancedDataGridView1";
+            this.advancedDataGridView1.ReadOnly = true;
+            this.advancedDataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.advancedDataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
+            this.advancedDataGridView1.Size = new System.Drawing.Size(1022, 648);
+            this.advancedDataGridView1.TabIndex = 0;
+            this.advancedDataGridView1.SortStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.SortEventArgs>(this.AdvancedDataGridView1_SortStringChanged);
+            this.advancedDataGridView1.FilterStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.FilterEventArgs>(this.AdvancedDataGridView1_FilterStringChanged);
+            // 
+            // OccupancyStatus
+            // 
+            this.OccupancyStatus.DataPropertyName = "OccupancyStatus";
+            this.OccupancyStatus.HeaderText = "OccupancyStatus";
+            this.OccupancyStatus.MinimumWidth = 22;
+            this.OccupancyStatus.Name = "OccupancyStatus";
+            this.OccupancyStatus.ReadOnly = true;
+            this.OccupancyStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.OccupancyStatus.ToolTipText = "Caso peggiore rilevato";
+            // 
+            // tabMonitoraggio
+            // 
+            this.tabMonitoraggio.Controls.Add(this.dataGridViolazioni);
+            this.tabMonitoraggio.Location = new System.Drawing.Point(4, 22);
+            this.tabMonitoraggio.Name = "tabMonitoraggio";
+            this.tabMonitoraggio.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMonitoraggio.Size = new System.Drawing.Size(1028, 654);
+            this.tabMonitoraggio.TabIndex = 4;
+            this.tabMonitoraggio.Text = "Monitoraggio Linee";
+            this.tabMonitoraggio.UseVisualStyleBackColor = true;
+            // 
+            // dataGridViolazioni
+            // 
+            this.dataGridViolazioni.AllowUserToAddRows = false;
+            this.dataGridViolazioni.AllowUserToDeleteRows = false;
+            this.dataGridViolazioni.AllowUserToOrderColumns = true;
+            this.dataGridViolazioni.AutoGenerateColumns = false;
+            this.dataGridViolazioni.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViolazioni.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViolazioni.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn25,
+            this.giornoDataGridViewTextBoxColumn,
+            this.daDataGridViewTextBoxColumn,
+            this.aDataGridViewTextBoxColumn,
+            this.tempoBonusDataGridViewTextBoxColumn,
+            this.vetturePrevisteDataGridViewTextBoxColumn,
+            this.vettureRilevateDataGridViewTextBoxColumn,
+            this.oraPrimaViolazioneDataGridViewTextBoxColumn,
+            this.oraUltimaViolazioneDataGridViewTextBoxColumn});
+            this.dataGridViolazioni.DataSource = this.lineaMonitorataBindingSource;
+            this.dataGridViolazioni.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViolazioni.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViolazioni.Name = "dataGridViolazioni";
+            this.dataGridViolazioni.ReadOnly = true;
+            this.dataGridViolazioni.Size = new System.Drawing.Size(1022, 648);
+            this.dataGridViolazioni.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(1053, 471);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(45, 13);
+            this.label1.TabIndex = 43;
+            this.label1.Text = "# ATAC";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelPonderatiATAC
+            // 
+            this.labelPonderatiATAC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelPonderatiATAC.Location = new System.Drawing.Point(1121, 470);
+            this.labelPonderatiATAC.Name = "labelPonderatiATAC";
+            this.labelPonderatiATAC.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelPonderatiATAC.Size = new System.Drawing.Size(40, 13);
+            this.labelPonderatiATAC.TabIndex = 44;
+            this.labelPonderatiATAC.Text = "- -";
+            this.labelPonderatiATAC.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label22
+            // 
+            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(1053, 498);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(37, 13);
+            this.label22.TabIndex = 45;
+            this.label22.Text = "# TPL";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelPonderatiTPL
+            // 
+            this.labelPonderatiTPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelPonderatiTPL.Location = new System.Drawing.Point(1121, 498);
+            this.labelPonderatiTPL.Name = "labelPonderatiTPL";
+            this.labelPonderatiTPL.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelPonderatiTPL.Size = new System.Drawing.Size(40, 13);
+            this.labelPonderatiTPL.TabIndex = 46;
+            this.labelPonderatiTPL.Text = "- -";
+            this.labelPonderatiTPL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label21
+            // 
+            this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(1068, 175);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(29, 13);
+            this.label21.TabIndex = 52;
+            this.label21.Text = "BUS";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelBUS
+            // 
+            this.labelBUS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelBUS.Location = new System.Drawing.Point(1121, 175);
+            this.labelBUS.Name = "labelBUS";
+            this.labelBUS.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelBUS.Size = new System.Drawing.Size(40, 13);
+            this.labelBUS.TabIndex = 51;
+            this.labelBUS.Text = "0";
+            this.labelBUS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelTRAM
+            // 
+            this.labelTRAM.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTRAM.Location = new System.Drawing.Point(1121, 190);
+            this.labelTRAM.Name = "labelTRAM";
+            this.labelTRAM.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelTRAM.Size = new System.Drawing.Size(40, 13);
+            this.labelTRAM.TabIndex = 53;
+            this.labelTRAM.Text = "0";
+            this.labelTRAM.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label28
+            // 
+            this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(1068, 190);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(38, 13);
+            this.label28.TabIndex = 54;
+            this.label28.Text = "TRAM";
+            this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label29
+            // 
+            this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(1068, 205);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(52, 13);
+            this.label29.TabIndex = 56;
+            this.label29.Text = "FILOBUS";
+            this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelFILOBUS
+            // 
+            this.labelFILOBUS.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelFILOBUS.Location = new System.Drawing.Point(1121, 205);
+            this.labelFILOBUS.Name = "labelFILOBUS";
+            this.labelFILOBUS.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelFILOBUS.Size = new System.Drawing.Size(40, 13);
+            this.labelFILOBUS.TabIndex = 55;
+            this.labelFILOBUS.Text = "0";
+            this.labelFILOBUS.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelFerro
+            // 
+            this.labelFerro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelFerro.Location = new System.Drawing.Point(1121, 250);
+            this.labelFerro.Name = "labelFerro";
+            this.labelFerro.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelFerro.Size = new System.Drawing.Size(40, 13);
+            this.labelFerro.TabIndex = 57;
+            this.labelFerro.Text = "0";
+            this.labelFerro.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelMiniBusEle
+            // 
+            this.labelMiniBusEle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelMiniBusEle.Location = new System.Drawing.Point(1121, 220);
+            this.labelMiniBusEle.Name = "labelMiniBusEle";
+            this.labelMiniBusEle.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelMiniBusEle.Size = new System.Drawing.Size(40, 13);
+            this.labelMiniBusEle.TabIndex = 55;
+            this.labelMiniBusEle.Text = "0";
+            this.labelMiniBusEle.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label25
+            // 
+            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(1068, 220);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(65, 13);
+            this.label25.TabIndex = 56;
+            this.label25.Text = "MiniBus Elet";
+            this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelFurgoncino
+            // 
+            this.labelFurgoncino.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelFurgoncino.Location = new System.Drawing.Point(1121, 235);
+            this.labelFurgoncino.Name = "labelFurgoncino";
+            this.labelFurgoncino.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelFurgoncino.Size = new System.Drawing.Size(40, 13);
+            this.labelFurgoncino.TabIndex = 55;
+            this.labelFurgoncino.Text = "0";
+            this.labelFurgoncino.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // label27
+            // 
+            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(1068, 235);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(60, 13);
+            this.label27.TabIndex = 56;
+            this.label27.Text = "Furgoncino";
+            this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label26
+            // 
+            this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label26.AutoSize = true;
+            this.label26.BackColor = System.Drawing.Color.Transparent;
+            this.label26.Font = new System.Drawing.Font("Marlett", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(1096, 248);
+            this.label26.Margin = new System.Windows.Forms.Padding(0);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(11, 14);
+            this.label26.TabIndex = 29;
+            this.label26.Text = "*";
+            this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTipFeedTrip.SetToolTip(this.label26, "La categoria FERRO include, se presenti nel feed, le informazioni relative a:\r\n- " +
+        "le linee della metro\r\n- Roma Lido\r\n- Roma Viterbo\r\n- Roma Giardinetti\r\n");
+            // 
+            // label30
+            // 
+            this.label30.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label30.AutoSize = true;
+            this.label30.BackColor = System.Drawing.Color.Transparent;
+            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label30.Location = new System.Drawing.Point(1141, 445);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(12, 13);
+            this.label30.TabIndex = 29;
+            this.label30.Text = "*";
+            this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label31
+            // 
+            this.label31.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label31.AutoSize = true;
+            this.label31.BackColor = System.Drawing.Color.Transparent;
+            this.label31.Font = new System.Drawing.Font("Marlett", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.Location = new System.Drawing.Point(1092, 264);
+            this.label31.Margin = new System.Windows.Forms.Padding(0);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(11, 14);
+            this.label31.TabIndex = 29;
+            this.label31.Text = "*";
+            this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTipFeedTrip.SetToolTip(this.label31, "Bus Atac in servizio, ma non ancora catalogati.\r\nNei prossimi giorni verifica se " +
+        "sono presenti dei file di configurazione aggiornati.");
+            // 
+            // labelAltro
+            // 
+            this.labelAltro.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelAltro.Location = new System.Drawing.Point(1121, 265);
+            this.labelAltro.Name = "labelAltro";
+            this.labelAltro.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelAltro.Size = new System.Drawing.Size(40, 13);
+            this.labelAltro.TabIndex = 57;
+            this.labelAltro.Text = "0";
+            this.labelAltro.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // dataGridViewTextBoxColumn11
             // 
@@ -1285,55 +1660,6 @@
             // 
             this.extendedVehicleInfoBindingSource.DataSource = typeof(AtacFeed.ExtendedVehicleInfo);
             // 
-            // tabGrigliaFiltrata
-            // 
-            this.tabGrigliaFiltrata.Controls.Add(this.advancedDataGridView1);
-            this.tabGrigliaFiltrata.Location = new System.Drawing.Point(4, 22);
-            this.tabGrigliaFiltrata.Name = "tabGrigliaFiltrata";
-            this.tabGrigliaFiltrata.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGrigliaFiltrata.Size = new System.Drawing.Size(1028, 654);
-            this.tabGrigliaFiltrata.TabIndex = 5;
-            this.tabGrigliaFiltrata.Text = "Griglia";
-            this.tabGrigliaFiltrata.UseVisualStyleBackColor = true;
-            // 
-            // advancedDataGridView1
-            // 
-            this.advancedDataGridView1.AllowUserToAddRows = false;
-            this.advancedDataGridView1.AllowUserToDeleteRows = false;
-            this.advancedDataGridView1.AutoGenerateColumns = false;
-            this.advancedDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.advancedDataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.advancedDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.advancedDataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idVetturaDataGridViewTextBoxColumn,
-            this.matricolaDataGridViewTextBoxColumn,
-            this.routeIdDataGridViewTextBoxColumn,
-            this.lineaDataGridViewTextBoxColumn,
-            this.gestoreDataGridViewTextBoxColumn,
-            this.directionIdDataGridViewTextBoxColumn,
-            this.currentStopSequenceDataGridViewTextBoxColumn,
-            this.congestionLevelDataGridViewTextBoxColumn,
-            this.tripIdDataGridViewTextBoxColumn,
-            this.primaVoltaDataGridViewTextBoxColumn,
-            this.ultimaVoltaDataGridViewTextBoxColumn,
-            this.rimessaDataGridViewTextBoxColumn,
-            this.euroDataGridViewTextBoxColumn,
-            this.modelloDataGridViewTextBoxColumn,
-            this.latitudeDataGridViewTextBoxColumn1,
-            this.longitudeDataGridViewTextBoxColumn1});
-            this.advancedDataGridView1.DataSource = this.extendedVehicleInfoBindingSource;
-            this.advancedDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.advancedDataGridView1.FilterAndSortEnabled = true;
-            this.advancedDataGridView1.Location = new System.Drawing.Point(3, 3);
-            this.advancedDataGridView1.Name = "advancedDataGridView1";
-            this.advancedDataGridView1.ReadOnly = true;
-            this.advancedDataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.advancedDataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            this.advancedDataGridView1.Size = new System.Drawing.Size(1022, 648);
-            this.advancedDataGridView1.TabIndex = 0;
-            this.advancedDataGridView1.SortStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.SortEventArgs>(this.AdvancedDataGridView1_SortStringChanged);
-            this.advancedDataGridView1.FilterStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.FilterEventArgs>(this.AdvancedDataGridView1_FilterStringChanged);
-            // 
             // idVetturaDataGridViewTextBoxColumn
             // 
             this.idVetturaDataGridViewTextBoxColumn.DataPropertyName = "IdVettura";
@@ -1400,11 +1726,14 @@
             // congestionLevelDataGridViewTextBoxColumn
             // 
             this.congestionLevelDataGridViewTextBoxColumn.DataPropertyName = "CongestionLevel";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.congestionLevelDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             this.congestionLevelDataGridViewTextBoxColumn.HeaderText = "CongestionLevel";
             this.congestionLevelDataGridViewTextBoxColumn.MinimumWidth = 22;
             this.congestionLevelDataGridViewTextBoxColumn.Name = "congestionLevelDataGridViewTextBoxColumn";
             this.congestionLevelDataGridViewTextBoxColumn.ReadOnly = true;
             this.congestionLevelDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.congestionLevelDataGridViewTextBoxColumn.Visible = false;
             // 
             // tripIdDataGridViewTextBoxColumn
             // 
@@ -1478,43 +1807,6 @@
             this.longitudeDataGridViewTextBoxColumn1.ReadOnly = true;
             this.longitudeDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
-            // tabMonitoraggio
-            // 
-            this.tabMonitoraggio.Controls.Add(this.dataGridViolazioni);
-            this.tabMonitoraggio.Location = new System.Drawing.Point(4, 22);
-            this.tabMonitoraggio.Name = "tabMonitoraggio";
-            this.tabMonitoraggio.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMonitoraggio.Size = new System.Drawing.Size(1028, 654);
-            this.tabMonitoraggio.TabIndex = 4;
-            this.tabMonitoraggio.Text = "Monitoraggio Linee";
-            this.tabMonitoraggio.UseVisualStyleBackColor = true;
-            // 
-            // dataGridViolazioni
-            // 
-            this.dataGridViolazioni.AllowUserToAddRows = false;
-            this.dataGridViolazioni.AllowUserToDeleteRows = false;
-            this.dataGridViolazioni.AllowUserToOrderColumns = true;
-            this.dataGridViolazioni.AutoGenerateColumns = false;
-            this.dataGridViolazioni.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViolazioni.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViolazioni.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.dataGridViewTextBoxColumn25,
-            this.giornoDataGridViewTextBoxColumn,
-            this.daDataGridViewTextBoxColumn,
-            this.aDataGridViewTextBoxColumn,
-            this.tempoBonusDataGridViewTextBoxColumn,
-            this.vetturePrevisteDataGridViewTextBoxColumn,
-            this.vettureRilevateDataGridViewTextBoxColumn,
-            this.oraPrimaViolazioneDataGridViewTextBoxColumn,
-            this.oraUltimaViolazioneDataGridViewTextBoxColumn});
-            this.dataGridViolazioni.DataSource = this.lineaMonitorataBindingSource;
-            this.dataGridViolazioni.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViolazioni.Location = new System.Drawing.Point(3, 3);
-            this.dataGridViolazioni.Name = "dataGridViolazioni";
-            this.dataGridViolazioni.ReadOnly = true;
-            this.dataGridViolazioni.Size = new System.Drawing.Size(1022, 648);
-            this.dataGridViolazioni.TabIndex = 0;
-            // 
             // dataGridViewTextBoxColumn25
             // 
             this.dataGridViewTextBoxColumn25.DataPropertyName = "Linea";
@@ -1583,56 +1875,29 @@
             this.lineaMonitorataBindingSource.AllowNew = false;
             this.lineaMonitorataBindingSource.DataSource = typeof(AtacFeed.LineaMonitorata);
             // 
-            // label1
-            // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1050, 357);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 13);
-            this.label1.TabIndex = 43;
-            this.label1.Text = "# ATAC";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelPonderatiATAC
-            // 
-            this.labelPonderatiATAC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelPonderatiATAC.Location = new System.Drawing.Point(1118, 356);
-            this.labelPonderatiATAC.Name = "labelPonderatiATAC";
-            this.labelPonderatiATAC.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelPonderatiATAC.Size = new System.Drawing.Size(40, 13);
-            this.labelPonderatiATAC.TabIndex = 44;
-            this.labelPonderatiATAC.Text = "- -";
-            this.labelPonderatiATAC.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // label22
-            // 
-            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(1050, 384);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(37, 13);
-            this.label22.TabIndex = 45;
-            this.label22.Text = "# TPL";
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelPonderatiTPL
-            // 
-            this.labelPonderatiTPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelPonderatiTPL.Location = new System.Drawing.Point(1118, 384);
-            this.labelPonderatiTPL.Name = "labelPonderatiTPL";
-            this.labelPonderatiTPL.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelPonderatiTPL.Size = new System.Drawing.Size(40, 13);
-            this.labelPonderatiTPL.TabIndex = 46;
-            this.labelPonderatiTPL.Text = "- -";
-            this.labelPonderatiTPL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
             // FormGTFS_RSM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1169, 705);
+            this.Controls.Add(this.label31);
+            this.Controls.Add(this.label30);
+            this.Controls.Add(this.label23);
+            this.Controls.Add(this.label33);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.labelAltro);
+            this.Controls.Add(this.labelFerro);
+            this.Controls.Add(this.label27);
+            this.Controls.Add(this.labelFurgoncino);
+            this.Controls.Add(this.label25);
+            this.Controls.Add(this.labelMiniBusEle);
+            this.Controls.Add(this.label29);
+            this.Controls.Add(this.labelFILOBUS);
+            this.Controls.Add(this.label28);
+            this.Controls.Add(this.labelTRAM);
+            this.Controls.Add(this.label21);
+            this.Controls.Add(this.labelBUS);
             this.Controls.Add(this.labelVer);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button4);
@@ -1646,8 +1911,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.labelTotaleMatricolaATAC);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.labelWait);
-            this.Controls.Add(this.label16);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.labelTot);
@@ -1668,6 +1931,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.labelTotaleIdVettura);
             this.Controls.Add(this.buttonPlayPause);
+            this.Controls.Add(this.label26);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormGTFS_RSM";
             this.Text = "Monitoraggio Trasporti  Roma";
@@ -1691,11 +1955,11 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tabGriglia.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVetture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).EndInit();
             this.tabGrigliaFiltrata.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView1)).EndInit();
             this.tabMonitoraggio.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViolazioni)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lineaMonitorataBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1725,8 +1989,6 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label labelAtac;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label labelWait;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.TabPage tabGrafico;
         private System.Windows.Forms.TabPage tabImpostazioni;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
@@ -1840,6 +2102,14 @@
         private System.Windows.Forms.Label labelVer;
         private System.Windows.Forms.TabPage tabGrigliaFiltrata;
         private Zuby.ADGV.AdvancedDataGridView advancedDataGridView1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelPonderatiATAC;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label labelPonderatiTPL;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.CheckBox checkTuttoPercorso;
+        private System.Windows.Forms.RichTextBox textBox2;
+        private System.Windows.Forms.CheckBox checkAnomalieGTFS;
         private System.Windows.Forms.DataGridViewTextBoxColumn idVetturaDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn matricolaDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn routeIdDataGridViewTextBoxColumn;
@@ -1848,6 +2118,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn directionIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn currentStopSequenceDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn congestionLevelDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OccupancyStatus;
         private System.Windows.Forms.DataGridViewTextBoxColumn tripIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn primaVoltaDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ultimaVoltaDataGridViewTextBoxColumn;
@@ -1856,14 +2127,25 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn modelloDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn latitudeDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn longitudeDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label labelPonderatiATAC;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label labelPonderatiTPL;
-        private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.CheckBox checkTuttoPercorso;
-        private System.Windows.Forms.RichTextBox textBox2;
-        private System.Windows.Forms.CheckBox checkAnomalie;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label labelBUS;
+        private System.Windows.Forms.Label labelTRAM;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label labelFILOBUS;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label labelFerro;
+        private System.Windows.Forms.Label labelMiniBusEle;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label labelFurgoncino;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.CheckBox checkSovraffollamento;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label labelAltro;
+        private System.Windows.Forms.Label label33;
     }
 }
 

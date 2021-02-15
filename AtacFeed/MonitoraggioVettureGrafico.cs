@@ -13,6 +13,5 @@ namespace AtacFeed
         public int Rilevate { get; set; }
         public int Aggiunte { get; set; }
         public int Tolte { get; set; }
-
     }
 }

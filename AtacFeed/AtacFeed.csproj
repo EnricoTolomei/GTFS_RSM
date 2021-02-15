@@ -27,7 +27,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.16.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.20.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -175,6 +175,7 @@
     <Compile Include="AlertDaControllare.cs" />
     <Compile Include="CriterioMediaPonderata.cs" />
     <Compile Include="DettagliVettura.cs" />
+    <Compile Include="ErroriGTFS.cs" />
     <Compile Include="ExtendedVehicleInfo.cs" />
     <Compile Include="FormGTFS_RSM.cs">
       <SubType>Form</SubType>
@@ -183,6 +184,7 @@
       <DependentUpon>FormGTFS_RSM.cs</DependentUpon>
     </Compile>
     <Compile Include="LineaAgenzia.cs" />
+    <Compile Include="RunTimeValueAlert.cs" />
     <Compile Include="UpdateBox.cs">
       <SubType>Form</SubType>
     </Compile>

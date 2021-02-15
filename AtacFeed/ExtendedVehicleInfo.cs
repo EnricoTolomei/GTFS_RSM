@@ -1,6 +1,5 @@
 ﻿using CsvHelper.Configuration.Attributes;
 using System;
-using System.ComponentModel;
 using TransitRealtime;
 
 namespace AtacFeed
@@ -70,11 +69,14 @@ namespace AtacFeed
         [Index(17)]
         public float Longitude { get; set; }
 
-        [Index(18)]       
+        [Index(18)]
         public VehiclePosition.VehicleStopStatus InTransitTo { get; set; }
 
+        [Index(19)]
+        [Ignore]
+        public int TipoMezzoTrasporto { get; set; }
 
-        public ExtendedVehicleInfo(string idVettura, string matricola, string licensePlate, string routeId, string linea, string gestore, uint? directionId, uint currentStopSequence, VehiclePosition.CongestionLevel congestionLevel, VehiclePosition.OccupancyStatus occupancyStatus, string tripId, bool strict, DateTime data, string rimessa, string euro, string modello, float latitude , float longitude, VehiclePosition.VehicleStopStatus inTransitTo, bool superStrictMode=false)
+        public ExtendedVehicleInfo(string idVettura, string matricola, string licensePlate, string routeId, string linea, string gestore, uint? directionId, uint currentStopSequence, VehiclePosition.CongestionLevel congestionLevel, VehiclePosition.OccupancyStatus occupancyStatus, string tripId, bool strict, DateTime data, string rimessa, string euro, string modello, float latitude, float longitude, VehiclePosition.VehicleStopStatus inTransitTo, int tipoMezzoTrasporto, bool superStrictMode = false)
         {
             IdVettura = idVettura;
             Matricola = matricola;
@@ -97,6 +99,7 @@ namespace AtacFeed
             Longitude = longitude;
             InTransitTo = inTransitTo;
             SuperStrictMode = superStrictMode;
+            TipoMezzoTrasporto = tipoMezzoTrasporto;
         }
 
         public bool Equals(ExtendedVehicleInfo other)
@@ -121,48 +124,6 @@ namespace AtacFeed
                 return (Matricola, TripId).GetHashCode();
             else
                 return Matricola.GetHashCode();
-        }
-    }
-
-    public class ErroriGTFS : ExtendedVehicleInfo
-    {
-        [Index(1)]
-        public new string Matricola { get => base.Matricola; set => base.Matricola = value; }
-
-        [Index(2)]
-        public new string Linea { get => base.Linea; set => base.Linea = value; }
-
-        [Index(3)]
-        [Description("Ora Violazione")]
-        public new DateTime PrimaVolta { get => base.PrimaVolta; set => base.PrimaVolta = value; }
-
-        [Index(3)]
-        [Description("Fermata")]
-        public new uint CurrentStopSequence { get => base.CurrentStopSequence; set => base.CurrentStopSequence = value; }
-
-        [Index(4)]
-        [Description("Fermate non monitorate")]
-        public int Delta { get; set; }        
-        
-
-        public ErroriGTFS(ExtendedVehicleInfo e, int delta) : base(e.IdVettura, e.Matricola, e.LicensePlate, e.RouteId, e.Linea, e.Gestore, e.DirectionId, e.CurrentStopSequence, e.CongestionLevel, e.OccupancyStatus, e.TripId, true, e.PrimaVolta, e.Rimessa, e.Euro, e.Modello, e.Latitude, e.Longitude, e.InTransitTo, false)
-        {
-            this.Delta = delta;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
-        public override string ToString()
-        {
-            return base.ToString();
         }
     }
 }

@@ -17,7 +17,6 @@ namespace AtacFeed
         {
             this.OraPrimaViolazione = oraPrimaViolazione;
             this.OraUltimaViolazione = oraUltimaViolazione;
-            //this.RegolaAlert = RegolaAlert;
             this.Violazione = vetturaSbagliata;
             this.Linea = regolaAlert.Linea;
             this.Giorno = regolaAlert.Giorno;
@@ -27,9 +26,9 @@ namespace AtacFeed
             this.VetturaA = regolaAlert.VetturaA;
         }
 
-        public ViolazioneAlert(DateTime OraPrimaViolazione, DateTime? OraUltimaViolazione, string linea, string VetturaSbagliata)
+        public ViolazioneAlert(DateTime oraPrimaViolazione, DateTime? OraUltimaViolazione, string linea, string VetturaSbagliata)
         {
-            this.OraPrimaViolazione = OraPrimaViolazione;
+            this.OraPrimaViolazione = oraPrimaViolazione;
             this.OraUltimaViolazione = OraUltimaViolazione;
             this.Linea = linea;
             this.Giorno = "";

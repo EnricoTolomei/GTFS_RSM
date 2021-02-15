@@ -9,7 +9,7 @@
       <Value Profile="(Default)">https://romamobilita.it/sites/default/files/rome_rtgtfs_trip_updates_feed.pb</Value>
     </Setting>
     <Setting Name="DeltaTSec" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">60</Value>
+      <Value Profile="(Default)">30</Value>
     </Setting>
     <Setting Name="Duplicati" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
@@ -57,6 +57,9 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="CheckAnomalie" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CheckSovraffollamento" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

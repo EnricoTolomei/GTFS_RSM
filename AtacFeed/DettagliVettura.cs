@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AtacFeed
+﻿namespace AtacFeed
 {
     public class DettagliVettura
     {
@@ -13,6 +7,6 @@ namespace AtacFeed
         public string Euro { get; set; }
         public string Rimessa { get; set; }
         public string Modello { get; set; }
-        
+        public int? TipoMezzoTrasporto { get; set; }
     }
 }

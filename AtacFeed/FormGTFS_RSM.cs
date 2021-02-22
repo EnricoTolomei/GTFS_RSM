@@ -107,7 +107,7 @@ namespace AtacFeed
                             resultSelector: (o2, i2) => new { o2, DettagliVettura = i2.FirstOrDefault() })
                         .Select(x => new ExtendedVehicleInfo(
                                         x.o2.Vehicle.Vehicle.Id,
-                                        x.o2.Vehicle.Vehicle.Label,
+                                        x.o2.Vehicle.Vehicle.Label.Trim(),
                                         x.o2.Vehicle.Vehicle.LicensePlate,
                                         x.o2.Vehicle.Trip?.RouteId,
                                         x.o2.Linea?.Route.ShortName,
@@ -314,20 +314,25 @@ namespace AtacFeed
 
                     IEnumerable <(string Matricola, int TipoMezzoTrasporto)> elencoAggregatoTPL = 
                         ElencoAggregatoVetture
-                        .Where(i => i.TipoMezzoTrasporto == 3 || i.TipoMezzoTrasporto == 4 || i.TipoMezzoTrasporto == 3)
+                        .Where(i => i.TipoMezzoTrasporto == 3 || i.TipoMezzoTrasporto == 4 || i.TipoMezzoTrasporto == -3)
                         .Select(i => (Matricola: i.Matricola.Trim(), i.TipoMezzoTrasporto))
                         .Distinct();
                     int TotaleMatricolaTPL = elencoAggregatoTPL.Count();
 
                     int TotaleIdVettura = ElencoAggregatoVetture.Select(i => i.IdVettura).Distinct().Count();
 
-                    int rilevatoBusAtac = elencoVetture.Where(x => x.TipoMezzoTrasporto == 0).Count();
+                    int rilevatoBusAtac = elencoVetture.Where(x => x.TipoMezzoTrasporto == 0).Count();                    
                     int rilevatoTramAtac = elencoVetture.Where(x => x.TipoMezzoTrasporto == 1).Count();
                     int rilevatoFilobusAtac = elencoVetture.Where(x => x.TipoMezzoTrasporto == 2).Count();
                     int rilevatoMinibusElettrici = elencoVetture.Where(x => x.TipoMezzoTrasporto == 5).Count();
                     int rilevatoFurgoncini = elencoVetture.Where(x => x.TipoMezzoTrasporto == 6).Count();
                     int rilevatoFerro = elencoVetture.Where(x => x.TipoMezzoTrasporto == -1).Count();
                     int rilevatoAltroAtac = elencoVetture.Where(x => x.TipoMezzoTrasporto == -2).Count();
+
+                    int rilevatoBusTpl = elencoVetture.Where(x => x.TipoMezzoTrasporto == 3).Count();
+                    int rilevatoPullmanTpl = elencoVetture.Where(x => x.TipoMezzoTrasporto == 4).Count();
+                    int rilevatoAltroTpl = elencoVetture.Where(x => x.TipoMezzoTrasporto == -3).Count();
+
                     //ElencoAggregatoVetture.Where(i => string.Equals(i.Gestore, "atac", StringComparison.OrdinalIgnoreCase)).Select(i => i.Matricola.Trim()).Distinct().Count() - TotaleMatricolaAtac;
 
 
@@ -336,13 +341,16 @@ namespace AtacFeed
 
                     labelTotaleIdVettura.Text = TotaleIdVettura.ToString();
                     labelTotaleMatricola.Text = TotaleMatricola.ToString();
-                    labelBUS.Text = rilevatoBusAtac.ToString();
-                    labelTRAM.Text = rilevatoTramAtac.ToString();
-                    labelFILOBUS.Text = rilevatoFilobusAtac.ToString();
-                    labelMiniBusEle.Text = rilevatoMinibusElettrici.ToString();
-                    labelFurgoncino.Text = rilevatoFurgoncini.ToString();
-                    labelFerro.Text = rilevatoFerro.ToString();
-                    labelAltro.Text = rilevatoAltroAtac.ToString();
+                    labelBusAtac.Text = rilevatoBusAtac.ToString();
+                    labelTramAtac.Text = rilevatoTramAtac.ToString();
+                    labelFilobusAtac.Text = rilevatoFilobusAtac.ToString();
+                    labelMiniBusEleAtac.Text = rilevatoMinibusElettrici.ToString();
+                    labelFurgoncinoAtac.Text = rilevatoFurgoncini.ToString();
+                    labelFerroAtac.Text = rilevatoFerro.ToString();
+                    labelAltroAtac.Text = rilevatoAltroAtac.ToString();
+                    labelBusTPL.Text = rilevatoBusTpl.ToString();
+                    labelPullmanTPL.Text = rilevatoPullmanTpl.ToString();
+                    labelAltroTpl.Text = rilevatoAltroTpl.ToString();
 
                     labelTotaleMatricolaATAC.Text = TotaleMatricolaAtac.ToString();
 
@@ -810,12 +818,12 @@ namespace AtacFeed
             labelTotaleMatricola.Text = "0";
             labelTotaleMatricolaATAC.Text = "0";
             labelTotaleMatricolaTPL.Text = "0";
-            labelFerro.Text = "0";
-            labelBUS.Text = "0";
-            labelTRAM.Text = "0";
-            labelFILOBUS.Text = "0";
-            labelMiniBusEle.Text =  "0";
-            labelFurgoncino.Text = "0";
+            labelFerroAtac.Text = "0";
+            labelBusAtac.Text = "0";
+            labelTramAtac.Text = "0";
+            labelFilobusAtac.Text = "0";
+            labelMiniBusEleAtac.Text =  "0";
+            labelFurgoncinoAtac.Text = "0";
 
 
             lblOraLettura.Text = "--:--:--";

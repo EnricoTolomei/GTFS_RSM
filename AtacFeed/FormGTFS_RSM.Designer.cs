@@ -117,54 +117,11 @@
             this.formsPlotAtac = new ScottPlot.FormsPlot();
             this.tabGriglia = new System.Windows.Forms.TabPage();
             this.dataGridVetture = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.latitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.longitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.extendedVehicleInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabGrigliaFiltrata = new System.Windows.Forms.TabPage();
             this.advancedDataGridView1 = new Zuby.ADGV.AdvancedDataGridView();
-            this.idVetturaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.matricolaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.routeIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lineaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gestoreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.directionIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.currentStopSequenceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.congestionLevelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OccupancyStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tripIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.primaVoltaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ultimaVoltaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rimessaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.euroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.modelloDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.latitudeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.longitudeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabMonitoraggio = new System.Windows.Forms.TabPage();
             this.dataGridViolazioni = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.giornoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.daDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.aDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tempoBonusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vetturePrevisteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.vettureRilevateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.oraPrimaViolazioneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.oraUltimaViolazioneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lineaMonitorataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.labelPonderatiATAC = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
@@ -189,6 +146,51 @@
             this.labelAltroTpl = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonPlayPause = new System.Windows.Forms.Button();
+            this.urlVehicleRiserva = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn24 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.latitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.longitudeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.extendedVehicleInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.idVetturaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.matricolaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.routeIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lineaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gestoreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.directionIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.currentStopSequenceDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.congestionLevelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tripIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.primaVoltaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ultimaVoltaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rimessaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.euroDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modelloDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.latitudeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.longitudeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.giornoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.daDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tempoBonusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vetturePrevisteDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.vettureRilevateDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oraPrimaViolazioneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.oraUltimaViolazioneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lineaMonitorataBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tabMainForm.SuspendLayout();
             this.tabImpostazioni.SuspendLayout();
             this.groupBoxExport.SuspendLayout();
@@ -202,11 +204,11 @@
             this.tableLayoutPanel2.SuspendLayout();
             this.tabGriglia.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVetture)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).BeginInit();
             this.tabGrigliaFiltrata.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView1)).BeginInit();
             this.tabMonitoraggio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViolazioni)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lineaMonitorataBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -503,7 +505,7 @@
             // checkFeedTrip
             // 
             this.checkFeedTrip.AutoSize = true;
-            this.checkFeedTrip.Location = new System.Drawing.Point(47, 63);
+            this.checkFeedTrip.Location = new System.Drawing.Point(51, 63);
             this.checkFeedTrip.Name = "checkFeedTrip";
             this.checkFeedTrip.Size = new System.Drawing.Size(71, 17);
             this.checkFeedTrip.TabIndex = 20;
@@ -986,6 +988,8 @@
             // 
             this.groupBoxServerRSM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxServerRSM.Controls.Add(this.urlVehicleRiserva);
+            this.groupBoxServerRSM.Controls.Add(this.label37);
             this.groupBoxServerRSM.Controls.Add(this.checkFeedTrip);
             this.groupBoxServerRSM.Controls.Add(this.label20);
             this.groupBoxServerRSM.Controls.Add(this.label6);
@@ -1007,7 +1011,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(63, 85);
+            this.label20.Location = new System.Drawing.Point(67, 85);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(55, 13);
             this.label20.TabIndex = 6;
@@ -1038,7 +1042,7 @@
             // 
             this.urlVehicle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.urlVehicle.Location = new System.Drawing.Point(124, 27);
+            this.urlVehicle.Location = new System.Drawing.Point(124, 17);
             this.urlVehicle.Name = "urlVehicle";
             this.urlVehicle.Size = new System.Drawing.Size(569, 20);
             this.urlVehicle.TabIndex = 1;
@@ -1046,7 +1050,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(49, 30);
+            this.label2.Location = new System.Drawing.Point(53, 20);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 13);
             this.label2.TabIndex = 7;
@@ -1269,122 +1273,6 @@
             this.dataGridVetture.TabIndex = 8;
             this.dataGridVetture.Visible = false;
             // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "IdVettura";
-            this.dataGridViewTextBoxColumn11.HeaderText = "IdVettura";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "Matricola";
-            this.dataGridViewTextBoxColumn12.HeaderText = "Matricola";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "RouteId";
-            this.dataGridViewTextBoxColumn13.HeaderText = "RouteId";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "Linea";
-            this.dataGridViewTextBoxColumn14.HeaderText = "Linea";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn15
-            // 
-            this.dataGridViewTextBoxColumn15.DataPropertyName = "Gestore";
-            this.dataGridViewTextBoxColumn15.HeaderText = "Gestore";
-            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
-            this.dataGridViewTextBoxColumn15.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn16
-            // 
-            this.dataGridViewTextBoxColumn16.DataPropertyName = "CurrentStopSequence";
-            this.dataGridViewTextBoxColumn16.HeaderText = "CurrentStopSequence";
-            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
-            this.dataGridViewTextBoxColumn16.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn17
-            // 
-            this.dataGridViewTextBoxColumn17.DataPropertyName = "CongestionLevel";
-            this.dataGridViewTextBoxColumn17.HeaderText = "CongestionLevel";
-            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
-            this.dataGridViewTextBoxColumn17.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn18
-            // 
-            this.dataGridViewTextBoxColumn18.DataPropertyName = "OccupancyStatus";
-            this.dataGridViewTextBoxColumn18.HeaderText = "OccupancyStatus";
-            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
-            this.dataGridViewTextBoxColumn18.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn19
-            // 
-            this.dataGridViewTextBoxColumn19.DataPropertyName = "TripId";
-            this.dataGridViewTextBoxColumn19.HeaderText = "TripId";
-            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
-            this.dataGridViewTextBoxColumn19.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn20
-            // 
-            this.dataGridViewTextBoxColumn20.DataPropertyName = "PrimaVolta";
-            this.dataGridViewTextBoxColumn20.HeaderText = "PrimaVolta";
-            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
-            this.dataGridViewTextBoxColumn20.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn21
-            // 
-            this.dataGridViewTextBoxColumn21.DataPropertyName = "UltimaVolta";
-            this.dataGridViewTextBoxColumn21.HeaderText = "UltimaVolta";
-            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
-            this.dataGridViewTextBoxColumn21.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn22
-            // 
-            this.dataGridViewTextBoxColumn22.DataPropertyName = "Rimessa";
-            this.dataGridViewTextBoxColumn22.HeaderText = "Rimessa";
-            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
-            this.dataGridViewTextBoxColumn22.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn23
-            // 
-            this.dataGridViewTextBoxColumn23.DataPropertyName = "Euro";
-            this.dataGridViewTextBoxColumn23.HeaderText = "Euro";
-            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
-            this.dataGridViewTextBoxColumn23.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn24
-            // 
-            this.dataGridViewTextBoxColumn24.DataPropertyName = "Modello";
-            this.dataGridViewTextBoxColumn24.HeaderText = "Modello";
-            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
-            this.dataGridViewTextBoxColumn24.ReadOnly = true;
-            // 
-            // latitudeDataGridViewTextBoxColumn
-            // 
-            this.latitudeDataGridViewTextBoxColumn.DataPropertyName = "Latitude";
-            this.latitudeDataGridViewTextBoxColumn.HeaderText = "Latitude";
-            this.latitudeDataGridViewTextBoxColumn.Name = "latitudeDataGridViewTextBoxColumn";
-            this.latitudeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // longitudeDataGridViewTextBoxColumn
-            // 
-            this.longitudeDataGridViewTextBoxColumn.DataPropertyName = "Longitude";
-            this.longitudeDataGridViewTextBoxColumn.HeaderText = "Longitude";
-            this.longitudeDataGridViewTextBoxColumn.Name = "longitudeDataGridViewTextBoxColumn";
-            this.longitudeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // extendedVehicleInfoBindingSource
-            // 
-            this.extendedVehicleInfoBindingSource.DataSource = typeof(AtacFeed.ExtendedVehicleInfo);
-            // 
             // tabGrigliaFiltrata
             // 
             this.tabGrigliaFiltrata.Controls.Add(this.advancedDataGridView1);
@@ -1435,81 +1323,6 @@
             this.advancedDataGridView1.SortStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.SortEventArgs>(this.AdvancedDataGridView1_SortStringChanged);
             this.advancedDataGridView1.FilterStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.FilterEventArgs>(this.AdvancedDataGridView1_FilterStringChanged);
             // 
-            // idVetturaDataGridViewTextBoxColumn
-            // 
-            this.idVetturaDataGridViewTextBoxColumn.DataPropertyName = "IdVettura";
-            this.idVetturaDataGridViewTextBoxColumn.HeaderText = "IdVettura";
-            this.idVetturaDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.idVetturaDataGridViewTextBoxColumn.Name = "idVetturaDataGridViewTextBoxColumn";
-            this.idVetturaDataGridViewTextBoxColumn.ReadOnly = true;
-            this.idVetturaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // matricolaDataGridViewTextBoxColumn
-            // 
-            this.matricolaDataGridViewTextBoxColumn.DataPropertyName = "Matricola";
-            this.matricolaDataGridViewTextBoxColumn.HeaderText = "Matricola";
-            this.matricolaDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.matricolaDataGridViewTextBoxColumn.Name = "matricolaDataGridViewTextBoxColumn";
-            this.matricolaDataGridViewTextBoxColumn.ReadOnly = true;
-            this.matricolaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // routeIdDataGridViewTextBoxColumn
-            // 
-            this.routeIdDataGridViewTextBoxColumn.DataPropertyName = "RouteId";
-            this.routeIdDataGridViewTextBoxColumn.HeaderText = "RouteId";
-            this.routeIdDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.routeIdDataGridViewTextBoxColumn.Name = "routeIdDataGridViewTextBoxColumn";
-            this.routeIdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.routeIdDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // lineaDataGridViewTextBoxColumn
-            // 
-            this.lineaDataGridViewTextBoxColumn.DataPropertyName = "Linea";
-            this.lineaDataGridViewTextBoxColumn.HeaderText = "Linea";
-            this.lineaDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.lineaDataGridViewTextBoxColumn.Name = "lineaDataGridViewTextBoxColumn";
-            this.lineaDataGridViewTextBoxColumn.ReadOnly = true;
-            this.lineaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // gestoreDataGridViewTextBoxColumn
-            // 
-            this.gestoreDataGridViewTextBoxColumn.DataPropertyName = "Gestore";
-            this.gestoreDataGridViewTextBoxColumn.HeaderText = "Gestore";
-            this.gestoreDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.gestoreDataGridViewTextBoxColumn.Name = "gestoreDataGridViewTextBoxColumn";
-            this.gestoreDataGridViewTextBoxColumn.ReadOnly = true;
-            this.gestoreDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // directionIdDataGridViewTextBoxColumn
-            // 
-            this.directionIdDataGridViewTextBoxColumn.DataPropertyName = "DirectionId";
-            this.directionIdDataGridViewTextBoxColumn.HeaderText = "DirectionId";
-            this.directionIdDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.directionIdDataGridViewTextBoxColumn.Name = "directionIdDataGridViewTextBoxColumn";
-            this.directionIdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.directionIdDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // currentStopSequenceDataGridViewTextBoxColumn
-            // 
-            this.currentStopSequenceDataGridViewTextBoxColumn.DataPropertyName = "CurrentStopSequence";
-            this.currentStopSequenceDataGridViewTextBoxColumn.HeaderText = "CurrentStopSequence";
-            this.currentStopSequenceDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.currentStopSequenceDataGridViewTextBoxColumn.Name = "currentStopSequenceDataGridViewTextBoxColumn";
-            this.currentStopSequenceDataGridViewTextBoxColumn.ReadOnly = true;
-            this.currentStopSequenceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // congestionLevelDataGridViewTextBoxColumn
-            // 
-            this.congestionLevelDataGridViewTextBoxColumn.DataPropertyName = "CongestionLevel";
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.congestionLevelDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            this.congestionLevelDataGridViewTextBoxColumn.HeaderText = "CongestionLevel";
-            this.congestionLevelDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.congestionLevelDataGridViewTextBoxColumn.Name = "congestionLevelDataGridViewTextBoxColumn";
-            this.congestionLevelDataGridViewTextBoxColumn.ReadOnly = true;
-            this.congestionLevelDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            this.congestionLevelDataGridViewTextBoxColumn.Visible = false;
-            // 
             // OccupancyStatus
             // 
             this.OccupancyStatus.DataPropertyName = "OccupancyStatus";
@@ -1519,78 +1332,6 @@
             this.OccupancyStatus.ReadOnly = true;
             this.OccupancyStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             this.OccupancyStatus.ToolTipText = "Caso peggiore rilevato";
-            // 
-            // tripIdDataGridViewTextBoxColumn
-            // 
-            this.tripIdDataGridViewTextBoxColumn.DataPropertyName = "TripId";
-            this.tripIdDataGridViewTextBoxColumn.HeaderText = "TripId";
-            this.tripIdDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.tripIdDataGridViewTextBoxColumn.Name = "tripIdDataGridViewTextBoxColumn";
-            this.tripIdDataGridViewTextBoxColumn.ReadOnly = true;
-            this.tripIdDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // primaVoltaDataGridViewTextBoxColumn
-            // 
-            this.primaVoltaDataGridViewTextBoxColumn.DataPropertyName = "PrimaVolta";
-            this.primaVoltaDataGridViewTextBoxColumn.HeaderText = "PrimaVolta";
-            this.primaVoltaDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.primaVoltaDataGridViewTextBoxColumn.Name = "primaVoltaDataGridViewTextBoxColumn";
-            this.primaVoltaDataGridViewTextBoxColumn.ReadOnly = true;
-            this.primaVoltaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // ultimaVoltaDataGridViewTextBoxColumn
-            // 
-            this.ultimaVoltaDataGridViewTextBoxColumn.DataPropertyName = "UltimaVolta";
-            this.ultimaVoltaDataGridViewTextBoxColumn.HeaderText = "UltimaVolta";
-            this.ultimaVoltaDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.ultimaVoltaDataGridViewTextBoxColumn.Name = "ultimaVoltaDataGridViewTextBoxColumn";
-            this.ultimaVoltaDataGridViewTextBoxColumn.ReadOnly = true;
-            this.ultimaVoltaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // rimessaDataGridViewTextBoxColumn
-            // 
-            this.rimessaDataGridViewTextBoxColumn.DataPropertyName = "Rimessa";
-            this.rimessaDataGridViewTextBoxColumn.HeaderText = "Rimessa";
-            this.rimessaDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.rimessaDataGridViewTextBoxColumn.Name = "rimessaDataGridViewTextBoxColumn";
-            this.rimessaDataGridViewTextBoxColumn.ReadOnly = true;
-            this.rimessaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // euroDataGridViewTextBoxColumn
-            // 
-            this.euroDataGridViewTextBoxColumn.DataPropertyName = "Euro";
-            this.euroDataGridViewTextBoxColumn.HeaderText = "Euro";
-            this.euroDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.euroDataGridViewTextBoxColumn.Name = "euroDataGridViewTextBoxColumn";
-            this.euroDataGridViewTextBoxColumn.ReadOnly = true;
-            this.euroDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // modelloDataGridViewTextBoxColumn
-            // 
-            this.modelloDataGridViewTextBoxColumn.DataPropertyName = "Modello";
-            this.modelloDataGridViewTextBoxColumn.HeaderText = "Modello";
-            this.modelloDataGridViewTextBoxColumn.MinimumWidth = 22;
-            this.modelloDataGridViewTextBoxColumn.Name = "modelloDataGridViewTextBoxColumn";
-            this.modelloDataGridViewTextBoxColumn.ReadOnly = true;
-            this.modelloDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // latitudeDataGridViewTextBoxColumn1
-            // 
-            this.latitudeDataGridViewTextBoxColumn1.DataPropertyName = "Latitude";
-            this.latitudeDataGridViewTextBoxColumn1.HeaderText = "Latitude";
-            this.latitudeDataGridViewTextBoxColumn1.MinimumWidth = 22;
-            this.latitudeDataGridViewTextBoxColumn1.Name = "latitudeDataGridViewTextBoxColumn1";
-            this.latitudeDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.latitudeDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // longitudeDataGridViewTextBoxColumn1
-            // 
-            this.longitudeDataGridViewTextBoxColumn1.DataPropertyName = "Longitude";
-            this.longitudeDataGridViewTextBoxColumn1.HeaderText = "Longitude";
-            this.longitudeDataGridViewTextBoxColumn1.MinimumWidth = 22;
-            this.longitudeDataGridViewTextBoxColumn1.Name = "longitudeDataGridViewTextBoxColumn1";
-            this.longitudeDataGridViewTextBoxColumn1.ReadOnly = true;
-            this.longitudeDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // tabMonitoraggio
             // 
@@ -1628,74 +1369,6 @@
             this.dataGridViolazioni.ReadOnly = true;
             this.dataGridViolazioni.Size = new System.Drawing.Size(1022, 648);
             this.dataGridViolazioni.TabIndex = 0;
-            // 
-            // dataGridViewTextBoxColumn25
-            // 
-            this.dataGridViewTextBoxColumn25.DataPropertyName = "Linea";
-            this.dataGridViewTextBoxColumn25.HeaderText = "Linea";
-            this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
-            this.dataGridViewTextBoxColumn25.ReadOnly = true;
-            // 
-            // giornoDataGridViewTextBoxColumn
-            // 
-            this.giornoDataGridViewTextBoxColumn.DataPropertyName = "Giorno";
-            this.giornoDataGridViewTextBoxColumn.HeaderText = "Giorno";
-            this.giornoDataGridViewTextBoxColumn.Name = "giornoDataGridViewTextBoxColumn";
-            this.giornoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // daDataGridViewTextBoxColumn
-            // 
-            this.daDataGridViewTextBoxColumn.DataPropertyName = "Da";
-            this.daDataGridViewTextBoxColumn.HeaderText = "Da";
-            this.daDataGridViewTextBoxColumn.Name = "daDataGridViewTextBoxColumn";
-            this.daDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // aDataGridViewTextBoxColumn
-            // 
-            this.aDataGridViewTextBoxColumn.DataPropertyName = "A";
-            this.aDataGridViewTextBoxColumn.HeaderText = "A";
-            this.aDataGridViewTextBoxColumn.Name = "aDataGridViewTextBoxColumn";
-            this.aDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // tempoBonusDataGridViewTextBoxColumn
-            // 
-            this.tempoBonusDataGridViewTextBoxColumn.DataPropertyName = "TempoBonus";
-            this.tempoBonusDataGridViewTextBoxColumn.HeaderText = "TempoBonus";
-            this.tempoBonusDataGridViewTextBoxColumn.Name = "tempoBonusDataGridViewTextBoxColumn";
-            this.tempoBonusDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // vetturePrevisteDataGridViewTextBoxColumn
-            // 
-            this.vetturePrevisteDataGridViewTextBoxColumn.DataPropertyName = "VetturePreviste";
-            this.vetturePrevisteDataGridViewTextBoxColumn.HeaderText = "VetturePreviste";
-            this.vetturePrevisteDataGridViewTextBoxColumn.Name = "vetturePrevisteDataGridViewTextBoxColumn";
-            this.vetturePrevisteDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // vettureRilevateDataGridViewTextBoxColumn
-            // 
-            this.vettureRilevateDataGridViewTextBoxColumn.DataPropertyName = "VettureRilevate";
-            this.vettureRilevateDataGridViewTextBoxColumn.HeaderText = "VettureRilevate";
-            this.vettureRilevateDataGridViewTextBoxColumn.Name = "vettureRilevateDataGridViewTextBoxColumn";
-            this.vettureRilevateDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // oraPrimaViolazioneDataGridViewTextBoxColumn
-            // 
-            this.oraPrimaViolazioneDataGridViewTextBoxColumn.DataPropertyName = "OraPrimaViolazione";
-            this.oraPrimaViolazioneDataGridViewTextBoxColumn.HeaderText = "OraPrimaViolazione";
-            this.oraPrimaViolazioneDataGridViewTextBoxColumn.Name = "oraPrimaViolazioneDataGridViewTextBoxColumn";
-            this.oraPrimaViolazioneDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // oraUltimaViolazioneDataGridViewTextBoxColumn
-            // 
-            this.oraUltimaViolazioneDataGridViewTextBoxColumn.DataPropertyName = "OraUltimaViolazione";
-            this.oraUltimaViolazioneDataGridViewTextBoxColumn.HeaderText = "OraUltimaViolazione";
-            this.oraUltimaViolazioneDataGridViewTextBoxColumn.Name = "oraUltimaViolazioneDataGridViewTextBoxColumn";
-            this.oraUltimaViolazioneDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // lineaMonitorataBindingSource
-            // 
-            this.lineaMonitorataBindingSource.AllowNew = false;
-            this.lineaMonitorataBindingSource.DataSource = typeof(AtacFeed.LineaMonitorata);
             // 
             // label1
             // 
@@ -1969,6 +1642,358 @@
             this.buttonPlayPause.UseVisualStyleBackColor = true;
             this.buttonPlayPause.Click += new System.EventHandler(this.ButtonPlayPause_Click);
             // 
+            // urlVehicleRiserva
+            // 
+            this.urlVehicleRiserva.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.urlVehicleRiserva.Location = new System.Drawing.Point(124, 38);
+            this.urlVehicleRiserva.Name = "urlVehicleRiserva";
+            this.urlVehicleRiserva.Size = new System.Drawing.Size(569, 20);
+            this.urlVehicleRiserva.TabIndex = 21;
+            this.urlVehicleRiserva.Text = "https://dati.comune.roma.it/catalog/dataset/a7dadb4a-66ae-4eff-8ded-a102064702ba/" +
+    "resource/d2b123d6-8d2d-4dee-9792-f535df3dc166/download/rome_vehicle_positions.pb" +
+    "";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(13, 41);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(109, 13);
+            this.label37.TabIndex = 22;
+            this.label37.Text = "Feed Vehicle (riserva)";
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "IdVettura";
+            this.dataGridViewTextBoxColumn11.HeaderText = "IdVettura";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "Matricola";
+            this.dataGridViewTextBoxColumn12.HeaderText = "Matricola";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "RouteId";
+            this.dataGridViewTextBoxColumn13.HeaderText = "RouteId";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "Linea";
+            this.dataGridViewTextBoxColumn14.HeaderText = "Linea";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn15
+            // 
+            this.dataGridViewTextBoxColumn15.DataPropertyName = "Gestore";
+            this.dataGridViewTextBoxColumn15.HeaderText = "Gestore";
+            this.dataGridViewTextBoxColumn15.Name = "dataGridViewTextBoxColumn15";
+            this.dataGridViewTextBoxColumn15.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.DataPropertyName = "CurrentStopSequence";
+            this.dataGridViewTextBoxColumn16.HeaderText = "CurrentStopSequence";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn17
+            // 
+            this.dataGridViewTextBoxColumn17.DataPropertyName = "CongestionLevel";
+            this.dataGridViewTextBoxColumn17.HeaderText = "CongestionLevel";
+            this.dataGridViewTextBoxColumn17.Name = "dataGridViewTextBoxColumn17";
+            this.dataGridViewTextBoxColumn17.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn18
+            // 
+            this.dataGridViewTextBoxColumn18.DataPropertyName = "OccupancyStatus";
+            this.dataGridViewTextBoxColumn18.HeaderText = "OccupancyStatus";
+            this.dataGridViewTextBoxColumn18.Name = "dataGridViewTextBoxColumn18";
+            this.dataGridViewTextBoxColumn18.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn19
+            // 
+            this.dataGridViewTextBoxColumn19.DataPropertyName = "TripId";
+            this.dataGridViewTextBoxColumn19.HeaderText = "TripId";
+            this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
+            this.dataGridViewTextBoxColumn19.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn20
+            // 
+            this.dataGridViewTextBoxColumn20.DataPropertyName = "PrimaVolta";
+            this.dataGridViewTextBoxColumn20.HeaderText = "PrimaVolta";
+            this.dataGridViewTextBoxColumn20.Name = "dataGridViewTextBoxColumn20";
+            this.dataGridViewTextBoxColumn20.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn21
+            // 
+            this.dataGridViewTextBoxColumn21.DataPropertyName = "UltimaVolta";
+            this.dataGridViewTextBoxColumn21.HeaderText = "UltimaVolta";
+            this.dataGridViewTextBoxColumn21.Name = "dataGridViewTextBoxColumn21";
+            this.dataGridViewTextBoxColumn21.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn22
+            // 
+            this.dataGridViewTextBoxColumn22.DataPropertyName = "Rimessa";
+            this.dataGridViewTextBoxColumn22.HeaderText = "Rimessa";
+            this.dataGridViewTextBoxColumn22.Name = "dataGridViewTextBoxColumn22";
+            this.dataGridViewTextBoxColumn22.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn23
+            // 
+            this.dataGridViewTextBoxColumn23.DataPropertyName = "Euro";
+            this.dataGridViewTextBoxColumn23.HeaderText = "Euro";
+            this.dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
+            this.dataGridViewTextBoxColumn23.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn24
+            // 
+            this.dataGridViewTextBoxColumn24.DataPropertyName = "Modello";
+            this.dataGridViewTextBoxColumn24.HeaderText = "Modello";
+            this.dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
+            this.dataGridViewTextBoxColumn24.ReadOnly = true;
+            // 
+            // latitudeDataGridViewTextBoxColumn
+            // 
+            this.latitudeDataGridViewTextBoxColumn.DataPropertyName = "Latitude";
+            this.latitudeDataGridViewTextBoxColumn.HeaderText = "Latitude";
+            this.latitudeDataGridViewTextBoxColumn.Name = "latitudeDataGridViewTextBoxColumn";
+            this.latitudeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // longitudeDataGridViewTextBoxColumn
+            // 
+            this.longitudeDataGridViewTextBoxColumn.DataPropertyName = "Longitude";
+            this.longitudeDataGridViewTextBoxColumn.HeaderText = "Longitude";
+            this.longitudeDataGridViewTextBoxColumn.Name = "longitudeDataGridViewTextBoxColumn";
+            this.longitudeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // extendedVehicleInfoBindingSource
+            // 
+            this.extendedVehicleInfoBindingSource.DataSource = typeof(AtacFeed.ExtendedVehicleInfo);
+            // 
+            // idVetturaDataGridViewTextBoxColumn
+            // 
+            this.idVetturaDataGridViewTextBoxColumn.DataPropertyName = "IdVettura";
+            this.idVetturaDataGridViewTextBoxColumn.HeaderText = "IdVettura";
+            this.idVetturaDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.idVetturaDataGridViewTextBoxColumn.Name = "idVetturaDataGridViewTextBoxColumn";
+            this.idVetturaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.idVetturaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // matricolaDataGridViewTextBoxColumn
+            // 
+            this.matricolaDataGridViewTextBoxColumn.DataPropertyName = "Matricola";
+            this.matricolaDataGridViewTextBoxColumn.HeaderText = "Matricola";
+            this.matricolaDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.matricolaDataGridViewTextBoxColumn.Name = "matricolaDataGridViewTextBoxColumn";
+            this.matricolaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.matricolaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // routeIdDataGridViewTextBoxColumn
+            // 
+            this.routeIdDataGridViewTextBoxColumn.DataPropertyName = "RouteId";
+            this.routeIdDataGridViewTextBoxColumn.HeaderText = "RouteId";
+            this.routeIdDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.routeIdDataGridViewTextBoxColumn.Name = "routeIdDataGridViewTextBoxColumn";
+            this.routeIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.routeIdDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // lineaDataGridViewTextBoxColumn
+            // 
+            this.lineaDataGridViewTextBoxColumn.DataPropertyName = "Linea";
+            this.lineaDataGridViewTextBoxColumn.HeaderText = "Linea";
+            this.lineaDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.lineaDataGridViewTextBoxColumn.Name = "lineaDataGridViewTextBoxColumn";
+            this.lineaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.lineaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // gestoreDataGridViewTextBoxColumn
+            // 
+            this.gestoreDataGridViewTextBoxColumn.DataPropertyName = "Gestore";
+            this.gestoreDataGridViewTextBoxColumn.HeaderText = "Gestore";
+            this.gestoreDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.gestoreDataGridViewTextBoxColumn.Name = "gestoreDataGridViewTextBoxColumn";
+            this.gestoreDataGridViewTextBoxColumn.ReadOnly = true;
+            this.gestoreDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // directionIdDataGridViewTextBoxColumn
+            // 
+            this.directionIdDataGridViewTextBoxColumn.DataPropertyName = "DirectionId";
+            this.directionIdDataGridViewTextBoxColumn.HeaderText = "DirectionId";
+            this.directionIdDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.directionIdDataGridViewTextBoxColumn.Name = "directionIdDataGridViewTextBoxColumn";
+            this.directionIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.directionIdDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // currentStopSequenceDataGridViewTextBoxColumn
+            // 
+            this.currentStopSequenceDataGridViewTextBoxColumn.DataPropertyName = "CurrentStopSequence";
+            this.currentStopSequenceDataGridViewTextBoxColumn.HeaderText = "CurrentStopSequence";
+            this.currentStopSequenceDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.currentStopSequenceDataGridViewTextBoxColumn.Name = "currentStopSequenceDataGridViewTextBoxColumn";
+            this.currentStopSequenceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.currentStopSequenceDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // congestionLevelDataGridViewTextBoxColumn
+            // 
+            this.congestionLevelDataGridViewTextBoxColumn.DataPropertyName = "CongestionLevel";
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.congestionLevelDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            this.congestionLevelDataGridViewTextBoxColumn.HeaderText = "CongestionLevel";
+            this.congestionLevelDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.congestionLevelDataGridViewTextBoxColumn.Name = "congestionLevelDataGridViewTextBoxColumn";
+            this.congestionLevelDataGridViewTextBoxColumn.ReadOnly = true;
+            this.congestionLevelDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.congestionLevelDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // tripIdDataGridViewTextBoxColumn
+            // 
+            this.tripIdDataGridViewTextBoxColumn.DataPropertyName = "TripId";
+            this.tripIdDataGridViewTextBoxColumn.HeaderText = "TripId";
+            this.tripIdDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.tripIdDataGridViewTextBoxColumn.Name = "tripIdDataGridViewTextBoxColumn";
+            this.tripIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.tripIdDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // primaVoltaDataGridViewTextBoxColumn
+            // 
+            this.primaVoltaDataGridViewTextBoxColumn.DataPropertyName = "PrimaVolta";
+            this.primaVoltaDataGridViewTextBoxColumn.HeaderText = "PrimaVolta";
+            this.primaVoltaDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.primaVoltaDataGridViewTextBoxColumn.Name = "primaVoltaDataGridViewTextBoxColumn";
+            this.primaVoltaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.primaVoltaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // ultimaVoltaDataGridViewTextBoxColumn
+            // 
+            this.ultimaVoltaDataGridViewTextBoxColumn.DataPropertyName = "UltimaVolta";
+            this.ultimaVoltaDataGridViewTextBoxColumn.HeaderText = "UltimaVolta";
+            this.ultimaVoltaDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.ultimaVoltaDataGridViewTextBoxColumn.Name = "ultimaVoltaDataGridViewTextBoxColumn";
+            this.ultimaVoltaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ultimaVoltaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // rimessaDataGridViewTextBoxColumn
+            // 
+            this.rimessaDataGridViewTextBoxColumn.DataPropertyName = "Rimessa";
+            this.rimessaDataGridViewTextBoxColumn.HeaderText = "Rimessa";
+            this.rimessaDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.rimessaDataGridViewTextBoxColumn.Name = "rimessaDataGridViewTextBoxColumn";
+            this.rimessaDataGridViewTextBoxColumn.ReadOnly = true;
+            this.rimessaDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // euroDataGridViewTextBoxColumn
+            // 
+            this.euroDataGridViewTextBoxColumn.DataPropertyName = "Euro";
+            this.euroDataGridViewTextBoxColumn.HeaderText = "Euro";
+            this.euroDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.euroDataGridViewTextBoxColumn.Name = "euroDataGridViewTextBoxColumn";
+            this.euroDataGridViewTextBoxColumn.ReadOnly = true;
+            this.euroDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // modelloDataGridViewTextBoxColumn
+            // 
+            this.modelloDataGridViewTextBoxColumn.DataPropertyName = "Modello";
+            this.modelloDataGridViewTextBoxColumn.HeaderText = "Modello";
+            this.modelloDataGridViewTextBoxColumn.MinimumWidth = 22;
+            this.modelloDataGridViewTextBoxColumn.Name = "modelloDataGridViewTextBoxColumn";
+            this.modelloDataGridViewTextBoxColumn.ReadOnly = true;
+            this.modelloDataGridViewTextBoxColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // latitudeDataGridViewTextBoxColumn1
+            // 
+            this.latitudeDataGridViewTextBoxColumn1.DataPropertyName = "Latitude";
+            this.latitudeDataGridViewTextBoxColumn1.HeaderText = "Latitude";
+            this.latitudeDataGridViewTextBoxColumn1.MinimumWidth = 22;
+            this.latitudeDataGridViewTextBoxColumn1.Name = "latitudeDataGridViewTextBoxColumn1";
+            this.latitudeDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.latitudeDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // longitudeDataGridViewTextBoxColumn1
+            // 
+            this.longitudeDataGridViewTextBoxColumn1.DataPropertyName = "Longitude";
+            this.longitudeDataGridViewTextBoxColumn1.HeaderText = "Longitude";
+            this.longitudeDataGridViewTextBoxColumn1.MinimumWidth = 22;
+            this.longitudeDataGridViewTextBoxColumn1.Name = "longitudeDataGridViewTextBoxColumn1";
+            this.longitudeDataGridViewTextBoxColumn1.ReadOnly = true;
+            this.longitudeDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // dataGridViewTextBoxColumn25
+            // 
+            this.dataGridViewTextBoxColumn25.DataPropertyName = "Linea";
+            this.dataGridViewTextBoxColumn25.HeaderText = "Linea";
+            this.dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
+            this.dataGridViewTextBoxColumn25.ReadOnly = true;
+            // 
+            // giornoDataGridViewTextBoxColumn
+            // 
+            this.giornoDataGridViewTextBoxColumn.DataPropertyName = "Giorno";
+            this.giornoDataGridViewTextBoxColumn.HeaderText = "Giorno";
+            this.giornoDataGridViewTextBoxColumn.Name = "giornoDataGridViewTextBoxColumn";
+            this.giornoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // daDataGridViewTextBoxColumn
+            // 
+            this.daDataGridViewTextBoxColumn.DataPropertyName = "Da";
+            this.daDataGridViewTextBoxColumn.HeaderText = "Da";
+            this.daDataGridViewTextBoxColumn.Name = "daDataGridViewTextBoxColumn";
+            this.daDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // aDataGridViewTextBoxColumn
+            // 
+            this.aDataGridViewTextBoxColumn.DataPropertyName = "A";
+            this.aDataGridViewTextBoxColumn.HeaderText = "A";
+            this.aDataGridViewTextBoxColumn.Name = "aDataGridViewTextBoxColumn";
+            this.aDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // tempoBonusDataGridViewTextBoxColumn
+            // 
+            this.tempoBonusDataGridViewTextBoxColumn.DataPropertyName = "TempoBonus";
+            this.tempoBonusDataGridViewTextBoxColumn.HeaderText = "TempoBonus";
+            this.tempoBonusDataGridViewTextBoxColumn.Name = "tempoBonusDataGridViewTextBoxColumn";
+            this.tempoBonusDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // vetturePrevisteDataGridViewTextBoxColumn
+            // 
+            this.vetturePrevisteDataGridViewTextBoxColumn.DataPropertyName = "VetturePreviste";
+            this.vetturePrevisteDataGridViewTextBoxColumn.HeaderText = "VetturePreviste";
+            this.vetturePrevisteDataGridViewTextBoxColumn.Name = "vetturePrevisteDataGridViewTextBoxColumn";
+            this.vetturePrevisteDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // vettureRilevateDataGridViewTextBoxColumn
+            // 
+            this.vettureRilevateDataGridViewTextBoxColumn.DataPropertyName = "VettureRilevate";
+            this.vettureRilevateDataGridViewTextBoxColumn.HeaderText = "VettureRilevate";
+            this.vettureRilevateDataGridViewTextBoxColumn.Name = "vettureRilevateDataGridViewTextBoxColumn";
+            this.vettureRilevateDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // oraPrimaViolazioneDataGridViewTextBoxColumn
+            // 
+            this.oraPrimaViolazioneDataGridViewTextBoxColumn.DataPropertyName = "OraPrimaViolazione";
+            this.oraPrimaViolazioneDataGridViewTextBoxColumn.HeaderText = "OraPrimaViolazione";
+            this.oraPrimaViolazioneDataGridViewTextBoxColumn.Name = "oraPrimaViolazioneDataGridViewTextBoxColumn";
+            this.oraPrimaViolazioneDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // oraUltimaViolazioneDataGridViewTextBoxColumn
+            // 
+            this.oraUltimaViolazioneDataGridViewTextBoxColumn.DataPropertyName = "OraUltimaViolazione";
+            this.oraUltimaViolazioneDataGridViewTextBoxColumn.HeaderText = "OraUltimaViolazione";
+            this.oraUltimaViolazioneDataGridViewTextBoxColumn.Name = "oraUltimaViolazioneDataGridViewTextBoxColumn";
+            this.oraUltimaViolazioneDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // lineaMonitorataBindingSource
+            // 
+            this.lineaMonitorataBindingSource.AllowNew = false;
+            this.lineaMonitorataBindingSource.DataSource = typeof(AtacFeed.LineaMonitorata);
+            // 
             // FormGTFS_RSM
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2056,11 +2081,11 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tabGriglia.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVetture)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).EndInit();
             this.tabGrigliaFiltrata.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView1)).EndInit();
             this.tabMonitoraggio.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViolazioni)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.extendedVehicleInfoBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lineaMonitorataBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -2254,6 +2279,8 @@
         private System.Windows.Forms.Label labelAltroTpl;
         private System.Windows.Forms.Label label35;
         private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.TextBox urlVehicleRiserva;
+        private System.Windows.Forms.Label label37;
     }
 }
 

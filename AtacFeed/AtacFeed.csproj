@@ -276,6 +276,14 @@
     <Content Include="OUTPUT\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\circle-16 %287%29.png" />
+    <None Include="Resources\circle-16 %286%29.png" />
+    <None Include="Resources\circle-16 %285%29.png" />
+    <None Include="Resources\circle-16 %284%29.png" />
+    <None Include="Resources\circle-16 %283%29.png" />
+    <None Include="Resources\circle-16.png" />
+    <None Include="Resources\circle-16 %281%29.png" />
+    <None Include="Resources\red.png" />
     <None Include="Resources\power-2-16.png" />
     <None Include="Resources\restart-icon-32266.png" />
     <None Include="Resources\cloud-download-16.png" />

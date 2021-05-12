@@ -68,6 +68,8 @@
             this.label31 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
             this.label32 = new System.Windows.Forms.Label();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.labelVer = new System.Windows.Forms.Label();
             this.tabMainForm = new System.Windows.Forms.TabControl();
@@ -96,6 +98,10 @@
             this.checkTuttoPercorso = new System.Windows.Forms.CheckBox();
             this.checkTripDuplicati = new System.Windows.Forms.CheckBox();
             this.groupBoxServerRSM = new System.Windows.Forms.GroupBox();
+            this.imgUrl2 = new System.Windows.Forms.PictureBox();
+            this.imgUrl1 = new System.Windows.Forms.PictureBox();
+            this.urlVehicleRiserva = new System.Windows.Forms.TextBox();
+            this.label37 = new System.Windows.Forms.Label();
             this.label20 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -146,8 +152,9 @@
             this.labelAltroTpl = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonPlayPause = new System.Windows.Forms.Button();
-            this.urlVehicleRiserva = new System.Windows.Forms.TextBox();
-            this.label37 = new System.Windows.Forms.Label();
+            this.labelLetture = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label41 = new System.Windows.Forms.Label();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -196,6 +203,8 @@
             this.groupBoxExport.SuspendLayout();
             this.groupBoxMonitoraggio.SuspendLayout();
             this.groupBoxServerRSM.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgUrl2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgUrl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minuti)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
@@ -220,7 +229,7 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(1059, 524);
+            this.button3.Location = new System.Drawing.Point(1059, 521);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(102, 23);
             this.button3.TabIndex = 28;
@@ -233,7 +242,7 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(1058, 617);
+            this.label9.Location = new System.Drawing.Point(1058, 618);
             this.label9.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(45, 13);
@@ -244,7 +253,7 @@
             // labelTotaleIdVettura
             // 
             this.labelTotaleIdVettura.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleIdVettura.Location = new System.Drawing.Point(1121, 581);
+            this.labelTotaleIdVettura.Location = new System.Drawing.Point(1121, 582);
             this.labelTotaleIdVettura.Name = "labelTotaleIdVettura";
             this.labelTotaleIdVettura.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleIdVettura.Size = new System.Drawing.Size(40, 13);
@@ -255,7 +264,7 @@
             // labelTotaleMatricola
             // 
             this.labelTotaleMatricola.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleMatricola.Location = new System.Drawing.Point(1121, 599);
+            this.labelTotaleMatricola.Location = new System.Drawing.Point(1121, 600);
             this.labelTotaleMatricola.Name = "labelTotaleMatricola";
             this.labelTotaleMatricola.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleMatricola.Size = new System.Drawing.Size(40, 13);
@@ -267,7 +276,7 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(1058, 581);
+            this.label10.Location = new System.Drawing.Point(1058, 582);
             this.label10.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(60, 13);
@@ -278,7 +287,7 @@
             // labelTotaleRighe
             // 
             this.labelTotaleRighe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleRighe.Location = new System.Drawing.Point(1121, 617);
+            this.labelTotaleRighe.Location = new System.Drawing.Point(1121, 618);
             this.labelTotaleRighe.Name = "labelTotaleRighe";
             this.labelTotaleRighe.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.labelTotaleRighe.Size = new System.Drawing.Size(40, 13);
@@ -290,7 +299,7 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1058, 599);
+            this.label3.Location = new System.Drawing.Point(1058, 600);
             this.label3.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(60, 13);
@@ -301,7 +310,7 @@
             // labelFeedLetti
             // 
             this.labelFeedLetti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelFeedLetti.Location = new System.Drawing.Point(1121, 563);
+            this.labelFeedLetti.Location = new System.Drawing.Point(1121, 564);
             this.labelFeedLetti.MinimumSize = new System.Drawing.Size(15, 0);
             this.labelFeedLetti.Name = "labelFeedLetti";
             this.labelFeedLetti.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -314,7 +323,7 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1058, 563);
+            this.label8.Location = new System.Drawing.Point(1058, 564);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(41, 13);
             this.label8.TabIndex = 20;
@@ -498,9 +507,12 @@
             // 
             // toolTipFeedTrip
             // 
+            this.toolTipFeedTrip.AutoPopDelay = 5000;
+            this.toolTipFeedTrip.InitialDelay = 300;
             this.toolTipFeedTrip.IsBalloon = true;
+            this.toolTipFeedTrip.ReshowDelay = 100;
             this.toolTipFeedTrip.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.toolTipFeedTrip.ToolTipTitle = "Monitoraggio feed GTFS ";
+            this.toolTipFeedTrip.ToolTipTitle = "Monitoraggio Traspoti Roma";
             // 
             // checkFeedTrip
             // 
@@ -642,6 +654,36 @@
             this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.toolTipFeedTrip.SetToolTip(this.label32, "Bus Roma Tpl  in servizio, ma non ancora catalogati.\r\nNei prossimi giorni verific" +
         "a se sono presenti dei file di configurazione aggiornati.");
+            // 
+            // label40
+            // 
+            this.label40.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label40.AutoSize = true;
+            this.label40.BackColor = System.Drawing.Color.Transparent;
+            this.label40.Font = new System.Drawing.Font("Marlett", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.Location = new System.Drawing.Point(1097, 563);
+            this.label40.Margin = new System.Windows.Forms.Padding(0);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(11, 14);
+            this.label40.TabIndex = 62;
+            this.label40.Text = "*";
+            this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTipFeedTrip.SetToolTip(this.label40, "Numero di feed validi recuperati");
+            // 
+            // label38
+            // 
+            this.label38.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label38.AutoSize = true;
+            this.label38.BackColor = System.Drawing.Color.Transparent;
+            this.label38.Font = new System.Drawing.Font("Marlett", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.Location = new System.Drawing.Point(1104, 545);
+            this.label38.Margin = new System.Windows.Forms.Padding(0);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(11, 14);
+            this.label38.TabIndex = 63;
+            this.label38.Text = "*";
+            this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTipFeedTrip.SetToolTip(this.label38, "Numero di tentativi di recupero di un feed");
             // 
             // button4
             // 
@@ -988,6 +1030,9 @@
             // 
             this.groupBoxServerRSM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBoxServerRSM.Controls.Add(this.label41);
+            this.groupBoxServerRSM.Controls.Add(this.imgUrl2);
+            this.groupBoxServerRSM.Controls.Add(this.imgUrl1);
             this.groupBoxServerRSM.Controls.Add(this.urlVehicleRiserva);
             this.groupBoxServerRSM.Controls.Add(this.label37);
             this.groupBoxServerRSM.Controls.Add(this.checkFeedTrip);
@@ -1008,6 +1053,49 @@
             this.groupBoxServerRSM.TabStop = false;
             this.groupBoxServerRSM.Text = "Impostazioni Server RSM";
             // 
+            // imgUrl2
+            // 
+            this.imgUrl2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.imgUrl2.Location = new System.Drawing.Point(697, 41);
+            this.imgUrl2.Margin = new System.Windows.Forms.Padding(0);
+            this.imgUrl2.Name = "imgUrl2";
+            this.imgUrl2.Size = new System.Drawing.Size(16, 16);
+            this.imgUrl2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.imgUrl2.TabIndex = 24;
+            this.imgUrl2.TabStop = false;
+            // 
+            // imgUrl1
+            // 
+            this.imgUrl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.imgUrl1.Location = new System.Drawing.Point(697, 20);
+            this.imgUrl1.Margin = new System.Windows.Forms.Padding(0);
+            this.imgUrl1.Name = "imgUrl1";
+            this.imgUrl1.Size = new System.Drawing.Size(16, 16);
+            this.imgUrl1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.imgUrl1.TabIndex = 23;
+            this.imgUrl1.TabStop = false;
+            // 
+            // urlVehicleRiserva
+            // 
+            this.urlVehicleRiserva.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.urlVehicleRiserva.Location = new System.Drawing.Point(124, 38);
+            this.urlVehicleRiserva.Name = "urlVehicleRiserva";
+            this.urlVehicleRiserva.Size = new System.Drawing.Size(569, 20);
+            this.urlVehicleRiserva.TabIndex = 21;
+            this.urlVehicleRiserva.Text = "https://dati.comune.roma.it/catalog/dataset/a7dadb4a-66ae-4eff-8ded-a102064702ba/" +
+    "resource/d2b123d6-8d2d-4dee-9792-f535df3dc166/download/rome_vehicle_positions.pb" +
+    "";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(3, 41);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(109, 13);
+            this.label37.TabIndex = 22;
+            this.label37.Text = "Feed Vehicle (riserva)";
+            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -1022,7 +1110,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(908, 30);
+            this.label6.Location = new System.Drawing.Point(961, 36);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(44, 13);
             this.label6.TabIndex = 18;
@@ -1032,7 +1120,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(824, 30);
+            this.label7.Location = new System.Drawing.Point(877, 36);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(34, 13);
             this.label7.TabIndex = 19;
@@ -1070,7 +1158,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(717, 30);
+            this.label5.Location = new System.Drawing.Point(770, 36);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(57, 13);
             this.label5.TabIndex = 17;
@@ -1079,7 +1167,7 @@
             // secondi
             // 
             this.secondi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.secondi.Location = new System.Drawing.Point(864, 28);
+            this.secondi.Location = new System.Drawing.Point(917, 34);
             this.secondi.Maximum = new decimal(new int[] {
             59,
             0,
@@ -1097,7 +1185,7 @@
             // minuti
             // 
             this.minuti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.minuti.Location = new System.Drawing.Point(780, 27);
+            this.minuti.Location = new System.Drawing.Point(833, 33);
             this.minuti.Name = "minuti";
             this.minuti.Size = new System.Drawing.Size(38, 20);
             this.minuti.TabIndex = 15;
@@ -1635,33 +1723,50 @@
             this.buttonPlayPause.FlatAppearance.BorderSize = 0;
             this.buttonPlayPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPlayPause.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayPause.Location = new System.Drawing.Point(1083, 640);
+            this.buttonPlayPause.Location = new System.Drawing.Point(1083, 643);
             this.buttonPlayPause.Name = "buttonPlayPause";
             this.buttonPlayPause.Size = new System.Drawing.Size(50, 46);
             this.buttonPlayPause.TabIndex = 0;
             this.buttonPlayPause.UseVisualStyleBackColor = true;
             this.buttonPlayPause.Click += new System.EventHandler(this.ButtonPlayPause_Click);
             // 
-            // urlVehicleRiserva
+            // labelLetture
             // 
-            this.urlVehicleRiserva.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.urlVehicleRiserva.Location = new System.Drawing.Point(124, 38);
-            this.urlVehicleRiserva.Name = "urlVehicleRiserva";
-            this.urlVehicleRiserva.Size = new System.Drawing.Size(569, 20);
-            this.urlVehicleRiserva.TabIndex = 21;
-            this.urlVehicleRiserva.Text = "https://dati.comune.roma.it/catalog/dataset/a7dadb4a-66ae-4eff-8ded-a102064702ba/" +
-    "resource/d2b123d6-8d2d-4dee-9792-f535df3dc166/download/rome_vehicle_positions.pb" +
-    "";
+            this.labelLetture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelLetture.Location = new System.Drawing.Point(1121, 547);
+            this.labelLetture.MinimumSize = new System.Drawing.Size(15, 0);
+            this.labelLetture.Name = "labelLetture";
+            this.labelLetture.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.labelLetture.Size = new System.Drawing.Size(40, 13);
+            this.labelLetture.TabIndex = 61;
+            this.labelLetture.Text = "0";
+            this.labelLetture.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label37
+            // label39
             // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(13, 41);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(109, 13);
-            this.label37.TabIndex = 22;
-            this.label37.Text = "Feed Vehicle (riserva)";
+            this.label39.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(1058, 547);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(50, 13);
+            this.label39.TabIndex = 60;
+            this.label39.Text = "# Letture";
+            this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label41
+            // 
+            this.label41.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label41.AutoSize = true;
+            this.label41.BackColor = System.Drawing.Color.Transparent;
+            this.label41.Font = new System.Drawing.Font("Marlett", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.Location = new System.Drawing.Point(107, 38);
+            this.label41.Margin = new System.Windows.Forms.Padding(0);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(11, 14);
+            this.label41.TabIndex = 64;
+            this.label41.Text = "*";
+            this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.toolTipFeedTrip.SetToolTip(this.label41, "Url utilizzata nel caso di mancato recupero di feed valido dal server principale");
             // 
             // dataGridViewTextBoxColumn11
             // 
@@ -2000,6 +2105,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1169, 705);
+            this.Controls.Add(this.label38);
+            this.Controls.Add(this.label40);
+            this.Controls.Add(this.labelLetture);
+            this.Controls.Add(this.label39);
             this.Controls.Add(this.label32);
             this.Controls.Add(this.label31);
             this.Controls.Add(this.label30);
@@ -2071,6 +2180,8 @@
             this.groupBoxMonitoraggio.PerformLayout();
             this.groupBoxServerRSM.ResumeLayout(false);
             this.groupBoxServerRSM.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgUrl2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.imgUrl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minuti)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -2281,6 +2392,13 @@
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.TextBox urlVehicleRiserva;
         private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.PictureBox imgUrl1;
+        private System.Windows.Forms.PictureBox imgUrl2;
+        private System.Windows.Forms.Label labelLetture;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label41;
     }
 }
 

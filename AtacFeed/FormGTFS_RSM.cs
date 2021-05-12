@@ -61,10 +61,51 @@ namespace AtacFeed
         private async Task AcquisizioneAsync()
         {
             try
-            {                
+            {
+                imgUrl1.Image = null;
+                imgUrl2.Image = null; 
+                textBox1.Clear();
+                textBox2.Clear();
+                FeedMessage actualFeedVehicle = null;
                 string routeID = comboBox1.SelectedValue.ToString();
+                if (!string.IsNullOrWhiteSpace(urlVehicle.Text))
+                {
+                    imgUrl1.Image = Properties.Resources.info; 
+                    textBox1.AppendText("Lettura da Server 1" + Environment.NewLine);
+                    actualFeedVehicle = GetFeedMessage(urlVehicle.Text);                    
+                }
 
-                FeedMessage actualFeedVehicle = getFeedMessage();
+                if (!ValidaFeed(actualFeedVehicle))
+                {                    
+                    textBox1.AppendText(Environment.NewLine+"Lettura da Server 2" + Environment.NewLine);
+                    if (!string.IsNullOrWhiteSpace(urlVehicle.Text))
+                    {
+                        if (actualFeedVehicle == null)
+                            imgUrl1.Image = Properties.Resources.rosso;
+                        else
+                            imgUrl1.Image = Properties.Resources.arancio;
+                    }
+
+                    if (!string.IsNullOrWhiteSpace(urlVehicleRiserva.Text))
+                    {
+                        imgUrl2.Image = Properties.Resources.info;
+                        actualFeedVehicle = GetFeedMessage(urlVehicleRiserva.Text);
+                        if (!ValidaFeed(actualFeedVehicle))
+                        {
+                            if (actualFeedVehicle == null)
+                                imgUrl2.Image = Properties.Resources.rosso;
+                            else
+                                imgUrl2.Image = Properties.Resources.arancio;
+                            actualFeedVehicle = null;
+                        }
+                        else
+                            imgUrl2.Image = Properties.Resources.verde;
+                    }
+                }
+                else
+                    imgUrl1.Image = Properties.Resources.verde;
+                labelLetture.Text = (int.Parse(labelLetture.Text) + 1).ToString();
+                
                 if (actualFeedVehicle != null)
                 {
                     if (actualFeedVehicle.Entities.Count == 0)
@@ -72,7 +113,7 @@ namespace AtacFeed
                         Log.Error("Feed VUOTO alle {DateTime:HH:mm:ss}", DateTime.Now);
                         throw new Exception("Il feed letto è vuoto");
                     }
-                    DateTime dataFeedVehicle = t0.AddSeconds(actualFeedVehicle.Header.Timestamp).ToLocalTime();
+                    DateTime dataFeedVehicle = t0.AddSeconds(actualFeedVehicle?.Header.Timestamp ?? 0).ToLocalTime();
 
                     if (DataResetMonitoraggio.HasValue && dataFeedVehicle > DataResetMonitoraggio.GetValueOrDefault())
                     {
@@ -81,11 +122,9 @@ namespace AtacFeed
                         Log.Information("Prossimo data reset: {DataResetMonitoraggio:dd/MM/yyyy HH:mm:ss}", DataResetMonitoraggio);
                     }
 
-                    if (LastDataFeedVehicle.GetValueOrDefault() != dataFeedVehicle)
+                    if (LastDataFeedVehicle.GetValueOrDefault(DateTime.MinValue) < dataFeedVehicle)
                     {
                         LastDataFeedVehicle = dataFeedVehicle;
-                        textBox1.Clear();
-                        textBox2.Clear();
 
                         lblOraLettura.Text = $"{dataFeedVehicle:HH:mm:ss}";
                         labelFeedLetti.Text = (int.Parse(labelFeedLetti.Text) + 1).ToString();
@@ -780,12 +819,13 @@ namespace AtacFeed
                 Log.Error(ex, "Errore Generico");
             }        
         }
-        private FeedMessage getFeedMessage() {
-            WebRequest req = HttpWebRequest.Create(urlVehicle.Text);
-            req.Timeout = 10000;
-            int numTentativi = 0;
-            while (numTentativi++ < 2)
+
+        private FeedMessage GetFeedMessage(string url)
+        {
+            if (!string.IsNullOrWhiteSpace(url))
             {
+                WebRequest req = WebRequest.Create(url);
+                req.Timeout = 10000;
                 try
                 {
                     return Serializer.Deserialize<FeedMessage>(req.GetResponse().GetResponseStream());
@@ -796,17 +836,57 @@ namespace AtacFeed
                     textBox1.AppendText($"{ex.Message}: {Environment.NewLine}Feed Non trovato al seguente indirizzo");
                     textBox1.AppendText($"{Environment.NewLine}{ex.Response.ResponseUri}{Environment.NewLine}");
                     Log.Error(ex, "Feed {UrlFeed} Non trovato ", ex.Response.ResponseUri);
-                    req = HttpWebRequest.Create(urlVehicleRiserva.Text);
+                    return null;
                 }
                 catch (WebException ex) when (ex.Status == WebExceptionStatus.Timeout)
                 {
                     textBox1.AppendText($"{ex.Message} Problemi di connessione con il server{Environment.NewLine}");
                     Log.Error(ex, "Errore Connessione Server {UrlRemoto}", req.RequestUri);
-                    req = HttpWebRequest.Create(urlVehicleRiserva.Text);
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex, "Errore : ", ex.Message);
+                    return null;
+                }
+
+            }
+            else
+                return null;
+        }
+
+        private bool ValidaFeed(FeedMessage feed) 
+        {
+            bool isValid = true;
+            DateTime dataFeedVehicle = t0.AddSeconds(feed?.Header.Timestamp ?? 0).ToLocalTime(); ;
+            try
+            {
+                if (feed == null)
+                {
+                    Log.Error($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè NON LETTO");
+                    textBox1.AppendText($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè NON LETTO");
+                    isValid = false;
+                }
+                else if (feed.Entities.Count == 0)
+                {
+                    Log.Error($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè VUOTO");
+                    textBox1.AppendText($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè VUOTO");
+                    isValid = false;
+
+                }
+                else if (LastDataFeedVehicle.GetValueOrDefault(DateTime.MinValue) >= dataFeedVehicle)
+                {
+                    Log.Error($"[{DateTime.Now:HH:mm:ss}] - Feed scartato in quanto ha il timestamp SUPERATO");
+                    textBox1.AppendText($"[{DateTime.Now:HH:mm:ss}] - Feed scartato in quanto ha il timestamp SUPERATO");
+                    isValid = false;
                 }
             }
-
-            return null;
+            catch (Exception exc) {
+                textBox1.AppendText($"{exc.Message}");
+                Log.Error(exc, "Errore Generico");
+                isValid = false;
+            }
+            return isValid;
         }
 
         private void RestartFile()
@@ -830,6 +910,7 @@ namespace AtacFeed
             formsPlotTPL.Reset();
             formsPlotAtac.Reset();
 
+            labelLetture.Text = "0";
             labelFeedLetti.Text = "0";
             labelTotaleRighe.Text = ElencoAggregatoVetture.Count.ToString();
             labelTotaleIdVettura.Text = "0";

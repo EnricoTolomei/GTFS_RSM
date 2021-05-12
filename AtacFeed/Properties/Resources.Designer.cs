@@ -63,6 +63,16 @@ namespace AtacFeed.Properties {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap arancio {
+            get {
+                object obj = ResourceManager.GetObject("arancio", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap available_updates_16 {
             get {
                 object obj = ResourceManager.GetObject("available-updates-16", resourceCulture);
@@ -93,9 +103,29 @@ namespace AtacFeed.Properties {
         /// <summary>
         ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap giallo {
+            get {
+                object obj = ResourceManager.GetObject("giallo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap github_logo {
             get {
                 object obj = ResourceManager.GetObject("github_logo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap info {
+            get {
+                object obj = ResourceManager.GetObject("info", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -126,6 +156,26 @@ namespace AtacFeed.Properties {
         internal static System.Drawing.Bitmap power_2_16 {
             get {
                 object obj = ResourceManager.GetObject("power-2-16", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap rosso {
+            get {
+                object obj = ResourceManager.GetObject("rosso", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una risorsa localizzata di tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap verde {
+            get {
+                object obj = ResourceManager.GetObject("verde", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

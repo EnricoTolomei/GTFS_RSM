@@ -20,12 +20,12 @@ namespace AtacFeed
         [Ignore] 
         public RegolaMonitoraggio RegolaViolata { get; set; }
 
-        public LineaMonitorata(DateTime? OraPrimaViolazione, DateTime? OraUltimaViolazione, RegolaMonitoraggio RegolaViolata, int VettureRilevate)
+        public LineaMonitorata(DateTime? oraPrimaViolazione, DateTime? oraUltimaViolazione, RegolaMonitoraggio regolaViolata, int vettureRilevate)
         {
-            this.OraPrimaViolazione = OraPrimaViolazione;
-            this.OraUltimaViolazione = OraUltimaViolazione;
-            this.RegolaViolata = RegolaViolata;
-            this.VettureRilevate = VettureRilevate;
+            OraPrimaViolazione = oraPrimaViolazione;
+            OraUltimaViolazione = oraUltimaViolazione;
+            RegolaViolata = regolaViolata;
+            VettureRilevate = vettureRilevate;
         }
         
         public bool Equals(LineaMonitorata other)

@@ -1,4 +1,5 @@
 ﻿using CsvHelper;
+using CsvHelper.Configuration;
 using CsvHelper.Configuration.Attributes;
 using FastMember;
 using GTFS;
@@ -35,6 +36,7 @@ namespace AtacFeed
         private List<ExtendedVehicleInfo> ElencoPrecedente;
         private List<ErroriGTFS> AnomaliaGTFS;
         private List<LineaAgenzia> ElencoLineaAgenzia;
+        private List<string> LineeAgenzia;
         private List<DettagliVettura> ElencoDettagliVettura;
 
         private List<MonitoraggioVettureGrafico> ElencoVettureGrafico;
@@ -43,11 +45,13 @@ namespace AtacFeed
 
         private List<AlertDaControllare> AlertsDaControllare;
         private List<CriterioMediaPonderata> CriteriMediaPonderata;
-        
+
         private string fileName;
         private DateTime? LastDataFeedVehicle;
         private DateTime? FirstDataFeedVehicle;
         private DateTime? DataResetMonitoraggio;
+
+        private List<Trip> Trips;
 
         private List<RunTimeValueAlert> ElencoVettureSovraffollate;
 
@@ -63,62 +67,22 @@ namespace AtacFeed
             try
             {
                 imgUrl1.Image = null;
-                imgUrl2.Image = null; 
+                imgUrl2.Image = null;
                 textBox1.Clear();
                 textBox2.Clear();
                 FeedMessage actualFeedVehicle = null;
                 string routeID = comboBox1.SelectedValue.ToString();
-                if (!string.IsNullOrWhiteSpace(urlVehicle.Text))
-                {
-                    imgUrl1.Image = Properties.Resources.info; 
-                    textBox1.AppendText("Lettura da Server 1" + Environment.NewLine);
-                    actualFeedVehicle = GetFeedMessage(urlVehicle.Text);                    
-                }
-
-                if (!ValidaFeed(actualFeedVehicle))
-                {                    
-                    textBox1.AppendText(Environment.NewLine+"Lettura da Server 2" + Environment.NewLine);
-                    if (!string.IsNullOrWhiteSpace(urlVehicle.Text))
-                    {
-                        if (actualFeedVehicle == null)
-                            imgUrl1.Image = Properties.Resources.rosso;
-                        else
-                            imgUrl1.Image = Properties.Resources.arancio;
-                    }
-
-                    if (!string.IsNullOrWhiteSpace(urlVehicleRiserva.Text))
-                    {
-                        imgUrl2.Image = Properties.Resources.info;
-                        actualFeedVehicle = GetFeedMessage(urlVehicleRiserva.Text);
-                        if (!ValidaFeed(actualFeedVehicle))
-                        {
-                            if (actualFeedVehicle == null)
-                                imgUrl2.Image = Properties.Resources.rosso;
-                            else
-                                imgUrl2.Image = Properties.Resources.arancio;
-                            actualFeedVehicle = null;
-                        }
-                        else
-                            imgUrl2.Image = Properties.Resources.verde;
-                    }
-                }
-                else
-                    imgUrl1.Image = Properties.Resources.verde;
+                actualFeedVehicle = GetValidFeed();
                 labelLetture.Text = (int.Parse(labelLetture.Text) + 1).ToString();
-                
                 if (actualFeedVehicle != null)
                 {
-                    if (actualFeedVehicle.Entities.Count == 0)
-                    {
-                        Log.Error("Feed VUOTO alle {DateTime:HH:mm:ss}", DateTime.Now);
-                        throw new Exception("Il feed letto è vuoto");
-                    }
                     DateTime dataFeedVehicle = t0.AddSeconds(actualFeedVehicle?.Header.Timestamp ?? 0).ToLocalTime();
 
                     if (DataResetMonitoraggio.HasValue && dataFeedVehicle > DataResetMonitoraggio.GetValueOrDefault())
                     {
+                        //Form1_Load(null, null);
                         RestartFile();
-                        DataResetMonitoraggio = DataResetMonitoraggio.Value.AddDays(1);
+                        DataResetMonitoraggio = DataResetMonitoraggio.GetValueOrDefault(DateTime.MinValue).AddDays(1);
                         Log.Information("Prossimo data reset: {DataResetMonitoraggio:dd/MM/yyyy HH:mm:ss}", DataResetMonitoraggio);
                     }
 
@@ -130,10 +94,23 @@ namespace AtacFeed
                         labelFeedLetti.Text = (int.Parse(labelFeedLetti.Text) + 1).ToString();
                         List<FeedEntity> feedEntities = actualFeedVehicle.Entities
                             .Where(x => ((int.TryParse(routeID, out int res) && res < 0) || x.Vehicle.Trip?.RouteId == routeID)
-                                    && (!checkTripVuoti.Checked || x.Vehicle?.Trip?.TripId.Length > 0)
-                               )
+                                        && (!checkTripVuoti.Checked || x.Vehicle?.Trip?.TripId.Length > 0))
                             .ToList();
-                        List<ExtendedVehicleInfo> elencoVetture = feedEntities
+
+                        List<string> lineeGTFS = feedEntities.Select(x => x.Vehicle.Trip?.RouteId).Distinct().OrderBy(q => q).ToList();
+
+                        List<string> lineeAnomale = lineeGTFS.Where(p => !LineeAgenzia.Any(p2 => p2 == p)).ToList();
+                        if (lineeAnomale.Count > 0) {
+                            textBox2.Text = $"Le seguenti linee {string.Join(", ",lineeAnomale)} {Environment.NewLine}NON sono riportate nel file statico routes.txt{Environment.NewLine}{Environment.NewLine}";
+                            foreach (string anomalia in lineeAnomale)
+                            {
+                                feedEntities.RemoveAll((x) => x.Vehicle.Trip.RouteId == anomalia);
+                            }
+                        }
+                        List<ExtendedVehicleInfo> elencoVetture = 
+                            (
+                            from ff in (
+                            feedEntities
                             .GroupJoin(
                                 inner: ElencoLineaAgenzia,
                                 outerKeySelector: v => v.Vehicle.Trip?.RouteId,
@@ -144,29 +121,45 @@ namespace AtacFeed
                                 outerKeySelector: o2 => o2.Vehicle.Vehicle?.Label.Trim(),
                                 innerKeySelector: i2 => i2.Matricola,
                                 resultSelector: (o2, i2) => new { o2, DettagliVettura = i2.FirstOrDefault() })
-                            .Select(x => new ExtendedVehicleInfo(
-                                            x.o2.Vehicle.Vehicle.Id,
-                                            x.o2.Vehicle.Vehicle.Label.Trim(),
-                                            x.o2.Vehicle.Vehicle.LicensePlate,
-                                            x.o2.Vehicle.Trip?.RouteId,
-                                            x.o2.Linea?.Route.ShortName,
-                                            x.DettagliVettura?.Gestore ?? x.o2.Linea.Agency.Name,
-                                            x.o2.Vehicle.Trip?.DirectionId,
-                                            x.o2.Vehicle.CurrentStopSequence,
-                                            x.o2.Vehicle.congestion_level,
-                                            x.o2.Vehicle.occupancy_status,
-                                            x.o2.Vehicle.Trip?.TripId,
+                            .GroupJoin(
+                                inner: staticData.Stops,
+                                outerKeySelector: z=> z.o2.Vehicle.StopId ,
+                                innerKeySelector: y => y.Code ,
+                                resultSelector: (z, y) => new { z, NomeFermata= y.FirstOrDefault()}
+                                )
+                            )
+                            from t2 in Trips
+                                .Where(x => (GTFS.Entities.Enumerations.DirectionType)(ff.z.o2.Vehicle.Trip?.DirectionId ?? 1) == (GTFS.Entities.Enumerations.DirectionType)x.Direction
+                                    && (ff.z.o2.Vehicle.Trip?.RouteId  == x.RouteId)
+                                )
+                                .DefaultIfEmpty()
+                            select  new { ff, t2.Headsign }
+                            )
+                            .Select(x => new ExtendedVehicleInfo(                                
+                                x.ff.z.o2.Vehicle.Vehicle.Id,
+                                            x.ff.z.o2.Vehicle.Vehicle.Label.Trim(),
+                                            x.ff.z.o2.Vehicle.Vehicle.LicensePlate,
+                                            x.ff.z.o2.Vehicle.Trip?.RouteId,
+                                            x.ff.z.o2.Linea?.Route.ShortName,
+                                            x.ff.z.DettagliVettura?.Gestore ?? x.ff.z.o2.Linea.Agency.Name,
+                                            x.ff.z.o2.Vehicle.Trip?.DirectionId,
+                                            x.ff.z.o2.Vehicle.CurrentStopSequence,
+                                            x.ff.z.o2.Vehicle.congestion_level,
+                                            x.ff.z.o2.Vehicle.occupancy_status,
+                                            x.ff.z.o2.Vehicle.Trip?.TripId,
                                             checkTripDuplicati.Checked,
                                             dataFeedVehicle,
-                                            x.DettagliVettura?.Rimessa,
-                                            x.DettagliVettura?.Euro,
-                                            x.DettagliVettura?.Modello,
-                                            x.o2.Vehicle.Position.Latitude,
-                                            x.o2.Vehicle.Position.Longitude,
-                                            x.o2.Vehicle.CurrentStatus,
-                                            x.DettagliVettura?.TipoMezzoTrasporto.GetValueOrDefault(0) ?? (string.Equals(x.o2.Linea.Agency.Name, "atac", StringComparison.OrdinalIgnoreCase) ? (x.o2.Linea.Route.Type == GTFS.Entities.Enumerations.RouteTypeExtended.TramService ? -1 : -2) : -3)
-                                            ,
-                                            checkTuttoPercorso.Visible && checkTuttoPercorso.Checked
+                                            x.ff.z.DettagliVettura?.Rimessa,
+                                            x.ff.z.DettagliVettura?.Euro,
+                                            x.ff.z.DettagliVettura?.Modello,
+                                            x.ff.z.o2.Vehicle.Position.Latitude,
+                                            x.ff.z.o2.Vehicle.Position.Longitude,
+                                            x.ff.z.o2.Vehicle.CurrentStatus,
+                                            x.ff.z.DettagliVettura?.TipoMezzoTrasporto.GetValueOrDefault(0) ?? (string.Equals(x.ff.z.o2.Linea.Agency.Name, "atac", StringComparison.OrdinalIgnoreCase) ? (x.ff.z.o2.Linea.Route.Type == GTFS.Entities.Enumerations.RouteTypeExtended.TramService ? -1 : -2) : -3),
+                                            x.ff.z.o2.Vehicle.Position.Odometer,
+                                            checkTuttoPercorso.Visible && checkTuttoPercorso.Checked,
+                                            x.ff.NomeFermata?.Name,
+                                            x.Headsign
                                         )
                             )
                             .Distinct()
@@ -373,11 +366,8 @@ namespace AtacFeed
                         int rilevatoAltroTpl = elencoVetture.Where(x => x.TipoMezzoTrasporto == -3).Count();
 
                         //ElencoAggregatoVetture.Where(i => string.Equals(i.Gestore, "atac", StringComparison.OrdinalIgnoreCase)).Select(i => i.Matricola.Trim()).Distinct().Count() - TotaleMatricolaAtac;
-
-
-
-
-
+                        
+                        
                         labelTotaleIdVettura.Text = TotaleIdVettura.ToString();
                         labelTotaleMatricola.Text = TotaleMatricola.ToString();
                         labelBusAtac.Text = rilevatoBusAtac.ToString();
@@ -395,10 +385,11 @@ namespace AtacFeed
 
                         labelTotaleMatricolaTPL.Text = elencoAggregatoTPL.Count().ToString();
 
-                        dataGridVetture.DataSource = ElencoAggregatoVetture;
+                        //dataGridVetture.DataSource = ElencoAggregatoVetture;
 
                         DataTable dt = new DataTable();
-                        using (var reader = ObjectReader.Create(ElencoAggregatoVetture))
+                        //using (var reader = ObjectReader.Create(ElencoAggregatoVetture))
+                        using (var reader = ObjectReader.Create(elencoVetture))
                         {
                             dt.Load(reader);
                         }
@@ -514,10 +505,10 @@ namespace AtacFeed
                                                                                join vettura in vettureSuLinea on regola.Linea equals vettura.Linea into lrs
                                                                                from lr in lrs.DefaultIfEmpty()
                                                                                select new LineaMonitorata(
-                                                                                   OraPrimaViolazione: null,
-                                                                                   OraUltimaViolazione: null,
-                                                                                   RegolaViolata: regola,
-                                                                                   VettureRilevate: lr?.count ?? 0
+                                                                                   oraPrimaViolazione: null,
+                                                                                   oraUltimaViolazione: null,
+                                                                                   regolaViolata: regola,
+                                                                                   vettureRilevate: lr?.count ?? 0
                                                                                    );
 
                                 foreach (var lineaMonitorata in lineeMonitorate)
@@ -750,7 +741,7 @@ namespace AtacFeed
 
                         if (!string.IsNullOrEmpty(urlTrip.Text) && checkFeedTrip.Checked)
                         {
-                            WebRequest req = HttpWebRequest.Create(urlTrip.Text);
+                            WebRequest req = WebRequest.Create(urlTrip.Text);
                             FeedMessage feedTrip = Serializer.Deserialize<FeedMessage>(req.GetResponse().GetResponseStream());
                             foreach (FeedEntity entity in feedTrip.Entities)
                             {
@@ -817,7 +808,42 @@ namespace AtacFeed
             {
                 textBox1.AppendText($"{ex.Message}");
                 Log.Error(ex, "Errore Generico");
-            }        
+            }
+        }
+
+        private FeedMessage GetValidFeed() 
+        {
+            imgUrl1.Image = null;
+            imgUrl2.Image = null;
+            FeedMessage validFeed = new FeedMessage();
+            List<Tuple<string, PictureBox>> tupleServer = new List<Tuple<string, PictureBox>>
+            {
+                new Tuple<string, PictureBox>(urlVehicle.Text, imgUrl1),
+                new Tuple<string, PictureBox>(urlVehicleRiserva.Text, imgUrl2)
+            };
+            tupleServer.RemoveAll( x=> string.IsNullOrEmpty(x.Item1));
+            tupleServer.ForEach(x => x.Item2.Refresh());
+            foreach (Tuple<string,PictureBox> tupla in tupleServer)
+            {
+                //textBox1.AppendText($"{Environment.NewLine}Lettura da {tupla.Item1}");
+                validFeed = GetFeedMessage(tupla.Item1);
+                int codeFeed = ValidaFeed(validFeed);
+
+                if (codeFeed == 0) { 
+                    tupla.Item2.Image = Properties.Resources.verde;
+                    break;
+                }
+                else if (codeFeed == -1 || codeFeed == -2) { 
+                    tupla.Item2.Image = Properties.Resources.rosso;
+                    validFeed = null;
+                }
+                else if (codeFeed == -3) { 
+                    tupla.Item2.Image = Properties.Resources.arancio;
+                    validFeed = null;
+                }
+                //tupla.Item2.Refresh();
+            }           
+            return validFeed;
         }
 
         private FeedMessage GetFeedMessage(string url)
@@ -855,36 +881,36 @@ namespace AtacFeed
                 return null;
         }
 
-        private bool ValidaFeed(FeedMessage feed) 
+        private int ValidaFeed(FeedMessage feed)
         {
-            bool isValid = true;
+            int isValid = 0;
             DateTime dataFeedVehicle = t0.AddSeconds(feed?.Header.Timestamp ?? 0).ToLocalTime(); ;
             try
             {
                 if (feed == null)
                 {
                     Log.Error($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè NON LETTO");
-                    textBox1.AppendText($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè NON LETTO");
-                    isValid = false;
+                    textBox1.AppendText($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè NON LETTO{Environment.NewLine}");
+                    isValid = -1;
                 }
                 else if (feed.Entities.Count == 0)
                 {
                     Log.Error($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè VUOTO");
-                    textBox1.AppendText($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè VUOTO");
-                    isValid = false;
-
+                    textBox1.AppendText($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè VUOTO{Environment.NewLine}");
+                    isValid = -2;
                 }
                 else if (LastDataFeedVehicle.GetValueOrDefault(DateTime.MinValue) >= dataFeedVehicle)
                 {
                     Log.Error($"[{DateTime.Now:HH:mm:ss}] - Feed scartato in quanto ha il timestamp SUPERATO");
-                    textBox1.AppendText($"[{DateTime.Now:HH:mm:ss}] - Feed scartato in quanto ha il timestamp SUPERATO");
-                    isValid = false;
+                    textBox1.AppendText($"[{DateTime.Now:HH:mm:ss}] - Feed scartato in quanto ha il timestamp SUPERATO{Environment.NewLine}");
+                    isValid = -3;
                 }
             }
-            catch (Exception exc) {
+            catch (Exception exc)
+            {
                 textBox1.AppendText($"{exc.Message}");
                 Log.Error(exc, "Errore Generico");
-                isValid = false;
+                isValid = -1;
             }
             return isValid;
         }
@@ -904,11 +930,15 @@ namespace AtacFeed
             dataGridViolazioni.Invalidate();
             dataGridViolazioni.DataSource = null;
 
-            dataGridVetture.Invalidate();
-            dataGridVetture.DataSource = null;
+            //dataGridVetture.Invalidate();
+            //dataGridVetture.DataSource = null;
 
-            formsPlotTPL.Reset();
-            formsPlotAtac.Reset();
+            advancedDataGridView1.Invalidate();
+            advancedDataGridView1.DataSource = null;
+
+
+            plotTPL.Reset();
+            plotAtac.Reset();
 
             labelLetture.Text = "0";
             labelFeedLetti.Text = "0";
@@ -921,7 +951,7 @@ namespace AtacFeed
             labelBusAtac.Text = "0";
             labelTramAtac.Text = "0";
             labelFilobusAtac.Text = "0";
-            labelMiniBusEleAtac.Text =  "0";
+            labelMiniBusEleAtac.Text = "0";
             labelFurgoncinoAtac.Text = "0";
 
 
@@ -950,9 +980,9 @@ namespace AtacFeed
                     MessageBoxButtons.YesNo,
                     MessageBoxIcon.Question);
                 if (dialog == DialogResult.No)
-                    return;                
+                    return;
             }
-            
+
             int deltaMilliSec = (int)(1000 * (60 * minuti.Value + secondi.Value));
             if (deltaMilliSec == 0)
             {
@@ -981,60 +1011,75 @@ namespace AtacFeed
                 buttonPlayPause.BackgroundImage = Properties.Resources.play;
                 comboBox1.Enabled = true;
                 buttonResetRegole.Enabled = true;
-                if (deltaMilliSec>0)
+                if (deltaMilliSec > 0)
                     Log.Information("Acquisizione in pausa");
             }
         }
 
         private void AggiornaScottPlot()
         {
-            if (ElencoVettureGrafico.Count > 2)
+            if (ElencoVettureGrafico.Count > 0)
             {
-                Render(formsPlotAtac, formsPlotTPL);
+                Render(plotAtac, plotTPL);
             }
         }
-        
+
         public void Render(FormsPlot pltATAC, FormsPlot pltTPL)
         {
-            var culture = CultureInfo.CreateSpecificCulture("it");                        
+            var culture = CultureInfo.CreateSpecificCulture("it");
             var tempo = (from elenco in ElencoVettureGrafico select elenco.DateTime.ToOADate()).ToArray();
             var serieAtac = (from elenco in ElencoVettureGrafico select (double)elenco.Atac).ToArray();
             var serieAggregateATAC = (from elenco in ElencoVettureGrafico select (double)(elenco.AggregateAtac)).ToArray();
-            
-            pltATAC.plt.Clear(); 
-            pltATAC.plt.PlotSignalXY(tempo, serieAggregateATAC, markerSize: 5, color: Color.FromArgb(231, 109, 20), lineWidth: 4, label: "Aggregate");
-            pltATAC.plt.PlotSignalXY(tempo, serieAtac, markerSize: 1, color: Color.FromArgb(137, 8, 39), lineWidth: 2, label: "Istantanee");            
-            pltATAC.plt.SetCulture(culture);
-            pltATAC.plt.Ticks(dateTimeX: true);
-            pltATAC.plt.Ticks(useMultiplierNotation: false);
-            pltATAC.plt.Legend(location: legendLocation.upperLeft);
-            pltATAC.plt.Title("Monitoraggio vetture ATAC");
-            pltATAC.plt.AxisAuto();
-            pltATAC.Render();
 
-            pltTPL.plt.Clear();
+            pltATAC.Plot.Clear();
+
+            //pltATAC.Plot.PlotSignalXY(tempo, serieAggregateATAC, markerSize: 5, color: Color.FromArgb(231, 109, 20), lineWidth: 4, label: "Aggregate");
+            //pltATAC.Plot.PlotSignalXY(tempo, serieAtac, markerSize: 1, color: Color.FromArgb(137, 8, 39), lineWidth: 2, label: "Istantanee");
+            var aggAtac = pltATAC.Plot.AddSignalXY(tempo, serieAggregateATAC, color: Color.FromArgb(231, 109, 20), label: "Aggregate");
+            aggAtac.LineWidth = 2;
+            aggAtac.MarkerSize = 2;
+            var istAtac = pltATAC.Plot.AddSignalXY(tempo, serieAtac, color: Color.FromArgb(137, 8, 39), label: "Istantanee");
+            istAtac.LineWidth = 2;
+            istAtac.MarkerSize = 2;
+            
+            pltATAC.Plot.SetCulture(culture);
+            pltATAC.Plot.XAxis.DateTimeFormat(true);
+            //pltATAC.Plot.XAxis.TickLabelFormat("dd-MM HH:mm:ss", dateTimeFormat: true);            
+            pltATAC.Plot.Legend(location: Alignment.UpperLeft);
+            pltATAC.Plot.YAxis.Label(label: "Vetture rilevate");
+            pltATAC.Plot.Title("Monitoraggio vetture ATAC");
+            pltATAC.Plot.AxisAuto();
+            pltATAC.Render();
+            
+            pltTPL.Plot.Clear();
             var serieTPL = (from elenco in ElencoVettureGrafico select (double)elenco.TPL).ToArray();
             var serieAggregateTPL = (from elenco in ElencoVettureGrafico select (double)(elenco.AggregateTPL)).ToArray();
-            pltTPL.plt.PlotSignalXY(tempo, serieAggregateTPL, markerSize: 5, color: Color.FromArgb(231, 109, 20), lineWidth: 4, maxRenderIndex: ElencoVettureGrafico.Count - 1, label: "Aggregate");
-            pltTPL.plt.PlotSignalXY(tempo, serieTPL, markerSize: 1, color: Color.FromArgb(4, 65, 136), lineWidth: 2, maxRenderIndex: ElencoVettureGrafico.Count - 1, label: "Istantanee");            
-            pltTPL.plt.SetCulture(culture);
-            pltTPL.plt.Ticks(dateTimeX: true);
-            pltTPL.plt.Ticks(useMultiplierNotation: false);
-            pltTPL.plt.Legend(location: legendLocation.upperLeft);
-            pltTPL.plt.Title("Monitoraggio vetture TPL");
-            pltTPL.plt.AxisAuto();
+            var plotSignalAggragatoTPL = pltTPL.Plot.AddSignalXY(tempo, serieAggregateTPL, color: Color.FromArgb(231, 109, 20), label: "Aggregate");
+            plotSignalAggragatoTPL.LineWidth = 3;
+            plotSignalAggragatoTPL.MarkerSize = 3;
+            var plotSignalActualTPL = pltTPL.Plot.AddSignalXY(tempo, serieTPL, color: Color.FromArgb(4, 65, 136),  label: "Istantanee");
+            plotSignalActualTPL.LineWidth = 2;
+            plotSignalActualTPL.MarkerSize = 2;
+            pltTPL.Plot.SetCulture(culture);
+            pltTPL.Plot.XAxis.DateTimeFormat(true);
+            pltTPL.Plot.YAxis.Label(label: "Vetture rilevate");
+            pltTPL.Plot.YAxis.MinimumTickSpacing(1);
+            pltTPL.Plot.Legend(location: Alignment.UpperLeft);
+            pltTPL.Plot.Title("Monitoraggio vetture TPL");
+            pltTPL.Plot.AxisAuto();
             pltTPL.Render();
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Properties.Settings settings = new Properties.Settings(); 
-            
+            //Properties.Settings settings = new Properties.Settings();
+
             ElencoAggregatoVetture = new List<ExtendedVehicleInfo>();
             ElencoPrecedente = new List<ExtendedVehicleInfo>();
             AnomaliaGTFS = new List<ErroriGTFS>();
             ElencoVettureGrafico = new List<MonitoraggioVettureGrafico>();
-            
+
             ElencoLineeMonitorate = new List<LineaMonitorata>();
             AlertsDaControllare = new List<AlertDaControllare>();
 
@@ -1065,24 +1110,26 @@ namespace AtacFeed
             radioRaggruppamento.Checked = true;
             checkAnomalieGTFS.Checked = Properties.Settings.Default.CheckAnomalie;
             checkSovraffollamento.Checked = Properties.Settings.Default.CheckSovraffollamento;
+
+            checkTuttoPercorso.Visible = Properties.Settings.Default.ExtraSetting;
             int totalSeconds = Properties.Settings.Default.DeltaTSec;
             minuti.Value = totalSeconds / 60;
             secondi.Value = totalSeconds % 60;
 
-            if (!Properties.Settings.Default.tabGrigliaOld)
-                tabMainForm.TabPages.Remove(tabGriglia);
+            //if (!Properties.Settings.Default.tabGrigliaOld)
+            //    tabMainForm.TabPages.Remove(tabGriglia);
 
             #endregion
 
             LeggiFileConfigurazione();
             LeggiRegoleAlertDaFile();
         }
-        
-        private void LeggiFileConfigurazione() {
-            
+
+        private void LeggiFileConfigurazione()
+        {
             RegoleMonitoraggio = new List<RegolaMonitoraggio>();
 
-            var reader = new GTFSReader<GTFSFeed>();            
+            var reader = new GTFSReader<GTFSFeed>();
             staticData = reader.Read($"Config{Path.DirectorySeparatorChar}GTFS_Static");
 
             List<Route> elencoLinee = staticData.Routes
@@ -1111,31 +1158,47 @@ namespace AtacFeed
                                   join agenzia in staticData.Agencies on linea.AgencyId equals agenzia.Id
                                   select new LineaAgenzia(linea, agenzia)
                                  ).ToList();
+            LineeAgenzia = ElencoLineaAgenzia.Select(x => x.Route.Id).Distinct().ToList();
+
+
+            Trips = (from trip in staticData.Trips
+                     select new Trip{ RouteId=trip.RouteId, Headsign=trip.Headsign, Direction= trip.Direction }
+                     ).Distinct().ToList();
+
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                Delimiter = ";",
+                HeaderValidated = null,
+                MissingFieldFound = null,
+                TrimOptions = TrimOptions.Trim,
+                PrepareHeaderForMatch = args => args.Header.Trim(),
+                AllowComments = true
+            };
 
             using (var readerDettagli = new StreamReader($"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}DettagliVettura.csv"))
-            using (var csv = new CsvReader(readerDettagli, CultureInfo.InvariantCulture))
+            using (var csv = new CsvReader(readerDettagli, config))
             {
-                csv.Configuration.Delimiter = ";";
-                csv.Configuration.HeaderValidated = null;
-                csv.Configuration.MissingFieldFound = null;
-                csv.Configuration.TrimOptions = CsvHelper.Configuration.TrimOptions.Trim;
-                csv.Configuration.PrepareHeaderForMatch = (string header, int index) => header.Trim();
-                csv.Configuration.AllowComments = true;
                 ElencoDettagliVettura = csv.GetRecords<DettagliVettura>().ToList();
             }
             try
             {
                 using (var readerTempoBonus = new StreamReader($"Config{Path.DirectorySeparatorChar}MonitoraggioLinee{Path.DirectorySeparatorChar}RegoleMonitoraggio_yes.txt"))
-                using (var csv = new CsvReader(readerTempoBonus, CultureInfo.InvariantCulture))
                 {
-                    csv.Configuration.Delimiter = ",";
-                    csv.Configuration.HeaderValidated = null;
-                    csv.Configuration.MissingFieldFound = null;
-                    csv.Configuration.TrimOptions = CsvHelper.Configuration.TrimOptions.Trim;
-                    csv.Configuration.PrepareHeaderForMatch = (string header, int index) => header.Trim();
-                    csv.Configuration.AllowComments = true;                    
-                    RegoleMonitoraggio = csv.GetRecords<RegolaMonitoraggio>().ToList();
-                    dataGridViolazioni.DataSource = RegoleMonitoraggio;
+                    var configTempoBonus = new CsvConfiguration(CultureInfo.InvariantCulture)
+                    {
+                        Delimiter = ",",
+                        HeaderValidated = null,
+                        MissingFieldFound = null,
+                        TrimOptions = TrimOptions.Trim,
+                        PrepareHeaderForMatch = args => args.Header.Trim(),
+                        AllowComments = true
+                    };
+
+                    using (var csv = new CsvReader(readerTempoBonus, configTempoBonus))
+                    {
+                        RegoleMonitoraggio = csv.GetRecords<RegolaMonitoraggio>().ToList();
+                        dataGridViolazioni.DataSource = RegoleMonitoraggio;
+                    }
                 }
             }
             catch
@@ -1166,16 +1229,20 @@ namespace AtacFeed
                 {
                     try
                     {
-                        using (var readerTempoBonus = new StreamReader(item))
-                        using (var csv = new CsvReader(readerTempoBonus, CultureInfo.InvariantCulture))
+                        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
                         {
-                            csv.Configuration.Delimiter = ",";
-                            csv.Configuration.HeaderValidated = null;
-                            csv.Configuration.TrimOptions = CsvHelper.Configuration.TrimOptions.Trim;
-                            csv.Configuration.MissingFieldFound = null;
-                            csv.Configuration.RegisterClassMap<RegolaAlertMap>();
-                            csv.Configuration.AllowComments = true;
-                            csv.Configuration.PrepareHeaderForMatch = (string header, int index) => header.Trim();
+                            Delimiter = ",",
+                            HeaderValidated = null,
+                            TrimOptions = TrimOptions.Trim,
+                            MissingFieldFound = null,
+                            AllowComments = true,
+                            PrepareHeaderForMatch = args => args.Header.Trim(),
+                        };
+
+                        using (var readerTempoBonus = new StreamReader(item))
+                        using (var csv = new CsvReader(readerTempoBonus, config))
+                        {
+                            csv.Context.RegisterClassMap<RegolaAlertMap>();
                             List<RegolaAlert> listaRegole = csv.GetRecords<RegolaAlert>().ToList();
                             TabPage myNewTabItem = new TabPage
                             {
@@ -1212,14 +1279,14 @@ namespace AtacFeed
                                 DataGridViewTextBoxColumn columnOraUltimaViolazione = new DataGridViewTextBoxColumn();
 
                                 myNewdataGridVetture.Columns.AddRange(new DataGridViewColumn[] {
-                                columnLinea
-                                ,columnGiorno
-                                ,columnDa
-                                ,columnA
-                                ,columnVetturaDa
-                                ,columnVetturaA
-                                ,columnVetturaSbagliata
-                            });
+                                    columnLinea
+                                    ,columnGiorno
+                                    ,columnDa
+                                    ,columnA
+                                    ,columnVetturaDa
+                                    ,columnVetturaA
+                                    ,columnVetturaSbagliata
+                                });
 
                                 DataGridViewCellStyle timeFormat = new DataGridViewCellStyle
                                 {
@@ -1272,7 +1339,7 @@ namespace AtacFeed
                                 myNewdataGridVetture.ReadOnly = true;
 
                                 myNewTabItem.Controls.Add(myNewdataGridVetture);
-                                tabMainForm.TabPages.Add(myNewTabItem);                                
+                                tabMainForm.TabPages.Add(myNewTabItem);
                             }
                         }
                     }
@@ -1314,26 +1381,29 @@ namespace AtacFeed
             FileInfo fileMediaPonderata = new FileInfo($"Config{Path.DirectorySeparatorChar}CriterioMediaPonderata.txt");
             if (fileMediaPonderata.Exists)
             {
-                using (var readerMediaPonderata = new StreamReader(fileMediaPonderata.FullName))
-                using (var csvMediaPonderata = new CsvReader(readerMediaPonderata, CultureInfo.InvariantCulture))
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
                 {
-                    csvMediaPonderata.Configuration.Delimiter = ",";
-                    csvMediaPonderata.Configuration.HeaderValidated = null;
-                    csvMediaPonderata.Configuration.TrimOptions = CsvHelper.Configuration.TrimOptions.Trim;
-                    csvMediaPonderata.Configuration.PrepareHeaderForMatch = (string header, int index) => header.Trim();
-                    csvMediaPonderata.Configuration.AllowComments = true;
-                    csvMediaPonderata.Configuration.MissingFieldFound = null;
+                    Delimiter = ",",
+                    HeaderValidated = null,
+                    TrimOptions = TrimOptions.Trim,
+                    PrepareHeaderForMatch = args => args.Header.Trim(),
+                    AllowComments = true,
+                    MissingFieldFound = null
+                };
+
+                using (var readerMediaPonderata = new StreamReader(fileMediaPonderata.FullName))
+                using (var csvMediaPonderata = new CsvReader(readerMediaPonderata, config))
+                {
                     CriteriMediaPonderata = csvMediaPonderata.GetRecords<CriterioMediaPonderata>().ToList();
-                    
                     if (CriteriMediaPonderata.Sum(x => x.Peso) != 1)
                     {
-
-                        MessageBox.Show(text:"La somma dei pesi dei campioni deve essere 1", caption:"Attenzione", buttons:MessageBoxButtons.OK, icon:MessageBoxIcon.Error);
+                        MessageBox.Show(text: "La somma dei pesi dei campioni deve essere 1", caption: "Attenzione", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
                     }
                 }
             }
-            else {
-            
+            else
+            {
+
             }
         }
 
@@ -1346,7 +1416,7 @@ namespace AtacFeed
         {
             Properties.Settings.Default.UrlVehicle = urlVehicle.Text;
             Properties.Settings.Default.UrlTrip = urlTrip.Text;
-            Properties.Settings.Default.UrlAlert= urlAlert.Text;
+            Properties.Settings.Default.UrlAlert = urlAlert.Text;
             Properties.Settings.Default.DeltaTSec = (int)(60 * minuti.Value + secondi.Value);
             Properties.Settings.Default.Duplicati = checkTripDuplicati.Checked;
             Properties.Settings.Default.Vuote = checkTripVuoti.Checked;
@@ -1369,10 +1439,10 @@ namespace AtacFeed
         {
             if (timerAcquisizione.Enabled)
             {
-                DialogResult dialog = MessageBox.Show($"Interrompere il monitoraggio {(needToRestart? "e riavviare" : "ed uscire")} ? ",
-                                $"Conferma {(needToRestart? "Riavvio" : "Uscita")}",
-                                 MessageBoxButtons.YesNo,
-                                 MessageBoxIcon.Question);
+                DialogResult dialog = MessageBox.Show($"Interrompere il monitoraggio {(needToRestart ? "e riavviare" : "ed uscire")} ? ",
+                                                      $"Conferma {(needToRestart ? "Riavvio" : "Uscita")}",
+                                                      MessageBoxButtons.YesNo,
+                                                      MessageBoxIcon.Question);
                 if (dialog == DialogResult.No)
                 {
                     e.Cancel = true;
@@ -1385,7 +1455,8 @@ namespace AtacFeed
             }
         }
 
-        private async Task<bool> SaveAs(FileInfo outputFile) {
+        private async Task<bool> SaveAs(FileInfo outputFile)
+        {
             bool retVal = true;
             if (checkXlsx.Checked)
             {
@@ -1575,9 +1646,6 @@ namespace AtacFeed
                             }
                         }
 
-
-
-
                         if (checkAnomalieGTFS.Checked)
                         {
                             string excelSheetName = "AnomalieGTFS";
@@ -1590,7 +1658,6 @@ namespace AtacFeed
                                 }
                             }
                             workSheet = excel.Workbook.Worksheets.Add(excelSheetName);
-
 
                             Ammessi = new List<string> { "Matricola", "Linea", "PrimaVolta", "TripId", "CurrentStopSequence", "Delta" };
                             membersToInclude = typeof(ErroriGTFS)
@@ -1633,7 +1700,6 @@ namespace AtacFeed
                             }
                             workSheet = excel.Workbook.Worksheets.Add(excelSheetName);
 
-
                             //Ammessi = new List<string> { "Matricola", "Linea", "PrimaVolta", "TripId", "CurrentStopSequence", "Delta" };
                             membersToInclude = typeof(RunTimeValueAlert)
                                 .GetProperties(BindingFlags.Instance | BindingFlags.Public)
@@ -1674,10 +1740,15 @@ namespace AtacFeed
             if (checkCSV.Checked)
             {
                 using (var writer = new StreamWriter($"OUTPUT{Path.DirectorySeparatorChar}{fileName}.csv"))
-                using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 {
-                    csv.Configuration.Delimiter = ";";
-                    await csv.WriteRecordsAsync(ElencoAggregatoVetture);
+                    var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                    {
+                        Delimiter = ";",
+                    };
+                    using (var csv = new CsvWriter(writer, config))
+                    {
+                        await csv.WriteRecordsAsync(ElencoAggregatoVetture);
+                    }
                 }
             }
             return retVal;
@@ -1752,7 +1823,8 @@ namespace AtacFeed
             checkAlert.Enabled = checkXlsx.Checked;
         }
 
-        public void Colora() {
+        public void Colora()
+        {
             dataGridViolazioni.SuspendLayout();
             IEnumerable<LineaMonitorata> dataSource = (IEnumerable<LineaMonitorata>)dataGridViolazioni.DataSource;
             LineaMonitorata riga;
@@ -1763,12 +1835,12 @@ namespace AtacFeed
                 if (riga.VettureRilevate < riga.VetturePreviste)
                 {
                     TimeSpan span = riga.OraUltimaViolazione.GetValueOrDefault(LastDataFeedVehicle.GetValueOrDefault()) - riga.OraPrimaViolazione.GetValueOrDefault(DateTime.MinValue);
-                    
+
                     double totalMinutes = span.TotalMinutes;
                     if (totalMinutes < riga.TempoBonus)
                     {
                         row.Cells[6].Style.ForeColor = ColorTranslator.FromHtml("#856404");
-                        row.Cells[6].Style.BackColor = ColorTranslator.FromHtml("#fff3cd");                        
+                        row.Cells[6].Style.BackColor = ColorTranslator.FromHtml("#fff3cd");
                     }
                     else
                     {
@@ -1797,7 +1869,7 @@ namespace AtacFeed
         private void ResetAcquisizione(object sender, EventArgs e)
         {
             // Application.Restart();
-            needToRestart = true;            
+            needToRestart = true;
             this.Close();
 
             /*
@@ -1870,7 +1942,8 @@ namespace AtacFeed
         {
             UpdateBox updateBox = new UpdateBox();
             var result = updateBox.ShowDialog();
-            if (result == DialogResult.Yes) {
+            if (result == DialogResult.Yes)
+            {
                 //Application.Restart();
                 needToRestart = true;
                 Close();

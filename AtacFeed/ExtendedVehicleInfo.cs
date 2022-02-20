@@ -76,7 +76,19 @@ namespace AtacFeed
         [Ignore]
         public int TipoMezzoTrasporto { get; set; }
 
-        public ExtendedVehicleInfo(string idVettura, string matricola, string licensePlate, string routeId, string linea, string gestore, uint? directionId, uint currentStopSequence, VehiclePosition.CongestionLevel congestionLevel, VehiclePosition.OccupancyStatus occupancyStatus, string tripId, bool strict, DateTime data, string rimessa, string euro, string modello, float latitude, float longitude, VehiclePosition.VehicleStopStatus inTransitTo, int tipoMezzoTrasporto, bool superStrictMode = false)
+        [Index(20)]
+        [Ignore]
+        public double DistanzaPercorsa { get; set; }
+
+        [Ignore]
+        public string NomeFermata { get; set; }
+
+        [Ignore]
+        public string Destinazione { get; set; }
+
+        public ExtendedVehicleInfo(string idVettura, string matricola, string licensePlate, string routeId, string linea, string gestore, uint? directionId, uint currentStopSequence, VehiclePosition.CongestionLevel congestionLevel, VehiclePosition.OccupancyStatus occupancyStatus, string tripId, bool strict, DateTime data, string rimessa, string euro, string modello, float latitude, float longitude, VehiclePosition.VehicleStopStatus inTransitTo, int tipoMezzoTrasporto, double distanzaPercorsa = 0, bool superStrictMode = false,
+            string nomeFermata = "", string destinazione=""
+            )
         {
             IdVettura = idVettura;
             Matricola = matricola;
@@ -100,6 +112,9 @@ namespace AtacFeed
             InTransitTo = inTransitTo;
             SuperStrictMode = superStrictMode;
             TipoMezzoTrasporto = tipoMezzoTrasporto;
+            DistanzaPercorsa = distanzaPercorsa;
+            NomeFermata = nomeFermata;
+            Destinazione = destinazione;
         }
 
         public bool Equals(ExtendedVehicleInfo other)

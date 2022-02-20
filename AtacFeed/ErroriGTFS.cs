@@ -25,9 +25,9 @@ namespace AtacFeed
         public int Delta { get; set; }        
         
 
-        public ErroriGTFS(ExtendedVehicleInfo e, int delta) : base(e.IdVettura, e.Matricola, e.LicensePlate, e.RouteId, e.Linea, e.Gestore, e.DirectionId, e.CurrentStopSequence, e.CongestionLevel, e.OccupancyStatus, e.TripId, true, e.PrimaVolta, e.Rimessa, e.Euro, e.Modello, e.Latitude, e.Longitude, e.InTransitTo, e.TipoMezzoTrasporto, false)
+        public ErroriGTFS(ExtendedVehicleInfo e, int delta) : base(e.IdVettura, e.Matricola, e.LicensePlate, e.RouteId, e.Linea, e.Gestore, e.DirectionId, e.CurrentStopSequence, e.CongestionLevel, e.OccupancyStatus, e.TripId, true, e.PrimaVolta, e.Rimessa, e.Euro, e.Modello, e.Latitude, e.Longitude, e.InTransitTo, e.TipoMezzoTrasporto, e.DistanzaPercorsa, false)
         {
-            this.Delta = delta;
+            Delta = delta;
         }
 
         public override bool Equals(object obj)

@@ -28,7 +28,6 @@ namespace AtacFeed
 {
     public partial class FormGTFS_RSM : Form
     {
-
         public bool needToRestart = false;
 
         private static readonly DateTime t0 = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
@@ -101,64 +100,64 @@ namespace AtacFeed
 
                         List<string> lineeAnomale = lineeGTFS.Where(p => !LineeAgenzia.Any(p2 => p2 == p)).ToList();
                         if (lineeAnomale.Count > 0) {
-                            textBox2.Text = $"Le seguenti linee {string.Join(", ",lineeAnomale)} {Environment.NewLine}NON sono riportate nel file statico routes.txt{Environment.NewLine}{Environment.NewLine}";
+                            textBox2.Text = $"Le seguenti linee {string.Join(", ",lineeAnomale)}{Environment.NewLine}NON sono riportate nel file statico routes.txt{Environment.NewLine}{Environment.NewLine}";
+                            /*
                             foreach (string anomalia in lineeAnomale)
-                            {
+                            {                                
                                 feedEntities.RemoveAll((x) => x.Vehicle.Trip.RouteId == anomalia);
                             }
+                            */
                         }
-                        List<ExtendedVehicleInfo> elencoVetture = 
-                            (
-                            from ff in (
-                            feedEntities
-                            .GroupJoin(
-                                inner: ElencoLineaAgenzia,
-                                outerKeySelector: v => v.Vehicle.Trip?.RouteId,
-                                innerKeySelector: l => l.Route.Id,
-                                resultSelector: (v, l) => new { v.Vehicle, Linea = l.FirstOrDefault() })
-                            .GroupJoin(
-                                inner: ElencoDettagliVettura,
-                                outerKeySelector: o2 => o2.Vehicle.Vehicle?.Label.Trim(),
-                                innerKeySelector: i2 => i2.Matricola,
-                                resultSelector: (o2, i2) => new { o2, DettagliVettura = i2.FirstOrDefault() })
-                            .GroupJoin(
-                                inner: staticData.Stops,
-                                outerKeySelector: z=> z.o2.Vehicle.StopId ,
-                                innerKeySelector: y => y.Code ,
-                                resultSelector: (z, y) => new { z, NomeFermata= y.FirstOrDefault()}
-                                )
-                            )
-                            from t2 in Trips
-                                .Where(x => (GTFS.Entities.Enumerations.DirectionType)(ff.z.o2.Vehicle.Trip?.DirectionId ?? 1) == (GTFS.Entities.Enumerations.DirectionType)x.Direction
-                                    && (ff.z.o2.Vehicle.Trip?.RouteId  == x.RouteId)
+                        List<ExtendedVehicleInfo> elencoVetture =
+                            (from fe in 
+                                 feedEntities
+                                 .GroupJoin(
+                                     inner: ElencoLineaAgenzia,
+                                     outerKeySelector: v => v.Vehicle.Trip?.RouteId,
+                                     innerKeySelector: l => l.Route.Id,
+                                     resultSelector: (v, l) => (v.Vehicle, Linea: l.FirstOrDefault())
+                                     )
+                                 .GroupJoin(
+                                     inner: ElencoDettagliVettura,
+                                     outerKeySelector: o2 => o2.Vehicle.Vehicle?.Label.Trim(),
+                                     innerKeySelector: i2 => i2.Matricola,
+                                     resultSelector: (o2, i2) => (o2.Linea, o2.Vehicle, DettagliVettura: i2.FirstOrDefault()))
+                                 .GroupJoin(
+                                     inner: staticData.Stops,
+                                     outerKeySelector: z => z.Vehicle.StopId,
+                                     innerKeySelector: y => y.Code,
+                                     resultSelector: (z, y) => (z.Linea, z.Vehicle, z.DettagliVettura, NomeFermata: y.FirstOrDefault()))
+                              from trip in Trips
+                                .Where(x => (GTFS.Entities.Enumerations.DirectionType)(fe.Vehicle.Trip?.DirectionId ?? 1) == (GTFS.Entities.Enumerations.DirectionType)x.Direction
+                                    && (fe.Vehicle.Trip?.RouteId  == x.RouteId)
                                 )
                                 .DefaultIfEmpty()
-                            select  new { ff, t2.Headsign }
+                            select (fe.Linea,fe.Vehicle,fe.DettagliVettura,fe.NomeFermata, trip?.Headsign)
                             )
-                            .Select(x => new ExtendedVehicleInfo(                                
-                                x.ff.z.o2.Vehicle.Vehicle.Id,
-                                            x.ff.z.o2.Vehicle.Vehicle.Label.Trim(),
-                                            x.ff.z.o2.Vehicle.Vehicle.LicensePlate,
-                                            x.ff.z.o2.Vehicle.Trip?.RouteId,
-                                            x.ff.z.o2.Linea?.Route.ShortName,
-                                            x.ff.z.DettagliVettura?.Gestore ?? x.ff.z.o2.Linea.Agency.Name,
-                                            x.ff.z.o2.Vehicle.Trip?.DirectionId,
-                                            x.ff.z.o2.Vehicle.CurrentStopSequence,
-                                            x.ff.z.o2.Vehicle.congestion_level,
-                                            x.ff.z.o2.Vehicle.occupancy_status,
-                                            x.ff.z.o2.Vehicle.Trip?.TripId,
+                            .Select(x => new ExtendedVehicleInfo(
+                                x.Vehicle.Vehicle.Id,
+                                            x.Vehicle.Vehicle.Label.Trim(),
+                                            x.Vehicle.Vehicle.LicensePlate,
+                                            x.Vehicle.Trip?.RouteId,
+                                            x.Linea?.Route.ShortName,
+                                            x.DettagliVettura?.Gestore ?? x.Linea.Agency.Name,
+                                            x.Vehicle.Trip?.DirectionId,
+                                            x.Vehicle.CurrentStopSequence,
+                                            x.Vehicle.congestion_level,
+                                            x.Vehicle.occupancy_status,
+                                            x.Vehicle.Trip?.TripId,
                                             checkTripDuplicati.Checked,
                                             dataFeedVehicle,
-                                            x.ff.z.DettagliVettura?.Rimessa,
-                                            x.ff.z.DettagliVettura?.Euro,
-                                            x.ff.z.DettagliVettura?.Modello,
-                                            x.ff.z.o2.Vehicle.Position.Latitude,
-                                            x.ff.z.o2.Vehicle.Position.Longitude,
-                                            x.ff.z.o2.Vehicle.CurrentStatus,
-                                            x.ff.z.DettagliVettura?.TipoMezzoTrasporto.GetValueOrDefault(0) ?? (string.Equals(x.ff.z.o2.Linea.Agency.Name, "atac", StringComparison.OrdinalIgnoreCase) ? (x.ff.z.o2.Linea.Route.Type == GTFS.Entities.Enumerations.RouteTypeExtended.TramService ? -1 : -2) : -3),
-                                            x.ff.z.o2.Vehicle.Position.Odometer,
+                                            x.DettagliVettura?.Rimessa,
+                                            x.DettagliVettura?.Euro,
+                                            x.DettagliVettura?.Modello,
+                                            x.Vehicle.Position.Latitude,
+                                            x.Vehicle.Position.Longitude,
+                                            x.Vehicle.CurrentStatus,
+                                            x.DettagliVettura?.TipoMezzoTrasporto.GetValueOrDefault(0) ?? (string.Equals(x.Linea.Agency.Name, "atac", StringComparison.OrdinalIgnoreCase) ? (x.Linea.Route.Type == GTFS.Entities.Enumerations.RouteTypeExtended.TramService ? -1 : -2) : -3),
+                                            x.Vehicle.Position.Odometer,
                                             checkTuttoPercorso.Visible && checkTuttoPercorso.Checked,
-                                            x.ff.NomeFermata?.Name,
+                                            x.NomeFermata?.Name,
                                             x.Headsign
                                         )
                             )
@@ -358,7 +357,7 @@ namespace AtacFeed
                         int rilevatoFilobusAtac = elencoVetture.Where(x => x.TipoMezzoTrasporto == 2).Count();
                         int rilevatoMinibusElettrici = elencoVetture.Where(x => x.TipoMezzoTrasporto == 5).Count();
                         int rilevatoFurgoncini = elencoVetture.Where(x => x.TipoMezzoTrasporto == 6).Count();
-                        int rilevatoFerro = elencoVetture.Where(x => x.TipoMezzoTrasporto == -1).Count();
+                        int rilevatoFerro = elencoVetture.Where(x => x.TipoMezzoTrasporto == -1 || x.TipoMezzoTrasporto == 7).Count();
                         int rilevatoAltroAtac = elencoVetture.Where(x => x.TipoMezzoTrasporto == -2).Count();
 
                         int rilevatoBusTpl = elencoVetture.Where(x => x.TipoMezzoTrasporto == 3).Count();
@@ -388,14 +387,15 @@ namespace AtacFeed
                         //dataGridVetture.DataSource = ElencoAggregatoVetture;
 
                         DataTable dt = new DataTable();
-                        //using (var reader = ObjectReader.Create(ElencoAggregatoVetture))
-                        using (var reader = ObjectReader.Create(elencoVetture))
+                        using (var reader = ObjectReader.Create(ElencoAggregatoVetture))
+                        //using (var reader = ObjectReader.Create(elencoVetture))
                         {
                             dt.Load(reader);
                         }
 
-                        extendedVehicleInfoBindingSource.DataSource = dt;
-                        advancedDataGridView1.DataSource = this.extendedVehicleInfoBindingSource;
+                        extendedVehicleInfoBindingSource.DataSource = dt;                        
+                        advancedDataGridView1.DataSource = extendedVehicleInfoBindingSource;
+                        
 
                         List<string> urlTripList = new List<string>();
                         List<string> urlVehicleList = new List<string>();
@@ -936,7 +936,6 @@ namespace AtacFeed
             advancedDataGridView1.Invalidate();
             advancedDataGridView1.DataSource = null;
 
-
             plotTPL.Reset();
             plotAtac.Reset();
 
@@ -953,7 +952,6 @@ namespace AtacFeed
             labelFilobusAtac.Text = "0";
             labelMiniBusEleAtac.Text = "0";
             labelFurgoncinoAtac.Text = "0";
-
 
             lblOraLettura.Text = "--:--:--";
             labelAtac.Text = "0";
@@ -1775,15 +1773,13 @@ namespace AtacFeed
             {
                 Log.Error("{Exception}", e);
             }
-
-
         }
 
         private void Random(object sender, EventArgs e)
         {
             DateTime t0;
             if (ElencoVettureGrafico.Count == 0)
-                t0 = System.DateTime.Now;
+                t0 = DateTime.Now;
             else
                 t0 = ElencoVettureGrafico[ElencoVettureGrafico.Count - 1].DateTime;
             if (ElencoVettureGrafico.Count < 100000)

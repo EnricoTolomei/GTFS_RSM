@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>AtacFeed</RootNamespace>
     <AssemblyName>AtacFeed</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -85,17 +85,8 @@
     <Reference Include="FastMember, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FastMember.1.5.0\lib\net461\FastMember.dll</HintPath>
     </Reference>
-    <Reference Include="GTFS, Version=1.7.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GTFS.1.7.1\lib\net40\GTFS.dll</HintPath>
-    </Reference>
-    <Reference Include="GTFS.IO, Version=1.7.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GTFS.1.7.1\lib\net40\GTFS.IO.dll</HintPath>
-    </Reference>
-    <Reference Include="GTFS.IO.Desktop, Version=1.7.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GTFS.1.7.1\lib\net40\GTFS.IO.Desktop.dll</HintPath>
-    </Reference>
-    <Reference Include="GtfsRealtimeBindings, Version=0.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GtfsRealtimeBindings.0.0.4\lib\net40\GtfsRealtimeBindings.dll</HintPath>
+    <Reference Include="GTFS, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GTFS.3.0.0-pre005\lib\netstandard2.0\GTFS.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -124,7 +115,7 @@
       <HintPath>..\packages\ScottPlot.WinForms.4.1.41\lib\net472\ScottPlot.WinForms.dll</HintPath>
     </Reference>
     <Reference Include="Serilog, Version=2.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
-      <HintPath>..\packages\Serilog.2.10.0\lib\net46\Serilog.dll</HintPath>
+      <HintPath>..\packages\Serilog.2.11.0\lib\net46\Serilog.dll</HintPath>
     </Reference>
     <Reference Include="Serilog.Sinks.File, Version=5.0.0.0, Culture=neutral, PublicKeyToken=24c2f752a8e58a10, processorArchitecture=MSIL">
       <HintPath>..\packages\Serilog.Sinks.File.5.0.0\lib\net45\Serilog.Sinks.File.dll</HintPath>
@@ -192,13 +183,17 @@
     <Compile Include="DettagliVettura.cs" />
     <Compile Include="ErroriGTFS.cs" />
     <Compile Include="ExtendedVehicleInfo.cs" />
+    <Compile Include="FeedManager.cs" />
     <Compile Include="FormGTFS_RSM.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FormGTFS_RSM.Designer.cs">
       <DependentUpon>FormGTFS_RSM.cs</DependentUpon>
     </Compile>
+    <Compile Include="GTFS_RSM.cs" />
     <Compile Include="LineaAgenzia.cs" />
+    <Compile Include="Statistiche.cs" />
+    <Compile Include="TransitRealtime.cs" />
     <Compile Include="RunTimeValueAlert.cs" />
     <Compile Include="UpdateBox.cs">
       <SubType>Form</SubType>

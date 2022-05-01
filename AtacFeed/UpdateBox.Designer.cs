@@ -104,7 +104,7 @@
             this.buttonRestart.Text = "Riavvia Ora";
             this.buttonRestart.UseVisualStyleBackColor = true;
             this.buttonRestart.Visible = false;
-            this.buttonRestart.Click += new System.EventHandler(this.buttonRestart_Click);
+            this.buttonRestart.Click += new System.EventHandler(this.ButtonRestart_Click);
             // 
             // buttonAggiorna
             // 

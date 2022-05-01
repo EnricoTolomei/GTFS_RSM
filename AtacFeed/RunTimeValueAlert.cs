@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TransitRealtime;
+using static AtacFeed.TransitRealtime;
 
 namespace AtacFeed
 {
-    class RunTimeValueAlert
+    public class RunTimeValueAlert
     {
         public string TripID { get; set; }
         public string Linea { get; set; }
         public string Matricola { get; set; }
         public VehiclePosition.OccupancyStatus OccupancyStatus { get; set; }
-        public uint PrimaFermata{ get; set; }
+        public uint PrimaFermata { get; set; }
         public DateTime? PrimaVolta { get; set; }
         public uint? UltimaFermata { get; set; }
         public DateTime? UltimaVolta { get; set; }

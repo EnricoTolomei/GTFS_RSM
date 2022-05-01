@@ -187,7 +187,7 @@ namespace AtacFeed
             CheckConf();
         }
 
-        private void buttonRestart_Click(object sender, EventArgs e)
+        private void ButtonRestart_Click(object sender, EventArgs e)
         {            
             DialogResult = DialogResult.Yes;
             Close();

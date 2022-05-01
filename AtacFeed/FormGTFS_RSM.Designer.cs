@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGTFS_RSM));
             this.timerAcquisizione = new System.Windows.Forms.Timer(this.components);
             this.button3 = new System.Windows.Forms.Button();
@@ -102,9 +105,6 @@
             this.dataGridViolazioni = new System.Windows.Forms.DataGridView();
             this.tabGrigliaFiltrata = new System.Windows.Forms.TabPage();
             this.advancedDataGridView1 = new Zuby.ADGV.AdvancedDataGridView();
-            this.Destinazione = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NomeFermata = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DistanzaPercorsa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabGrafico = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.plotAtac = new ScottPlot.FormsPlot();
@@ -154,23 +154,6 @@
             this.textBox2 = new System.Windows.Forms.RichTextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabMainForm = new System.Windows.Forms.TabControl();
-            this.dataGridViewTextBoxColumn34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn38 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn39 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn40 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.occupancyStatusDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn42 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn43 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn44 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn45 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn46 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn47 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn48 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn49 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.inTransitToDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipoMezzoTrasportoDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.extendedVehicleInfoBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn50 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn51 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -183,6 +166,27 @@
             this.dataGridViewTextBoxColumn58 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.regolaViolataDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lineaMonitorataBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataGridViewTextBoxColumn34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn38 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn39 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Destinazione = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn40 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NomeFermata = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.occupancyStatusDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn42 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn43 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn44 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn45 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn46 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn47 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn48 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn49 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.inTransitToDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipoMezzoTrasportoDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DistanzaPercorsa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PartenzaProgrammata = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabMonitoraggio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViolazioni)).BeginInit();
             this.tabGrigliaFiltrata.SuspendLayout();
@@ -212,9 +216,10 @@
             // button3
             // 
             this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(1059, 521);
+            this.button3.Location = new System.Drawing.Point(1412, 641);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(102, 23);
+            this.button3.Size = new System.Drawing.Size(136, 28);
             this.button3.TabIndex = 28;
             this.button3.Text = "Dati Random";
             this.button3.UseVisualStyleBackColor = true;
@@ -225,10 +230,10 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(1058, 618);
-            this.label9.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.label9.Location = new System.Drawing.Point(1411, 761);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 6, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(45, 13);
+            this.label9.Size = new System.Drawing.Size(53, 16);
             this.label9.TabIndex = 24;
             this.label9.Text = "# Righe";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -236,10 +241,11 @@
             // labelTotaleIdVettura
             // 
             this.labelTotaleIdVettura.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleIdVettura.Location = new System.Drawing.Point(1121, 582);
+            this.labelTotaleIdVettura.Location = new System.Drawing.Point(1495, 716);
+            this.labelTotaleIdVettura.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTotaleIdVettura.Name = "labelTotaleIdVettura";
             this.labelTotaleIdVettura.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelTotaleIdVettura.Size = new System.Drawing.Size(40, 13);
+            this.labelTotaleIdVettura.Size = new System.Drawing.Size(53, 16);
             this.labelTotaleIdVettura.TabIndex = 11;
             this.labelTotaleIdVettura.Text = "0";
             this.labelTotaleIdVettura.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -247,10 +253,11 @@
             // labelTotaleMatricola
             // 
             this.labelTotaleMatricola.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleMatricola.Location = new System.Drawing.Point(1121, 600);
+            this.labelTotaleMatricola.Location = new System.Drawing.Point(1495, 738);
+            this.labelTotaleMatricola.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTotaleMatricola.Name = "labelTotaleMatricola";
             this.labelTotaleMatricola.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelTotaleMatricola.Size = new System.Drawing.Size(40, 13);
+            this.labelTotaleMatricola.Size = new System.Drawing.Size(53, 16);
             this.labelTotaleMatricola.TabIndex = 25;
             this.labelTotaleMatricola.Text = "0";
             this.labelTotaleMatricola.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -259,10 +266,10 @@
             // 
             this.label10.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(1058, 582);
-            this.label10.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.label10.Location = new System.Drawing.Point(1411, 716);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 6, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(60, 13);
+            this.label10.Size = new System.Drawing.Size(70, 16);
             this.label10.TabIndex = 26;
             this.label10.Text = "# IdVettura";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -270,10 +277,11 @@
             // labelTotaleRighe
             // 
             this.labelTotaleRighe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleRighe.Location = new System.Drawing.Point(1121, 618);
+            this.labelTotaleRighe.Location = new System.Drawing.Point(1495, 761);
+            this.labelTotaleRighe.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTotaleRighe.Name = "labelTotaleRighe";
             this.labelTotaleRighe.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelTotaleRighe.Size = new System.Drawing.Size(40, 13);
+            this.labelTotaleRighe.Size = new System.Drawing.Size(53, 16);
             this.labelTotaleRighe.TabIndex = 23;
             this.labelTotaleRighe.Text = "0";
             this.labelTotaleRighe.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -282,10 +290,10 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1058, 600);
-            this.label3.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
+            this.label3.Location = new System.Drawing.Point(1411, 738);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 6, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(60, 13);
+            this.label3.Size = new System.Drawing.Size(72, 16);
             this.label3.TabIndex = 12;
             this.label3.Text = "# Matricola";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -293,11 +301,12 @@
             // labelFeedLetti
             // 
             this.labelFeedLetti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelFeedLetti.Location = new System.Drawing.Point(1121, 564);
-            this.labelFeedLetti.MinimumSize = new System.Drawing.Size(15, 0);
+            this.labelFeedLetti.Location = new System.Drawing.Point(1495, 694);
+            this.labelFeedLetti.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelFeedLetti.MinimumSize = new System.Drawing.Size(20, 0);
             this.labelFeedLetti.Name = "labelFeedLetti";
             this.labelFeedLetti.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelFeedLetti.Size = new System.Drawing.Size(40, 13);
+            this.labelFeedLetti.Size = new System.Drawing.Size(53, 16);
             this.labelFeedLetti.TabIndex = 21;
             this.labelFeedLetti.Text = "0";
             this.labelFeedLetti.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -306,9 +315,10 @@
             // 
             this.label8.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(1058, 564);
+            this.label8.Location = new System.Drawing.Point(1411, 694);
+            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(41, 13);
+            this.label8.Size = new System.Drawing.Size(49, 16);
             this.label8.TabIndex = 20;
             this.label8.Text = "# Feed";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -318,9 +328,10 @@
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(1055, 77);
+            this.label12.Location = new System.Drawing.Point(1407, 95);
+            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(100, 13);
+            this.label12.Size = new System.Drawing.Size(127, 17);
             this.label12.TabIndex = 29;
             this.label12.Text = "Ultimo feed letto";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -330,9 +341,10 @@
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(1051, 220);
+            this.label13.Location = new System.Drawing.Point(1401, 271);
+            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(36, 15);
+            this.label13.Size = new System.Drawing.Size(46, 18);
             this.label13.TabIndex = 39;
             this.label13.Text = "ATAC";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -341,10 +353,11 @@
             // 
             this.labelTot.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTot.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTot.Location = new System.Drawing.Point(1102, 120);
+            this.labelTot.Location = new System.Drawing.Point(1469, 148);
+            this.labelTot.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTot.Name = "labelTot";
             this.labelTot.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelTot.Size = new System.Drawing.Size(40, 13);
+            this.labelTot.Size = new System.Drawing.Size(53, 16);
             this.labelTot.TabIndex = 38;
             this.labelTot.Text = "0";
             this.labelTot.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -354,9 +367,10 @@
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.Location = new System.Drawing.Point(1052, 147);
+            this.label15.Location = new System.Drawing.Point(1403, 181);
+            this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(29, 15);
+            this.label15.Size = new System.Drawing.Size(35, 18);
             this.label15.TabIndex = 37;
             this.label15.Text = "TPL";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -365,10 +379,11 @@
             // 
             this.labelTPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelTPL.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTPL.Location = new System.Drawing.Point(1102, 147);
+            this.labelTPL.Location = new System.Drawing.Point(1469, 181);
+            this.labelTPL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTPL.Name = "labelTPL";
             this.labelTPL.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelTPL.Size = new System.Drawing.Size(40, 13);
+            this.labelTPL.Size = new System.Drawing.Size(53, 16);
             this.labelTPL.TabIndex = 36;
             this.labelTPL.Text = "0";
             this.labelTPL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -376,11 +391,12 @@
             // lblOraLettura
             // 
             this.lblOraLettura.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblOraLettura.Location = new System.Drawing.Point(1080, 100);
-            this.lblOraLettura.MinimumSize = new System.Drawing.Size(15, 0);
+            this.lblOraLettura.Location = new System.Drawing.Point(1440, 123);
+            this.lblOraLettura.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblOraLettura.MinimumSize = new System.Drawing.Size(20, 0);
             this.lblOraLettura.Name = "lblOraLettura";
             this.lblOraLettura.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.lblOraLettura.Size = new System.Drawing.Size(78, 13);
+            this.lblOraLettura.Size = new System.Drawing.Size(104, 16);
             this.lblOraLettura.TabIndex = 35;
             this.lblOraLettura.Text = "--:--:--";
             this.lblOraLettura.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -390,9 +406,10 @@
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.AutoSize = true;
             this.label19.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(1051, 120);
+            this.label19.Location = new System.Drawing.Point(1401, 148);
+            this.label19.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(41, 15);
+            this.label19.Size = new System.Drawing.Size(49, 18);
             this.label19.TabIndex = 33;
             this.label19.Text = "Totale";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -401,10 +418,11 @@
             // 
             this.labelAtac.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelAtac.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAtac.Location = new System.Drawing.Point(1102, 220);
+            this.labelAtac.Location = new System.Drawing.Point(1469, 271);
+            this.labelAtac.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelAtac.Name = "labelAtac";
             this.labelAtac.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelAtac.Size = new System.Drawing.Size(40, 13);
+            this.labelAtac.Size = new System.Drawing.Size(53, 16);
             this.labelAtac.TabIndex = 32;
             this.labelAtac.Text = "0";
             this.labelAtac.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -413,9 +431,10 @@
             // 
             this.label11.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(1050, 100);
+            this.label11.Location = new System.Drawing.Point(1400, 123);
+            this.label11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(35, 13);
+            this.label11.Size = new System.Drawing.Size(44, 16);
             this.label11.TabIndex = 40;
             this.label11.Text = "Orario";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -423,10 +442,11 @@
             // labelTotaleMatricolaATAC
             // 
             this.labelTotaleMatricolaATAC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleMatricolaATAC.Location = new System.Drawing.Point(1121, 389);
+            this.labelTotaleMatricolaATAC.Location = new System.Drawing.Point(1495, 479);
+            this.labelTotaleMatricolaATAC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTotaleMatricolaATAC.Name = "labelTotaleMatricolaATAC";
             this.labelTotaleMatricolaATAC.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelTotaleMatricolaATAC.Size = new System.Drawing.Size(40, 13);
+            this.labelTotaleMatricolaATAC.Size = new System.Drawing.Size(53, 16);
             this.labelTotaleMatricolaATAC.TabIndex = 44;
             this.labelTotaleMatricolaATAC.Text = "0";
             this.labelTotaleMatricolaATAC.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -435,9 +455,10 @@
             // 
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(1053, 390);
+            this.label17.Location = new System.Drawing.Point(1404, 480);
+            this.label17.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(45, 13);
+            this.label17.Size = new System.Drawing.Size(53, 16);
             this.label17.TabIndex = 43;
             this.label17.Text = "# ATAC";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -446,10 +467,11 @@
             // labelTotaleMatricolaTPL
             // 
             this.labelTotaleMatricolaTPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTotaleMatricolaTPL.Location = new System.Drawing.Point(1121, 410);
+            this.labelTotaleMatricolaTPL.Location = new System.Drawing.Point(1495, 505);
+            this.labelTotaleMatricolaTPL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTotaleMatricolaTPL.Name = "labelTotaleMatricolaTPL";
             this.labelTotaleMatricolaTPL.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelTotaleMatricolaTPL.Size = new System.Drawing.Size(40, 13);
+            this.labelTotaleMatricolaTPL.Size = new System.Drawing.Size(53, 16);
             this.labelTotaleMatricolaTPL.TabIndex = 46;
             this.labelTotaleMatricolaTPL.Text = "0";
             this.labelTotaleMatricolaTPL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -458,9 +480,10 @@
             // 
             this.label18.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(1053, 410);
+            this.label18.Location = new System.Drawing.Point(1404, 505);
+            this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(37, 13);
+            this.label18.Size = new System.Drawing.Size(42, 16);
             this.label18.TabIndex = 45;
             this.label18.Text = "# TPL";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -471,9 +494,10 @@
             this.label14.AutoSize = true;
             this.label14.BackColor = System.Drawing.Color.Transparent;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(1058, 370);
+            this.label14.Location = new System.Drawing.Point(1411, 455);
+            this.label14.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(88, 13);
+            this.label14.Size = new System.Drawing.Size(112, 17);
             this.label14.TabIndex = 47;
             this.label14.Text = "Dati Aggregati";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -483,13 +507,17 @@
             // 
             this.dataGridViewTextBoxColumn1.DataPropertyName = "RegolaViolata";
             this.dataGridViewTextBoxColumn1.HeaderText = "RegolaViolata";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 125;
             // 
             // dataGridViewTextBoxColumn2
             // 
             this.dataGridViewTextBoxColumn2.DataPropertyName = "RegolaViolata";
             this.dataGridViewTextBoxColumn2.HeaderText = "RegolaViolata";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.Width = 125;
             // 
             // toolTipFeedTrip
             // 
@@ -505,9 +533,10 @@
             this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label24.AutoSize = true;
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(1058, 450);
+            this.label24.Location = new System.Drawing.Point(1411, 554);
+            this.label24.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(88, 13);
+            this.label24.Size = new System.Drawing.Size(112, 17);
             this.label24.TabIndex = 47;
             this.label24.Text = "Dati Ponderati";
             this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -520,9 +549,10 @@
             this.label16.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label16.AutoSize = true;
             this.label16.BackColor = System.Drawing.Color.Transparent;
-            this.label16.Location = new System.Drawing.Point(1068, 312);
+            this.label16.Location = new System.Drawing.Point(1424, 384);
+            this.label16.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(31, 13);
+            this.label16.Size = new System.Drawing.Size(39, 16);
             this.label16.TabIndex = 58;
             this.label16.Text = "Ferro";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -535,9 +565,10 @@
             this.label23.AutoSize = true;
             this.label23.BackColor = System.Drawing.Color.Transparent;
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(1141, 370);
+            this.label23.Location = new System.Drawing.Point(1521, 455);
+            this.label23.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(12, 13);
+            this.label23.Size = new System.Drawing.Size(14, 17);
             this.label23.TabIndex = 29;
             this.label23.Text = "*";
             this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -548,9 +579,10 @@
             this.label33.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label33.AutoSize = true;
             this.label33.BackColor = System.Drawing.Color.Transparent;
-            this.label33.Location = new System.Drawing.Point(1068, 327);
+            this.label33.Location = new System.Drawing.Point(1424, 402);
+            this.label33.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(28, 13);
+            this.label33.Size = new System.Drawing.Size(34, 16);
             this.label33.TabIndex = 58;
             this.label33.Text = "Altro";
             this.label33.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -563,10 +595,10 @@
             this.label26.AutoSize = true;
             this.label26.BackColor = System.Drawing.Color.Transparent;
             this.label26.Font = new System.Drawing.Font("Marlett", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label26.Location = new System.Drawing.Point(1096, 310);
+            this.label26.Location = new System.Drawing.Point(1461, 382);
             this.label26.Margin = new System.Windows.Forms.Padding(0);
             this.label26.Name = "label26";
-            this.label26.Size = new System.Drawing.Size(11, 14);
+            this.label26.Size = new System.Drawing.Size(12, 16);
             this.label26.TabIndex = 29;
             this.label26.Text = "*";
             this.label26.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -579,10 +611,10 @@
             this.label31.AutoSize = true;
             this.label31.BackColor = System.Drawing.Color.Transparent;
             this.label31.Font = new System.Drawing.Font("Marlett", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(1092, 326);
+            this.label31.Location = new System.Drawing.Point(1456, 401);
             this.label31.Margin = new System.Windows.Forms.Padding(0);
             this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(11, 14);
+            this.label31.Size = new System.Drawing.Size(12, 16);
             this.label31.TabIndex = 29;
             this.label31.Text = "*";
             this.label31.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -593,9 +625,10 @@
             // 
             this.label35.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label35.AutoSize = true;
-            this.label35.Location = new System.Drawing.Point(1068, 194);
+            this.label35.Location = new System.Drawing.Point(1424, 239);
+            this.label35.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label35.Name = "label35";
-            this.label35.Size = new System.Drawing.Size(28, 13);
+            this.label35.Size = new System.Drawing.Size(34, 16);
             this.label35.TabIndex = 54;
             this.label35.Text = "Altro";
             this.label35.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -608,10 +641,10 @@
             this.label32.AutoSize = true;
             this.label32.BackColor = System.Drawing.Color.Transparent;
             this.label32.Font = new System.Drawing.Font("Marlett", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.Location = new System.Drawing.Point(1092, 192);
+            this.label32.Location = new System.Drawing.Point(1456, 236);
             this.label32.Margin = new System.Windows.Forms.Padding(0);
             this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(11, 14);
+            this.label32.Size = new System.Drawing.Size(12, 16);
             this.label32.TabIndex = 59;
             this.label32.Text = "*";
             this.label32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -624,10 +657,10 @@
             this.label40.AutoSize = true;
             this.label40.BackColor = System.Drawing.Color.Transparent;
             this.label40.Font = new System.Drawing.Font("Marlett", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label40.Location = new System.Drawing.Point(1097, 563);
+            this.label40.Location = new System.Drawing.Point(1463, 693);
             this.label40.Margin = new System.Windows.Forms.Padding(0);
             this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(11, 14);
+            this.label40.Size = new System.Drawing.Size(12, 16);
             this.label40.TabIndex = 62;
             this.label40.Text = "*";
             this.label40.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -639,10 +672,10 @@
             this.label38.AutoSize = true;
             this.label38.BackColor = System.Drawing.Color.Transparent;
             this.label38.Font = new System.Drawing.Font("Marlett", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.Location = new System.Drawing.Point(1104, 545);
+            this.label38.Location = new System.Drawing.Point(1472, 671);
             this.label38.Margin = new System.Windows.Forms.Padding(0);
             this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(11, 14);
+            this.label38.Size = new System.Drawing.Size(12, 16);
             this.label38.TabIndex = 63;
             this.label38.Text = "*";
             this.label38.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -652,18 +685,20 @@
             // 
             this.urlTrip.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.urlTrip.Location = new System.Drawing.Point(124, 60);
+            this.urlTrip.Location = new System.Drawing.Point(165, 74);
+            this.urlTrip.Margin = new System.Windows.Forms.Padding(4);
             this.urlTrip.Name = "urlTrip";
-            this.urlTrip.Size = new System.Drawing.Size(569, 20);
+            this.urlTrip.Size = new System.Drawing.Size(757, 22);
             this.urlTrip.TabIndex = 3;
             this.toolTipFeedTrip.SetToolTip(this.urlTrip, "Url opzionale, al momento usato solo per fini statistici");
             // 
             // checkFeedTrip
             // 
             this.checkFeedTrip.AutoSize = true;
-            this.checkFeedTrip.Location = new System.Drawing.Point(51, 63);
+            this.checkFeedTrip.Location = new System.Drawing.Point(68, 78);
+            this.checkFeedTrip.Margin = new System.Windows.Forms.Padding(4);
             this.checkFeedTrip.Name = "checkFeedTrip";
-            this.checkFeedTrip.Size = new System.Drawing.Size(71, 17);
+            this.checkFeedTrip.Size = new System.Drawing.Size(88, 20);
             this.checkFeedTrip.TabIndex = 20;
             this.checkFeedTrip.Text = "Feed Trip";
             this.toolTipFeedTrip.SetToolTip(this.checkFeedTrip, "Può essere tranquillamnte disabilitato. Al momento l\'informazione del feed non è " +
@@ -676,10 +711,10 @@
             this.label41.AutoSize = true;
             this.label41.BackColor = System.Drawing.Color.Transparent;
             this.label41.Font = new System.Drawing.Font("Marlett", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.Location = new System.Drawing.Point(107, 38);
+            this.label41.Location = new System.Drawing.Point(143, 47);
             this.label41.Margin = new System.Windows.Forms.Padding(0);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(11, 14);
+            this.label41.Size = new System.Drawing.Size(12, 16);
             this.label41.TabIndex = 64;
             this.label41.Text = "*";
             this.label41.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -688,9 +723,10 @@
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(706, 0);
+            this.button4.Location = new System.Drawing.Point(941, 0);
+            this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 23);
+            this.button4.Size = new System.Drawing.Size(133, 28);
             this.button4.TabIndex = 48;
             this.button4.Text = "buttonReset";
             this.button4.UseVisualStyleBackColor = true;
@@ -702,11 +738,12 @@
             this.labelVer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelVer.AutoSize = true;
             this.labelVer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelVer.Location = new System.Drawing.Point(1058, 0);
-            this.labelVer.MinimumSize = new System.Drawing.Size(100, 24);
+            this.labelVer.Location = new System.Drawing.Point(1411, 0);
+            this.labelVer.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelVer.MinimumSize = new System.Drawing.Size(133, 30);
             this.labelVer.Name = "labelVer";
             this.labelVer.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelVer.Size = new System.Drawing.Size(100, 24);
+            this.labelVer.Size = new System.Drawing.Size(133, 30);
             this.labelVer.TabIndex = 50;
             this.labelVer.Text = "label1";
             this.labelVer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -715,9 +752,10 @@
             // 
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1053, 470);
+            this.label1.Location = new System.Drawing.Point(1404, 578);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(45, 13);
+            this.label1.Size = new System.Drawing.Size(53, 16);
             this.label1.TabIndex = 43;
             this.label1.Text = "# ATAC";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -725,10 +763,11 @@
             // labelPonderatiATAC
             // 
             this.labelPonderatiATAC.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelPonderatiATAC.Location = new System.Drawing.Point(1121, 470);
+            this.labelPonderatiATAC.Location = new System.Drawing.Point(1495, 578);
+            this.labelPonderatiATAC.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPonderatiATAC.Name = "labelPonderatiATAC";
             this.labelPonderatiATAC.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelPonderatiATAC.Size = new System.Drawing.Size(40, 13);
+            this.labelPonderatiATAC.Size = new System.Drawing.Size(53, 16);
             this.labelPonderatiATAC.TabIndex = 44;
             this.labelPonderatiATAC.Text = "- -";
             this.labelPonderatiATAC.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -737,9 +776,10 @@
             // 
             this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(1053, 490);
+            this.label22.Location = new System.Drawing.Point(1404, 603);
+            this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(37, 13);
+            this.label22.Size = new System.Drawing.Size(42, 16);
             this.label22.TabIndex = 45;
             this.label22.Text = "# TPL";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -747,10 +787,11 @@
             // labelPonderatiTPL
             // 
             this.labelPonderatiTPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelPonderatiTPL.Location = new System.Drawing.Point(1121, 490);
+            this.labelPonderatiTPL.Location = new System.Drawing.Point(1495, 603);
+            this.labelPonderatiTPL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPonderatiTPL.Name = "labelPonderatiTPL";
             this.labelPonderatiTPL.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelPonderatiTPL.Size = new System.Drawing.Size(40, 13);
+            this.labelPonderatiTPL.Size = new System.Drawing.Size(53, 16);
             this.labelPonderatiTPL.TabIndex = 46;
             this.labelPonderatiTPL.Text = "- -";
             this.labelPonderatiTPL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -759,9 +800,10 @@
             // 
             this.label21.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(1068, 237);
+            this.label21.Location = new System.Drawing.Point(1424, 292);
+            this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(25, 13);
+            this.label21.Size = new System.Drawing.Size(30, 16);
             this.label21.TabIndex = 52;
             this.label21.Text = "Bus";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -769,10 +811,11 @@
             // labelBusAtac
             // 
             this.labelBusAtac.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelBusAtac.Location = new System.Drawing.Point(1121, 237);
+            this.labelBusAtac.Location = new System.Drawing.Point(1495, 292);
+            this.labelBusAtac.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelBusAtac.Name = "labelBusAtac";
             this.labelBusAtac.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelBusAtac.Size = new System.Drawing.Size(40, 13);
+            this.labelBusAtac.Size = new System.Drawing.Size(53, 16);
             this.labelBusAtac.TabIndex = 51;
             this.labelBusAtac.Text = "0";
             this.labelBusAtac.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -780,10 +823,11 @@
             // labelTramAtac
             // 
             this.labelTramAtac.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelTramAtac.Location = new System.Drawing.Point(1121, 252);
+            this.labelTramAtac.Location = new System.Drawing.Point(1495, 310);
+            this.labelTramAtac.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelTramAtac.Name = "labelTramAtac";
             this.labelTramAtac.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelTramAtac.Size = new System.Drawing.Size(40, 13);
+            this.labelTramAtac.Size = new System.Drawing.Size(53, 16);
             this.labelTramAtac.TabIndex = 53;
             this.labelTramAtac.Text = "0";
             this.labelTramAtac.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -792,9 +836,10 @@
             // 
             this.label28.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(1068, 252);
+            this.label28.Location = new System.Drawing.Point(1424, 310);
+            this.label28.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(31, 13);
+            this.label28.Size = new System.Drawing.Size(39, 16);
             this.label28.TabIndex = 54;
             this.label28.Text = "Tram";
             this.label28.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -803,9 +848,10 @@
             // 
             this.label29.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(1068, 267);
+            this.label29.Location = new System.Drawing.Point(1424, 329);
+            this.label29.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(40, 13);
+            this.label29.Size = new System.Drawing.Size(51, 16);
             this.label29.TabIndex = 56;
             this.label29.Text = "Filobus";
             this.label29.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -813,10 +859,11 @@
             // labelFilobusAtac
             // 
             this.labelFilobusAtac.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelFilobusAtac.Location = new System.Drawing.Point(1121, 267);
+            this.labelFilobusAtac.Location = new System.Drawing.Point(1495, 329);
+            this.labelFilobusAtac.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelFilobusAtac.Name = "labelFilobusAtac";
             this.labelFilobusAtac.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelFilobusAtac.Size = new System.Drawing.Size(40, 13);
+            this.labelFilobusAtac.Size = new System.Drawing.Size(53, 16);
             this.labelFilobusAtac.TabIndex = 55;
             this.labelFilobusAtac.Text = "0";
             this.labelFilobusAtac.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -824,10 +871,11 @@
             // labelFerroAtac
             // 
             this.labelFerroAtac.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelFerroAtac.Location = new System.Drawing.Point(1121, 312);
+            this.labelFerroAtac.Location = new System.Drawing.Point(1495, 384);
+            this.labelFerroAtac.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelFerroAtac.Name = "labelFerroAtac";
             this.labelFerroAtac.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelFerroAtac.Size = new System.Drawing.Size(40, 13);
+            this.labelFerroAtac.Size = new System.Drawing.Size(53, 16);
             this.labelFerroAtac.TabIndex = 57;
             this.labelFerroAtac.Text = "0";
             this.labelFerroAtac.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -835,10 +883,11 @@
             // labelMiniBusEleAtac
             // 
             this.labelMiniBusEleAtac.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelMiniBusEleAtac.Location = new System.Drawing.Point(1121, 282);
+            this.labelMiniBusEleAtac.Location = new System.Drawing.Point(1495, 347);
+            this.labelMiniBusEleAtac.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelMiniBusEleAtac.Name = "labelMiniBusEleAtac";
             this.labelMiniBusEleAtac.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelMiniBusEleAtac.Size = new System.Drawing.Size(40, 13);
+            this.labelMiniBusEleAtac.Size = new System.Drawing.Size(53, 16);
             this.labelMiniBusEleAtac.TabIndex = 55;
             this.labelMiniBusEleAtac.Text = "0";
             this.labelMiniBusEleAtac.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -847,9 +896,10 @@
             // 
             this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(1068, 282);
+            this.label25.Location = new System.Drawing.Point(1424, 347);
+            this.label25.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(65, 13);
+            this.label25.Size = new System.Drawing.Size(80, 16);
             this.label25.TabIndex = 56;
             this.label25.Text = "MiniBus Elet";
             this.label25.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -857,10 +907,11 @@
             // labelFurgoncinoAtac
             // 
             this.labelFurgoncinoAtac.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelFurgoncinoAtac.Location = new System.Drawing.Point(1121, 297);
+            this.labelFurgoncinoAtac.Location = new System.Drawing.Point(1495, 366);
+            this.labelFurgoncinoAtac.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelFurgoncinoAtac.Name = "labelFurgoncinoAtac";
             this.labelFurgoncinoAtac.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelFurgoncinoAtac.Size = new System.Drawing.Size(40, 13);
+            this.labelFurgoncinoAtac.Size = new System.Drawing.Size(53, 16);
             this.labelFurgoncinoAtac.TabIndex = 55;
             this.labelFurgoncinoAtac.Text = "0";
             this.labelFurgoncinoAtac.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -869,9 +920,10 @@
             // 
             this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(1068, 297);
+            this.label27.Location = new System.Drawing.Point(1424, 366);
+            this.label27.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(60, 13);
+            this.label27.Size = new System.Drawing.Size(74, 16);
             this.label27.TabIndex = 56;
             this.label27.Text = "Furgoncino";
             this.label27.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -882,9 +934,10 @@
             this.label30.AutoSize = true;
             this.label30.BackColor = System.Drawing.Color.Transparent;
             this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.Location = new System.Drawing.Point(1141, 450);
+            this.label30.Location = new System.Drawing.Point(1521, 554);
+            this.label30.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(12, 13);
+            this.label30.Size = new System.Drawing.Size(14, 17);
             this.label30.TabIndex = 29;
             this.label30.Text = "*";
             this.label30.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -892,10 +945,11 @@
             // labelAltroAtac
             // 
             this.labelAltroAtac.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelAltroAtac.Location = new System.Drawing.Point(1121, 327);
+            this.labelAltroAtac.Location = new System.Drawing.Point(1495, 402);
+            this.labelAltroAtac.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelAltroAtac.Name = "labelAltroAtac";
             this.labelAltroAtac.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelAltroAtac.Size = new System.Drawing.Size(40, 13);
+            this.labelAltroAtac.Size = new System.Drawing.Size(53, 16);
             this.labelAltroAtac.TabIndex = 57;
             this.labelAltroAtac.Text = "0";
             this.labelAltroAtac.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -903,10 +957,11 @@
             // labelBusTPL
             // 
             this.labelBusTPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelBusTPL.Location = new System.Drawing.Point(1121, 164);
+            this.labelBusTPL.Location = new System.Drawing.Point(1495, 202);
+            this.labelBusTPL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelBusTPL.Name = "labelBusTPL";
             this.labelBusTPL.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelBusTPL.Size = new System.Drawing.Size(40, 13);
+            this.labelBusTPL.Size = new System.Drawing.Size(53, 16);
             this.labelBusTPL.TabIndex = 51;
             this.labelBusTPL.Text = "0";
             this.labelBusTPL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -915,9 +970,10 @@
             // 
             this.label34.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label34.AutoSize = true;
-            this.label34.Location = new System.Drawing.Point(1068, 164);
+            this.label34.Location = new System.Drawing.Point(1424, 202);
+            this.label34.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(25, 13);
+            this.label34.Size = new System.Drawing.Size(30, 16);
             this.label34.TabIndex = 52;
             this.label34.Text = "Bus";
             this.label34.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -925,10 +981,11 @@
             // labelPullmanTPL
             // 
             this.labelPullmanTPL.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelPullmanTPL.Location = new System.Drawing.Point(1121, 179);
+            this.labelPullmanTPL.Location = new System.Drawing.Point(1495, 220);
+            this.labelPullmanTPL.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPullmanTPL.Name = "labelPullmanTPL";
             this.labelPullmanTPL.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelPullmanTPL.Size = new System.Drawing.Size(40, 13);
+            this.labelPullmanTPL.Size = new System.Drawing.Size(53, 16);
             this.labelPullmanTPL.TabIndex = 53;
             this.labelPullmanTPL.Text = "0";
             this.labelPullmanTPL.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -937,9 +994,10 @@
             // 
             this.label36.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(1068, 179);
+            this.label36.Location = new System.Drawing.Point(1424, 220);
+            this.label36.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(44, 13);
+            this.label36.Size = new System.Drawing.Size(55, 16);
             this.label36.TabIndex = 54;
             this.label36.Text = "Pullman";
             this.label36.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -947,10 +1005,11 @@
             // labelAltroTpl
             // 
             this.labelAltroTpl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelAltroTpl.Location = new System.Drawing.Point(1121, 194);
+            this.labelAltroTpl.Location = new System.Drawing.Point(1495, 239);
+            this.labelAltroTpl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelAltroTpl.Name = "labelAltroTpl";
             this.labelAltroTpl.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelAltroTpl.Size = new System.Drawing.Size(40, 13);
+            this.labelAltroTpl.Size = new System.Drawing.Size(53, 16);
             this.labelAltroTpl.TabIndex = 53;
             this.labelAltroTpl.Text = "0";
             this.labelAltroTpl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -960,9 +1019,10 @@
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.button1.Image = global::AtacFeed.Properties.Resources.available_updates_16;
             this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(1061, 27);
+            this.button1.Location = new System.Drawing.Point(1415, 33);
+            this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 37);
+            this.button1.Size = new System.Drawing.Size(133, 46);
             this.button1.TabIndex = 49;
             this.button1.Text = "   Verifica\r\n  Aggiornamenti";
             this.button1.UseVisualStyleBackColor = true;
@@ -976,9 +1036,10 @@
             this.buttonPlayPause.FlatAppearance.BorderSize = 0;
             this.buttonPlayPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonPlayPause.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayPause.Location = new System.Drawing.Point(1083, 643);
+            this.buttonPlayPause.Location = new System.Drawing.Point(1444, 791);
+            this.buttonPlayPause.Margin = new System.Windows.Forms.Padding(4);
             this.buttonPlayPause.Name = "buttonPlayPause";
-            this.buttonPlayPause.Size = new System.Drawing.Size(50, 46);
+            this.buttonPlayPause.Size = new System.Drawing.Size(67, 57);
             this.buttonPlayPause.TabIndex = 0;
             this.buttonPlayPause.UseVisualStyleBackColor = true;
             this.buttonPlayPause.Click += new System.EventHandler(this.ButtonPlayPause_Click);
@@ -986,11 +1047,12 @@
             // labelLetture
             // 
             this.labelLetture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labelLetture.Location = new System.Drawing.Point(1121, 547);
-            this.labelLetture.MinimumSize = new System.Drawing.Size(15, 0);
+            this.labelLetture.Location = new System.Drawing.Point(1495, 673);
+            this.labelLetture.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelLetture.MinimumSize = new System.Drawing.Size(20, 0);
             this.labelLetture.Name = "labelLetture";
             this.labelLetture.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelLetture.Size = new System.Drawing.Size(40, 13);
+            this.labelLetture.Size = new System.Drawing.Size(53, 16);
             this.labelLetture.TabIndex = 61;
             this.labelLetture.Text = "0";
             this.labelLetture.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -999,9 +1061,10 @@
             // 
             this.label39.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(1058, 547);
+            this.label39.Location = new System.Drawing.Point(1411, 673);
+            this.label39.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(50, 13);
+            this.label39.Size = new System.Drawing.Size(57, 16);
             this.label39.TabIndex = 60;
             this.label39.Text = "# Letture";
             this.label39.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -1009,10 +1072,11 @@
             // tabMonitoraggio
             // 
             this.tabMonitoraggio.Controls.Add(this.dataGridViolazioni);
-            this.tabMonitoraggio.Location = new System.Drawing.Point(4, 22);
+            this.tabMonitoraggio.Location = new System.Drawing.Point(4, 25);
+            this.tabMonitoraggio.Margin = new System.Windows.Forms.Padding(4);
             this.tabMonitoraggio.Name = "tabMonitoraggio";
-            this.tabMonitoraggio.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMonitoraggio.Size = new System.Drawing.Size(1028, 654);
+            this.tabMonitoraggio.Padding = new System.Windows.Forms.Padding(4);
+            this.tabMonitoraggio.Size = new System.Drawing.Size(1373, 808);
             this.tabMonitoraggio.TabIndex = 4;
             this.tabMonitoraggio.Text = "Monitoraggio Linee";
             this.tabMonitoraggio.UseVisualStyleBackColor = true;
@@ -1038,19 +1102,22 @@
             this.regolaViolataDataGridViewTextBoxColumn});
             this.dataGridViolazioni.DataSource = this.lineaMonitorataBindingSource;
             this.dataGridViolazioni.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViolazioni.Location = new System.Drawing.Point(3, 3);
+            this.dataGridViolazioni.Location = new System.Drawing.Point(4, 4);
+            this.dataGridViolazioni.Margin = new System.Windows.Forms.Padding(4);
             this.dataGridViolazioni.Name = "dataGridViolazioni";
             this.dataGridViolazioni.ReadOnly = true;
-            this.dataGridViolazioni.Size = new System.Drawing.Size(1022, 648);
+            this.dataGridViolazioni.RowHeadersWidth = 51;
+            this.dataGridViolazioni.Size = new System.Drawing.Size(1365, 800);
             this.dataGridViolazioni.TabIndex = 0;
             // 
             // tabGrigliaFiltrata
             // 
             this.tabGrigliaFiltrata.Controls.Add(this.advancedDataGridView1);
-            this.tabGrigliaFiltrata.Location = new System.Drawing.Point(4, 22);
+            this.tabGrigliaFiltrata.Location = new System.Drawing.Point(4, 25);
+            this.tabGrigliaFiltrata.Margin = new System.Windows.Forms.Padding(4);
             this.tabGrigliaFiltrata.Name = "tabGrigliaFiltrata";
-            this.tabGrigliaFiltrata.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGrigliaFiltrata.Size = new System.Drawing.Size(1028, 654);
+            this.tabGrigliaFiltrata.Padding = new System.Windows.Forms.Padding(4);
+            this.tabGrigliaFiltrata.Size = new System.Drawing.Size(1373, 808);
             this.tabGrigliaFiltrata.TabIndex = 5;
             this.tabGrigliaFiltrata.Text = "Griglia";
             this.tabGrigliaFiltrata.UseVisualStyleBackColor = true;
@@ -1083,54 +1150,32 @@
             this.dataGridViewTextBoxColumn49,
             this.inTransitToDataGridViewTextBoxColumn1,
             this.tipoMezzoTrasportoDataGridViewTextBoxColumn1,
-            this.DistanzaPercorsa});
+            this.DistanzaPercorsa,
+            this.PartenzaProgrammata});
             this.advancedDataGridView1.DataSource = this.extendedVehicleInfoBindingSource;
             this.advancedDataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.advancedDataGridView1.FilterAndSortEnabled = true;
-            this.advancedDataGridView1.Location = new System.Drawing.Point(3, 3);
+            this.advancedDataGridView1.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.advancedDataGridView1.Location = new System.Drawing.Point(4, 4);
+            this.advancedDataGridView1.Margin = new System.Windows.Forms.Padding(4);
             this.advancedDataGridView1.Name = "advancedDataGridView1";
             this.advancedDataGridView1.ReadOnly = true;
             this.advancedDataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.advancedDataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
-            this.advancedDataGridView1.Size = new System.Drawing.Size(1022, 648);
+            this.advancedDataGridView1.RowHeadersWidth = 51;
+            this.advancedDataGridView1.Size = new System.Drawing.Size(1365, 800);
+            this.advancedDataGridView1.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.advancedDataGridView1.TabIndex = 0;
             this.advancedDataGridView1.SortStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.SortEventArgs>(this.AdvancedDataGridView1_SortStringChanged);
             this.advancedDataGridView1.FilterStringChanged += new System.EventHandler<Zuby.ADGV.AdvancedDataGridView.FilterEventArgs>(this.AdvancedDataGridView1_FilterStringChanged);
             // 
-            // Destinazione
-            // 
-            this.Destinazione.DataPropertyName = "Destinazione";
-            this.Destinazione.HeaderText = "Destinazione";
-            this.Destinazione.MinimumWidth = 22;
-            this.Destinazione.Name = "Destinazione";
-            this.Destinazione.ReadOnly = true;
-            this.Destinazione.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // NomeFermata
-            // 
-            this.NomeFermata.DataPropertyName = "NomeFermata";
-            this.NomeFermata.HeaderText = "NomeFermata";
-            this.NomeFermata.MinimumWidth = 22;
-            this.NomeFermata.Name = "NomeFermata";
-            this.NomeFermata.ReadOnly = true;
-            this.NomeFermata.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // DistanzaPercorsa
-            // 
-            this.DistanzaPercorsa.DataPropertyName = "DistanzaPercorsa";
-            this.DistanzaPercorsa.HeaderText = "DistanzaPercorsa";
-            this.DistanzaPercorsa.MinimumWidth = 22;
-            this.DistanzaPercorsa.Name = "DistanzaPercorsa";
-            this.DistanzaPercorsa.ReadOnly = true;
-            this.DistanzaPercorsa.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
             // tabGrafico
             // 
             this.tabGrafico.Controls.Add(this.tableLayoutPanel2);
-            this.tabGrafico.Location = new System.Drawing.Point(4, 22);
+            this.tabGrafico.Location = new System.Drawing.Point(4, 25);
             this.tabGrafico.Margin = new System.Windows.Forms.Padding(0);
             this.tabGrafico.Name = "tabGrafico";
-            this.tabGrafico.Size = new System.Drawing.Size(1028, 654);
+            this.tabGrafico.Size = new System.Drawing.Size(1373, 808);
             this.tabGrafico.TabIndex = 2;
             this.tabGrafico.Text = "Grafico";
             this.tabGrafico.UseVisualStyleBackColor = true;
@@ -1144,30 +1189,33 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanel2.Controls.Add(this.plotAtac, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.plotTPL, 0, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(4, 4);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1022, 648);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1363, 798);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // plotAtac
             // 
             this.plotAtac.BackColor = System.Drawing.Color.Transparent;
             this.plotAtac.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotAtac.Location = new System.Drawing.Point(3, 3);
+            this.plotAtac.Location = new System.Drawing.Point(5, 5);
+            this.plotAtac.Margin = new System.Windows.Forms.Padding(5);
             this.plotAtac.Name = "plotAtac";
-            this.plotAtac.Size = new System.Drawing.Size(1016, 318);
+            this.plotAtac.Size = new System.Drawing.Size(1355, 389);
             this.plotAtac.TabIndex = 0;
             // 
             // plotTPL
             // 
             this.plotTPL.BackColor = System.Drawing.Color.Transparent;
             this.plotTPL.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.plotTPL.Location = new System.Drawing.Point(3, 327);
+            this.plotTPL.Location = new System.Drawing.Point(5, 404);
+            this.plotTPL.Margin = new System.Windows.Forms.Padding(5);
             this.plotTPL.Name = "plotTPL";
-            this.plotTPL.Size = new System.Drawing.Size(1016, 318);
+            this.plotTPL.Size = new System.Drawing.Size(1355, 389);
             this.plotTPL.TabIndex = 1;
             // 
             // tabImpostazioni
@@ -1178,10 +1226,11 @@
             this.tabImpostazioni.Controls.Add(this.groupBoxMonitoraggio);
             this.tabImpostazioni.Controls.Add(this.groupBoxServerRSM);
             this.tabImpostazioni.Controls.Add(this.tableLayoutPanel1);
-            this.tabImpostazioni.Location = new System.Drawing.Point(4, 22);
+            this.tabImpostazioni.Location = new System.Drawing.Point(4, 25);
+            this.tabImpostazioni.Margin = new System.Windows.Forms.Padding(4);
             this.tabImpostazioni.Name = "tabImpostazioni";
-            this.tabImpostazioni.Padding = new System.Windows.Forms.Padding(3);
-            this.tabImpostazioni.Size = new System.Drawing.Size(1028, 654);
+            this.tabImpostazioni.Padding = new System.Windows.Forms.Padding(4);
+            this.tabImpostazioni.Size = new System.Drawing.Size(1373, 808);
             this.tabImpostazioni.TabIndex = 0;
             this.tabImpostazioni.Text = "Impostazioni";
             // 
@@ -1197,9 +1246,11 @@
             this.groupBoxExport.Controls.Add(this.checkXlsx);
             this.groupBoxExport.Controls.Add(this.checkCSV);
             this.groupBoxExport.Controls.Add(this.checkGrafico);
-            this.groupBoxExport.Location = new System.Drawing.Point(6, 219);
+            this.groupBoxExport.Location = new System.Drawing.Point(8, 270);
+            this.groupBoxExport.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxExport.Name = "groupBoxExport";
-            this.groupBoxExport.Size = new System.Drawing.Size(1014, 102);
+            this.groupBoxExport.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBoxExport.Size = new System.Drawing.Size(1352, 126);
             this.groupBoxExport.TabIndex = 28;
             this.groupBoxExport.TabStop = false;
             this.groupBoxExport.Text = "Impostazioni Export";
@@ -1209,9 +1260,10 @@
             this.checkAnomalieGTFS.AutoSize = true;
             this.checkAnomalieGTFS.Checked = true;
             this.checkAnomalieGTFS.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkAnomalieGTFS.Location = new System.Drawing.Point(209, 37);
+            this.checkAnomalieGTFS.Location = new System.Drawing.Point(279, 46);
+            this.checkAnomalieGTFS.Margin = new System.Windows.Forms.Padding(4);
             this.checkAnomalieGTFS.Name = "checkAnomalieGTFS";
-            this.checkAnomalieGTFS.Size = new System.Drawing.Size(133, 17);
+            this.checkAnomalieGTFS.Size = new System.Drawing.Size(165, 20);
             this.checkAnomalieGTFS.TabIndex = 28;
             this.checkAnomalieGTFS.Text = "Includi anomalie GTFS";
             this.checkAnomalieGTFS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1222,9 +1274,10 @@
             this.checkAlert.AutoSize = true;
             this.checkAlert.Checked = true;
             this.checkAlert.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkAlert.Location = new System.Drawing.Point(88, 59);
+            this.checkAlert.Location = new System.Drawing.Point(117, 73);
+            this.checkAlert.Margin = new System.Windows.Forms.Padding(4);
             this.checkAlert.Name = "checkAlert";
-            this.checkAlert.Size = new System.Drawing.Size(93, 17);
+            this.checkAlert.Size = new System.Drawing.Size(113, 20);
             this.checkAlert.TabIndex = 27;
             this.checkAlert.Text = "Includi gli alert";
             this.checkAlert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1233,9 +1286,10 @@
             // checkSovraffollamento
             // 
             this.checkSovraffollamento.AutoSize = true;
-            this.checkSovraffollamento.Location = new System.Drawing.Point(209, 58);
+            this.checkSovraffollamento.Location = new System.Drawing.Point(279, 71);
+            this.checkSovraffollamento.Margin = new System.Windows.Forms.Padding(4);
             this.checkSovraffollamento.Name = "checkSovraffollamento";
-            this.checkSovraffollamento.Size = new System.Drawing.Size(192, 17);
+            this.checkSovraffollamento.Size = new System.Drawing.Size(240, 20);
             this.checkSovraffollamento.TabIndex = 26;
             this.checkSovraffollamento.Text = "Includi il monitoraggio linee affollate";
             this.checkSovraffollamento.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1244,9 +1298,10 @@
             // checkMonitoraggio
             // 
             this.checkMonitoraggio.AutoSize = true;
-            this.checkMonitoraggio.Location = new System.Drawing.Point(209, 77);
+            this.checkMonitoraggio.Location = new System.Drawing.Point(279, 95);
+            this.checkMonitoraggio.Margin = new System.Windows.Forms.Padding(4);
             this.checkMonitoraggio.Name = "checkMonitoraggio";
-            this.checkMonitoraggio.Size = new System.Drawing.Size(152, 17);
+            this.checkMonitoraggio.Size = new System.Drawing.Size(190, 20);
             this.checkMonitoraggio.TabIndex = 26;
             this.checkMonitoraggio.Text = "Includi il monitoraggio linee";
             this.checkMonitoraggio.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1256,9 +1311,10 @@
             // buttonSalvaImpostazioni
             // 
             this.buttonSalvaImpostazioni.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSalvaImpostazioni.Location = new System.Drawing.Point(886, 73);
+            this.buttonSalvaImpostazioni.Location = new System.Drawing.Point(1181, 90);
+            this.buttonSalvaImpostazioni.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSalvaImpostazioni.Name = "buttonSalvaImpostazioni";
-            this.buttonSalvaImpostazioni.Size = new System.Drawing.Size(122, 23);
+            this.buttonSalvaImpostazioni.Size = new System.Drawing.Size(163, 28);
             this.buttonSalvaImpostazioni.TabIndex = 20;
             this.buttonSalvaImpostazioni.Text = "Salva Impostazioni";
             this.buttonSalvaImpostazioni.UseVisualStyleBackColor = true;
@@ -1269,9 +1325,10 @@
             this.checkXlsx.AutoSize = true;
             this.checkXlsx.Checked = true;
             this.checkXlsx.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkXlsx.Location = new System.Drawing.Point(159, 14);
+            this.checkXlsx.Location = new System.Drawing.Point(212, 17);
+            this.checkXlsx.Margin = new System.Windows.Forms.Padding(4);
             this.checkXlsx.Name = "checkXlsx";
-            this.checkXlsx.Size = new System.Drawing.Size(114, 17);
+            this.checkXlsx.Size = new System.Drawing.Size(141, 20);
             this.checkXlsx.TabIndex = 22;
             this.checkXlsx.Text = "Esporta come .xlsx";
             this.checkXlsx.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1283,9 +1340,10 @@
             this.checkCSV.AutoSize = true;
             this.checkCSV.Checked = true;
             this.checkCSV.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkCSV.Location = new System.Drawing.Point(579, 14);
+            this.checkCSV.Location = new System.Drawing.Point(772, 17);
+            this.checkCSV.Margin = new System.Windows.Forms.Padding(4);
             this.checkCSV.Name = "checkCSV";
-            this.checkCSV.Size = new System.Drawing.Size(114, 17);
+            this.checkCSV.Size = new System.Drawing.Size(140, 20);
             this.checkCSV.TabIndex = 23;
             this.checkCSV.Text = "Esporta come .csv";
             this.checkCSV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1296,9 +1354,10 @@
             this.checkGrafico.AutoSize = true;
             this.checkGrafico.Checked = true;
             this.checkGrafico.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkGrafico.Location = new System.Drawing.Point(88, 37);
+            this.checkGrafico.Location = new System.Drawing.Point(117, 46);
+            this.checkGrafico.Margin = new System.Windows.Forms.Padding(4);
             this.checkGrafico.Name = "checkGrafico";
-            this.checkGrafico.Size = new System.Drawing.Size(99, 17);
+            this.checkGrafico.Size = new System.Drawing.Size(120, 20);
             this.checkGrafico.TabIndex = 25;
             this.checkGrafico.Text = "Includi il grafico";
             this.checkGrafico.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1321,9 +1380,11 @@
             this.groupBoxMonitoraggio.Controls.Add(this.label4);
             this.groupBoxMonitoraggio.Controls.Add(this.checkTuttoPercorso);
             this.groupBoxMonitoraggio.Controls.Add(this.checkTripDuplicati);
-            this.groupBoxMonitoraggio.Location = new System.Drawing.Point(6, 120);
+            this.groupBoxMonitoraggio.Location = new System.Drawing.Point(8, 148);
+            this.groupBoxMonitoraggio.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxMonitoraggio.Name = "groupBoxMonitoraggio";
-            this.groupBoxMonitoraggio.Size = new System.Drawing.Size(1014, 93);
+            this.groupBoxMonitoraggio.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBoxMonitoraggio.Size = new System.Drawing.Size(1352, 114);
             this.groupBoxMonitoraggio.TabIndex = 27;
             this.groupBoxMonitoraggio.TabStop = false;
             this.groupBoxMonitoraggio.Text = "Impostazioni Monitoraggio";
@@ -1331,9 +1392,10 @@
             // buttonResetRegole
             // 
             this.buttonResetRegole.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonResetRegole.Location = new System.Drawing.Point(886, 64);
+            this.buttonResetRegole.Location = new System.Drawing.Point(1181, 79);
+            this.buttonResetRegole.Margin = new System.Windows.Forms.Padding(4);
             this.buttonResetRegole.Name = "buttonResetRegole";
-            this.buttonResetRegole.Size = new System.Drawing.Size(122, 23);
+            this.buttonResetRegole.Size = new System.Drawing.Size(163, 28);
             this.buttonResetRegole.TabIndex = 48;
             this.buttonResetRegole.Text = "Rleggi regole";
             this.buttonResetRegole.UseVisualStyleBackColor = true;
@@ -1342,9 +1404,10 @@
             // checkBoxStorico
             // 
             this.checkBoxStorico.AutoSize = true;
-            this.checkBoxStorico.Location = new System.Drawing.Point(661, 68);
+            this.checkBoxStorico.Location = new System.Drawing.Point(881, 84);
+            this.checkBoxStorico.Margin = new System.Windows.Forms.Padding(4);
             this.checkBoxStorico.Name = "checkBoxStorico";
-            this.checkBoxStorico.Size = new System.Drawing.Size(138, 17);
+            this.checkBoxStorico.Size = new System.Drawing.Size(172, 20);
             this.checkBoxStorico.TabIndex = 32;
             this.checkBoxStorico.Text = "Mostra storico violazioni";
             this.checkBoxStorico.UseVisualStyleBackColor = true;
@@ -1352,19 +1415,20 @@
             // labelRaggruppaAlert
             // 
             this.labelRaggruppaAlert.AutoSize = true;
-            this.labelRaggruppaAlert.Location = new System.Drawing.Point(658, 30);
+            this.labelRaggruppaAlert.Location = new System.Drawing.Point(877, 37);
+            this.labelRaggruppaAlert.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelRaggruppaAlert.Name = "labelRaggruppaAlert";
-            this.labelRaggruppaAlert.Size = new System.Drawing.Size(114, 13);
+            this.labelRaggruppaAlert.Size = new System.Drawing.Size(145, 16);
             this.labelRaggruppaAlert.TabIndex = 31;
             this.labelRaggruppaAlert.Text = "Raggruppa gli alert per";
             // 
             // radioNonRaggruppare
             // 
             this.radioNonRaggruppare.AutoSize = true;
-            this.radioNonRaggruppare.Location = new System.Drawing.Point(776, 49);
+            this.radioNonRaggruppare.Location = new System.Drawing.Point(1035, 60);
             this.radioNonRaggruppare.Margin = new System.Windows.Forms.Padding(1);
             this.radioNonRaggruppare.Name = "radioNonRaggruppare";
-            this.radioNonRaggruppare.Size = new System.Drawing.Size(105, 17);
+            this.radioNonRaggruppare.Size = new System.Drawing.Size(131, 20);
             this.radioNonRaggruppare.TabIndex = 30;
             this.radioNonRaggruppare.Text = "Non raggruppare";
             this.radioNonRaggruppare.UseVisualStyleBackColor = true;
@@ -1372,9 +1436,10 @@
             // checkReset
             // 
             this.checkReset.AutoSize = true;
-            this.checkReset.Location = new System.Drawing.Point(295, 61);
+            this.checkReset.Location = new System.Drawing.Point(393, 75);
+            this.checkReset.Margin = new System.Windows.Forms.Padding(4);
             this.checkReset.Name = "checkReset";
-            this.checkReset.Size = new System.Drawing.Size(193, 17);
+            this.checkReset.Size = new System.Drawing.Size(243, 20);
             this.checkReset.TabIndex = 24;
             this.checkReset.Text = "Azzera e riavvia il monitoraggio alle ";
             this.checkReset.UseVisualStyleBackColor = true;
@@ -1384,10 +1449,10 @@
             // 
             this.radioLineaRegola.AutoSize = true;
             this.radioLineaRegola.Checked = true;
-            this.radioLineaRegola.Location = new System.Drawing.Point(776, 30);
+            this.radioLineaRegola.Location = new System.Drawing.Point(1035, 37);
             this.radioLineaRegola.Margin = new System.Windows.Forms.Padding(1);
             this.radioLineaRegola.Name = "radioLineaRegola";
-            this.radioLineaRegola.Size = new System.Drawing.Size(97, 17);
+            this.radioLineaRegola.Size = new System.Drawing.Size(120, 20);
             this.radioLineaRegola.TabIndex = 29;
             this.radioLineaRegola.TabStop = true;
             this.radioLineaRegola.Text = "Linea e Regola";
@@ -1396,10 +1461,10 @@
             // radioLinea
             // 
             this.radioLinea.AutoSize = true;
-            this.radioLinea.Location = new System.Drawing.Point(776, 11);
+            this.radioLinea.Location = new System.Drawing.Point(1035, 14);
             this.radioLinea.Margin = new System.Windows.Forms.Padding(1);
             this.radioLinea.Name = "radioLinea";
-            this.radioLinea.Size = new System.Drawing.Size(51, 17);
+            this.radioLinea.Size = new System.Drawing.Size(61, 20);
             this.radioLinea.TabIndex = 28;
             this.radioLinea.Text = "Linea";
             this.radioLinea.UseVisualStyleBackColor = true;
@@ -1408,10 +1473,11 @@
             // 
             this.dateTimeReset.CustomFormat = "HH:mm";
             this.dateTimeReset.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimeReset.Location = new System.Drawing.Point(488, 59);
+            this.dateTimeReset.Location = new System.Drawing.Point(651, 73);
+            this.dateTimeReset.Margin = new System.Windows.Forms.Padding(4);
             this.dateTimeReset.Name = "dateTimeReset";
             this.dateTimeReset.ShowUpDown = true;
-            this.dateTimeReset.Size = new System.Drawing.Size(50, 20);
+            this.dateTimeReset.Size = new System.Drawing.Size(65, 22);
             this.dateTimeReset.TabIndex = 22;
             this.dateTimeReset.Value = new System.DateTime(2020, 9, 6, 0, 0, 0, 0);
             this.dateTimeReset.ValueChanged += new System.EventHandler(this.CheckReset_CheckedChanged);
@@ -1419,9 +1485,10 @@
             // checkTripVuoti
             // 
             this.checkTripVuoti.AutoSize = true;
-            this.checkTripVuoti.Location = new System.Drawing.Point(295, 12);
+            this.checkTripVuoti.Location = new System.Drawing.Point(393, 15);
+            this.checkTripVuoti.Margin = new System.Windows.Forms.Padding(4);
             this.checkTripVuoti.Name = "checkTripVuoti";
-            this.checkTripVuoti.Size = new System.Drawing.Size(188, 17);
+            this.checkTripVuoti.Size = new System.Drawing.Size(229, 20);
             this.checkTripVuoti.TabIndex = 21;
             this.checkTripVuoti.Text = "Escludi le vetture con TripId vuoto";
             this.checkTripVuoti.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1430,17 +1497,19 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(124, 28);
+            this.comboBox1.Location = new System.Drawing.Point(165, 34);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(165, 21);
+            this.comboBox1.Size = new System.Drawing.Size(219, 24);
             this.comboBox1.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(85, 31);
+            this.label4.Location = new System.Drawing.Point(113, 38);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(33, 13);
+            this.label4.Size = new System.Drawing.Size(40, 16);
             this.label4.TabIndex = 13;
             this.label4.Text = "Linea";
             // 
@@ -1448,9 +1517,10 @@
             // 
             this.checkTuttoPercorso.AutoSize = true;
             this.checkTuttoPercorso.DataBindings.Add(new System.Windows.Forms.Binding("Visible", global::AtacFeed.Properties.Settings.Default, "ExtraSetting", true, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged));
-            this.checkTuttoPercorso.Location = new System.Drawing.Point(295, 44);
+            this.checkTuttoPercorso.Location = new System.Drawing.Point(393, 54);
+            this.checkTuttoPercorso.Margin = new System.Windows.Forms.Padding(4);
             this.checkTuttoPercorso.Name = "checkTuttoPercorso";
-            this.checkTuttoPercorso.Size = new System.Drawing.Size(213, 17);
+            this.checkTuttoPercorso.Size = new System.Drawing.Size(261, 20);
             this.checkTuttoPercorso.TabIndex = 14;
             this.checkTuttoPercorso.Text = "Traccia la vettura lungo tutto il percorso";
             this.checkTuttoPercorso.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1460,9 +1530,10 @@
             // checkTripDuplicati
             // 
             this.checkTripDuplicati.AutoSize = true;
-            this.checkTripDuplicati.Location = new System.Drawing.Point(295, 28);
+            this.checkTripDuplicati.Location = new System.Drawing.Point(393, 34);
+            this.checkTripDuplicati.Margin = new System.Windows.Forms.Padding(4);
             this.checkTripDuplicati.Name = "checkTripDuplicati";
-            this.checkTripDuplicati.Size = new System.Drawing.Size(317, 17);
+            this.checkTripDuplicati.Size = new System.Drawing.Size(394, 20);
             this.checkTripDuplicati.TabIndex = 14;
             this.checkTripDuplicati.Text = "Includi più volte la stessa vettura se è rilevata su TripId diversi";
             this.checkTripDuplicati.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1488,9 +1559,11 @@
             this.groupBoxServerRSM.Controls.Add(this.label5);
             this.groupBoxServerRSM.Controls.Add(this.secondi);
             this.groupBoxServerRSM.Controls.Add(this.minuti);
-            this.groupBoxServerRSM.Location = new System.Drawing.Point(6, 6);
+            this.groupBoxServerRSM.Location = new System.Drawing.Point(8, 7);
+            this.groupBoxServerRSM.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxServerRSM.Name = "groupBoxServerRSM";
-            this.groupBoxServerRSM.Size = new System.Drawing.Size(1014, 108);
+            this.groupBoxServerRSM.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBoxServerRSM.Size = new System.Drawing.Size(1352, 133);
             this.groupBoxServerRSM.TabIndex = 26;
             this.groupBoxServerRSM.TabStop = false;
             this.groupBoxServerRSM.Text = "Impostazioni Server RSM";
@@ -1498,10 +1571,10 @@
             // imgUrl2
             // 
             this.imgUrl2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.imgUrl2.Location = new System.Drawing.Point(697, 41);
+            this.imgUrl2.Location = new System.Drawing.Point(929, 50);
             this.imgUrl2.Margin = new System.Windows.Forms.Padding(0);
             this.imgUrl2.Name = "imgUrl2";
-            this.imgUrl2.Size = new System.Drawing.Size(16, 16);
+            this.imgUrl2.Size = new System.Drawing.Size(21, 20);
             this.imgUrl2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.imgUrl2.TabIndex = 24;
             this.imgUrl2.TabStop = false;
@@ -1509,10 +1582,10 @@
             // imgUrl1
             // 
             this.imgUrl1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.imgUrl1.Location = new System.Drawing.Point(697, 20);
+            this.imgUrl1.Location = new System.Drawing.Point(929, 25);
             this.imgUrl1.Margin = new System.Windows.Forms.Padding(0);
             this.imgUrl1.Name = "imgUrl1";
-            this.imgUrl1.Size = new System.Drawing.Size(16, 16);
+            this.imgUrl1.Size = new System.Drawing.Size(21, 20);
             this.imgUrl1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.imgUrl1.TabIndex = 23;
             this.imgUrl1.TabStop = false;
@@ -1521,9 +1594,10 @@
             // 
             this.urlVehicleRiserva.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.urlVehicleRiserva.Location = new System.Drawing.Point(124, 38);
+            this.urlVehicleRiserva.Location = new System.Drawing.Point(165, 47);
+            this.urlVehicleRiserva.Margin = new System.Windows.Forms.Padding(4);
             this.urlVehicleRiserva.Name = "urlVehicleRiserva";
-            this.urlVehicleRiserva.Size = new System.Drawing.Size(569, 20);
+            this.urlVehicleRiserva.Size = new System.Drawing.Size(757, 22);
             this.urlVehicleRiserva.TabIndex = 21;
             this.urlVehicleRiserva.Text = "https://dati.comune.roma.it/catalog/dataset/a7dadb4a-66ae-4eff-8ded-a102064702ba/" +
     "resource/d2b123d6-8d2d-4dee-9792-f535df3dc166/download/rome_vehicle_positions.pb" +
@@ -1532,18 +1606,20 @@
             // label37
             // 
             this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(3, 41);
+            this.label37.Location = new System.Drawing.Point(4, 50);
+            this.label37.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(109, 13);
+            this.label37.Size = new System.Drawing.Size(139, 16);
             this.label37.TabIndex = 22;
             this.label37.Text = "Feed Vehicle (riserva)";
             // 
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(67, 85);
+            this.label20.Location = new System.Drawing.Point(89, 105);
+            this.label20.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(55, 13);
+            this.label20.Size = new System.Drawing.Size(69, 16);
             this.label20.TabIndex = 6;
             this.label20.Text = "Feed Alert";
             this.label20.Visible = false;
@@ -1552,9 +1628,10 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(961, 36);
+            this.label6.Location = new System.Drawing.Point(1281, 44);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(44, 13);
+            this.label6.Size = new System.Drawing.Size(55, 16);
             this.label6.TabIndex = 18;
             this.label6.Text = "secondi";
             // 
@@ -1562,9 +1639,10 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(877, 36);
+            this.label7.Location = new System.Drawing.Point(1169, 44);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(34, 13);
+            this.label7.Size = new System.Drawing.Size(41, 16);
             this.label7.TabIndex = 19;
             this.label7.Text = "minuti";
             // 
@@ -1572,17 +1650,19 @@
             // 
             this.urlVehicle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.urlVehicle.Location = new System.Drawing.Point(124, 17);
+            this.urlVehicle.Location = new System.Drawing.Point(165, 21);
+            this.urlVehicle.Margin = new System.Windows.Forms.Padding(4);
             this.urlVehicle.Name = "urlVehicle";
-            this.urlVehicle.Size = new System.Drawing.Size(569, 20);
+            this.urlVehicle.Size = new System.Drawing.Size(757, 22);
             this.urlVehicle.TabIndex = 1;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(53, 20);
+            this.label2.Location = new System.Drawing.Point(71, 25);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 13);
+            this.label2.Size = new System.Drawing.Size(87, 16);
             this.label2.TabIndex = 7;
             this.label2.Text = "Feed Vehicle";
             // 
@@ -1590,9 +1670,10 @@
             // 
             this.urlAlert.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.urlAlert.Location = new System.Drawing.Point(124, 82);
+            this.urlAlert.Location = new System.Drawing.Point(165, 101);
+            this.urlAlert.Margin = new System.Windows.Forms.Padding(4);
             this.urlAlert.Name = "urlAlert";
-            this.urlAlert.Size = new System.Drawing.Size(569, 20);
+            this.urlAlert.Size = new System.Drawing.Size(757, 22);
             this.urlAlert.TabIndex = 3;
             this.urlAlert.Visible = false;
             // 
@@ -1600,23 +1681,25 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(770, 36);
+            this.label5.Location = new System.Drawing.Point(1027, 44);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(57, 13);
+            this.label5.Size = new System.Drawing.Size(71, 16);
             this.label5.TabIndex = 17;
             this.label5.Text = "Ripeti ogni";
             // 
             // secondi
             // 
             this.secondi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.secondi.Location = new System.Drawing.Point(917, 34);
+            this.secondi.Location = new System.Drawing.Point(1223, 42);
+            this.secondi.Margin = new System.Windows.Forms.Padding(4);
             this.secondi.Maximum = new decimal(new int[] {
             59,
             0,
             0,
             0});
             this.secondi.Name = "secondi";
-            this.secondi.Size = new System.Drawing.Size(38, 20);
+            this.secondi.Size = new System.Drawing.Size(51, 22);
             this.secondi.TabIndex = 16;
             this.secondi.Value = new decimal(new int[] {
             5,
@@ -1627,9 +1710,10 @@
             // minuti
             // 
             this.minuti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.minuti.Location = new System.Drawing.Point(833, 33);
+            this.minuti.Location = new System.Drawing.Point(1111, 41);
+            this.minuti.Margin = new System.Windows.Forms.Padding(4);
             this.minuti.Name = "minuti";
-            this.minuti.Size = new System.Drawing.Size(38, 20);
+            this.minuti.Size = new System.Drawing.Size(51, 22);
             this.minuti.TabIndex = 15;
             // 
             // tableLayoutPanel1
@@ -1644,32 +1728,34 @@
             this.tableLayoutPanel1.Controls.Add(this.textBox3, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.textBox4, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 324);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(4, 399);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1020, 329);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1360, 405);
             this.tableLayoutPanel1.TabIndex = 24;
             // 
             // textBox3
             // 
             this.textBox3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox3.Location = new System.Drawing.Point(411, 3);
+            this.textBox3.Location = new System.Drawing.Point(548, 4);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(4);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
             this.textBox3.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox3.Size = new System.Drawing.Size(300, 323);
+            this.textBox3.Size = new System.Drawing.Size(400, 397);
             this.textBox3.TabIndex = 9;
             // 
             // textBox4
             // 
             this.textBox4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox4.Location = new System.Drawing.Point(717, 3);
+            this.textBox4.Location = new System.Drawing.Point(956, 4);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(4);
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
             this.textBox4.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox4.Size = new System.Drawing.Size(300, 323);
+            this.textBox4.Size = new System.Drawing.Size(400, 397);
             this.textBox4.TabIndex = 10;
             // 
             // tableLayoutPanel3
@@ -1685,15 +1771,16 @@
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.1282F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 69.8718F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(408, 329);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(544, 405);
             this.tableLayoutPanel3.TabIndex = 11;
             // 
             // textBox2
             // 
             this.textBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox2.Location = new System.Drawing.Point(3, 102);
+            this.textBox2.Location = new System.Drawing.Point(4, 126);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(402, 224);
+            this.textBox2.Size = new System.Drawing.Size(536, 275);
             this.textBox2.TabIndex = 28;
             this.textBox2.Text = "";
             this.textBox2.WordWrap = false;
@@ -1703,11 +1790,12 @@
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(3, 3);
+            this.textBox1.Location = new System.Drawing.Point(4, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(402, 93);
+            this.textBox1.Size = new System.Drawing.Size(536, 114);
             this.textBox1.TabIndex = 4;
             // 
             // tabMainForm
@@ -1719,12 +1807,102 @@
             this.tabMainForm.Controls.Add(this.tabGrafico);
             this.tabMainForm.Controls.Add(this.tabGrigliaFiltrata);
             this.tabMainForm.Controls.Add(this.tabMonitoraggio);
-            this.tabMainForm.Location = new System.Drawing.Point(13, 13);
+            this.tabMainForm.Location = new System.Drawing.Point(17, 16);
+            this.tabMainForm.Margin = new System.Windows.Forms.Padding(4);
             this.tabMainForm.Name = "tabMainForm";
             this.tabMainForm.SelectedIndex = 0;
-            this.tabMainForm.Size = new System.Drawing.Size(1036, 680);
+            this.tabMainForm.Size = new System.Drawing.Size(1381, 837);
             this.tabMainForm.TabIndex = 27;
             this.tabMainForm.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
+            // 
+            // extendedVehicleInfoBindingSource
+            // 
+            this.extendedVehicleInfoBindingSource.DataSource = typeof(AtacFeed.ExtendedVehicleInfo);
+            // 
+            // dataGridViewTextBoxColumn50
+            // 
+            this.dataGridViewTextBoxColumn50.DataPropertyName = "Linea";
+            this.dataGridViewTextBoxColumn50.HeaderText = "Linea";
+            this.dataGridViewTextBoxColumn50.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn50.Name = "dataGridViewTextBoxColumn50";
+            this.dataGridViewTextBoxColumn50.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn51
+            // 
+            this.dataGridViewTextBoxColumn51.DataPropertyName = "Giorno";
+            this.dataGridViewTextBoxColumn51.HeaderText = "Giorno";
+            this.dataGridViewTextBoxColumn51.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn51.Name = "dataGridViewTextBoxColumn51";
+            this.dataGridViewTextBoxColumn51.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn52
+            // 
+            this.dataGridViewTextBoxColumn52.DataPropertyName = "Da";
+            this.dataGridViewTextBoxColumn52.HeaderText = "Da";
+            this.dataGridViewTextBoxColumn52.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn52.Name = "dataGridViewTextBoxColumn52";
+            this.dataGridViewTextBoxColumn52.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn53
+            // 
+            this.dataGridViewTextBoxColumn53.DataPropertyName = "A";
+            this.dataGridViewTextBoxColumn53.HeaderText = "A";
+            this.dataGridViewTextBoxColumn53.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn53.Name = "dataGridViewTextBoxColumn53";
+            this.dataGridViewTextBoxColumn53.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn54
+            // 
+            this.dataGridViewTextBoxColumn54.DataPropertyName = "TempoBonus";
+            this.dataGridViewTextBoxColumn54.HeaderText = "TempoBonus";
+            this.dataGridViewTextBoxColumn54.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn54.Name = "dataGridViewTextBoxColumn54";
+            this.dataGridViewTextBoxColumn54.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn55
+            // 
+            this.dataGridViewTextBoxColumn55.DataPropertyName = "VetturePreviste";
+            this.dataGridViewTextBoxColumn55.HeaderText = "VetturePreviste";
+            this.dataGridViewTextBoxColumn55.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn55.Name = "dataGridViewTextBoxColumn55";
+            this.dataGridViewTextBoxColumn55.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn56
+            // 
+            this.dataGridViewTextBoxColumn56.DataPropertyName = "VettureRilevate";
+            this.dataGridViewTextBoxColumn56.HeaderText = "VettureRilevate";
+            this.dataGridViewTextBoxColumn56.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn56.Name = "dataGridViewTextBoxColumn56";
+            this.dataGridViewTextBoxColumn56.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn57
+            // 
+            this.dataGridViewTextBoxColumn57.DataPropertyName = "OraPrimaViolazione";
+            this.dataGridViewTextBoxColumn57.HeaderText = "OraPrimaViolazione";
+            this.dataGridViewTextBoxColumn57.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn57.Name = "dataGridViewTextBoxColumn57";
+            this.dataGridViewTextBoxColumn57.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn58
+            // 
+            this.dataGridViewTextBoxColumn58.DataPropertyName = "OraUltimaViolazione";
+            this.dataGridViewTextBoxColumn58.HeaderText = "OraUltimaViolazione";
+            this.dataGridViewTextBoxColumn58.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn58.Name = "dataGridViewTextBoxColumn58";
+            this.dataGridViewTextBoxColumn58.ReadOnly = true;
+            // 
+            // regolaViolataDataGridViewTextBoxColumn
+            // 
+            this.regolaViolataDataGridViewTextBoxColumn.DataPropertyName = "RegolaViolata";
+            this.regolaViolataDataGridViewTextBoxColumn.HeaderText = "RegolaViolata";
+            this.regolaViolataDataGridViewTextBoxColumn.MinimumWidth = 6;
+            this.regolaViolataDataGridViewTextBoxColumn.Name = "regolaViolataDataGridViewTextBoxColumn";
+            this.regolaViolataDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // lineaMonitorataBindingSource
+            // 
+            this.lineaMonitorataBindingSource.AllowNew = false;
+            this.lineaMonitorataBindingSource.DataSource = typeof(AtacFeed.LineaMonitorata);
             // 
             // dataGridViewTextBoxColumn34
             // 
@@ -1771,6 +1949,15 @@
             this.dataGridViewTextBoxColumn39.ReadOnly = true;
             this.dataGridViewTextBoxColumn39.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
+            // Destinazione
+            // 
+            this.Destinazione.DataPropertyName = "Destinazione";
+            this.Destinazione.HeaderText = "Destinazione";
+            this.Destinazione.MinimumWidth = 22;
+            this.Destinazione.Name = "Destinazione";
+            this.Destinazione.ReadOnly = true;
+            this.Destinazione.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
             // dataGridViewTextBoxColumn40
             // 
             this.dataGridViewTextBoxColumn40.DataPropertyName = "CurrentStopSequence";
@@ -1779,6 +1966,15 @@
             this.dataGridViewTextBoxColumn40.Name = "dataGridViewTextBoxColumn40";
             this.dataGridViewTextBoxColumn40.ReadOnly = true;
             this.dataGridViewTextBoxColumn40.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // NomeFermata
+            // 
+            this.NomeFermata.DataPropertyName = "NomeFermata";
+            this.NomeFermata.HeaderText = "NomeFermata";
+            this.NomeFermata.MinimumWidth = 22;
+            this.NomeFermata.Name = "NomeFermata";
+            this.NomeFermata.ReadOnly = true;
+            this.NomeFermata.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // occupancyStatusDataGridViewTextBoxColumn1
             // 
@@ -1801,6 +1997,9 @@
             // dataGridViewTextBoxColumn43
             // 
             this.dataGridViewTextBoxColumn43.DataPropertyName = "PrimaVolta";
+            dataGridViewCellStyle1.Format = "t";
+            dataGridViewCellStyle1.NullValue = null;
+            this.dataGridViewTextBoxColumn43.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewTextBoxColumn43.HeaderText = "PrimaVolta";
             this.dataGridViewTextBoxColumn43.MinimumWidth = 22;
             this.dataGridViewTextBoxColumn43.Name = "dataGridViewTextBoxColumn43";
@@ -1810,6 +2009,8 @@
             // dataGridViewTextBoxColumn44
             // 
             this.dataGridViewTextBoxColumn44.DataPropertyName = "UltimaVolta";
+            dataGridViewCellStyle2.Format = "t";
+            this.dataGridViewTextBoxColumn44.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewTextBoxColumn44.HeaderText = "UltimaVolta";
             this.dataGridViewTextBoxColumn44.MinimumWidth = 22;
             this.dataGridViewTextBoxColumn44.Name = "dataGridViewTextBoxColumn44";
@@ -1879,91 +2080,33 @@
             this.tipoMezzoTrasportoDataGridViewTextBoxColumn1.ReadOnly = true;
             this.tipoMezzoTrasportoDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
-            // extendedVehicleInfoBindingSource
+            // DistanzaPercorsa
             // 
-            this.extendedVehicleInfoBindingSource.DataSource = typeof(AtacFeed.ExtendedVehicleInfo);
+            this.DistanzaPercorsa.DataPropertyName = "DistanzaPercorsa";
+            this.DistanzaPercorsa.HeaderText = "DistanzaPercorsa";
+            this.DistanzaPercorsa.MinimumWidth = 22;
+            this.DistanzaPercorsa.Name = "DistanzaPercorsa";
+            this.DistanzaPercorsa.ReadOnly = true;
+            this.DistanzaPercorsa.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
-            // dataGridViewTextBoxColumn50
+            // PartenzaProgrammata
             // 
-            this.dataGridViewTextBoxColumn50.DataPropertyName = "Linea";
-            this.dataGridViewTextBoxColumn50.HeaderText = "Linea";
-            this.dataGridViewTextBoxColumn50.Name = "dataGridViewTextBoxColumn50";
-            this.dataGridViewTextBoxColumn50.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn51
-            // 
-            this.dataGridViewTextBoxColumn51.DataPropertyName = "Giorno";
-            this.dataGridViewTextBoxColumn51.HeaderText = "Giorno";
-            this.dataGridViewTextBoxColumn51.Name = "dataGridViewTextBoxColumn51";
-            this.dataGridViewTextBoxColumn51.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn52
-            // 
-            this.dataGridViewTextBoxColumn52.DataPropertyName = "Da";
-            this.dataGridViewTextBoxColumn52.HeaderText = "Da";
-            this.dataGridViewTextBoxColumn52.Name = "dataGridViewTextBoxColumn52";
-            this.dataGridViewTextBoxColumn52.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn53
-            // 
-            this.dataGridViewTextBoxColumn53.DataPropertyName = "A";
-            this.dataGridViewTextBoxColumn53.HeaderText = "A";
-            this.dataGridViewTextBoxColumn53.Name = "dataGridViewTextBoxColumn53";
-            this.dataGridViewTextBoxColumn53.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn54
-            // 
-            this.dataGridViewTextBoxColumn54.DataPropertyName = "TempoBonus";
-            this.dataGridViewTextBoxColumn54.HeaderText = "TempoBonus";
-            this.dataGridViewTextBoxColumn54.Name = "dataGridViewTextBoxColumn54";
-            this.dataGridViewTextBoxColumn54.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn55
-            // 
-            this.dataGridViewTextBoxColumn55.DataPropertyName = "VetturePreviste";
-            this.dataGridViewTextBoxColumn55.HeaderText = "VetturePreviste";
-            this.dataGridViewTextBoxColumn55.Name = "dataGridViewTextBoxColumn55";
-            this.dataGridViewTextBoxColumn55.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn56
-            // 
-            this.dataGridViewTextBoxColumn56.DataPropertyName = "VettureRilevate";
-            this.dataGridViewTextBoxColumn56.HeaderText = "VettureRilevate";
-            this.dataGridViewTextBoxColumn56.Name = "dataGridViewTextBoxColumn56";
-            this.dataGridViewTextBoxColumn56.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn57
-            // 
-            this.dataGridViewTextBoxColumn57.DataPropertyName = "OraPrimaViolazione";
-            this.dataGridViewTextBoxColumn57.HeaderText = "OraPrimaViolazione";
-            this.dataGridViewTextBoxColumn57.Name = "dataGridViewTextBoxColumn57";
-            this.dataGridViewTextBoxColumn57.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn58
-            // 
-            this.dataGridViewTextBoxColumn58.DataPropertyName = "OraUltimaViolazione";
-            this.dataGridViewTextBoxColumn58.HeaderText = "OraUltimaViolazione";
-            this.dataGridViewTextBoxColumn58.Name = "dataGridViewTextBoxColumn58";
-            this.dataGridViewTextBoxColumn58.ReadOnly = true;
-            // 
-            // regolaViolataDataGridViewTextBoxColumn
-            // 
-            this.regolaViolataDataGridViewTextBoxColumn.DataPropertyName = "RegolaViolata";
-            this.regolaViolataDataGridViewTextBoxColumn.HeaderText = "RegolaViolata";
-            this.regolaViolataDataGridViewTextBoxColumn.Name = "regolaViolataDataGridViewTextBoxColumn";
-            this.regolaViolataDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // lineaMonitorataBindingSource
-            // 
-            this.lineaMonitorataBindingSource.AllowNew = false;
-            this.lineaMonitorataBindingSource.DataSource = typeof(AtacFeed.LineaMonitorata);
+            this.PartenzaProgrammata.DataPropertyName = "PartenzaProgrammata";
+            dataGridViewCellStyle3.Format = "t";
+            dataGridViewCellStyle3.NullValue = null;
+            this.PartenzaProgrammata.DefaultCellStyle = dataGridViewCellStyle3;
+            this.PartenzaProgrammata.HeaderText = "PartenzaProgrammata";
+            this.PartenzaProgrammata.MinimumWidth = 22;
+            this.PartenzaProgrammata.Name = "PartenzaProgrammata";
+            this.PartenzaProgrammata.ReadOnly = true;
+            this.PartenzaProgrammata.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // FormGTFS_RSM
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1169, 705);
+            this.ClientSize = new System.Drawing.Size(1559, 868);
             this.Controls.Add(this.label38);
             this.Controls.Add(this.label40);
             this.Controls.Add(this.labelLetture);
@@ -2027,6 +2170,7 @@
             this.Controls.Add(this.buttonPlayPause);
             this.Controls.Add(this.label26);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FormGTFS_RSM";
             this.Text = "Monitoraggio Trasporti  Roma";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -2104,6 +2248,7 @@
         private System.Windows.Forms.ToolTip toolTipFeedTrip;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.BindingSource extendedVehicleInfoBindingSource;
+        /*
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn11;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn12;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn13;
@@ -2129,6 +2274,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn vettureRilevateDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn oraPrimaViolazioneDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn oraUltimaViolazioneDataGridViewTextBoxColumn;
+        */
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label labelVer;
         private System.Windows.Forms.Label label1;
@@ -2267,6 +2413,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn inTransitToDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipoMezzoTrasportoDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn DistanzaPercorsa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PartenzaProgrammata;
     }
 }
 

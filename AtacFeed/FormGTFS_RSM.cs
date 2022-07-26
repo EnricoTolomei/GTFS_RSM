@@ -765,7 +765,7 @@ namespace AtacFeed
             }
             catch
             {
-                    Log.Information("Nessuna RegoleMonitoraggio");
+                Log.Information("Nessuna RegoleMonitoraggio");
             }            
         }
 

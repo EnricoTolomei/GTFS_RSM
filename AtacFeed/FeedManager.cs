@@ -149,17 +149,13 @@ namespace AtacFeed
         }        
         public void ElaboraUltimoFeedValido(string filtroLinea, bool filtroTripVuoti, bool filtroTuttoPercorso, bool raggruppalineaRegola, bool nonRaggruppare)
         {
-
             
-
             FeedEntities = LastValidFeed.Entities
                             .Where(x => (string.IsNullOrEmpty(filtroLinea) || x.Vehicle.Trip?.RouteId == filtroLinea)
                                         && (!filtroTripVuoti || x.Vehicle?.Trip?.TripId.Length > 0))
                             .ToList();
-
-            ElencoVetture =
-                            (from fe in
-                                 FeedEntities
+            
+            ElencoVetture = (from fe in FeedEntities
                                  .GroupJoin(
                                      inner: GTFS_RSM.ElencoLineaAgenzia,
                                      outerKeySelector: v => v.Vehicle.Trip?.RouteId,
@@ -182,38 +178,37 @@ namespace AtacFeed
                                )
                                .DefaultIfEmpty()
                              select (fe.Linea, fe.Vehicle, fe.DettagliVettura, fe.NomeFermata, trip?.Headsign )
-                            )
-                            .Select(x => new ExtendedVehicleInfo(
-                                x.Vehicle.Vehicle.Id,
-                                            x.Vehicle.Vehicle.Label.Trim(),
-                                            x.Vehicle.Vehicle.LicensePlate,
-                                            x.Vehicle.Trip?.RouteId,
-                                            x.Linea?.Route.ShortName,
-                                            x.DettagliVettura?.Gestore ?? x.Linea?.Agency.Name,
-                                            x.Vehicle.Trip?.DirectionId,
-                                            x.Vehicle.CurrentStopSequence,
-                                            x.Vehicle.congestion_level,
-                                            x.Vehicle.occupancy_status,
-                                            x.Vehicle.Trip?.TripId,
-                                            filtroTripVuoti,
-                                            LastDataFeedVehicle.Value,
-                                            x.DettagliVettura?.Rimessa,
-                                            x.DettagliVettura?.Euro,
-                                            x.DettagliVettura?.Modello,
-                                            x.Vehicle.Position.Latitude,
-                                            x.Vehicle.Position.Longitude,
-                                            x.Vehicle.CurrentStatus,
-                                            x.DettagliVettura?.TipoMezzoTrasporto.GetValueOrDefault(0) ?? (string.Equals(x.Linea?.Agency.Name, "atac", StringComparison.OrdinalIgnoreCase) ? (x.Linea?.Route.Type == GTFS.Entities.Enumerations.RouteTypeExtended.TramService ? -1 : -2) : -3),
-                                            x.Vehicle.Position.Odometer,
-                                            filtroTuttoPercorso,
-                                            x.NomeFermata?.Name,
-                                            x.Headsign,
-                                            x.Vehicle.Trip?.StartDate + x.Vehicle.Trip?.StartTime
-                                        )
-                            )
-                            .Distinct()
-                            .OrderBy(x => x.IdVettura)
-                            .ToList();
+                             )
+                             .Select( x => new ExtendedVehicleInfo(
+                                 x.Vehicle.Vehicle.Id,
+                                 x.Vehicle.Vehicle.Label.Trim(),
+                                 x.Vehicle.Vehicle.LicensePlate,
+                                 x.Vehicle.Trip?.RouteId,
+                                 x.Linea?.Route.ShortName,
+                                 x.DettagliVettura?.Gestore ?? x.Linea?.Agency.Name,
+                                 x.Vehicle.Trip?.DirectionId,
+                                 x.Vehicle.CurrentStopSequence,
+                                 x.Vehicle.congestion_level,
+                                 x.Vehicle.occupancy_status,
+                                 x.Vehicle.Trip?.TripId,
+                                 filtroTripVuoti,
+                                 LastDataFeedVehicle.Value,
+                                 x.DettagliVettura?.Rimessa,
+                                 x.DettagliVettura?.Euro,
+                                 x.DettagliVettura?.Modello,
+                                 x.Vehicle.Position.Latitude,
+                                 x.Vehicle.Position.Longitude,
+                                 x.Vehicle.CurrentStatus,
+                                 x.DettagliVettura?.TipoMezzoTrasporto.GetValueOrDefault(0) ?? (string.Equals(x.Linea?.Agency.Name, "atac", StringComparison.OrdinalIgnoreCase) ? (x.Linea?.Route.Type == GTFS.Entities.Enumerations.RouteTypeExtended.TramService ? -1 : -2) : -3),
+                                 x.Vehicle.Position.Odometer,
+                                 filtroTuttoPercorso,
+                                 x.NomeFermata?.Name,
+                                 x.Headsign,
+                                 x.Vehicle.Trip?.StartDate + x.Vehicle.Trip?.StartTime)
+                             )
+                             .Distinct()
+                             .OrderBy(x => x.IdVettura)
+                             .ToList();
 
             /*
             ExtendedVehicleInfo tripCIP = ElencoVetture.Where(x=>x.CurrentStopSequence>2).FirstOrDefault();
@@ -283,9 +278,8 @@ namespace AtacFeed
                     date = g.Max(x => x.UltimaVolta)
                 })
                 .OrderByDescending(c => c.date);
-
-
-
+                
+                
                 IEnumerable<RegolaMonitoraggio> regoleApplicabili = from regoleLineeScoperte in GTFS_RSM.RegoleMonitoraggio
                                                                     where regoleLineeScoperte.Giorno.Contains(giornosettimana.ToString())
                                                                           && regoleLineeScoperte.Da < oraFeed
@@ -392,8 +386,8 @@ namespace AtacFeed
             }
 
             int numVettureTPLFeedVehicle = ElencoVetture
-    .Where(i => i.TipoMezzoTrasporto == 3 || i.TipoMezzoTrasporto == 4 || i.TipoMezzoTrasporto == -3)
-    .Count();
+                .Where(i => i.TipoMezzoTrasporto == 3 || i.TipoMezzoTrasporto == 4 || i.TipoMezzoTrasporto == -3)
+                .Count();
             List<ExtendedVehicleInfo> listaMezziSuLinea = ElencoVetture
                 .Where(x => x.TripId != null)
                 .ToList();
@@ -639,7 +633,7 @@ namespace AtacFeed
 
         internal void LeggiGTFS(string path)
         {
-            GTFS_RSM= new GTFS_RSM(path);
+            GTFS_RSM = new GTFS_RSM(path);
         }
 
 

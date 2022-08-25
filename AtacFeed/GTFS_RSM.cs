@@ -7,9 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AtacFeed
 {
@@ -18,43 +17,66 @@ namespace AtacFeed
         public GTFSFeed StaticData { get; set; }
         public List<Trip> Trips { get; set; }
         public List<LineaAgenzia> ElencoLineaAgenzia { get; set; }
-        public List<string> LineeAgenzia { get; set;}
-        public List<DettagliVettura> ElencoDettagliVettura { get; set; }
-        public GTFS_RSM(string fileGTFSStatico)
+        //public List<string> LineeAgenzia { get; set;}
+        public IEnumerable<DettagliVettura> ElencoDettagliVettura { get; set; }
+        public GTFS_RSM(string pathGTFSStatico, bool usaDettagliVettura=true)
         {
             var reader = new GTFSReader<GTFSFeed>();
-            //fileGTFSStatico = Path.Combine(fileGTFSStatico, "test.zip");
-            StaticData = reader.Read(fileGTFSStatico);
-            Trips = (from trip in StaticData.Trips
-                     select new Trip { RouteId = trip.RouteId, Headsign = trip.Headsign, Direction = trip.Direction }
-                     )
-                     .Distinct().ToList();
+            string gtfsStatico = Path.Combine(pathGTFSStatico, "GTFS.zip");
+
+            if (File.Exists(gtfsStatico))
+            {
+                string gtfsBck = Path.Combine(pathGTFSStatico, "GTFS_bck.zip");
+                pathGTFSStatico = gtfsStatico;
+                File.Copy(gtfsStatico, gtfsBck, true);
+                using (ZipArchive zipArchive = new ZipArchive(new FileStream(pathGTFSStatico, FileMode.Open, FileAccess.ReadWrite, FileShare.None), ZipArchiveMode.Update))
+                {
+                    ZipArchiveEntry entry = zipArchive.GetEntry("stop_times.txt");
+                    entry?.Delete();
+                }
+            }
+
+            StaticData = reader.Read(pathGTFSStatico);
+
+            Trips = StaticData.Trips
+                        .Select(trip => new Trip { RouteId = trip.RouteId, Headsign = trip.Headsign, Direction = trip.Direction })
+                        .Distinct()
+                        .ToList();
 
             ElencoLineaAgenzia = (from linea in StaticData.Routes
                                   join agenzia in StaticData.Agencies on linea.AgencyId equals agenzia.Id
                                   select new LineaAgenzia(linea, agenzia)
                                  ).ToList();
 
-            LineeAgenzia = ElencoLineaAgenzia.Select(x => x.Route.Id).Distinct().ToList();
-
-            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-            {
-                Delimiter = ";",
-                HeaderValidated = null,
-                MissingFieldFound = null,
-                TrimOptions = TrimOptions.Trim,
-                PrepareHeaderForMatch = args => args.Header.Trim(),
-                AllowComments = true
-            };
-
-
-            using (var readerDettagli = new StreamReader($"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}DettagliVettura.csv"))
-            using (var csv = new CsvReader(readerDettagli, config))
-            {
-                ElencoDettagliVettura = csv.GetRecords<DettagliVettura>().ToList();
-            }
-
             AlertsDaControllare = new List<AlertDaControllare>();
+
+            LeggiDettagliVettura(usaDettagliVettura);
+        }
+
+        internal void LeggiDettagliVettura(bool usaDettagliVettura)
+        {
+            ElencoDettagliVettura = new DettagliVettura[] { };
+            if (usaDettagliVettura)
+            {
+                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+                {
+                    Delimiter = ";",
+                    HeaderValidated = null,
+                    MissingFieldFound = null,
+                    TrimOptions = TrimOptions.Trim,
+                    PrepareHeaderForMatch = args => args.Header.Trim(),
+                    AllowComments = true
+                };
+                string pathDettagli = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}DettagliVettura.csv";
+                if (File.Exists(pathDettagli))
+                {
+                    using (var readerDettagli = new StreamReader(pathDettagli))
+                    using (var csv = new CsvReader(readerDettagli, config))
+                    {
+                        ElencoDettagliVettura = csv.GetRecords<DettagliVettura>().ToList();
+                    }
+                }
+            }
         }
 
         public List<CriterioMediaPonderata> CriteriMediaPonderata;
@@ -115,16 +137,6 @@ namespace AtacFeed
             if (Directory.Exists(pathAlert))
             {
                 string[] alertFiles = Directory.GetFiles(pathAlert, "*.txt");
-
-                /*
-                foreach (var alertDaControllare in AlertsDaControllare)
-                {
-                    var esisteFileAlert = alertFiles.Where(x => x == alertDaControllare.Griglia.Name).Any();
-                    if (!esisteFileAlert)
-                        alertDaControllare.RegoleAlert = new List<RegolaAlert>();
-                }
-                */
-
                 foreach (string item in alertFiles)
                 {
                     try
@@ -156,7 +168,8 @@ namespace AtacFeed
                                         RegoleAlert = listaRegole,
                                         ViolazioniAlert = new List<ViolazioneAlert>(),
                                         Name = Path.GetFileNameWithoutExtension(item)
-                                    });
+                                    }
+                                );
                             }
                         }
                     }

@@ -12,7 +12,7 @@ namespace AtacFeed.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.3.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -261,6 +261,30 @@ namespace AtacFeed.Properties {
             }
             set {
                 this["CheckSovraffollamento"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UrlGTFS_Statico {
+            get {
+                return ((string)(this["UrlGTFS_Statico"]));
+            }
+            set {
+                this["UrlGTFS_Statico"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UrlMD5_GTFS_Statico {
+            get {
+                return ((string)(this["UrlMD5_GTFS_Statico"]));
+            }
+            set {
+                this["UrlMD5_GTFS_Statico"] = value;
             }
         }
     }

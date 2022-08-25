@@ -88,11 +88,16 @@ namespace AtacFeed
         [Ignore]
         public string Destinazione { get; set; }
 
-        [Index(21)] 
+        [Index(22)] 
         public DateTime? PartenzaProgrammata { get; set; }
 
+        [Index(21)]
+        public DateTime? PartenzaEffettiva { get; set; }
+
+
+
         public ExtendedVehicleInfo(string idVettura, string matricola, string licensePlate, string routeId, string linea, string gestore, uint? directionId, uint currentStopSequence, VehiclePosition.CongestionLevel congestionLevel, VehiclePosition.OccupancyStatus occupancyStatus, string tripId, bool strict, DateTime data, string rimessa, string euro, string modello, float latitude, float longitude, VehiclePosition.VehicleStopStatus inTransitTo, int tipoMezzoTrasporto, double distanzaPercorsa = 0, bool superStrictMode = false,
-            string nomeFermata = "", string destinazione="" , string partenzaProgrammata = ""
+            string nomeFermata = "", string destinazione="", string dataProgrammata = "", string oraProgrammata = ""
             )
         {
             CultureInfo provider = CultureInfo.InvariantCulture;
@@ -122,7 +127,16 @@ namespace AtacFeed
             DistanzaPercorsa = distanzaPercorsa;
             NomeFermata = nomeFermata;
             Destinazione = destinazione;
-            DateTime.TryParseExact(partenzaProgrammata, "yyyyMMddHH:mm:ss", provider, DateTimeStyles.AssumeLocal, out DateTime dateTimePartenzaProgrammata);
+            DateTime.TryParseExact(dataProgrammata, "yyyyMMdd", provider, DateTimeStyles.AssumeLocal, out DateTime dateTimePartenzaProgrammata);
+            if (oraProgrammata.Length > 0)
+            {
+                TimeSpan timestamp = new TimeSpan(
+                    int.Parse(oraProgrammata.Split(':')[0]),    // hours
+                    int.Parse(oraProgrammata.Split(':')[1]),    // minutes
+                    0                                           // seconds
+                );
+                dateTimePartenzaProgrammata = dateTimePartenzaProgrammata.Add(timestamp);
+            }
             PartenzaProgrammata = dateTimePartenzaProgrammata;
         }
 

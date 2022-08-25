@@ -1,4 +1,7 @@
-﻿namespace AtacFeed
+﻿using GTFS.Entities.Enumerations;
+using System.Collections.Generic;
+
+namespace AtacFeed
 {
     public class Statistiche
     {
@@ -12,5 +15,16 @@
         public int RilevatoBusTpl { get; set; }
         public int RilevatoPullmanTpl { get; set; }
         public int RilevatoAltroTpl { get; set; }
+        public List<ServizioRaggruppato> ServizioRaggruppato { get; set; }
+    }
+    public class ServizioRaggruppato { 
+        public string Agenzia { get; set; }
+
+        public string Servizio { get; set; }
+        
+        public RouteTypeExtended Tipo { get; set; }
+
+        public int Num { get; set; }
+
     }
 }

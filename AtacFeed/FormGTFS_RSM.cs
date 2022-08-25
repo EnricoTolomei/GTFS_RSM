@@ -30,8 +30,10 @@ namespace AtacFeed
         
         private string fileName;        
         private DateTime? DataResetMonitoraggio;
+        private DateTime? DataCheckUpdate;
         
-        private readonly FeedManager FeedManager = new FeedManager();        
+        private readonly FeedManager FeedManager = new FeedManager();
+        private readonly UpdateBox UpdateBox = new UpdateBox();
 
         public FormGTFS_RSM()
         {
@@ -45,320 +47,352 @@ namespace AtacFeed
         {
             try
             {
+                Exception ecc = null;
                 imgUrl1.Image = null;
                 imgUrl2.Image = null;
                 textBox1.Clear();
                 textBox2.Clear();
-                string routeID = comboBox1.SelectedValue.ToString();
+                string routeID = comboBox1.SelectedValue?.ToString()?? "-1";
+                if (DataResetMonitoraggio.HasValue && DateTime.Now > DataResetMonitoraggio.GetValueOrDefault())
+                {
+                    RestartFile();
+                    //NumeroFeedValidi = 1;
+                    //NumeroLetture = 1;
+                    //labelLetture.Text = NumeroLetture.ToString();
+                    DataResetMonitoraggio = DataResetMonitoraggio.GetValueOrDefault(DateTime.MinValue).AddDays(1);
+                    Log.Information("Prossimo reset monitoraggio: {DataResetMonitoraggio:dd/MM/yyyy HH:mm:ss}", DataResetMonitoraggio);
+                }
+
+
                 bool feedAvailable = GetValidFeed() == 0;
                 labelLetture.Text = NumeroLetture.ToString();
-
+                if (checkMD5.Checked && !DataCheckUpdate.HasValue)
+                {
+                    DataCheckUpdate = DateTime.Now.AddSeconds(15);
+                }                    
+                else if (DateTime.Now>DataCheckUpdate.GetValueOrDefault())
+                {
+                    CheckUpdate();                        
+                    DataCheckUpdate = DateTime.Now.AddSeconds(30);
+                }
                 if (feedAvailable)
                 {
                     DateTime lastDataFeedVehicle = FeedManager.LastDataFeedVehicle.Value;
+                    //if (DataResetMonitoraggio.HasValue && lastDataFeedVehicle > DataResetMonitoraggio.GetValueOrDefault())
+                    //{
+                    //    RestartFile();
+                    //    NumeroFeedValidi = 1;
+                    //    NumeroLetture = 1;
+                    //    labelLetture.Text = NumeroLetture.ToString();
+                    //    DataResetMonitoraggio = DataResetMonitoraggio.GetValueOrDefault(DateTime.MinValue).AddDays(1);
+                    //    Log.Information("Prossimo reset monitoraggio: {DataResetMonitoraggio:dd/MM/yyyy HH:mm:ss}", DataResetMonitoraggio);
+                    //}
 
-                    if (DataResetMonitoraggio.HasValue && lastDataFeedVehicle > DataResetMonitoraggio.GetValueOrDefault())
+                    lblOraLettura.Text = $"{lastDataFeedVehicle:HH:mm:ss}";
+                    labelFeedLetti.Text = NumeroFeedValidi.ToString();
+
+                    string filtroLinea = routeID == "-1" ? string.Empty : routeID;
+                    bool filtroTripVuoti = checkTripVuoti.Checked;
+                    bool filtroTuttoPercorso = checkTuttoPercorso.Visible && checkTuttoPercorso.Checked;
+                    bool raggruppalineaRegola = radioLineaRegola.Enabled && radioLineaRegola.Checked;
+                    bool nonoRaggruppare = radioNonRaggruppare.Checked;
+                    ecc= FeedManager.ElaboraUltimoFeedValido(filtroLinea, filtroTripVuoti, filtroTuttoPercorso, raggruppalineaRegola, nonoRaggruppare);
+                    List<string> lineeAnomale = FeedManager.LineeAnomale();
+                    if (lineeAnomale.Count > 0)
                     {
-                        RestartFile();
-                        DataResetMonitoraggio = DataResetMonitoraggio.GetValueOrDefault(DateTime.MinValue).AddDays(1);
-                        Log.Information("Prossimo data reset: {DataResetMonitoraggio:dd/MM/yyyy HH:mm:ss}", DataResetMonitoraggio);
+                        textBox2.Text = $"Le seguenti linee {string.Join(", ", lineeAnomale)}{Environment.NewLine}NON sono riportate nel file statico routes.txt{Environment.NewLine}{Environment.NewLine}";
                     }
 
-                    //else //if (LastDataFeedVehicle.GetValueOrDefault(DateTime.MinValue) < dataFeedVehicle)
+                    int lineNumberToSelect = 0;
+                    int start = 0;
+                    int length = 0;
+                    if (FeedManager.ElencoPrecedente.Count > 0)
                     {
-                        lblOraLettura.Text = $"{lastDataFeedVehicle:HH:mm:ss}";
-                        labelFeedLetti.Text = NumeroFeedValidi.ToString();
-
-                        string filtroLinea = (routeID != "-1") ? routeID : string.Empty;
-                        bool filtroTripVuoti = checkTripVuoti.Checked;
-                        bool filtroTuttoPercorso = checkTuttoPercorso.Visible && checkTuttoPercorso.Checked;
-                        bool raggruppalineaRegola = radioLineaRegola.Enabled && radioLineaRegola.Checked;
-                        bool nonoRaggruppare = radioNonRaggruppare.Checked;
-                        FeedManager.ElaboraUltimoFeedValido(filtroLinea, filtroTripVuoti, filtroTuttoPercorso, raggruppalineaRegola, nonoRaggruppare);
-                        List<string> lineeAnomale = FeedManager.LineeAnomale();
-                        if (lineeAnomale.Count > 0)
+                        foreach (ExtendedVehicleInfo vettura in FeedManager.VettureAggiunte)
                         {
-                            textBox2.Text = $"Le seguenti linee {string.Join(", ", lineeAnomale)}{Environment.NewLine}NON sono riportate nel file statico routes.txt{Environment.NewLine}{Environment.NewLine}";
+                            textBox3.AppendText($"{vettura.IdVettura} - {vettura.Matricola} rilevata alle {lastDataFeedVehicle:HH:mm:ss} {Environment.NewLine}");
                         }
 
-                        if (FeedManager.ElencoPrecedente.Count > 0)
+                        foreach (ExtendedVehicleInfo vettura in FeedManager.VettureTolte)
                         {
-
-                            foreach (ExtendedVehicleInfo vettura in FeedManager.VettureAggiunte)
-                            {
-                                textBox3.AppendText($"{vettura.IdVettura} - {vettura.Matricola} rilevata alle {lastDataFeedVehicle:HH:mm:ss} {Environment.NewLine}");
-                            }
-
-                            foreach (ExtendedVehicleInfo vettura in FeedManager.VettureTolte)
-                            {
-                                textBox4.AppendText($"{vettura.IdVettura} - {vettura.Matricola} NON rilevata alle {lastDataFeedVehicle:HH:mm:ss} {Environment.NewLine}");
-                            }
-
-                            if (FeedManager.PartenzaAvanzata?.Count() > 0)
-                            {
-                                textBox2.AppendText($"Vetture con 'partenza avanzata'{Environment.NewLine}");
-                                foreach (ExtendedVehicleInfo errore in FeedManager.PartenzaAvanzata)
-                                {
-                                    textBox2.AppendText($"Matricola {errore.Matricola} Linea {errore.Linea} Fermata {errore.CurrentStopSequence}{Environment.NewLine}");
-                                    int lineNumberToSelect = textBox2.Lines.Count() - 2;
-                                    int start = textBox2.GetFirstCharIndexFromLine(lineNumberToSelect);
-                                    int length = textBox2.Lines[lineNumberToSelect].Length;
-                                    textBox2.Select(start, length);
-                                    textBox2.SelectionColor = Color.CornflowerBlue;
-                                    textBox2.SelectionIndent = 10;
-                                    FeedManager.AnomaliaGTFS.Add(new ErroriGTFS(errore, (int)errore.CurrentStopSequence));
-                                }
-                                textBox2.AppendText($"{Environment.NewLine}");
-                            }
-
-                            if (FeedManager.VettureRiagganciate?.Count() > 0)
-                            {
-                                textBox2.AppendText($"Vetture 'riagganciate'{Environment.NewLine}");
-                                foreach (ExtendedVehicleInfo errore in FeedManager.VettureRiagganciate)
-                                {
-                                    textBox2.AppendText($"Matricola {errore.Matricola} Linea {errore.Linea} Fermata {errore.CurrentStopSequence}{Environment.NewLine}");
-                                    int lineNumberToSelect = textBox2.Lines.Count() - 2;
-                                    int start = textBox2.GetFirstCharIndexFromLine(lineNumberToSelect);
-                                    int length = textBox2.Lines[lineNumberToSelect].Length;
-                                    textBox2.Select(start, length);
-                                    textBox2.SelectionColor = Color.CornflowerBlue;
-                                    textBox2.SelectionIndent = 10;
-                                    uint ultimaFermataRilevata = FeedManager.ElencoAggregatoVetture
-                                            .Where(x => x.TripId == errore.TripId && x.Matricola == errore.Matricola)
-                                            .Max(x => x.CurrentStopSequence);
-                                    //   .OrderByDescending(x => x.CurrentStopSequence).FirstOrDefault();
-                                    int delta = (int)(errore.CurrentStopSequence - ultimaFermataRilevata);
-                                    FeedManager.AnomaliaGTFS.Add(new ErroriGTFS(errore, delta));
-                                }
-                                textBox2.AppendText($"{Environment.NewLine}");
-                            }
-
-                            List<ErroriGTFS> percorsoAnomalo = FeedManager.PercorsoAnomalo;
-                            if (percorsoAnomalo?.Count > 0)
-                            {
-                                textBox2.AppendText($"Vetture con progressivo fermate 'bucato'{Environment.NewLine}");
-                                foreach (ErroriGTFS errore in percorsoAnomalo)
-                                {
-                                    textBox2.AppendText(text: $"Matricola {errore.Matricola} Linea {errore.Linea} Fermata {errore.CurrentStopSequence} => 'balzo' di {errore.Delta}{Environment.NewLine}");
-                                    int delta = errore.Delta;
-                                    int lineNumberToSelect = textBox2.Lines.Count() - 2;
-                                    int start = textBox2.GetFirstCharIndexFromLine(lineNumberToSelect);
-                                    int length = textBox2.Lines[lineNumberToSelect].Length;
-                                    textBox2.Select(start, length);
-                                    if (delta < 0)
-                                    {
-                                        textBox2.SelectionColor = Color.OrangeRed;
-                                        textBox2.SelectionFont = new Font(textBox2.SelectionFont, FontStyle.Bold);
-                                    }
-                                    else
-                                    {
-                                        textBox2.SelectionColor = Color.DarkOrange;
-                                    }
-                                    textBox2.SelectionIndent = 10;                                    
-                                }
-                                textBox2.AppendText($"{Environment.NewLine}");
-                            }
+                            textBox4.AppendText($"{vettura.IdVettura} - {vettura.Matricola} NON rilevata alle {lastDataFeedVehicle:HH:mm:ss} {Environment.NewLine}");
                         }
 
-                        List<string> tripDuplicatiFeedVehicle = FeedManager.TripDuplicati();
-                        if (tripDuplicatiFeedVehicle.Count() > 0)
+                        if (FeedManager.PartenzaAvanzata?.Count() > 0)
                         {
-                            textBox2.AppendText($"Trip Duplicati{Environment.NewLine}");
-                            foreach (string tripDuplicato in tripDuplicatiFeedVehicle)
+                            textBox2.AppendText($"Vetture con 'partenza avanzata'{Environment.NewLine}");
+                            foreach (ExtendedVehicleInfo errore in FeedManager.PartenzaAvanzata)
                             {
-                                var elencoVettureSuTripIdDuplicato = string.Join(", ", FeedManager.FeedEntities.Where(x => x.Vehicle.Trip.TripId == tripDuplicato).Select(x => x.Vehicle.Vehicle.Label));
-                                textBox2.AppendText($"Trip {tripDuplicato}\tVetture:[{elencoVettureSuTripIdDuplicato}]{Environment.NewLine}");
-                                int lineNumberToSelect = textBox2.Lines.Count() - 2;
-                                int start = textBox2.GetFirstCharIndexFromLine(lineNumberToSelect);
-                                int length = textBox2.Lines[lineNumberToSelect].Length;
+                                textBox2.AppendText($"Matricola {errore.Matricola} Linea {errore.Linea} Fermata {errore.CurrentStopSequence}{Environment.NewLine}");
+                                lineNumberToSelect = textBox2.Lines.Count() - 2;
+                                start = textBox2.GetFirstCharIndexFromLine(lineNumberToSelect);
+                                length = textBox2.Lines[lineNumberToSelect].Length;
                                 textBox2.Select(start, length);
-                                textBox2.SelectionColor = Color.Tomato;
+                                textBox2.SelectionColor = Color.CornflowerBlue;
                                 textBox2.SelectionIndent = 10;
+                                FeedManager.AnomaliaGTFS.Add(new ErroriGTFS(errore, (int)errore.CurrentStopSequence));
                             }
                             textBox2.AppendText($"{Environment.NewLine}");
                         }
 
-                        /// Controllo accuratezza GTFS (Matricole o IDVehicle vuoto)
-                        List<ExtendedVehicleInfo> vettureSenzaMatricola = FeedManager.VettureSenzaMatricola();
-
-                        if (vettureSenzaMatricola.Count() > 0)
+                        if (FeedManager.VettureRiagganciate?.Count() > 0)
                         {
-                            textBox2.AppendText($"Vetture Senza Matricola{Environment.NewLine}");
-                            foreach (ExtendedVehicleInfo vettura in vettureSenzaMatricola)
+                            textBox2.AppendText($"Vetture 'riagganciate'{Environment.NewLine}");
+                            foreach (ExtendedVehicleInfo errore in FeedManager.VettureRiagganciate)
                             {
-                                textBox2.AppendText($"IdVettura {vettura.IdVettura}\t Matricola:[{vettura.Matricola}]{Environment.NewLine}");
-                                int lineNumberToSelect = textBox2.Lines.Count() - 2;
-                                int start = textBox2.GetFirstCharIndexFromLine(lineNumberToSelect);
-                                int length = textBox2.Lines[lineNumberToSelect].Length;
+                                textBox2.AppendText($"Matricola {errore.Matricola} Linea {errore.Linea} Fermata {errore.CurrentStopSequence}{Environment.NewLine}");
+                                lineNumberToSelect = textBox2.Lines.Count() - 2;
+                                start = textBox2.GetFirstCharIndexFromLine(lineNumberToSelect);
+                                length = textBox2.Lines[lineNumberToSelect].Length;
                                 textBox2.Select(start, length);
-                                textBox2.SelectionColor = Color.DarkGray;
+                                textBox2.SelectionColor = Color.CornflowerBlue;
                                 textBox2.SelectionIndent = 10;
+                                uint ultimaFermataRilevata = FeedManager.ElencoAggregatoVetture
+                                        .Where(x => x.TripId == errore.TripId && x.Matricola == errore.Matricola)
+                                        .Max(x => x.CurrentStopSequence);
+                                int delta = (int)(errore.CurrentStopSequence - ultimaFermataRilevata);
+                                FeedManager.AnomaliaGTFS.Add(new ErroriGTFS(errore, delta));
                             }
                             textBox2.AppendText($"{Environment.NewLine}");
                         }
 
+                        List<ErroriGTFS> percorsoAnomalo = FeedManager.PercorsoAnomalo;
+                        if (percorsoAnomalo?.Count > 0)
+                        {
+                            textBox2.AppendText($"Vetture con progressivo fermate 'bucato'{Environment.NewLine}");
+                            foreach (ErroriGTFS errore in percorsoAnomalo)
+                            {
+                                textBox2.AppendText(text: $"Matricola {errore.Matricola} Linea {errore.Linea} Fermata {errore.CurrentStopSequence} => 'balzo' di {errore.Delta}{Environment.NewLine}");
+                                int delta = errore.Delta;
+                                lineNumberToSelect = textBox2.Lines.Count() - 2;
+                                start = textBox2.GetFirstCharIndexFromLine(lineNumberToSelect);
+                                length = textBox2.Lines[lineNumberToSelect].Length;
+                                textBox2.Select(start, length);
+                                if (delta < 0)
+                                {
+                                    textBox2.SelectionColor = Color.OrangeRed;
+                                    textBox2.SelectionFont = new Font(textBox2.SelectionFont, FontStyle.Bold);
+                                }
+                                else
+                                {
+                                    textBox2.SelectionColor = Color.DarkOrange;
+                                }
+                                textBox2.SelectionIndent = 10;
+                            }
+                            textBox2.AppendText($"{Environment.NewLine}");
+                        }
+                    }
+
+                    List<string> tripDuplicatiFeedVehicle = FeedManager.TripDuplicati();
+                    if (tripDuplicatiFeedVehicle.Count() > 0)
+                    {
+                        textBox2.AppendText($"Trip Duplicati{Environment.NewLine}");
+                        foreach (string tripDuplicato in tripDuplicatiFeedVehicle)
+                        {
+                            var elencoVettureSuTripIdDuplicato = string.Join(", ", FeedManager.FeedEntities.Where(x => x.Vehicle.Trip.TripId == tripDuplicato).Select(x => x.Vehicle.Vehicle.Label));
+                            textBox2.AppendText($"Trip {tripDuplicato}\tVetture:[{elencoVettureSuTripIdDuplicato}]{Environment.NewLine}");
+                            lineNumberToSelect = textBox2.Lines.Count() - 2;
+                            start = textBox2.GetFirstCharIndexFromLine(lineNumberToSelect);
+                            length = textBox2.Lines[lineNumberToSelect].Length;
+                            textBox2.Select(start, length);
+                            textBox2.SelectionColor = Color.Tomato;
+                            textBox2.SelectionIndent = 10;
+                        }
                         textBox2.AppendText($"{Environment.NewLine}");
-                        textBox2.Select(0, 0);
+                    }
 
+                    /// Controllo accuratezza GTFS (Matricole o IDVehicle vuoto)
+                    List<ExtendedVehicleInfo> vettureSenzaMatricola = FeedManager.VettureSenzaMatricola();
 
-
-
-                        labelTotaleRighe.Text = FeedManager.ElencoAggregatoVetture.Count.ToString();
-
-                        labelTotaleIdVettura.Text = FeedManager.TotaleIdVettura.ToString();
-                        labelTotaleMatricola.Text = FeedManager.TotaleMatricola.ToString();
-                        labelBusAtac.Text = FeedManager.StatisticheAttuali.RilevatoBusAtac.ToString();
-                        labelTramAtac.Text = FeedManager.StatisticheAttuali.RilevatoTramAtac.ToString();
-                        labelFilobusAtac.Text = FeedManager.StatisticheAttuali.RilevatoFilobusAtac.ToString();
-                        labelMiniBusEleAtac.Text = FeedManager.StatisticheAttuali.RilevatoMinibusElettrici.ToString();
-                        labelFurgoncinoAtac.Text = FeedManager.StatisticheAttuali.RilevatoFurgoncini.ToString();
-                        labelFerroAtac.Text = FeedManager.StatisticheAttuali.RilevatoFerro.ToString();
-                        labelAltroAtac.Text = FeedManager.StatisticheAttuali.RilevatoAltroAtac.ToString();
-                        labelBusTPL.Text = FeedManager.StatisticheAttuali.RilevatoBusTpl.ToString();
-                        labelPullmanTPL.Text = FeedManager.StatisticheAttuali.RilevatoPullmanTpl.ToString();
-                        labelAltroTpl.Text = FeedManager.StatisticheAttuali.RilevatoAltroTpl.ToString();
-
-                        labelTotaleMatricolaATAC.Text = FeedManager.TotaleMatricolaAtac.ToString();
-                        labelTotaleMatricolaTPL.Text = FeedManager.TotaleMatricolaTPL.ToString();
-
-                        DataTable dt = new DataTable();
-                        using (var reader = ObjectReader.Create(FeedManager.ElencoAggregatoVetture))
-                        //using (var reader = ObjectReader.Create(elencoVetture))
+                    if (vettureSenzaMatricola.Count() > 0)
+                    {
+                        textBox2.AppendText($"Vetture Senza Matricola{Environment.NewLine}");
+                        lineNumberToSelect = textBox2.Lines.Count()-1;
+                        start = textBox2.GetFirstCharIndexFromLine(lineNumberToSelect);
+                        string vetture = string.Empty;
+                        foreach (ExtendedVehicleInfo vettura in vettureSenzaMatricola)
                         {
-                            dt.Load(reader);
+                            vetture+= ($"IdVettura {vettura.IdVettura}\t Matricola:[{vettura.Matricola}]{Environment.NewLine}");
                         }
+                        textBox2.AppendText(vetture);
+                        textBox2.Select (start, vetture.Length);
+                        textBox2.SelectionColor = Color.DarkGray;
+                        textBox2.SelectionIndent = 10;
+                        textBox2.AppendText($"{Environment.NewLine}");
+                    }
 
-                        extendedVehicleInfoBindingSource.DataSource = dt;
-                        advancedDataGridView1.DataSource = extendedVehicleInfoBindingSource;
+                    textBox2.AppendText($"{Environment.NewLine}");
+                    textBox2.Select(0, 0);
 
+                    labelTotaleRighe.Text = FeedManager.ElencoAggregatoVetture.Count.ToString();
 
-                        List<string> urlTripList = new List<string>();
-                        List<string> urlVehicleList = new List<string>();
-                        foreach (FeedEntity entity in FeedManager.FeedEntities)
+                    labelTotaleIdVettura.Text = FeedManager.TotaleIdVettura.ToString();
+                    labelTotaleMatricola.Text = FeedManager.TotaleMatricola.ToString();
+                    labelBusAtac.Text = FeedManager.StatisticheAttuali.RilevatoBusAtac.ToString();
+                    labelTramAtac.Text = FeedManager.StatisticheAttuali.RilevatoTramAtac.ToString();
+                    labelFilobusAtac.Text = FeedManager.StatisticheAttuali.RilevatoFilobusAtac.ToString();
+                    labelMiniBusEleAtac.Text = FeedManager.StatisticheAttuali.RilevatoMinibusElettrici.ToString();
+                    labelFurgoncinoAtac.Text = FeedManager.StatisticheAttuali.RilevatoFurgoncini.ToString();
+                    labelFerroAtac.Text = FeedManager.StatisticheAttuali.RilevatoFerro.ToString();
+                    labelAltroAtac.Text = FeedManager.StatisticheAttuali.RilevatoAltroAtac.ToString();
+                    labelBusTPL.Text = FeedManager.StatisticheAttuali.RilevatoBusTpl.ToString();
+                    labelPullmanTPL.Text = FeedManager.StatisticheAttuali.RilevatoPullmanTpl.ToString();
+                    labelAltroTpl.Text = FeedManager.StatisticheAttuali.RilevatoAltroTpl.ToString();
+
+                    labelTotaleMatricolaATAC.Text = FeedManager.TotaleMatricolaAtac.ToString();
+                    labelTotaleMatricolaTPL.Text = FeedManager.TotaleMatricolaTPL.ToString();
+
+                    DataTable dt = new DataTable();
+                    using (var reader = ObjectReader.Create(FeedManager.ElencoAggregatoVetture))
+                    {
+                        dt.Load(reader);
+                    }
+                    extendedVehicleInfoBindingSource.DataSource = dt;
+                    advancedDataGridView1.DataSource = extendedVehicleInfoBindingSource;
+
+                    DataTable dtAttuale = new DataTable();
+                    using (var reader = ObjectReader.Create(FeedManager.ElencoVetture))
+                    {
+                        dtAttuale.Load(reader);
+                    }
+
+                    bindingSourceAttuale.DataSource = dtAttuale;
+                    advancedDataGridView2.DataSource = bindingSourceAttuale;
+
+                    List<string> urlTripList = new List<string>();
+                    List<string> urlVehicleList = new List<string>();
+                    foreach (FeedEntity entity in FeedManager.FeedEntities)
+                    {
+                        if (entity.Vehicle != null && entity.Vehicle.Trip != null && !(int.TryParse(routeID, out int res) && res != -1) && entity.Vehicle.Trip.RouteId == routeID)
                         {
-                            if (entity.Vehicle != null && entity.Vehicle.Trip != null && !(int.TryParse(routeID, out int res) && res != -1) && entity.Vehicle.Trip.RouteId == routeID)
+                            textBox1.AppendText(entity.Vehicle.Vehicle.Id + Environment.NewLine);
+                        }
+                    }
+
+                    List<ExtendedVehicleInfo> listaMezziSuLinea = FeedManager.ElencoVetture
+                        .Where(x => x.TripId != null)
+                        .ToList();
+                    List<ExtendedVehicleInfo> listaBusAttesa = FeedManager.ElencoVetture.Where(x => x.TripId == null).ToList();
+
+                    int numVettureTPLFeedVehicle = FeedManager.ElencoVetture
+                        .Where(i => i.TipoMezzoTrasporto == 3 || i.TipoMezzoTrasporto == 4 || i.TipoMezzoTrasporto == -3)
+                        .Count();
+
+                    //var rrr = elencoVetture.Where(i => i.Gestore.Contains("tpl") && (i.TipoMezzoTrasporto == 3 || i.TipoMezzoTrasporto == 4 || i.TipoMezzoTrasporto == -3)).ToList();
+
+                    int busLinea = listaMezziSuLinea.Count;
+                    int busAttesa = listaBusAttesa.Count;
+                    int busTotale = busLinea + busAttesa;
+                    textBox1.AppendText($"Totale Vetture Rilevate sul Feed Vehicle {busTotale}");
+
+
+                    var result = FeedManager.StatisticheAttuali.ServizioRaggruppato
+                        .GroupBy(x => x.Agenzia)
+                        .Select(g => new {
+                            Gestore = g.Key,
+                            Totale = g.Sum(x => x.Num)}
+                    );
+
+                    foreach (var ss in result)
+                    {
+                        textBox1.AppendText(Environment.NewLine+$"{ss.Gestore} - {ss.Totale}" + Environment.NewLine);
+                        foreach (var elem in FeedManager.StatisticheAttuali.ServizioRaggruppato.Where(x => x.Agenzia == ss.Gestore)) {
+                            textBox1.AppendText($"    {elem.Servizio}\t{elem.Num}" + Environment.NewLine);
+                        }
+                    }
+
+                    labelTPL.Text = $"{numVettureTPLFeedVehicle}";
+                    labelAtac.Text = $"{busTotale - numVettureTPLFeedVehicle}";
+                    labelTot.Text = $"{busTotale}";
+
+                    labelPonderatiATAC.Text = Math.Round(FeedManager.PonderateAtac).ToString();
+                    labelPonderatiTPL.Text = Math.Round(FeedManager.PonderateTPL).ToString();
+
+                    if (string.IsNullOrEmpty(fileName))
+                    {
+                        fileName = $"Feed_{lastDataFeedVehicle:yyyy-MM-dd (HH_mm_ss)}";
+                    }
+
+                    if (FeedManager.GTFS_RSM.RegoleMonitoraggio?.Count > 0)
+                    {
+                        dataGridViolazioni.DataSource = FeedManager.ViolazioniLeneeMonitorate();
+                        if (tabMainForm.SelectedTab == tabMonitoraggio)
+                        {
+                            Colora();
+                        }
+                    }
+
+                    foreach (var alert in FeedManager.GTFS_RSM.AlertsDaControllare)
+                    {
+                        if (checkBoxStorico.Checked)
+                            (tabMainForm.TabPages[alert.Name].Controls[alert.Name] as DataGridView).DataSource = alert.ViolazioniAlert.ToList();
+                        else
+                            (tabMainForm.TabPages[alert.Name].Controls[alert.Name] as DataGridView).DataSource = FeedManager.ViolazioniAlertAttuali.ToList();
+                    }
+
+                    await ExportGrid();
+
+                    AggiornaScottPlot();
+
+                    if (!string.IsNullOrEmpty(urlTrip.Text) && checkFeedTrip.Checked)
+                    {
+                        WebRequest req = WebRequest.Create(urlTrip.Text);
+                        FeedMessage feedTrip = Serializer.Deserialize<FeedMessage>(req.GetResponse().GetResponseStream());
+                        foreach (FeedEntity entity in feedTrip.Entities)
+                        {
+                            if (entity.TripUpdate.Vehicle != null && entity.TripUpdate.Trip != null && (entity.TripUpdate.Trip.RouteId == routeID))
                             {
-                                textBox1.AppendText(entity.Vehicle.Vehicle.Id + Environment.NewLine);
+                                urlTripList.Add(entity.TripUpdate.Vehicle.Id);
                             }
                         }
+                        textBox1.AppendText(string.Join(Environment.NewLine, urlTripList));
+                        textBox1.AppendText(Environment.NewLine);
 
-                        List<ExtendedVehicleInfo> listaMezziSuLinea = FeedManager.ElencoVetture
-                            .Where(x => x.TripId != null)
-                            .ToList();
-                        List<ExtendedVehicleInfo> listaBusAttesa = FeedManager.ElencoVetture.Where(x => x.TripId == null).ToList();
-
-                        int numVettureTPLFeedVehicle = FeedManager.ElencoVetture
-                            .Where(i => i.TipoMezzoTrasporto == 3 || i.TipoMezzoTrasporto == 4 || i.TipoMezzoTrasporto == -3)
+                        int numVettureFeedTrip = feedTrip.Entities
+                            .Where(x => x.TripUpdate.Vehicle != null && !string.IsNullOrEmpty(x.TripUpdate.Vehicle.Id))
+                            .Count();
+                        int numVettureTPLFeedTrip = feedTrip.Entities
+                            .Where(x => x.TripUpdate.Vehicle != null && !string.IsNullOrEmpty(x.TripUpdate.Vehicle.Id) && x.TripUpdate.Vehicle.Id.Length > 4)
                             .Count();
 
-                        //var rrr = elencoVetture.Where(i => i.Gestore.Contains("tpl") && (i.TipoMezzoTrasporto == 3 || i.TipoMezzoTrasporto == 4 || i.TipoMezzoTrasporto == -3)).ToList();
+                        textBox1.AppendText($"Totale Vetture Rilevate sul Feed Trip: {numVettureFeedTrip}{Environment.NewLine}");
 
-                        int busLinea = listaMezziSuLinea.Count;
-                        int busAttesa = listaBusAttesa.Count;
-                        int busTotale = busLinea + busAttesa;
-                        textBox1.AppendText($"Totale Vetture Rilevate sul Feed Vehicle {busTotale}" + Environment.NewLine);
-                        textBox1.AppendText($"\tATAC {busTotale - numVettureTPLFeedVehicle}\tTPL {numVettureTPLFeedVehicle}" + Environment.NewLine);
-                        textBox1.AppendText($"\tSu Linea {busLinea}\tIn Attesa {busAttesa}" + Environment.NewLine);
-                        labelTPL.Text = $"{numVettureTPLFeedVehicle}";
-                        labelAtac.Text = $"{busTotale - numVettureTPLFeedVehicle}";
+                        textBox1.AppendText($"\tATAC {numVettureFeedTrip - numVettureTPLFeedTrip}\tTPL {numVettureTPLFeedVehicle}{Environment.NewLine}");
 
-                        labelTot.Text = $"{busTotale}";
+                        List<FeedEntity> soloVehicle = FeedManager.FeedEntities
+                            .Where(vehicle => !feedTrip.Entities.Any(trip => vehicle.Vehicle.Vehicle.Label == trip.TripUpdate.Vehicle?.Label))
+                            .ToList();
 
-                        labelPonderatiATAC.Text = Math.Round(FeedManager.PonderateAtac).ToString();
-                        labelPonderatiTPL.Text = Math.Round(FeedManager.PonderateTPL).ToString();
 
-                        if (string.IsNullOrEmpty(fileName))
+                        List<FeedEntity> soloTrip = feedTrip.Entities
+                            .Where(trip => !FeedManager.FeedEntities.Any(vehicle => vehicle.Vehicle.Vehicle.Label == trip.TripUpdate.Vehicle.Label))
+                            .ToList();
+                        IEnumerable<string> tripDuplicatiFeedTrip = from trip in feedTrip.Entities
+                                                                    group trip by trip.TripUpdate.Trip.TripId into grp
+                                                                    where grp.Count() > 1
+                                                                    select grp.Key;
+                        foreach (FeedEntity trip in soloTrip)
                         {
-                            fileName = $"Feed_{lastDataFeedVehicle:yyyy-MM-dd (HH_mm_ss)}";
+                            textBox2.AppendText($"Solo sul Feed Trip: {trip.TripUpdate.Vehicle.Label}" + Environment.NewLine);
                         }
 
-
-                        if (FeedManager.GTFS_RSM.RegoleMonitoraggio?.Count > 0)
+                        foreach (FeedEntity vehicle in soloVehicle)
                         {
-                            dataGridViolazioni.DataSource = FeedManager.ViolazioniLeneeMonitorate();
-                            if (tabMainForm.SelectedTab == tabMonitoraggio)
-                            {
-                                Colora();
-                            }
+                            textBox2.AppendText($"Solo sul Feed Vehicle: {vehicle.Vehicle.Vehicle.Label}" + Environment.NewLine);
+                        }
+                        foreach (string tripDuplicato in tripDuplicatiFeedTrip)
+                        {
+                            textBox2.AppendText($"Trip Duplicato sul Feed Trip: {tripDuplicato}" + Environment.NewLine);
+                            var dup = feedTrip.Entities.Where(x => x.TripUpdate.Trip.TripId == tripDuplicato).ToList();
                         }
 
-                        foreach (var alert in FeedManager.GTFS_RSM.AlertsDaControllare)
-                        {
-                            if (checkBoxStorico.Checked)
-                                (tabMainForm.TabPages[alert.Name].Controls[alert.Name] as DataGridView).DataSource = alert.ViolazioniAlert.ToList();
-                            else
-                                (tabMainForm.TabPages[alert.Name].Controls[alert.Name] as DataGridView).DataSource = FeedManager.ViolazioniAlertAttuali.ToList();
-                        }
-
-                       
-                       
-
-                        await ExportGrid();
-                        
-
-
-
-
-
-
-                        AggiornaScottPlot();
-
-                        if (!string.IsNullOrEmpty(urlTrip.Text) && checkFeedTrip.Checked)
-                        {
-                            WebRequest req = WebRequest.Create(urlTrip.Text);
-                            FeedMessage feedTrip = Serializer.Deserialize<FeedMessage>(req.GetResponse().GetResponseStream());
-                            foreach (FeedEntity entity in feedTrip.Entities)
-                            {
-                                if (entity.TripUpdate.Vehicle != null && entity.TripUpdate.Trip != null && (entity.TripUpdate.Trip.RouteId == routeID))
-                                {
-                                    urlTripList.Add(entity.TripUpdate.Vehicle.Id);
-                                }
-                            }
-                            textBox1.AppendText(string.Join(Environment.NewLine, urlTripList));
-                            textBox1.AppendText(Environment.NewLine);
-
-                            int numVettureFeedTrip = feedTrip.Entities
-                                .Where(x => x.TripUpdate.Vehicle != null && !string.IsNullOrEmpty(x.TripUpdate.Vehicle.Id))
-                                .Count();
-                            int numVettureTPLFeedTrip = feedTrip.Entities
-                                .Where(x => x.TripUpdate.Vehicle != null && !string.IsNullOrEmpty(x.TripUpdate.Vehicle.Id) && x.TripUpdate.Vehicle.Id.Length > 4)
-                                .Count();
-
-                            textBox1.AppendText($"Totale Vetture Rilevate sul Feed Trip: {numVettureFeedTrip}{Environment.NewLine}");
-
-                            textBox1.AppendText($"\tATAC {numVettureFeedTrip - numVettureTPLFeedTrip}\tTPL {numVettureTPLFeedVehicle}{Environment.NewLine}");
-
-                            List<FeedEntity> soloVehicle = FeedManager.FeedEntities
-                                .Where(vehicle => !feedTrip.Entities.Any(trip => vehicle.Vehicle.Vehicle.Label == trip.TripUpdate.Vehicle.Label))
-                                .ToList();
-
-
-                            List<FeedEntity> soloTrip = feedTrip.Entities
-                                .Where(trip => !FeedManager.FeedEntities.Any(vehicle => vehicle.Vehicle.Vehicle.Label == trip.TripUpdate.Vehicle.Label))
-                                .ToList();
-                            IEnumerable<string> tripDuplicatiFeedTrip = from trip in feedTrip.Entities
-                                                                        group trip by trip.TripUpdate.Trip.TripId into grp
-                                                                        where grp.Count() > 1
-                                                                        select grp.Key;
-                            foreach (FeedEntity trip in soloTrip)
-                            {
-                                textBox2.AppendText($"Solo sul Feed Trip: {trip.TripUpdate.Vehicle.Label}" + Environment.NewLine);
-                            }
-
-                            foreach (FeedEntity vehicle in soloVehicle)
-                            {
-                                textBox2.AppendText($"Solo sul Feed Vehicle: {vehicle.Vehicle.Vehicle.Label}" + Environment.NewLine);
-                            }
-                            foreach (string tripDuplicato in tripDuplicatiFeedTrip)
-                            {
-                                textBox2.AppendText($"Trip Duplicato sul Feed Trip: {tripDuplicato}" + Environment.NewLine);
-                                var dup = feedTrip.Entities.Where(x => x.TripUpdate.Trip.TripId == tripDuplicato).ToList();
-                            }
-
-                            textBox1.AppendText($"Vetture rilevate solo sul feed Trip: {soloTrip.Count}" + Environment.NewLine);
-                            textBox1.AppendText($"Vetture rilevate solo sul feed Vehicle: {soloVehicle.Count}" + Environment.NewLine);
-                        }
+                        textBox1.AppendText($"Vetture rilevate solo sul feed Trip: {soloTrip.Count}" + Environment.NewLine);
+                        textBox1.AppendText($"Vetture rilevate solo sul feed Vehicle: {soloVehicle.Count}" + Environment.NewLine);
                     }
+                }
+                if (ecc!=null)
+                {
+                    throw ecc;
                 }
             }
             catch (Exception ex)
@@ -366,7 +400,6 @@ namespace AtacFeed
                 textBox1.AppendText($"{ex.Message}");
                 Log.Error(ex, "Errore Generico");
             }
-
         }
 
         private int GetValidFeed()
@@ -531,9 +564,13 @@ namespace AtacFeed
         
         private void RestartFile()
         {
+            ResetUI();
             fileName = string.Empty;
             FeedManager.ResetAcquisizione();
-            LeggiFileConfigurazione();
+            if (UpdateBox.NewCSVDownloaded || UpdateBox.NewGTFSDownloaded)
+            {
+                LeggiFileConfigurazione();
+            }
             LeggiRegoleAlertDaFile();
 
             dataGridViolazioni.Invalidate();
@@ -542,31 +579,14 @@ namespace AtacFeed
             advancedDataGridView1.Invalidate();
             advancedDataGridView1.DataSource = null;
 
+            advancedDataGridView2.Invalidate();
+            advancedDataGridView2.DataSource = null;
+
             plotTPL.Reset();
             plotAtac.Reset();
 
-            NumeroFeedValidi = 1;
-            NumeroLetture= 1;
-
-            /*
-            labelTotaleRighe.Text = FeedManager.ElencoAggregatoVetture.Count.ToString();
-            labelTotaleIdVettura.Text = "0";
-            labelTotaleMatricola.Text = "0";
-            labelTotaleMatricolaATAC.Text = "0";
-            labelTotaleMatricolaTPL.Text = "0";
-            labelFerroAtac.Text = "0";
-            labelBusAtac.Text = "0";
-            labelTramAtac.Text = "0";
-            labelFilobusAtac.Text = "0";
-            labelMiniBusEleAtac.Text = "0";
-            labelFurgoncinoAtac.Text = "0";
-
-            lblOraLettura.Text = "--:--:--";
-            labelAtac.Text = "0";
-            labelTPL.Text = "0";
-            //labelWait.Text = "0";
-            labelTot.Text = "0";
-            */
+            NumeroFeedValidi = 0;
+            NumeroLetture= 0;
         }
 
         private void ButtonPlayPause_Click(object sender, EventArgs e)
@@ -666,27 +686,19 @@ namespace AtacFeed
             pltTPL.Plot.Legend(location: Alignment.UpperLeft);
             pltTPL.Plot.Title("Monitoraggio vetture TPL");
             pltTPL.Plot.AxisAuto();
-            pltTPL.Render();
-            
+            pltTPL.Render();            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //Properties.Settings settings = new Properties.Settings();
-
-            
-            //ElencoVettureGrafico = new List<MonitoraggioVettureGrafico>();
-
-            
-            //AlertsDaControllare = new List<AlertDaControllare>();
-
-            //ElencoVettureSovraffollate = new List<RunTimeValueAlert>();
-
-
             Version actualVersion = Assembly.GetExecutingAssembly().GetName().Version;
             labelVer.Text = string.Format("Vers. {0}.{1:00}", actualVersion.Major, actualVersion.Minor);
-
+            checkMD5.Text = "Aggiorna,se possibile, i file di configurazione in automatico.\r\nSaranno utilizzati al successivo riavvio del monitoraggio";
             #region Load default settings
+            urlGTFS_Statico.Text = Properties.Settings.Default.UrlGTFS_Statico;
+            urlMD5_GTFS_Statico.Text = Properties.Settings.Default.UrlMD5_GTFS_Statico;
+            UpdateBox.UrlGTFS = urlGTFS_Statico.Text;
+            UpdateBox.UrlMD5 = urlMD5_GTFS_Statico.Text;
             urlVehicle.Text = Properties.Settings.Default.UrlVehicle;
             urlTrip.Text = Properties.Settings.Default.UrlTrip;
             urlAlert.Text = Properties.Settings.Default.UrlAlert;
@@ -712,14 +724,11 @@ namespace AtacFeed
             minuti.Value = totalSeconds / 60;
             secondi.Value = totalSeconds % 60;
 
-            //if (!Properties.Settings.Default.tabGrigliaOld)
-            //    tabMainForm.TabPages.Remove(tabGriglia);
-
             #endregion
 
             LeggiFileConfigurazione();
 
-            if (FeedManager.GTFS_RSM.RegoleMonitoraggio?.Count > 0)
+            if (FeedManager.GTFS_RSM?.RegoleMonitoraggio?.Count > 0)
             {
                 dataGridViolazioni.DataSource = FeedManager.GTFS_RSM.RegoleMonitoraggio;
             }
@@ -733,29 +742,31 @@ namespace AtacFeed
             }            
             LeggiRegoleAlertDaFile();
         }
-
         private void LeggiFileConfigurazione()
-        {            
-            FeedManager.LeggiGTFS($"Config{Path.DirectorySeparatorChar}GTFS_Static");
+        {
+            //FeedManager.LeggiGTFS($"Config{Path.DirectorySeparatorChar}GTFS_Static");
+            bool usaDettagliVettura = checkDettagliVettura.Checked;
+            FeedManager.GTFS_RSM = new GTFS_RSM($"Config{Path.DirectorySeparatorChar}GTFS_Static", usaDettagliVettura);
+            UpdateBox.ExistNewerGTFS = false;
+            UpdateBox.ExistNewerConf = false;
+            UpdateBox.NewCSVDownloaded = false;
+            UpdateBox.NewGTFSDownloaded = false;
             List<Route> elencoLinee = FeedManager.GTFS_RSM.StaticData.Routes
                 .OrderBy(k => k.ShortName)
+                .DefaultIfEmpty()
                 .ToList();
-            Route route = FeedManager.GTFS_RSM.StaticData.Routes.Take(1).FirstOrDefault();
-            Route copia = new Route
+            
+            Route fittizia = new Route
             {
                 Id = "-1",
                 ShortName = "Tutte",
-                AgencyId = route.AgencyId,
-                LongName = route.LongName,
-                Description = route.Description,
-                Type = route.Type,
-                Url = route.Url,
-                Color = route.Color,
-                TextColor = route.TextColor
+                LongName = "Tutte"                
             };
+            elencoLinee.Insert(0, fittizia);            
 
-            elencoLinee.Insert(0, copia);
             comboBox1.DataSource = elencoLinee;
+            //var alternativa= elencoLinee.Select(x => new Route { Id = x.Id, LongName = x.ShortName + " " + x.LongName }).ToList();
+            //comboBox1.DataSource = alternativa;
             comboBox1.ValueMember = "Id";
             comboBox1.DisplayMember = "ShortName";
             
@@ -885,11 +896,8 @@ namespace AtacFeed
                     radioNonRaggruppare.Visible = true;
                     checkAlert.Visible = true;
                     checkBoxStorico.Visible = true;
-                    //buttonResetRegole.Visible = true;
                 }
             }
-
-
             else
             {
                 labelRaggruppaAlert.Visible = false;
@@ -898,7 +906,6 @@ namespace AtacFeed
                 radioNonRaggruppare.Visible = false;
                 checkAlert.Visible = false;
                 checkBoxStorico.Visible = false;
-                //buttonResetRegole.Visible = false;
             }
 
             int esito = FeedManager.GTFS_RSM.LeggiCriteriMediaPonderata($"Config{Path.DirectorySeparatorChar}CriterioMediaPonderata.txt");
@@ -915,6 +922,8 @@ namespace AtacFeed
 
         private void SalvaImpostazioni(object sender, EventArgs e)
         {
+            Properties.Settings.Default.UrlGTFS_Statico = urlGTFS_Statico.Text;
+            Properties.Settings.Default.UrlMD5_GTFS_Statico = urlMD5_GTFS_Statico.Text;
             Properties.Settings.Default.UrlVehicle = urlVehicle.Text;
             Properties.Settings.Default.UrlTrip = urlTrip.Text;
             Properties.Settings.Default.UrlAlert = urlAlert.Text;
@@ -1255,6 +1264,20 @@ namespace AtacFeed
             return retVal;
         }
 
+        async void CheckUpdate()
+        {
+            bool? newVersion = await Task.Run(() => TaskCheckUpdate(false));
+
+            if (!newVersion.HasValue)
+            {                
+                button1.Image = Properties.Resources.arancio;
+            }
+            else if (newVersion.Value)
+                button1.Image= Properties.Resources.rosso;
+            else
+                button1.Image = Properties.Resources.verde;
+        }
+
         private async Task ExportGrid()
         {
             try
@@ -1364,52 +1387,28 @@ namespace AtacFeed
             }
         }
 
-        private void ResetAcquisizione(object sender, EventArgs e)
+        private async Task<bool?> TaskCheckUpdate(bool download=false)
         {
-            // Application.Restart();
-            needToRestart = true;
-            this.Close();
+            bool existNewConf = await UpdateBox.CheckConf();
+            bool? existNewGTFS = await UpdateBox.CheckGTFS();
 
-            /*
-            LastdataFeedVehicle = null;
-            FirstdataFeedVehicle = null;
-            fileName = string.Empty;
-
-            ElencoLineeMonitorate.Clear();
-            ElencoAggregatoVetture.Clear();
-            ElencoPrecedente.Clear();
-            ElencoVettureGrafico.Clear();
-
-            dataGridViolazioni.Invalidate();
-            dataGridViolazioni.DataSource = null;
-
-            dataGridVetture.Invalidate(); 
-            dataGridVetture.DataSource = null;
-
-            formsPlotTPL.Reset();
-            formsPlotAtac.Reset();
-
-            labelFeedLetti.Text = "0";
-            labelTotaleRighe.Text = ElencoAggregatoVetture.Count.ToString();
-            labelTotaleIdVettura.Text = "0";
-            labelTotaleMatricola.Text = "0";
-            labelTotaleMatricolaATAC.Text = "0";
-            labelTotaleMatricolaTPL.Text  = "0";
-
-            lblOraLettura.Text = "--:--:--";
-            labelAtac.Text = "0";
-            labelTPL.Text = "0";
-            //labelWait.Text = "0";
-            labelTot.Text = "0";
-
-            LeggiFileConfigurazione();
-            LeggiRegoleAlertDaFile();
-
-            foreach (var alert in AlertsDaControllare)
+            if (download && existNewConf)
             {
-                alert.ViolazioniAlert.Clear();
+                await UpdateBox.DownloadCSV(false);
             }
-            */
+
+            if (download && existNewGTFS.GetValueOrDefault(false) || true)
+            {
+                await UpdateBox.DownloadGTFS(false);
+            }
+            return existNewGTFS.HasValue? existNewConf || existNewGTFS.GetValueOrDefault(false): existNewGTFS;
+        }
+        
+        
+        private async void ResetAcquisizioneAsync(object sender, EventArgs e)
+        {
+            await Task.Run(() => TaskCheckUpdate(true));
+            RestartFile();
         }
 
         private void CheckFeedTrip_CheckedChanged(object sender, EventArgs e)
@@ -1420,6 +1419,7 @@ namespace AtacFeed
         private void RileggiRegole(object sender, EventArgs e)
         {
             LeggiRegoleAlertDaFile();
+            RestartFile();
         }
 
         private void CheckReset_CheckedChanged(object sender, EventArgs e)
@@ -1438,17 +1438,55 @@ namespace AtacFeed
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            UpdateBox updateBox = new UpdateBox();
-            var result = updateBox.ShowDialog();
+            UpdateBox.Check();
+            var result = UpdateBox.ShowDialog();
             if (result == DialogResult.Yes)
             {
-                //Application.Restart();
-                needToRestart = true;
-                Close();
+                RestartFile();
             }
             else
                 needToRestart = false;
         }
+
+        public void ResetUI()
+        {
+            labelTotaleRighe.Text = "---";
+            labelTotaleIdVettura.Text = "---";
+            labelTotaleMatricola.Text = "---";
+            labelTotaleMatricolaATAC.Text = "---";
+            labelTotaleMatricolaTPL.Text = "---";
+            labelFerroAtac.Text = "---";
+            labelBusAtac.Text = "---";
+            labelTramAtac.Text = "---";
+            labelFilobusAtac.Text = "---";
+            labelMiniBusEleAtac.Text = "---";
+            labelFurgoncinoAtac.Text = "---";
+
+            lblOraLettura.Text = "hh:mm:ss";
+            labelAtac.Text = "---";
+            labelTPL.Text = "---";
+            //labelWait.Text = "0";
+            labelTot.Text = "---";
+            labelLetture.Text = "---";
+            labelFeedLetti.Text = "---";
+
+            labelBusTPL.Text = "---";
+            labelPullmanTPL.Text = "---";
+            labelAltroTpl.Text = "---";
+            labelAltroAtac.Text = "---";
+            labelPonderatiATAC.Text = "---";
+            labelPonderatiTPL.Text = "---";
+            
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            imgUrl1.Image = null;
+            imgUrl2.Image = null;
+            UpdateBox.ResetUI();
+            Refresh();
+        }
+
 
         private void AdvancedDataGridView1_SortStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.SortEventArgs e)
         {
@@ -1458,6 +1496,31 @@ namespace AtacFeed
         private void AdvancedDataGridView1_FilterStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.FilterEventArgs e)
         {
             extendedVehicleInfoBindingSource.Filter = advancedDataGridView1.FilterString;
+        }
+
+        private void AdvancedDataGridView2_SortStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.SortEventArgs e)
+        {
+            bindingSourceAttuale.Sort = advancedDataGridView2.SortString;
+        }
+
+        private void AdvancedDataGridView2_FilterStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.FilterEventArgs e)
+        {
+            bindingSourceAttuale.Filter = advancedDataGridView2.FilterString;
+        }
+
+        private void urlMD5_GTFS_Statico_TextChanged(object sender, EventArgs e)
+        {
+            UpdateBox.UrlMD5=urlMD5_GTFS_Statico.Text;
+        }
+
+        private void urlGTFS_Statico_TextChanged(object sender, EventArgs e)
+        {
+            UpdateBox.UrlGTFS = urlGTFS_Statico.Text;
+        }
+
+        private void checkDettagliVettura_CheckedChanged(object sender, EventArgs e)
+        {
+            FeedManager.GTFS_RSM.LeggiDettagliVettura(checkDettagliVettura.Checked);
         }
     }
 }

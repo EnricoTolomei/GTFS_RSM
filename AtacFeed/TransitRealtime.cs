@@ -243,9 +243,7 @@ namespace AtacFeed
                     [global::ProtoBuf.ProtoEnum(Name = @"NO_DATA")]
                     NoData = 2,
                 }
-
             }
-
         }
 
         [global::ProtoBuf.ProtoContract()]

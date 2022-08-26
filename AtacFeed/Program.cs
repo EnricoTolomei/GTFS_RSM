@@ -24,13 +24,7 @@ namespace AtacFeed
             FormGTFS_RSM formGTFS_RSM = new FormGTFS_RSM();
             Application.Run(formGTFS_RSM);
 
-            if (formGTFS_RSM.needToRestart)
-            {
-                Application.Restart();
-                Log.Information("Riavvio Programma");
-            }
-            else
-                Log.Information("Uscita Programma");
+            Log.Information("Uscita Programma");
             Log.CloseAndFlush();
         }
     }

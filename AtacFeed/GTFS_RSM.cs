@@ -17,7 +17,6 @@ namespace AtacFeed
         public GTFSFeed StaticData { get; set; }
         public List<Trip> Trips { get; set; }
         public List<LineaAgenzia> ElencoLineaAgenzia { get; set; }
-        //public List<string> LineeAgenzia { get; set;}
         public IEnumerable<DettagliVettura> ElencoDettagliVettura { get; set; }
         public GTFS_RSM(string pathGTFSStatico, bool usaDettagliVettura=true)
         {

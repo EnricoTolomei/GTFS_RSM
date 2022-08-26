@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 // Copyright 2015-2019 Google Inc., MobilityData
@@ -24,33 +21,33 @@ namespace AtacFeed
 {
     public class TransitRealtime
     {
-        [global::ProtoBuf.ProtoContract()]
-        public partial class FeedMessage : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public partial class FeedMessage : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"header", IsRequired = true)]
+            [ProtoBuf.ProtoMember(1, Name = @"header", IsRequired = true)]
             public FeedHeader Header { get; set; }
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"entity")]
-            public global::System.Collections.Generic.List<FeedEntity> Entities { get; } = new global::System.Collections.Generic.List<FeedEntity>();
+            [ProtoBuf.ProtoMember(2, Name = @"entity")]
+            public List<FeedEntity> Entities { get; } = new List<FeedEntity>();
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public partial class FeedHeader : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public partial class FeedHeader : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"gtfs_realtime_version", IsRequired = true)]
+            [ProtoBuf.ProtoMember(1, Name = @"gtfs_realtime_version", IsRequired = true)]
             public string GtfsRealtimeVersion { get; set; }
 
-            [global::ProtoBuf.ProtoMember(2)]
-            [global::System.ComponentModel.DefaultValue(Incrementality.FullDataset)]
+            [ProtoBuf.ProtoMember(2)]
+            [System.ComponentModel.DefaultValue(Incrementality.FullDataset)]
             public Incrementality incrementality
             {
                 get { return __pbn__incrementality ?? Incrementality.FullDataset; }
@@ -60,7 +57,7 @@ namespace AtacFeed
             public void Resetincrementality() => __pbn__incrementality = null;
             private Incrementality? __pbn__incrementality;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"timestamp")]
+            [ProtoBuf.ProtoMember(3, Name = @"timestamp")]
             public ulong Timestamp
             {
                 get { return __pbn__Timestamp.GetValueOrDefault(); }
@@ -70,29 +67,29 @@ namespace AtacFeed
             public void ResetTimestamp() => __pbn__Timestamp = null;
             private ulong? __pbn__Timestamp;
 
-            [global::ProtoBuf.ProtoContract()]
+            [ProtoBuf.ProtoContract()]
             public enum Incrementality
             {
-                [global::ProtoBuf.ProtoEnum(Name = @"FULL_DATASET")]
+                [ProtoBuf.ProtoEnum(Name = @"FULL_DATASET")]
                 FullDataset = 0,
-                [global::ProtoBuf.ProtoEnum(Name = @"DIFFERENTIAL")]
+                [ProtoBuf.ProtoEnum(Name = @"DIFFERENTIAL")]
                 Differential = 1,
             }
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public partial class FeedEntity : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public partial class FeedEntity : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"id", IsRequired = true)]
+            [ProtoBuf.ProtoMember(1, Name = @"id", IsRequired = true)]
             public string Id { get; set; }
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"is_deleted")]
-            [global::System.ComponentModel.DefaultValue(false)]
+            [ProtoBuf.ProtoMember(2, Name = @"is_deleted")]
+            [System.ComponentModel.DefaultValue(false)]
             public bool IsDeleted
             {
                 get { return __pbn__IsDeleted ?? false; }
@@ -102,34 +99,34 @@ namespace AtacFeed
             public void ResetIsDeleted() => __pbn__IsDeleted = null;
             private bool? __pbn__IsDeleted;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"trip_update")]
+            [ProtoBuf.ProtoMember(3, Name = @"trip_update")]
             public TripUpdate TripUpdate { get; set; }
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"vehicle")]
+            [ProtoBuf.ProtoMember(4, Name = @"vehicle")]
             public VehiclePosition Vehicle { get; set; }
 
-            [global::ProtoBuf.ProtoMember(5, Name = @"alert")]
+            [ProtoBuf.ProtoMember(5, Name = @"alert")]
             public Alert Alert { get; set; }
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public partial class TripUpdate : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public partial class TripUpdate : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"trip", IsRequired = true)]
+            [ProtoBuf.ProtoMember(1, Name = @"trip", IsRequired = true)]
             public TripDescriptor Trip { get; set; }
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"vehicle")]
+            [ProtoBuf.ProtoMember(3, Name = @"vehicle")]
             public VehicleDescriptor Vehicle { get; set; }
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"stop_time_update")]
-            public global::System.Collections.Generic.List<StopTimeUpdate> StopTimeUpdates { get; } = new global::System.Collections.Generic.List<StopTimeUpdate>();
+            [ProtoBuf.ProtoMember(2, Name = @"stop_time_update")]
+            public List<StopTimeUpdate> StopTimeUpdates { get; } = new List<StopTimeUpdate>();
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"timestamp")]
+            [ProtoBuf.ProtoMember(4, Name = @"timestamp")]
             public ulong Timestamp
             {
                 get { return __pbn__Timestamp.GetValueOrDefault(); }
@@ -139,7 +136,7 @@ namespace AtacFeed
             public void ResetTimestamp() => __pbn__Timestamp = null;
             private ulong? __pbn__Timestamp;
 
-            [global::ProtoBuf.ProtoMember(5, Name = @"delay")]
+            [ProtoBuf.ProtoMember(5, Name = @"delay")]
             public int Delay
             {
                 get { return __pbn__Delay.GetValueOrDefault(); }
@@ -149,14 +146,14 @@ namespace AtacFeed
             public void ResetDelay() => __pbn__Delay = null;
             private int? __pbn__Delay;
 
-            [global::ProtoBuf.ProtoContract()]
-            public partial class StopTimeEvent : global::ProtoBuf.IExtensible
+            [ProtoBuf.ProtoContract()]
+            public partial class StopTimeEvent : ProtoBuf.IExtensible
             {
-                private global::ProtoBuf.IExtension __pbn__extensionData;
-                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+                private ProtoBuf.IExtension __pbn__extensionData;
+                ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-                [global::ProtoBuf.ProtoMember(1, Name = @"delay")]
+                [ProtoBuf.ProtoMember(1, Name = @"delay")]
                 public int Delay
                 {
                     get { return __pbn__Delay.GetValueOrDefault(); }
@@ -166,7 +163,7 @@ namespace AtacFeed
                 public void ResetDelay() => __pbn__Delay = null;
                 private int? __pbn__Delay;
 
-                [global::ProtoBuf.ProtoMember(2, Name = @"time")]
+                [ProtoBuf.ProtoMember(2, Name = @"time")]
                 public long Time
                 {
                     get { return __pbn__Time.GetValueOrDefault(); }
@@ -176,7 +173,7 @@ namespace AtacFeed
                 public void ResetTime() => __pbn__Time = null;
                 private long? __pbn__Time;
 
-                [global::ProtoBuf.ProtoMember(3, Name = @"uncertainty")]
+                [ProtoBuf.ProtoMember(3, Name = @"uncertainty")]
                 public int Uncertainty
                 {
                     get { return __pbn__Uncertainty.GetValueOrDefault(); }
@@ -188,14 +185,14 @@ namespace AtacFeed
 
             }
 
-            [global::ProtoBuf.ProtoContract()]
-            public partial class StopTimeUpdate : global::ProtoBuf.IExtensible
+            [ProtoBuf.ProtoContract()]
+            public partial class StopTimeUpdate : ProtoBuf.IExtensible
             {
-                private global::ProtoBuf.IExtension __pbn__extensionData;
-                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+                private ProtoBuf.IExtension __pbn__extensionData;
+                ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-                [global::ProtoBuf.ProtoMember(1, Name = @"stop_sequence")]
+                [ProtoBuf.ProtoMember(1, Name = @"stop_sequence")]
                 public uint StopSequence
                 {
                     get { return __pbn__StopSequence.GetValueOrDefault(); }
@@ -205,8 +202,8 @@ namespace AtacFeed
                 public void ResetStopSequence() => __pbn__StopSequence = null;
                 private uint? __pbn__StopSequence;
 
-                [global::ProtoBuf.ProtoMember(4, Name = @"stop_id")]
-                [global::System.ComponentModel.DefaultValue("")]
+                [ProtoBuf.ProtoMember(4, Name = @"stop_id")]
+                [System.ComponentModel.DefaultValue("")]
                 public string StopId
                 {
                     get { return __pbn__StopId ?? ""; }
@@ -216,14 +213,14 @@ namespace AtacFeed
                 public void ResetStopId() => __pbn__StopId = null;
                 private string __pbn__StopId;
 
-                [global::ProtoBuf.ProtoMember(2, Name = @"arrival")]
-                public TripUpdate.StopTimeEvent Arrival { get; set; }
+                [ProtoBuf.ProtoMember(2, Name = @"arrival")]
+                public StopTimeEvent Arrival { get; set; }
 
-                [global::ProtoBuf.ProtoMember(3, Name = @"departure")]
-                public TripUpdate.StopTimeEvent Departure { get; set; }
+                [ProtoBuf.ProtoMember(3, Name = @"departure")]
+                public StopTimeEvent Departure { get; set; }
 
-                [global::ProtoBuf.ProtoMember(5)]
-                [global::System.ComponentModel.DefaultValue(ScheduleRelationship.Scheduled)]
+                [ProtoBuf.ProtoMember(5)]
+                [System.ComponentModel.DefaultValue(ScheduleRelationship.Scheduled)]
                 public ScheduleRelationship schedule_relationship
                 {
                     get { return __pbn__schedule_relationship ?? ScheduleRelationship.Scheduled; }
@@ -233,36 +230,36 @@ namespace AtacFeed
                 public void Resetschedule_relationship() => __pbn__schedule_relationship = null;
                 private ScheduleRelationship? __pbn__schedule_relationship;
 
-                [global::ProtoBuf.ProtoContract()]
+                [ProtoBuf.ProtoContract()]
                 public enum ScheduleRelationship
                 {
-                    [global::ProtoBuf.ProtoEnum(Name = @"SCHEDULED")]
+                    [ProtoBuf.ProtoEnum(Name = @"SCHEDULED")]
                     Scheduled = 0,
-                    [global::ProtoBuf.ProtoEnum(Name = @"SKIPPED")]
+                    [ProtoBuf.ProtoEnum(Name = @"SKIPPED")]
                     Skipped = 1,
-                    [global::ProtoBuf.ProtoEnum(Name = @"NO_DATA")]
+                    [ProtoBuf.ProtoEnum(Name = @"NO_DATA")]
                     NoData = 2,
                 }
             }
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public partial class VehiclePosition : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public partial class VehiclePosition : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"trip")]
+            [ProtoBuf.ProtoMember(1, Name = @"trip")]
             public TripDescriptor Trip { get; set; }
 
-            [global::ProtoBuf.ProtoMember(8, Name = @"vehicle")]
+            [ProtoBuf.ProtoMember(8, Name = @"vehicle")]
             public VehicleDescriptor Vehicle { get; set; }
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"position")]
+            [ProtoBuf.ProtoMember(2, Name = @"position")]
             public Position Position { get; set; }
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"current_stop_sequence")]
+            [ProtoBuf.ProtoMember(3, Name = @"current_stop_sequence")]
             public uint CurrentStopSequence
             {
                 get { return __pbn__CurrentStopSequence.GetValueOrDefault(); }
@@ -272,8 +269,8 @@ namespace AtacFeed
             public void ResetCurrentStopSequence() => __pbn__CurrentStopSequence = null;
             private uint? __pbn__CurrentStopSequence;
 
-            [global::ProtoBuf.ProtoMember(7, Name = @"stop_id")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(7, Name = @"stop_id")]
+            [System.ComponentModel.DefaultValue("")]
             public string StopId
             {
                 get { return __pbn__StopId ?? ""; }
@@ -283,8 +280,8 @@ namespace AtacFeed
             public void ResetStopId() => __pbn__StopId = null;
             private string __pbn__StopId;
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"current_status")]
-            [global::System.ComponentModel.DefaultValue(VehicleStopStatus.InTransitTo)]
+            [ProtoBuf.ProtoMember(4, Name = @"current_status")]
+            [System.ComponentModel.DefaultValue(VehicleStopStatus.InTransitTo)]
             public VehicleStopStatus CurrentStatus
             {
                 get { return __pbn__CurrentStatus ?? VehicleStopStatus.InTransitTo; }
@@ -294,7 +291,7 @@ namespace AtacFeed
             public void ResetCurrentStatus() => __pbn__CurrentStatus = null;
             private VehicleStopStatus? __pbn__CurrentStatus;
 
-            [global::ProtoBuf.ProtoMember(5, Name = @"timestamp")]
+            [ProtoBuf.ProtoMember(5, Name = @"timestamp")]
             public ulong Timestamp
             {
                 get { return __pbn__Timestamp.GetValueOrDefault(); }
@@ -304,8 +301,8 @@ namespace AtacFeed
             public void ResetTimestamp() => __pbn__Timestamp = null;
             private ulong? __pbn__Timestamp;
 
-            [global::ProtoBuf.ProtoMember(6)]
-            [global::System.ComponentModel.DefaultValue(CongestionLevel.UnknownCongestionLevel)]
+            [ProtoBuf.ProtoMember(6)]
+            [System.ComponentModel.DefaultValue(CongestionLevel.UnknownCongestionLevel)]
             public CongestionLevel congestion_level
             {
                 get { return __pbn__congestion_level ?? CongestionLevel.UnknownCongestionLevel; }
@@ -315,8 +312,8 @@ namespace AtacFeed
             public void Resetcongestion_level() => __pbn__congestion_level = null;
             private CongestionLevel? __pbn__congestion_level;
 
-            [global::ProtoBuf.ProtoMember(9)]
-            [global::System.ComponentModel.DefaultValue(OccupancyStatus.Empty)]
+            [ProtoBuf.ProtoMember(9)]
+            [System.ComponentModel.DefaultValue(OccupancyStatus.Empty)]
             public OccupancyStatus occupancy_status
             {
                 get { return __pbn__occupancy_status ?? OccupancyStatus.Empty; }
@@ -326,68 +323,72 @@ namespace AtacFeed
             public void Resetoccupancy_status() => __pbn__occupancy_status = null;
             private OccupancyStatus? __pbn__occupancy_status;
 
-            [global::ProtoBuf.ProtoContract()]
+            [ProtoBuf.ProtoContract()]
             public enum VehicleStopStatus
             {
-                [global::ProtoBuf.ProtoEnum(Name = @"INCOMING_AT")]
+                [ProtoBuf.ProtoEnum(Name = @"INCOMING_AT")]
                 IncomingAt = 0,
-                [global::ProtoBuf.ProtoEnum(Name = @"STOPPED_AT")]
+                [ProtoBuf.ProtoEnum(Name = @"STOPPED_AT")]
                 StoppedAt = 1,
-                [global::ProtoBuf.ProtoEnum(Name = @"IN_TRANSIT_TO")]
+                [ProtoBuf.ProtoEnum(Name = @"IN_TRANSIT_TO")]
                 InTransitTo = 2,
             }
 
-            [global::ProtoBuf.ProtoContract()]
+            [ProtoBuf.ProtoContract()]
             public enum CongestionLevel
             {
-                [global::ProtoBuf.ProtoEnum(Name = @"UNKNOWN_CONGESTION_LEVEL")]
+                [ProtoBuf.ProtoEnum(Name = @"UNKNOWN_CONGESTION_LEVEL")]
                 UnknownCongestionLevel = 0,
-                [global::ProtoBuf.ProtoEnum(Name = @"RUNNING_SMOOTHLY")]
+                [ProtoBuf.ProtoEnum(Name = @"RUNNING_SMOOTHLY")]
                 RunningSmoothly = 1,
-                [global::ProtoBuf.ProtoEnum(Name = @"STOP_AND_GO")]
+                [ProtoBuf.ProtoEnum(Name = @"STOP_AND_GO")]
                 StopAndGo = 2,
-                [global::ProtoBuf.ProtoEnum(Name = @"CONGESTION")]
+                [ProtoBuf.ProtoEnum(Name = @"CONGESTION")]
                 Congestion = 3,
-                [global::ProtoBuf.ProtoEnum(Name = @"SEVERE_CONGESTION")]
+                [ProtoBuf.ProtoEnum(Name = @"SEVERE_CONGESTION")]
                 SevereCongestion = 4,
             }
 
-            [global::ProtoBuf.ProtoContract()]
+            [ProtoBuf.ProtoContract()]
             public enum OccupancyStatus
             {
-                [global::ProtoBuf.ProtoEnum(Name = @"EMPTY")]
+                [ProtoBuf.ProtoEnum(Name = @"EMPTY")]
                 Empty = 0,
-                [global::ProtoBuf.ProtoEnum(Name = @"MANY_SEATS_AVAILABLE")]
+                [ProtoBuf.ProtoEnum(Name = @"MANY_SEATS_AVAILABLE")]
                 ManySeatsAvailable = 1,
-                [global::ProtoBuf.ProtoEnum(Name = @"FEW_SEATS_AVAILABLE")]
+                [ProtoBuf.ProtoEnum(Name = @"FEW_SEATS_AVAILABLE")]
                 FewSeatsAvailable = 2,
-                [global::ProtoBuf.ProtoEnum(Name = @"STANDING_ROOM_ONLY")]
+                [ProtoBuf.ProtoEnum(Name = @"STANDING_ROOM_ONLY")]
                 StandingRoomOnly = 3,
-                [global::ProtoBuf.ProtoEnum(Name = @"CRUSHED_STANDING_ROOM_ONLY")]
+                [ProtoBuf.ProtoEnum(Name = @"CRUSHED_STANDING_ROOM_ONLY")]
                 CrushedStandingRoomOnly = 4,
-                [global::ProtoBuf.ProtoEnum(Name = @"FULL")]
+                [ProtoBuf.ProtoEnum(Name = @"FULL")]
                 Full = 5,
-                [global::ProtoBuf.ProtoEnum(Name = @"NOT_ACCEPTING_PASSENGERS")]
+                [ProtoBuf.ProtoEnum(Name = @"NOT_ACCEPTING_PASSENGERS")]
                 NotAcceptingPassengers = 6,
+                [ProtoBuf.ProtoEnum(Name = @"NO_DATA_AVAILABLE")]
+                NoDataAvailable = 7,
+                [ProtoBuf.ProtoEnum(Name = @"NOT_BOARDABLE")] 
+                NotBoardable = 8,
             }
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public partial class Alert : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public partial class Alert : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"active_period")]
-            public global::System.Collections.Generic.List<TimeRange> ActivePeriods { get; } = new global::System.Collections.Generic.List<TimeRange>();
+            [ProtoBuf.ProtoMember(1, Name = @"active_period")]
+            public List<TimeRange> ActivePeriods { get; } = new List<TimeRange>();
 
-            [global::ProtoBuf.ProtoMember(5, Name = @"informed_entity")]
-            public global::System.Collections.Generic.List<EntitySelector> InformedEntities { get; } = new global::System.Collections.Generic.List<EntitySelector>();
+            [ProtoBuf.ProtoMember(5, Name = @"informed_entity")]
+            public List<EntitySelector> InformedEntities { get; } = new List<EntitySelector>();
 
-            [global::ProtoBuf.ProtoMember(6)]
-            [global::System.ComponentModel.DefaultValue(Cause.UnknownCause)]
+            [ProtoBuf.ProtoMember(6)]
+            [System.ComponentModel.DefaultValue(Cause.UnknownCause)]
             public Cause cause
             {
                 get { return __pbn__cause ?? Cause.UnknownCause; }
@@ -397,8 +398,8 @@ namespace AtacFeed
             public void Resetcause() => __pbn__cause = null;
             private Cause? __pbn__cause;
 
-            [global::ProtoBuf.ProtoMember(7)]
-            [global::System.ComponentModel.DefaultValue(Effect.UnknownEffect)]
+            [ProtoBuf.ProtoMember(7)]
+            [System.ComponentModel.DefaultValue(Effect.UnknownEffect)]
             public Effect effect
             {
                 get { return __pbn__effect ?? Effect.UnknownEffect; }
@@ -408,23 +409,23 @@ namespace AtacFeed
             public void Reseteffect() => __pbn__effect = null;
             private Effect? __pbn__effect;
 
-            [global::ProtoBuf.ProtoMember(8, Name = @"url")]
+            [ProtoBuf.ProtoMember(8, Name = @"url")]
             public TranslatedString Url { get; set; }
 
-            [global::ProtoBuf.ProtoMember(10, Name = @"header_text")]
+            [ProtoBuf.ProtoMember(10, Name = @"header_text")]
             public TranslatedString HeaderText { get; set; }
 
-            [global::ProtoBuf.ProtoMember(11, Name = @"description_text")]
+            [ProtoBuf.ProtoMember(11, Name = @"description_text")]
             public TranslatedString DescriptionText { get; set; }
 
-            [global::ProtoBuf.ProtoMember(12, Name = @"tts_header_text")]
+            [ProtoBuf.ProtoMember(12, Name = @"tts_header_text")]
             public TranslatedString TtsHeaderText { get; set; }
 
-            [global::ProtoBuf.ProtoMember(13, Name = @"tts_description_text")]
+            [ProtoBuf.ProtoMember(13, Name = @"tts_description_text")]
             public TranslatedString TtsDescriptionText { get; set; }
 
-            [global::ProtoBuf.ProtoMember(14)]
-            [global::System.ComponentModel.DefaultValue(SeverityLevel.UnknownSeverity)]
+            [ProtoBuf.ProtoMember(14)]
+            [System.ComponentModel.DefaultValue(SeverityLevel.UnknownSeverity)]
             public SeverityLevel severity_level
             {
                 get { return __pbn__severity_level ?? SeverityLevel.UnknownSeverity; }
@@ -434,83 +435,85 @@ namespace AtacFeed
             public void Resetseverity_level() => __pbn__severity_level = null;
             private SeverityLevel? __pbn__severity_level;
 
-            [global::ProtoBuf.ProtoContract()]
+            [ProtoBuf.ProtoContract()]
             public enum Cause
             {
-                [global::ProtoBuf.ProtoEnum(Name = @"UNKNOWN_CAUSE")]
+                [ProtoBuf.ProtoEnum(Name = @"UNKNOWN_CAUSE")]
                 UnknownCause = 1,
-                [global::ProtoBuf.ProtoEnum(Name = @"OTHER_CAUSE")]
+                [ProtoBuf.ProtoEnum(Name = @"OTHER_CAUSE")]
                 OtherCause = 2,
-                [global::ProtoBuf.ProtoEnum(Name = @"TECHNICAL_PROBLEM")]
+                [ProtoBuf.ProtoEnum(Name = @"TECHNICAL_PROBLEM")]
                 TechnicalProblem = 3,
-                [global::ProtoBuf.ProtoEnum(Name = @"STRIKE")]
+                [ProtoBuf.ProtoEnum(Name = @"STRIKE")]
                 Strike = 4,
-                [global::ProtoBuf.ProtoEnum(Name = @"DEMONSTRATION")]
+                [ProtoBuf.ProtoEnum(Name = @"DEMONSTRATION")]
                 Demonstration = 5,
-                [global::ProtoBuf.ProtoEnum(Name = @"ACCIDENT")]
+                [ProtoBuf.ProtoEnum(Name = @"ACCIDENT")]
                 Accident = 6,
-                [global::ProtoBuf.ProtoEnum(Name = @"HOLIDAY")]
+                [ProtoBuf.ProtoEnum(Name = @"HOLIDAY")]
                 Holiday = 7,
-                [global::ProtoBuf.ProtoEnum(Name = @"WEATHER")]
+                [ProtoBuf.ProtoEnum(Name = @"WEATHER")]
                 Weather = 8,
-                [global::ProtoBuf.ProtoEnum(Name = @"MAINTENANCE")]
+                [ProtoBuf.ProtoEnum(Name = @"MAINTENANCE")]
                 Maintenance = 9,
-                [global::ProtoBuf.ProtoEnum(Name = @"CONSTRUCTION")]
+                [ProtoBuf.ProtoEnum(Name = @"CONSTRUCTION")]
                 Construction = 10,
-                [global::ProtoBuf.ProtoEnum(Name = @"POLICE_ACTIVITY")]
+                [ProtoBuf.ProtoEnum(Name = @"POLICE_ACTIVITY")]
                 PoliceActivity = 11,
-                [global::ProtoBuf.ProtoEnum(Name = @"MEDICAL_EMERGENCY")]
+                [ProtoBuf.ProtoEnum(Name = @"MEDICAL_EMERGENCY")]
                 MedicalEmergency = 12,
             }
 
-            [global::ProtoBuf.ProtoContract()]
+            [ProtoBuf.ProtoContract()]
             public enum Effect
             {
-                [global::ProtoBuf.ProtoEnum(Name = @"NO_SERVICE")]
+                [ProtoBuf.ProtoEnum(Name = @"NO_SERVICE")]
                 NoService = 1,
-                [global::ProtoBuf.ProtoEnum(Name = @"REDUCED_SERVICE")]
+                [ProtoBuf.ProtoEnum(Name = @"REDUCED_SERVICE")]
                 ReducedService = 2,
-                [global::ProtoBuf.ProtoEnum(Name = @"SIGNIFICANT_DELAYS")]
+                [ProtoBuf.ProtoEnum(Name = @"SIGNIFICANT_DELAYS")]
                 SignificantDelays = 3,
-                [global::ProtoBuf.ProtoEnum(Name = @"DETOUR")]
+                [ProtoBuf.ProtoEnum(Name = @"DETOUR")]
                 Detour = 4,
-                [global::ProtoBuf.ProtoEnum(Name = @"ADDITIONAL_SERVICE")]
+                [ProtoBuf.ProtoEnum(Name = @"ADDITIONAL_SERVICE")]
                 AdditionalService = 5,
-                [global::ProtoBuf.ProtoEnum(Name = @"MODIFIED_SERVICE")]
+                [ProtoBuf.ProtoEnum(Name = @"MODIFIED_SERVICE")]
                 ModifiedService = 6,
-                [global::ProtoBuf.ProtoEnum(Name = @"OTHER_EFFECT")]
+                [ProtoBuf.ProtoEnum(Name = @"OTHER_EFFECT")]
                 OtherEffect = 7,
-                [global::ProtoBuf.ProtoEnum(Name = @"UNKNOWN_EFFECT")]
+                [ProtoBuf.ProtoEnum(Name = @"UNKNOWN_EFFECT")]
                 UnknownEffect = 8,
-                [global::ProtoBuf.ProtoEnum(Name = @"STOP_MOVED")]
+                [ProtoBuf.ProtoEnum(Name = @"STOP_MOVED")]
                 StopMoved = 9,
-                [global::ProtoBuf.ProtoEnum(Name = @"NO_EFFECT")]
+                [ProtoBuf.ProtoEnum(Name = @"NO_EFFECT")]
                 NoEffect = 10,
+                [ProtoBuf.ProtoEnum(Name = @"ACCESSIBILITY_ISSUE")] 
+                AccessibilityIssue = 11,
             }
 
-            [global::ProtoBuf.ProtoContract()]
+            [ProtoBuf.ProtoContract()]
             public enum SeverityLevel
             {
-                [global::ProtoBuf.ProtoEnum(Name = @"UNKNOWN_SEVERITY")]
+                [ProtoBuf.ProtoEnum(Name = @"UNKNOWN_SEVERITY")]
                 UnknownSeverity = 1,
-                [global::ProtoBuf.ProtoEnum(Name = @"INFO")]
+                [ProtoBuf.ProtoEnum(Name = @"INFO")]
                 Info = 2,
-                [global::ProtoBuf.ProtoEnum(Name = @"WARNING")]
+                [ProtoBuf.ProtoEnum(Name = @"WARNING")]
                 Warning = 3,
-                [global::ProtoBuf.ProtoEnum(Name = @"SEVERE")]
+                [ProtoBuf.ProtoEnum(Name = @"SEVERE")]
                 Severe = 4,
             }
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public partial class TimeRange : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public partial class TimeRange : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"start")]
+            [ProtoBuf.ProtoMember(1, Name = @"start")]
             public ulong Start
             {
                 get { return __pbn__Start.GetValueOrDefault(); }
@@ -520,7 +523,7 @@ namespace AtacFeed
             public void ResetStart() => __pbn__Start = null;
             private ulong? __pbn__Start;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"end")]
+            [ProtoBuf.ProtoMember(2, Name = @"end")]
             public ulong End
             {
                 get { return __pbn__End.GetValueOrDefault(); }
@@ -532,20 +535,20 @@ namespace AtacFeed
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public partial class Position : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public partial class Position : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"latitude", IsRequired = true)]
+            [ProtoBuf.ProtoMember(1, Name = @"latitude", IsRequired = true)]
             public float Latitude { get; set; }
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"longitude", IsRequired = true)]
+            [ProtoBuf.ProtoMember(2, Name = @"longitude", IsRequired = true)]
             public float Longitude { get; set; }
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"bearing")]
+            [ProtoBuf.ProtoMember(3, Name = @"bearing")]
             public float Bearing
             {
                 get { return __pbn__Bearing.GetValueOrDefault(); }
@@ -555,7 +558,7 @@ namespace AtacFeed
             public void ResetBearing() => __pbn__Bearing = null;
             private float? __pbn__Bearing;
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"odometer")]
+            [ProtoBuf.ProtoMember(4, Name = @"odometer")]
             public double Odometer
             {
                 get { return __pbn__Odometer.GetValueOrDefault(); }
@@ -565,7 +568,7 @@ namespace AtacFeed
             public void ResetOdometer() => __pbn__Odometer = null;
             private double? __pbn__Odometer;
 
-            [global::ProtoBuf.ProtoMember(5, Name = @"speed")]
+            [ProtoBuf.ProtoMember(5, Name = @"speed")]
             public float Speed
             {
                 get { return __pbn__Speed.GetValueOrDefault(); }
@@ -577,15 +580,15 @@ namespace AtacFeed
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public partial class TripDescriptor : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public partial class TripDescriptor : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"trip_id")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(1, Name = @"trip_id")]
+            [System.ComponentModel.DefaultValue("")]
             public string TripId
             {
                 get { return __pbn__TripId ?? ""; }
@@ -595,8 +598,8 @@ namespace AtacFeed
             public void ResetTripId() => __pbn__TripId = null;
             private string __pbn__TripId;
 
-            [global::ProtoBuf.ProtoMember(5, Name = @"route_id")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(5, Name = @"route_id")]
+            [System.ComponentModel.DefaultValue("")]
             public string RouteId
             {
                 get { return __pbn__RouteId ?? ""; }
@@ -606,7 +609,7 @@ namespace AtacFeed
             public void ResetRouteId() => __pbn__RouteId = null;
             private string __pbn__RouteId;
 
-            [global::ProtoBuf.ProtoMember(6, Name = @"direction_id")]
+            [ProtoBuf.ProtoMember(6, Name = @"direction_id")]
             public uint DirectionId
             {
                 get { return __pbn__DirectionId.GetValueOrDefault(); }
@@ -616,8 +619,8 @@ namespace AtacFeed
             public void ResetDirectionId() => __pbn__DirectionId = null;
             private uint? __pbn__DirectionId;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"start_time")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(2, Name = @"start_time")]
+            [System.ComponentModel.DefaultValue("")]
             public string StartTime
             {
                 get { return __pbn__StartTime ?? ""; }
@@ -627,8 +630,8 @@ namespace AtacFeed
             public void ResetStartTime() => __pbn__StartTime = null;
             private string __pbn__StartTime;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"start_date")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(3, Name = @"start_date")]
+            [System.ComponentModel.DefaultValue("")]
             public string StartDate
             {
                 get { return __pbn__StartDate ?? ""; }
@@ -638,8 +641,8 @@ namespace AtacFeed
             public void ResetStartDate() => __pbn__StartDate = null;
             private string __pbn__StartDate;
 
-            [global::ProtoBuf.ProtoMember(4)]
-            [global::System.ComponentModel.DefaultValue(ScheduleRelationship.Scheduled)]
+            [ProtoBuf.ProtoMember(4)]
+            [System.ComponentModel.DefaultValue(ScheduleRelationship.Scheduled)]
             public ScheduleRelationship schedule_relationship
             {
                 get { return __pbn__schedule_relationship ?? ScheduleRelationship.Scheduled; }
@@ -649,33 +652,33 @@ namespace AtacFeed
             public void Resetschedule_relationship() => __pbn__schedule_relationship = null;
             private ScheduleRelationship? __pbn__schedule_relationship;
 
-            [global::ProtoBuf.ProtoContract()]
+            [ProtoBuf.ProtoContract()]
             public enum ScheduleRelationship
             {
-                [global::ProtoBuf.ProtoEnum(Name = @"SCHEDULED")]
+                [ProtoBuf.ProtoEnum(Name = @"SCHEDULED")]
                 Scheduled = 0,
-                [global::ProtoBuf.ProtoEnum(Name = @"ADDED")]
+                [ProtoBuf.ProtoEnum(Name = @"ADDED")]
                 Added = 1,
-                [global::ProtoBuf.ProtoEnum(Name = @"UNSCHEDULED")]
+                [ProtoBuf.ProtoEnum(Name = @"UNSCHEDULED")]
                 Unscheduled = 2,
-                [global::ProtoBuf.ProtoEnum(Name = @"CANCELED")]
+                [ProtoBuf.ProtoEnum(Name = @"CANCELED")]
                 Canceled = 3,
-                [global::ProtoBuf.ProtoEnum(Name = @"REPLACEMENT")]
-                [global::System.Obsolete]
+                [ProtoBuf.ProtoEnum(Name = @"REPLACEMENT")]
+                [Obsolete]
                 Replacement = 5,
             }
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public partial class VehicleDescriptor : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public partial class VehicleDescriptor : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"id")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(1, Name = @"id")]
+            [System.ComponentModel.DefaultValue("")]
             public string Id
             {
                 get { return __pbn__Id ?? ""; }
@@ -685,8 +688,8 @@ namespace AtacFeed
             public void ResetId() => __pbn__Id = null;
             private string __pbn__Id;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"label")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(2, Name = @"label")]
+            [System.ComponentModel.DefaultValue("")]
             public string Label
             {
                 get { return __pbn__Label ?? ""; }
@@ -696,8 +699,8 @@ namespace AtacFeed
             public void ResetLabel() => __pbn__Label = null;
             private string __pbn__Label;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"license_plate")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(3, Name = @"license_plate")]
+            [System.ComponentModel.DefaultValue("")]
             public string LicensePlate
             {
                 get { return __pbn__LicensePlate ?? ""; }
@@ -709,15 +712,15 @@ namespace AtacFeed
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public partial class EntitySelector : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public partial class EntitySelector : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"agency_id")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(1, Name = @"agency_id")]
+            [System.ComponentModel.DefaultValue("")]
             public string AgencyId
             {
                 get { return __pbn__AgencyId ?? ""; }
@@ -727,8 +730,8 @@ namespace AtacFeed
             public void ResetAgencyId() => __pbn__AgencyId = null;
             private string __pbn__AgencyId;
 
-            [global::ProtoBuf.ProtoMember(2, Name = @"route_id")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(2, Name = @"route_id")]
+            [System.ComponentModel.DefaultValue("")]
             public string RouteId
             {
                 get { return __pbn__RouteId ?? ""; }
@@ -738,7 +741,7 @@ namespace AtacFeed
             public void ResetRouteId() => __pbn__RouteId = null;
             private string __pbn__RouteId;
 
-            [global::ProtoBuf.ProtoMember(3, Name = @"route_type")]
+            [ProtoBuf.ProtoMember(3, Name = @"route_type")]
             public int RouteType
             {
                 get { return __pbn__RouteType.GetValueOrDefault(); }
@@ -748,11 +751,11 @@ namespace AtacFeed
             public void ResetRouteType() => __pbn__RouteType = null;
             private int? __pbn__RouteType;
 
-            [global::ProtoBuf.ProtoMember(4, Name = @"trip")]
+            [ProtoBuf.ProtoMember(4, Name = @"trip")]
             public TripDescriptor Trip { get; set; }
 
-            [global::ProtoBuf.ProtoMember(5, Name = @"stop_id")]
-            [global::System.ComponentModel.DefaultValue("")]
+            [ProtoBuf.ProtoMember(5, Name = @"stop_id")]
+            [System.ComponentModel.DefaultValue("")]
             public string StopId
             {
                 get { return __pbn__StopId ?? ""; }
@@ -764,28 +767,28 @@ namespace AtacFeed
 
         }
 
-        [global::ProtoBuf.ProtoContract()]
-        public partial class TranslatedString : global::ProtoBuf.IExtensible
+        [ProtoBuf.ProtoContract()]
+        public partial class TranslatedString : ProtoBuf.IExtensible
         {
-            private global::ProtoBuf.IExtension __pbn__extensionData;
-            global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+            private ProtoBuf.IExtension __pbn__extensionData;
+            ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-            [global::ProtoBuf.ProtoMember(1, Name = @"translation")]
-            public global::System.Collections.Generic.List<Translation> Translations { get; } = new global::System.Collections.Generic.List<Translation>();
+            [ProtoBuf.ProtoMember(1, Name = @"translation")]
+            public List<Translation> Translations { get; } = new List<Translation>();
 
-            [global::ProtoBuf.ProtoContract()]
-            public partial class Translation : global::ProtoBuf.IExtensible
+            [ProtoBuf.ProtoContract()]
+            public partial class Translation : ProtoBuf.IExtensible
             {
-                private global::ProtoBuf.IExtension __pbn__extensionData;
-                global::ProtoBuf.IExtension global::ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
-                    => global::ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
+                private ProtoBuf.IExtension __pbn__extensionData;
+                ProtoBuf.IExtension ProtoBuf.IExtensible.GetExtensionObject(bool createIfMissing)
+                    => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
-                [global::ProtoBuf.ProtoMember(1, Name = @"text", IsRequired = true)]
+                [ProtoBuf.ProtoMember(1, Name = @"text", IsRequired = true)]
                 public string Text { get; set; }
 
-                [global::ProtoBuf.ProtoMember(2, Name = @"language")]
-                [global::System.ComponentModel.DefaultValue("")]
+                [ProtoBuf.ProtoMember(2, Name = @"language")]
+                [System.ComponentModel.DefaultValue("")]
                 public string Language
                 {
                     get { return __pbn__Language ?? ""; }

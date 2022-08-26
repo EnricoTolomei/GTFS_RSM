@@ -1,6 +1,4 @@
-﻿using GTFS.Entities;
-using Newtonsoft.Json;
-using ProtoBuf;
+﻿using ProtoBuf;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -70,9 +68,11 @@ namespace AtacFeed
         {
             try
             {
-                WebRequest req = WebRequest.Create(url);
-                req.Timeout = 10000;
-                LastReadFeed = Serializer.Deserialize<FeedMessage>(req.GetResponse().GetResponseStream());
+                WebRequest request = WebRequest.Create(url);
+                request.Timeout = 10000;
+                WebResponse response = request.GetResponse();
+                var stream = response.GetResponseStream();
+                LastReadFeed = Serializer.Deserialize<FeedMessage>(stream);
             }
             catch (Exception exc) {
                 LastReadFeed = null;
@@ -141,9 +141,18 @@ namespace AtacFeed
         {
             Exception ecc = null;
             FeedEntities = LastValidFeed.Entities
-                            .Where(x => (string.IsNullOrEmpty(filtroLinea) || x.Vehicle?.Trip?.RouteId == filtroLinea)
+                            .Where(x => !x.IsDeleted 
+                                        && (string.IsNullOrEmpty(filtroLinea) || x.Vehicle?.Trip?.RouteId == filtroLinea)
                                         && (!filtroTripVuoti || x.Vehicle?.Trip?.TripId.Length > 0))
                             .ToList();
+
+            //Saniamo FeedEntities con RouteId null, recuperandolo tramite Routes
+            foreach (FeedEntity entity in FeedEntities.Where(v=> string.IsNullOrEmpty(v.Vehicle.Trip?.RouteId)))
+            {
+                    var routeId = GTFS_RSM.StaticData.Trips.Where(x => x.Id == entity.Vehicle.Trip.TripId).FirstOrDefault();
+                    entity.Vehicle.Trip.RouteId = routeId?.RouteId?? string.Empty;
+            }
+            //
 
             ElencoVetture = (from fe in FeedEntities
                                  .GroupJoin(
@@ -167,13 +176,33 @@ namespace AtacFeed
                                .DefaultIfEmpty()
                              select (fe.Linea, fe.Vehicle, fe.DettagliVettura, fe.NomeFermata, trip?.Headsign )
                              )
-                             .Select(x => new ExtendedVehicleInfo(
+                             .Select(x => {
+
+                                 string linea = string.Empty;
+                                 if (x.Linea?.Route.ShortName == x.Linea?.Route.LongName || string.IsNullOrEmpty(x.Linea?.Route.LongName))
+                                 {
+                                     linea = x.Linea?.Route.ShortName;
+                                 }
+                                 else if (string.IsNullOrEmpty(x.Linea?.Route.ShortName))
+                                 {
+                                     linea = x.Linea?.Route.LongName;
+                                 }
+                                 else
+                                 {
+                                     linea = x.Linea?.Route.ShortName + " - " + x.Linea?.Route.LongName;
+                                 }
+
+                                 return new ExtendedVehicleInfo(
                                                     idVettura: x.Vehicle.Vehicle?.Id,
                                                     matricola: x.Vehicle.Vehicle?.Label.Trim(),
                                                     licensePlate: x.Vehicle.Vehicle?.LicensePlate,
                                                     routeId: x.Vehicle.Trip?.RouteId,
-                                                    linea: x.Linea?.Route.ShortName,
-                                                    gestore: x.DettagliVettura?.Gestore?? x.Linea?.Agency.Name,
+                                                    linea:
+                                                        //x.Linea?.Route.ShortName,
+                                                        //string.IsNullOrEmpty(x.Linea?.Route.LongName) ? x.Linea?.Route.ShortName : x.Linea?.Route.ShortName + " - " + x.Linea?.Route.LongName,
+                                                        //string.IsNullOrEmpty(x.Linea?.Route.ShortName) ? x.Linea?.Route.LongName : x.Linea?.Route.ShortName,
+                                                        linea,
+                                                    gestore: x.DettagliVettura?.Gestore ?? x.Linea?.Agency.Name,
                                                     directionId: x.Vehicle.Trip?.DirectionId,
                                                     currentStopSequence: x.Vehicle.CurrentStopSequence,
                                                     congestionLevel: x.Vehicle.congestion_level,
@@ -194,7 +223,9 @@ namespace AtacFeed
                                                     destinazione: x.Headsign,
                                                     dataProgrammata: x.Vehicle.Trip?.StartDate,
                                                     oraProgrammata: x.Vehicle.Trip?.StartTime
-                                    )                                 
+
+                                    );
+                                 }                          
                              )
                              .Distinct()
                              .OrderBy(x => x.IdVettura)

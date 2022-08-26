@@ -26,7 +26,7 @@ namespace AtacFeed
 {
     public partial class FormGTFS_RSM : Form
     {
-        public bool needToRestart = false;
+        //public bool needToRestart = false;
         
         private string fileName;        
         private DateTime? DataResetMonitoraggio;
@@ -56,37 +56,28 @@ namespace AtacFeed
                 if (DataResetMonitoraggio.HasValue && DateTime.Now > DataResetMonitoraggio.GetValueOrDefault())
                 {
                     RestartFile();
-                    //NumeroFeedValidi = 1;
-                    //NumeroLetture = 1;
-                    //labelLetture.Text = NumeroLetture.ToString();
                     DataResetMonitoraggio = DataResetMonitoraggio.GetValueOrDefault(DateTime.MinValue).AddDays(1);
                     Log.Information("Prossimo reset monitoraggio: {DataResetMonitoraggio:dd/MM/yyyy HH:mm:ss}", DataResetMonitoraggio);
                 }
 
-
-                bool feedAvailable = GetValidFeed() == 0;
+                #region Verifica Update GTFS STATICO
                 labelLetture.Text = NumeroLetture.ToString();
-                if (checkMD5.Checked && !DataCheckUpdate.HasValue)
+                if (!DataCheckUpdate.HasValue)
                 {
-                    DataCheckUpdate = DateTime.Now.AddSeconds(15);
+                    DataCheckUpdate = DateTime.Now.AddSeconds(20);
+                    CheckUpdate(download: checkMD5.Checked);
                 }                    
                 else if (DateTime.Now>DataCheckUpdate.GetValueOrDefault())
                 {
-                    CheckUpdate();                        
-                    DataCheckUpdate = DateTime.Now.AddSeconds(30);
+                    CheckUpdate(download: checkMD5.Checked);
+                    DataCheckUpdate = DateTime.Now.AddSeconds(20);
                 }
+                #endregion
+
+                bool feedAvailable = GetValidFeed() == 0;
                 if (feedAvailable)
                 {
                     DateTime lastDataFeedVehicle = FeedManager.LastDataFeedVehicle.Value;
-                    //if (DataResetMonitoraggio.HasValue && lastDataFeedVehicle > DataResetMonitoraggio.GetValueOrDefault())
-                    //{
-                    //    RestartFile();
-                    //    NumeroFeedValidi = 1;
-                    //    NumeroLetture = 1;
-                    //    labelLetture.Text = NumeroLetture.ToString();
-                    //    DataResetMonitoraggio = DataResetMonitoraggio.GetValueOrDefault(DateTime.MinValue).AddDays(1);
-                    //    Log.Information("Prossimo reset monitoraggio: {DataResetMonitoraggio:dd/MM/yyyy HH:mm:ss}", DataResetMonitoraggio);
-                    //}
 
                     lblOraLettura.Text = $"{lastDataFeedVehicle:HH:mm:ss}";
                     labelFeedLetti.Text = NumeroFeedValidi.ToString();
@@ -96,7 +87,7 @@ namespace AtacFeed
                     bool filtroTuttoPercorso = checkTuttoPercorso.Visible && checkTuttoPercorso.Checked;
                     bool raggruppalineaRegola = radioLineaRegola.Enabled && radioLineaRegola.Checked;
                     bool nonoRaggruppare = radioNonRaggruppare.Checked;
-                    ecc= FeedManager.ElaboraUltimoFeedValido(filtroLinea, filtroTripVuoti, filtroTuttoPercorso, raggruppalineaRegola, nonoRaggruppare);
+                    ecc = FeedManager.ElaboraUltimoFeedValido(filtroLinea, filtroTripVuoti, filtroTuttoPercorso, raggruppalineaRegola, nonoRaggruppare);
                     List<string> lineeAnomale = FeedManager.LineeAnomale();
                     if (lineeAnomale.Count > 0)
                     {
@@ -442,6 +433,7 @@ namespace AtacFeed
                 }
                 catch (Exception ex)
                 {
+                    textBox1.AppendText($"{ex.Message} {Environment.NewLine}");
                     Log.Error(ex, "Errore : ", ex.Message);
                 }
 
@@ -483,85 +475,7 @@ namespace AtacFeed
             }
             return codeFeed; //== 0 ? FeedManager.LastValidFeed : null;
         }
-        
-        /*
-        private FeedMessage GetFeedMessage(string url)
-        {
-            if (!string.IsNullOrWhiteSpace(url))
-            {
-                //WebRequest req = WebRequest.Create(url);
-                //req.Timeout = 10000;
-                try
-                {
-                    return FeedManager.GetFeed(url);
-                    // return Serializer.Deserialize<FeedMessage>(req.GetResponse().GetResponseStream());
-                }
-                catch (WebException ex) when ((ex.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
-                {
-                    textBox1.AppendText($"{ex.Message}: {Environment.NewLine}Feed Non trovato al seguente indirizzo");
-                    textBox1.AppendText($"{Environment.NewLine}{ex.Response.ResponseUri}{Environment.NewLine}");
-                    Log.Error(ex, "Feed {UrlFeed} Non trovato ", ex.Response.ResponseUri);
-                    return null;
-                }
-                catch (WebException ex) when (ex.Status == WebExceptionStatus.Timeout)
-                {
-                    textBox1.AppendText($"{ex.Message} Problemi di connessione con il server{Environment.NewLine}");
-                    Log.Error(ex, "Errore Connessione Server {UrlRemoto}", url);
-                    return null;
-                }
-                catch (WebException ex) when (ex.Status == WebExceptionStatus.NameResolutionFailure)
-                {
-                    textBox1.AppendText($"{ex.Message} {Environment.NewLine}");
-                    Log.Error(ex, "Errore Connessione Server {UrlRemoto}", url);
-                    return null;
-                }
-
-                catch (Exception ex)
-                {
-                    Log.Error(ex, "Errore : ", ex.Message);
-                    return null;
-                }
-
-            }
-            else
-                return null;
-        }
-
-        private int ValidaFeed(FeedMessage feed)
-        {
-            int isValid = 0;
-            DateTime dataFeedVehicle = t0.AddSeconds(feed?.Header.Timestamp ?? 0).ToLocalTime();
-            try
-            {
-                if (feed == null)
-                {
-                    Log.Error($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè NON LETTO");
-                    textBox1.AppendText($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè NON LETTO{Environment.NewLine}");
-                    isValid = -1;
-                }
-                else if (feed.Entities.Count == 0)
-                {
-                    Log.Error($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè VUOTO");
-                    textBox1.AppendText($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè VUOTO{Environment.NewLine}");
-                    isValid = -2;
-                }
-                else if (LastDataFeedVehicle.GetValueOrDefault(DateTime.MinValue) >= dataFeedVehicle)
-                {
-                    Log.Error($"[{DateTime.Now:HH:mm:ss}] - Feed scartato in quanto ha il timestamp SUPERATO");
-                    textBox1.AppendText($"[{DateTime.Now:HH:mm:ss}] - Feed scartato in quanto ha il timestamp SUPERATO{Environment.NewLine}");
-                    isValid = -3;
-                }
-            }
-            catch (Exception exc)
-            {
-                textBox1.AppendText($"{exc.Message}");
-                Log.Error(exc, "Errore Generico");
-                isValid = -1;
-            }
-            return isValid;
-        }
-        */
-        
+                
         private void RestartFile()
         {
             ResetUI();
@@ -748,25 +662,42 @@ namespace AtacFeed
             bool usaDettagliVettura = checkDettagliVettura.Checked;
             FeedManager.GTFS_RSM = new GTFS_RSM($"Config{Path.DirectorySeparatorChar}GTFS_Static", usaDettagliVettura);
             UpdateBox.ExistNewerGTFS = false;
-            UpdateBox.ExistNewerConf = false;
+            UpdateBox.ExistNewerCSV = false;
             UpdateBox.NewCSVDownloaded = false;
             UpdateBox.NewGTFSDownloaded = false;
             List<Route> elencoLinee = FeedManager.GTFS_RSM.StaticData.Routes
                 .OrderBy(k => k.ShortName)
                 .DefaultIfEmpty()
+                .Distinct()
                 .ToList();
             
             Route fittizia = new Route
             {
                 Id = "-1",
-                ShortName = "Tutte",
-                LongName = "Tutte"                
+                ShortName = "    Tutte"
             };
-            elencoLinee.Insert(0, fittizia);            
+            elencoLinee.Insert(0, fittizia);
 
-            comboBox1.DataSource = elencoLinee;
-            //var alternativa= elencoLinee.Select(x => new Route { Id = x.Id, LongName = x.ShortName + " " + x.LongName }).ToList();
-            //comboBox1.DataSource = alternativa;
+            //comboBox1.DataSource = elencoLinee;
+            var alternativa = elencoLinee.Select(x =>
+            {
+                string linea = string.Empty;
+                if (x.ShortName == x.LongName || string.IsNullOrEmpty(x.LongName))
+                {
+                    linea = x.ShortName;
+                }
+                else if (string.IsNullOrEmpty(x.ShortName))
+                {
+                    linea = x.LongName;
+                }
+                else
+                {
+                    linea = x.ShortName + " - " + x.LongName;
+                }                
+                //IsNullOrEmpty(x.LongName) ? x.ShortName : x.ShortName + " - " + x.LongName;
+                return new Route { Id = x.Id, ShortName = linea };
+            }).Distinct().ToList();
+            comboBox1.DataSource = alternativa;
             comboBox1.ValueMember = "Id";
             comboBox1.DisplayMember = "ShortName";
             
@@ -949,14 +880,13 @@ namespace AtacFeed
         {
             if (timerAcquisizione.Enabled)
             {
-                DialogResult dialog = MessageBox.Show($"Interrompere il monitoraggio {(needToRestart ? "e riavviare" : "ed uscire")} ? ",
-                                                      $"Conferma {(needToRestart ? "Riavvio" : "Uscita")}",
+                DialogResult dialog = MessageBox.Show($"Interrompere il monitoraggio ed uscire",
+                                                      $"Conferma Uscita",
                                                       MessageBoxButtons.YesNo,
                                                       MessageBoxIcon.Question);
                 if (dialog == DialogResult.No)
                 {
                     e.Cancel = true;
-                    needToRestart = false;
                 }
                 else if (!string.IsNullOrEmpty(fileName))
                 {
@@ -1264,18 +1194,22 @@ namespace AtacFeed
             return retVal;
         }
 
-        async void CheckUpdate()
+        async void CheckUpdate(bool download = false, bool forceDownload = false)
         {
-            bool? newVersion = await Task.Run(() => TaskCheckUpdate(false));
+            bool? newVersion = await Task.Run(() => TaskCheckUpdate(download, forceDownload));
 
-            if (!newVersion.HasValue)
+            if (UpdateBox.NewGTFSDownloaded || UpdateBox.NewCSVDownloaded) 
+            {
+                buttonVerificaAggiornamenti.Image = Properties.Resources.giallo;
+            }
+            else if (!newVersion.HasValue)
             {                
-                button1.Image = Properties.Resources.arancio;
+                buttonVerificaAggiornamenti.Image = Properties.Resources.arancio;
             }
             else if (newVersion.Value)
-                button1.Image= Properties.Resources.rosso;
+                buttonVerificaAggiornamenti.Image= Properties.Resources.rosso;
             else
-                button1.Image = Properties.Resources.verde;
+                buttonVerificaAggiornamenti.Image = Properties.Resources.verde;
         }
 
         private async Task ExportGrid()
@@ -1387,17 +1321,17 @@ namespace AtacFeed
             }
         }
 
-        private async Task<bool?> TaskCheckUpdate(bool download=false)
+        private async Task<bool?> TaskCheckUpdate(bool download = false, bool forceDownload=false)
         {
-            bool existNewConf = await UpdateBox.CheckConf();
+            bool existNewConf = await UpdateBox.CheckCSV();
             bool? existNewGTFS = await UpdateBox.CheckGTFS();
 
-            if (download && existNewConf)
+            if (forceDownload || (download && existNewConf))
             {
                 await UpdateBox.DownloadCSV(false);
             }
 
-            if (download && existNewGTFS.GetValueOrDefault(false) || true)
+            if (forceDownload || (download && existNewGTFS.GetValueOrDefault(false)))
             {
                 await UpdateBox.DownloadGTFS(false);
             }
@@ -1407,7 +1341,7 @@ namespace AtacFeed
         
         private async void ResetAcquisizioneAsync(object sender, EventArgs e)
         {
-            await Task.Run(() => TaskCheckUpdate(true));
+            await Task.Run(() => TaskCheckUpdate(forceDownload:true));
             RestartFile();
         }
 
@@ -1438,14 +1372,12 @@ namespace AtacFeed
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            UpdateBox.Check();
+            UpdateBox.Check(true);
             var result = UpdateBox.ShowDialog();
             if (result == DialogResult.Yes)
             {
                 RestartFile();
             }
-            else
-                needToRestart = false;
         }
 
         public void ResetUI()
@@ -1484,6 +1416,8 @@ namespace AtacFeed
             imgUrl1.Image = null;
             imgUrl2.Image = null;
             UpdateBox.ResetUI();
+            
+            buttonVerificaAggiornamenti.Image= Properties.Resources.available_updates_16;
             Refresh();
         }
 

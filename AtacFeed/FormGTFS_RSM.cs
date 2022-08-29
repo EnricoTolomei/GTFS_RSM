@@ -60,8 +60,7 @@ namespace AtacFeed
                     Log.Information("Prossimo reset monitoraggio: {DataResetMonitoraggio:dd/MM/yyyy HH:mm:ss}", DataResetMonitoraggio);
                 }
 
-                #region Verifica Update GTFS STATICO
-                labelLetture.Text = NumeroLetture.ToString();
+                #region Verifica Update GTFS STATICO                
                 if (!DataCheckUpdate.HasValue)
                 {
                     DataCheckUpdate = DateTime.Now.AddSeconds(20);
@@ -70,11 +69,12 @@ namespace AtacFeed
                 else if (DateTime.Now>DataCheckUpdate.GetValueOrDefault())
                 {
                     CheckUpdate(download: checkMD5.Checked);
-                    DataCheckUpdate = DateTime.Now.AddSeconds(20);
+                    DataCheckUpdate = DateTime.Now.AddHours(8);
                 }
                 #endregion
 
                 bool feedAvailable = GetValidFeed() == 0;
+                labelLetture.Text = NumeroLetture.ToString();
                 if (feedAvailable)
                 {
                     DateTime lastDataFeedVehicle = FeedManager.LastDataFeedVehicle.Value;
@@ -632,7 +632,8 @@ namespace AtacFeed
             radioRaggruppamento.Checked = true;
             checkAnomalieGTFS.Checked = Properties.Settings.Default.CheckAnomalie;
             checkSovraffollamento.Checked = Properties.Settings.Default.CheckSovraffollamento;
-            /// TODO -- TOGLIERE || true dalla riga di sotto
+            checkMD5.Checked = Properties.Settings.Default.CheckMD5;
+            checkDettagliVettura.Checked = Properties.Settings.Default.CheckDettagliVettura;
             checkTuttoPercorso.Visible = Properties.Settings.Default.ExtraSetting;
             int totalSeconds = Properties.Settings.Default.DeltaTSec;
             minuti.Value = totalSeconds / 60;
@@ -663,6 +664,7 @@ namespace AtacFeed
             FeedManager.GTFS_RSM = new GTFS_RSM($"Config{Path.DirectorySeparatorChar}GTFS_Static", usaDettagliVettura);
             UpdateBox.ExistNewerGTFS = false;
             UpdateBox.ExistNewerCSV = false;
+            UpdateBox.ExistNewerVersion = false;
             UpdateBox.NewCSVDownloaded = false;
             UpdateBox.NewGTFSDownloaded = false;
             List<Route> elencoLinee = FeedManager.GTFS_RSM.StaticData.Routes
@@ -670,7 +672,7 @@ namespace AtacFeed
                 .DefaultIfEmpty()
                 .Distinct()
                 .ToList();
-            
+
             Route fittizia = new Route
             {
                 Id = "-1",
@@ -693,7 +695,7 @@ namespace AtacFeed
                 else
                 {
                     linea = x.ShortName + " - " + x.LongName;
-                }                
+                }
                 //IsNullOrEmpty(x.LongName) ? x.ShortName : x.ShortName + " - " + x.LongName;
                 return new Route { Id = x.Id, ShortName = linea };
             }).Distinct().ToList();
@@ -873,6 +875,8 @@ namespace AtacFeed
                 .FirstOrDefault(r => r.Checked);
             Properties.Settings.Default.RadioRaggruppamento = radioRaggruppamento.Name;
             Properties.Settings.Default.CheckSovraffollamento = checkSovraffollamento.Checked;
+            Properties.Settings.Default.CheckMD5 =checkMD5.Checked ;
+            Properties.Settings.Default.CheckDettagliVettura = checkDettagliVettura.Checked;
             Properties.Settings.Default.Save();
         }
 
@@ -1208,8 +1212,7 @@ namespace AtacFeed
             }
             else if (newVersion.Value)
                 buttonVerificaAggiornamenti.Image= Properties.Resources.rosso;
-            else
-                buttonVerificaAggiornamenti.Image = Properties.Resources.verde;
+            //else buttonVerificaAggiornamenti.Image = Properties.Resources.verde;
         }
 
         private async Task ExportGrid()
@@ -1323,10 +1326,11 @@ namespace AtacFeed
 
         private async Task<bool?> TaskCheckUpdate(bool download = false, bool forceDownload=false)
         {
-            bool existNewConf = await UpdateBox.CheckCSV();
-            bool? existNewGTFS = await UpdateBox.CheckGTFS();
+            bool? existNewConf = await UpdateBox.CheckCSV();
+            bool? existNewGTFS = string.IsNullOrEmpty(urlMD5_GTFS_Statico.Text)? null: await UpdateBox.CheckGTFS();
+            bool? existNewVersion = await UpdateBox.CheckVersion();
 
-            if (forceDownload || (download && existNewConf))
+            if (forceDownload || (download && existNewConf.GetValueOrDefault(false)))
             {
                 await UpdateBox.DownloadCSV(false);
             }
@@ -1335,7 +1339,8 @@ namespace AtacFeed
             {
                 await UpdateBox.DownloadGTFS(false);
             }
-            return existNewGTFS.HasValue? existNewConf || existNewGTFS.GetValueOrDefault(false): existNewGTFS;
+            return !existNewVersion.HasValue || !existNewGTFS.HasValue || !existNewGTFS.HasValue ? null
+                : existNewGTFS.HasValue ? existNewConf.GetValueOrDefault(false) || existNewGTFS.GetValueOrDefault(false) : existNewGTFS;
         }
         
         
@@ -1397,7 +1402,6 @@ namespace AtacFeed
             lblOraLettura.Text = "hh:mm:ss";
             labelAtac.Text = "---";
             labelTPL.Text = "---";
-            //labelWait.Text = "0";
             labelTot.Text = "---";
             labelLetture.Text = "---";
             labelFeedLetti.Text = "---";
@@ -1442,19 +1446,19 @@ namespace AtacFeed
             bindingSourceAttuale.Filter = advancedDataGridView2.FilterString;
         }
 
-        private void urlMD5_GTFS_Statico_TextChanged(object sender, EventArgs e)
+        private void UrlMD5_GTFS_Statico_TextChanged(object sender, EventArgs e)
         {
             UpdateBox.UrlMD5=urlMD5_GTFS_Statico.Text;
         }
 
-        private void urlGTFS_Statico_TextChanged(object sender, EventArgs e)
+        private void UrlGTFS_Statico_TextChanged(object sender, EventArgs e)
         {
             UpdateBox.UrlGTFS = urlGTFS_Statico.Text;
         }
 
-        private void checkDettagliVettura_CheckedChanged(object sender, EventArgs e)
+        private void CheckDettagliVettura_CheckedChanged(object sender, EventArgs e)
         {
-            FeedManager.GTFS_RSM.LeggiDettagliVettura(checkDettagliVettura.Checked);
+            FeedManager.GTFS_RSM?.LeggiDettagliVettura(checkDettagliVettura.Checked);
         }
     }
 }

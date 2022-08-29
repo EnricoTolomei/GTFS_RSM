@@ -176,8 +176,8 @@ namespace AtacFeed
                                .DefaultIfEmpty()
                              select (fe.Linea, fe.Vehicle, fe.DettagliVettura, fe.NomeFermata, trip?.Headsign )
                              )
-                             .Select(x => {
-
+                             .Select(x =>
+                             {
                                  string linea = string.Empty;
                                  if (x.Linea?.Route.ShortName == x.Linea?.Route.LongName || string.IsNullOrEmpty(x.Linea?.Route.LongName))
                                  {
@@ -223,14 +223,11 @@ namespace AtacFeed
                                                     destinazione: x.Headsign,
                                                     dataProgrammata: x.Vehicle.Trip?.StartDate,
                                                     oraProgrammata: x.Vehicle.Trip?.StartTime
-
                                     );
-                                 }                          
-                             )
+                             })
                              .Distinct()
                              .OrderBy(x => x.IdVettura)
                              .ToList();
-
             foreach (ExtendedVehicleInfo vettura in ElencoVetture)
             {
                 var presente = ElencoAggregatoVetture
@@ -375,7 +372,10 @@ namespace AtacFeed
 
                 foreach (var lineaMonitorata in lineeMonitorate)
                 {
-                    LineaMonitorata esiste = ElencoLineeMonitorate.Where(x => x.Linea == lineaMonitorata.Linea && x.OraUltimaViolazione.GetValueOrDefault() == lineaMonitorata.OraUltimaViolazione.GetValueOrDefault()).FirstOrDefault();
+                    LineaMonitorata esiste = ElencoLineeMonitorate
+                        .Where(x => x.Linea == lineaMonitorata.Linea
+                                    && x.OraUltimaViolazione.GetValueOrDefault() == lineaMonitorata.OraUltimaViolazione.GetValueOrDefault())
+                        .FirstOrDefault();
 
                     if (lineaMonitorata.VettureRilevate < lineaMonitorata.VetturePreviste)
                     {
@@ -389,7 +389,10 @@ namespace AtacFeed
                         }
                     }
 
-                    LineaMonitorata presente = ElencoLineeMonitorate.Where(x => x.Linea == lineaMonitorata.Linea && x.OraUltimaViolazione.GetValueOrDefault() == lineaMonitorata.OraUltimaViolazione.GetValueOrDefault()).FirstOrDefault();
+                    LineaMonitorata presente = ElencoLineeMonitorate
+                        .Where(x => x.Linea == lineaMonitorata.Linea 
+                                    && x.OraUltimaViolazione.GetValueOrDefault() == lineaMonitorata.OraUltimaViolazione.GetValueOrDefault())
+                        .FirstOrDefault();
                     if (presente != null)
                     {
                         ElencoLineeMonitorate.Remove(presente);
@@ -624,7 +627,6 @@ namespace AtacFeed
                             }
                         }
                     }
-
                 }
             }
             catch (Exception exc) {

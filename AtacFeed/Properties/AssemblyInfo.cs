@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set di attributi. Modificare i valori di questi attributi per modificare le informazioni
 // associate a un assembly.
 [assembly: AssemblyTitle("AtacFeed")]
-[assembly: AssemblyDescription("Monitoraggio Bus tramite GTFS fornito da RSM")]
+[assembly: AssemblyDescription("Monitoraggio Bus tramite GTFS")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Enrico Tolomei")]
 [assembly: AssemblyProduct("AtacFeed")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // È possibile specificare tutti i valori oppure impostare valori predefiniti per i numeri relativi alla revisione e alla build
 // usando l'asterisco '*' come illustrato di seguito:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.25.0.0")]
-[assembly: AssemblyFileVersion("1.25.0.0")]
+[assembly: AssemblyVersion("1.30.0.0")]
+[assembly: AssemblyFileVersion("1.30.0.0")]

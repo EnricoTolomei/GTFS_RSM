@@ -266,7 +266,7 @@ namespace AtacFeed.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://romamobilita.it/sites/default/files/rome_static_gtfs.zip")]
         public string UrlGTFS_Statico {
             get {
                 return ((string)(this["UrlGTFS_Statico"]));
@@ -278,13 +278,37 @@ namespace AtacFeed.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://romamobilita.it/sites/default/files/rome_static_gtfs.zip.md5")]
         public string UrlMD5_GTFS_Statico {
             get {
                 return ((string)(this["UrlMD5_GTFS_Statico"]));
             }
             set {
                 this["UrlMD5_GTFS_Statico"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CheckMD5 {
+            get {
+                return ((bool)(this["CheckMD5"]));
+            }
+            set {
+                this["CheckMD5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CheckDettagliVettura {
+            get {
+                return ((bool)(this["CheckDettagliVettura"]));
+            }
+            set {
+                this["CheckDettagliVettura"] = value;
             }
         }
     }

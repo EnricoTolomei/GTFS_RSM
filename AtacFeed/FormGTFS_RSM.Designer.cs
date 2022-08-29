@@ -1680,7 +1680,7 @@
             this.checkDettagliVettura.TabIndex = 70;
             this.checkDettagliVettura.Text = "Usa le informazioni aggiuntive contenute nel file \"DettagliVettura.csv\"";
             this.checkDettagliVettura.UseVisualStyleBackColor = true;
-            this.checkDettagliVettura.CheckedChanged += new System.EventHandler(this.checkDettagliVettura_CheckedChanged);
+            this.checkDettagliVettura.CheckedChanged += new System.EventHandler(this.CheckDettagliVettura_CheckedChanged);
             // 
             // checkMD5
             // 
@@ -1704,7 +1704,7 @@
             this.urlGTFS_Statico.Size = new System.Drawing.Size(749, 22);
             this.urlGTFS_Statico.TabIndex = 67;
             this.urlGTFS_Statico.Text = "https://romamobilita.it/sites/default/files/rome_static_gtfs.zip";
-            this.urlGTFS_Statico.TextChanged += new System.EventHandler(this.urlGTFS_Statico_TextChanged);
+            this.urlGTFS_Statico.TextChanged += new System.EventHandler(this.UrlGTFS_Statico_TextChanged);
             // 
             // label43
             // 
@@ -1726,7 +1726,7 @@
             this.urlMD5_GTFS_Statico.Size = new System.Drawing.Size(749, 22);
             this.urlMD5_GTFS_Statico.TabIndex = 65;
             this.urlMD5_GTFS_Statico.Text = "https://romamobilita.it/sites/default/files/rome_static_gtfs.zip.md5";
-            this.urlMD5_GTFS_Statico.TextChanged += new System.EventHandler(this.urlMD5_GTFS_Statico_TextChanged);
+            this.urlMD5_GTFS_Statico.TextChanged += new System.EventHandler(this.UrlMD5_GTFS_Statico_TextChanged);
             // 
             // label42
             // 
@@ -2691,22 +2691,22 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label labelPonderatiTPL;
         private System.Windows.Forms.Label label24;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idVetturaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn matricolaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn routeIdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lineaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gestoreDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn directionIdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn currentStopSequenceDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn congestionLevelDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tripIdDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn primaVoltaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ultimaVoltaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rimessaDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn euroDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn modelloDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn latitudeDataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn longitudeDataGridViewTextBoxColumn1;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn idVetturaDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn matricolaDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn routeIdDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn lineaDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn gestoreDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn directionIdDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn currentStopSequenceDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn congestionLevelDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn tripIdDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn primaVoltaDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn ultimaVoltaDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn rimessaDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn euroDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn modelloDataGridViewTextBoxColumn;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn latitudeDataGridViewTextBoxColumn1;
+        //private System.Windows.Forms.DataGridViewTextBoxColumn longitudeDataGridViewTextBoxColumn1;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label labelBusAtac;
         private System.Windows.Forms.Label labelTramAtac;

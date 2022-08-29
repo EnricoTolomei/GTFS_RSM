@@ -63,10 +63,16 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="UrlGTFS_Statico" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">https://romamobilita.it/sites/default/files/rome_static_gtfs.zip</Value>
     </Setting>
     <Setting Name="UrlMD5_GTFS_Statico" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">https://romamobilita.it/sites/default/files/rome_static_gtfs.zip.md5</Value>
+    </Setting>
+    <Setting Name="CheckMD5" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CheckDettagliVettura" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
     </Setting>
   </Settings>
 </SettingsFile>

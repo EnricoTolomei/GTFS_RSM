@@ -20,71 +20,88 @@ namespace AtacFeed
             buttonRestart.DialogResult = DialogResult.Yes;            
         }
 
+        public static bool? ExistNewerVersion { get; set; }
         public static bool? ExistNewerGTFS { get; set; }
-        public static bool ExistNewerCSV { get; set; }
+        public static bool? ExistNewerCSV { get; set; }
 
         public string UrlMD5 { get; set; }
         public string UrlGTFS { get; set; }
         public bool NewCSVDownloaded { get; set; }
         public bool NewGTFSDownloaded { get; set; }
 
-        //private bool UpdatedFounded { get; set; }
-
-        public async void CheckVersion(bool clickPerformed=false) {            
-            Version latestVersion = await GetLatestVersionAsync(clickPerformed);
-            Version actualVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            labelActualVersion.Text = $"Versione in uso {actualVersion.Major}.{actualVersion.Minor:00}";
-            labelLastVersion.Text = $"Ultima versione {latestVersion.Major}.{latestVersion.Minor:00}";
-
-
-            if (latestVersion == new Version()) {
-                labelUpdateProgram.Text = "Problemi di connessione con il server GitHub";
-            }
-            else if (actualVersion < latestVersion)
+        public async Task<bool?> CheckVersion(bool clickPerformed = false)
+        {
+            try
             {
-                labelUpdateProgram.Text = "E' disponibile una nuova versione del programma";
+                Log.Information("CheckVersion - Inizio Check");
+                Version latestVersion = await GetLatestVersionAsync(clickPerformed);
+                Version actualVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+                labelActualVersion.Text = $"Versione in uso {actualVersion.Major}.{actualVersion.Minor:00}";
+                labelLastVersion.Text = $"Ultima versione {latestVersion.Major}.{latestVersion.Minor:00}";
+                if (clickPerformed)
+                {
+                    if (latestVersion == new Version())
+                    {
+                        labelUpdateProgram.Text = "Problemi di connessione con il server GitHub";
+                        ExistNewerVersion = null;
+                    }
+                    else if (actualVersion < latestVersion)
+                    {
+                        labelUpdateProgram.Text = "E' disponibile una nuova versione del programma";
+                        ExistNewerVersion = true;
+                    }
+                    else
+                    {
+                        labelUpdateProgram.Text = "Stai utilizzando l'ultima versione";
+                        ExistNewerVersion = false;
+                    }
+                }
+                Log.Information("CheckGTFS - Fine Check con {ExistNewerGTFS}", ExistNewerVersion);
             }
-            else {
-                labelUpdateProgram.Text = "Stai utilizzando l'ultima versione";
-            }            
+            catch(Exception exc)
+            {
+                Log.Error(exc, "UPS CheckVersion");
+            }
+            return ExistNewerVersion;
         }
         public async Task<bool?> CheckGTFS(bool clickPerformed=false)
         {
             try
             {
-                Log.Information("CheckGTFS - Inizio Check");
-                ExistNewerGTFS = false;
-                string latestVersion = await GetLatestGtfsMd5Async(clickPerformed);
-                string actualVersion = string.Empty;
-                string filepath = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}gtfs.zip.md5";
+                Log.Information("CheckGTFS - Inizio Check");                
                 if (clickPerformed)
                 {
                     label3.Text = string.Empty;
                     labelConfResult.Text = string.Empty;
                 }
-
+                string latestVersion = await GetLatestGtfsMd5Async(clickPerformed);
+                string actualVersion = string.Empty;
+                string filepath = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}gtfs.zip.md5";
                 if (File.Exists(filepath))
                 {
                     actualVersion = File.ReadAllText(filepath);
                 }
-
-                if (string.IsNullOrEmpty(latestVersion))
+                if (clickPerformed)
                 {
-                    labelUpdateGTFS.Text = "Impossibile determinare ultima versione disponibile sul server";
-                    label3.Text = "File MD5 di controllo non scaricato";
-                    labelConfResult.Text = "E' comunque possibile procedere con il download dell'ultima versione rilasciata.";
-                    ExistNewerGTFS = null;
-                }
-                else if (actualVersion != latestVersion)
-                {
-                    labelUpdateGTFS.Text = "E' disponibile una nuova versione dei file GFTS statico";
-                    labelConfResult.Text = "E' consigliabile recuperare gli ultimi file di configurazione rilasciati";
-                    ExistNewerGTFS = true;
-                }
-                else
-                {
-                    labelUpdateGTFS.Text = "I file di configurazione sono aggiornati";
-                    labelConfResult.Text = "E' comunque possibile reimpostare i file con l'ultima versione rilasciata.";
+                    if (string.IsNullOrEmpty(latestVersion))
+                    {
+                        labelUpdateGTFS.Text = "Impossibile determinare ultima versione disponibile sul server";
+                        label3.Text = "File MD5 di controllo non scaricato";
+                        labelConfResult.Text = "E' comunque possibile procedere con il download dell'ultima versione rilasciata.";
+                        ExistNewerGTFS = null;
+                    }
+                    else if (actualVersion != latestVersion)
+                    {
+                        labelUpdateGTFS.Text = "E' disponibile una nuova versione dei file GFTS statico";
+                        labelConfResult.Text = "E' consigliabile recuperare gli ultimi file di configurazione rilasciati";
+                        ExistNewerGTFS = true;
+                    }
+                    else
+                    {
+                        labelUpdateGTFS.Text = "I file di configurazione sono aggiornati";
+                        labelConfResult.Text = "E' comunque possibile reimpostare i file con l'ultima versione rilasciata.";
+                        ExistNewerGTFS = false;
+                    }
                 }
                 Log.Information("CheckGTFS - Fine Check con {ExistNewerGTFS}", ExistNewerGTFS);
             }
@@ -92,11 +109,10 @@ namespace AtacFeed
             {
                 Log.Error(exc, "UPS");
             }
-
             return ExistNewerGTFS;
         }
 
-        public async Task<bool> CheckCSV(bool clickPerformed = false)
+        public async Task<bool?> CheckCSV(bool clickPerformed = false)
         {
             try
             {
@@ -104,29 +120,32 @@ namespace AtacFeed
                 decimal latestVersion = await GetLatestCsvVersionAsync();
                 decimal actualVersion = 0;
                 string filepath = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}LatestVersion.txt";
-
                 if (File.Exists(filepath))
                 {
                     string localVersion = File.ReadAllLines(filepath).FirstOrDefault();
                     decimal.TryParse(localVersion, out actualVersion);
                 }
-                if (actualVersion < latestVersion)
+                if (clickPerformed)
                 {
-                    labelUpdateCSV.Text = "E' disponibile una nuova versione dei file di configurazione";
-                    labelUpdateCSV.Text = "E' consigliabile recuperare gli ultimi file di configurazione rilasciati";
-                    ExistNewerCSV = true;
-                }
-                else
-                {
-                    labelUpdateCSV.Text = "I file di configurazione sono aggiornati";
-                    labelConfResult.Text = "E' comunque possibile reimpostare i file con l'ultima versione rilasciata.";
+                    if (actualVersion < latestVersion)
+                    {
+                        labelUpdateCSV.Text = "E' disponibile una nuova versione dei file di configurazione";
+                        labelUpdateCSV.Text = "E' consigliabile recuperare gli ultimi file di configurazione rilasciati";
+                        ExistNewerCSV = true;
+                    }
+                    else
+                    {
+                        labelUpdateCSV.Text = "I file di configurazione sono aggiornati";
+                        labelConfResult.Text = "E' comunque possibile reimpostare i file con l'ultima versione rilasciata.";
+                    }
                 }
             }
             catch (Exception exc)
             {
                 labelUpdateCSV.Text = exc.Message;
+                ExistNewerCSV = null;
             }
-            return ExistNewerCSV;            
+            return ExistNewerCSV;
         }
 
         public async Task<Version> GetLatestVersionAsync(bool clickPerformed=false) {
@@ -150,8 +169,9 @@ namespace AtacFeed
             catch (Exception exc) {
                 Log.Error(exc, "ERRORE RECUPERO VERSIONE");
                 if (clickPerformed)
+                {
                     labelUpdateProgram.Text = exc.Message;
-                //throw exc;
+                }
             }
             return version;
         }
@@ -181,20 +201,25 @@ namespace AtacFeed
         }
         public async Task<decimal> GetLatestCsvVersionAsync()
         {
-            Uri uriVersion = new Uri("https://raw.githubusercontent.com/EnricoTolomei/GTFS_RSM/master/AtacFeed/Config/GTFS_Static/LatestVersion.txt");
-            string localVersion = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}LatestVersion.txt.new";
-            string vers = string.Empty;
-            using (WebClient wc = new WebClient())
+            decimal serverConfVersion = 0;
+            try
             {
-                //wc.DownloadProgressChanged += Wc_DownloadProgressChanged;                
-                await wc.DownloadFileTaskAsync(uriVersion, localVersion);
+                Uri uriVersion = new Uri("https://raw.githubusercontent.com/EnricoTolomei/GTFS_RSM/master/AtacFeed/Config/GTFS_Static/LatestVersion.txt");
+                string localVersion = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}LatestVersion.txt.new";
+                using (WebClient wc = new WebClient())
+                {
+                    await wc.DownloadFileTaskAsync(uriVersion, localVersion);
+                }
+                string vers = File.ReadAllText(localVersion);
+                if (!decimal.TryParse(vers, out serverConfVersion))
+                {
+                    Log.Error("Errore conversione della stringa {Vers}", vers);
+                }
             }
-            vers = File.ReadAllText(localVersion);
-            if (!decimal.TryParse(vers, out decimal serverConfVersion))
+            catch (Exception exc)
             {
-                Log.Error("Errore conversione della stringa {Vers}", vers);
+                Log.Error(exc, "ERRORE RECUPERO VERSIONE CSV");
             }
-
             return serverConfVersion;
         }
 
@@ -207,7 +232,6 @@ namespace AtacFeed
         {
             progressBar.Value = e.ProgressPercentage;
         }
-
 
         private void LinkUrlDownload_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -230,12 +254,12 @@ namespace AtacFeed
             {
                 ExistNewerGTFS = await CheckGTFS(clickPerformed);
             }
-            if (!NewCSVDownloaded && !ExistNewerCSV)
+            if (!NewCSVDownloaded && !ExistNewerCSV.GetValueOrDefault(false))
             {
                 ExistNewerCSV = await CheckCSV(clickPerformed);
             }
 
-            CheckVersion(clickPerformed);
+            await CheckVersion(clickPerformed);
 
             UpdateBox_Shown(null, null);
         }
@@ -254,7 +278,11 @@ namespace AtacFeed
                 buttonAggiornaGTFS.ForeColor = System.Drawing.SystemColors.ControlDark;
             }
 
-            if (ExistNewerCSV)
+            if (!ExistNewerCSV.HasValue)
+            {
+                buttonAggiornaCSV.ForeColor = System.Drawing.SystemColors.ControlText;
+            }
+            else if (ExistNewerGTFS.GetValueOrDefault(false))
             {
                 buttonAggiornaCSV.ForeColor = System.Drawing.SystemColors.ControlText;
             }
@@ -335,7 +363,6 @@ namespace AtacFeed
                 File.Copy(localGTFS, Path.GetDirectoryName(localGTFS) + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(localGTFS), true);
                 File.Delete(localGTFS);
                 NewGTFSDownloaded = true;
-                //return localGTFS;
                 esitoDownload = true;
             }
             catch (Exception exc) {

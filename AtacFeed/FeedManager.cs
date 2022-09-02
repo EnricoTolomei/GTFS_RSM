@@ -146,13 +146,12 @@ namespace AtacFeed
                                         && (!filtroTripVuoti || x.Vehicle?.Trip?.TripId.Length > 0))
                             .ToList();
 
-            //Saniamo FeedEntities con RouteId null, recuperandolo tramite Routes
+            // Saniamo FeedEntities con RouteId null, recuperandolo tramite Routes
             foreach (FeedEntity entity in FeedEntities.Where(v=> string.IsNullOrEmpty(v.Vehicle.Trip?.RouteId)))
             {
-                    var routeId = GTFS_RSM.StaticData.Trips.Where(x => x.Id == entity.Vehicle.Trip.TripId).FirstOrDefault();
-                    entity.Vehicle.Trip.RouteId = routeId?.RouteId?? string.Empty;
+                var routeId = GTFS_RSM.StaticData.Trips.Where(x => x.Id == entity.Vehicle.Trip.TripId).FirstOrDefault();
+                entity.Vehicle.Trip.RouteId = routeId?.RouteId?? string.Empty;
             }
-            //
 
             ElencoVetture = (from fe in FeedEntities
                                  .GroupJoin(
@@ -482,7 +481,8 @@ namespace AtacFeed
                 Tolte = VettureTolte.Count
             };
             ElencoVettureGrafico.Add(nuovoMonitoraggio);
-
+            
+            #region Controllo Custom Alert
             try
             {
                 foreach (var alert in GTFS_RSM.AlertsDaControllare)
@@ -633,7 +633,8 @@ namespace AtacFeed
                 ecc = new Exception("Si è verificato un errore durante il controllo degli alert" ,exc);
                 
             }
-
+            #endregion
+            
             #region Controllo sovraffollamento
 
             var listaBusPieni = GetBusPieni();
@@ -656,9 +657,7 @@ namespace AtacFeed
             }
             #endregion
 
-            #region Media Ponderata
-
-            
+            #region Calcolo Media Ponderata            
             if (VettureAggiunte.Count > 0 || VettureTolte.Count > 0 || ElencoPrecedente.Count == 0 || ElencoVetture.Count > 0)
             {
                 int campioniNecessari = GTFS_RSM.CriteriMediaPonderata.Sum(x => x.NumeroCampioni);
@@ -688,7 +687,6 @@ namespace AtacFeed
                     }                                        
                 }                
             }
-
             #endregion
 
             ElencoPrecedente = ElencoVetture;

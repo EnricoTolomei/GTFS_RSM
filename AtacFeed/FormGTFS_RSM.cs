@@ -246,19 +246,18 @@ namespace AtacFeed
                     {
                         dtAttuale.Load(reader);
                     }
-
                     bindingSourceAttuale.DataSource = dtAttuale;
                     advancedDataGridView2.DataSource = bindingSourceAttuale;
 
                     List<string> urlTripList = new List<string>();
                     List<string> urlVehicleList = new List<string>();
-                    foreach (FeedEntity entity in FeedManager.FeedEntities)
-                    {
-                        if (entity.Vehicle != null && entity.Vehicle.Trip != null && !(int.TryParse(routeID, out int res) && res != -1) && entity.Vehicle.Trip.RouteId == routeID)
-                        {
-                            textBox1.AppendText(entity.Vehicle.Vehicle.Id + Environment.NewLine);
-                        }
-                    }
+                    //foreach (FeedEntity entity in FeedManager.FeedEntities)
+                    //{
+                    //    if (entity.Vehicle != null && entity.Vehicle.Trip != null && !(int.TryParse(routeID, out int res) && res != -1) && entity.Vehicle.Trip.RouteId == routeID)
+                    //    {
+                    //        textBox1.AppendText(entity.Vehicle.Vehicle.Id + Environment.NewLine);
+                    //    }
+                    //}
 
                     List<ExtendedVehicleInfo> listaMezziSuLinea = FeedManager.ElencoVetture
                         .Where(x => x.TripId != null)
@@ -377,8 +376,8 @@ namespace AtacFeed
                             var dup = feedTrip.Entities.Where(x => x.TripUpdate.Trip.TripId == tripDuplicato).ToList();
                         }
 
-                        textBox1.AppendText($"Vetture rilevate solo sul feed Trip: {soloTrip.Count}" + Environment.NewLine);
-                        textBox1.AppendText($"Vetture rilevate solo sul feed Vehicle: {soloVehicle.Count}" + Environment.NewLine);
+                        textBox2.AppendText($"Vetture rilevate solo sul feed Trip: {soloTrip.Count}" + Environment.NewLine);
+                        textBox2.AppendText($"Vetture rilevate solo sul feed Vehicle: {soloVehicle.Count}" + Environment.NewLine);
                     }
                 }
                 if (ecc!=null)

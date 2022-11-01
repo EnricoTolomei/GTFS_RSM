@@ -8,15 +8,13 @@ using static AtacFeed.TransitRealtime;
 
 namespace AtacFeed
 {
-    public class FeedManager 
-    {
-        private static readonly DateTime t0 = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-
-        public FeedMessage LastValidFeed { get; set; }
+    public class FeedVehicleManager : BaseFeedManager
+    {        
         public List<FeedEntity> FeedEntities { get; set; }
-        public FeedMessage LastReadFeed { get; set; }
+
         public List<ExtendedVehicleInfo> ElencoVetture { get; set; }
         public List<ExtendedVehicleInfo> ElencoPrecedente;
+
         public List<ExtendedVehicleInfo> ElencoAggregatoVetture;
         public List<ExtendedVehicleInfo> ElencoAggregatoPrecedente;        
         public List<ErroriGTFS> AnomaliaGTFS;
@@ -25,10 +23,8 @@ namespace AtacFeed
         public List<string> LineeAnomale() => FeedEntities.Select(x => x.Vehicle.Trip?.RouteId).Distinct().OrderBy(q => q).Where(p => !GTFS_RSM.ElencoLineaAgenzia.Any(p2 => p2.Route.Id == p)).ToList();
         
         
-        public DateTime? LastDataFeedVehicle;
-        public DateTime? FirstDataFeedVehicle;
         public GTFS_RSM GTFS_RSM { get; set; }
-        public List<LineaMonitorata> ViolazioniLeneeMonitorate() => ElencoLineeMonitorate.Where(riga => !riga.OraUltimaViolazione.HasValue || (riga.OraUltimaViolazione.GetValueOrDefault(LastDataFeedVehicle.GetValueOrDefault()) - riga.OraPrimaViolazione.GetValueOrDefault(DateTime.MinValue)).TotalMinutes > riga.TempoBonus).ToList();
+        public List<LineaMonitorata> ViolazioniLeneeMonitorate() => ElencoLineeMonitorate.Where(riga => !riga.OraUltimaViolazione.HasValue || (riga.OraUltimaViolazione.GetValueOrDefault(LastDataFeed.GetValueOrDefault()) - riga.OraPrimaViolazione.GetValueOrDefault(DateTime.MinValue)).TotalMinutes > riga.TempoBonus).ToList();
 
         public int TotaleMatricola;
         public int TotaleIdVettura;
@@ -53,7 +49,7 @@ namespace AtacFeed
 
         public List<RunTimeValueAlert> ElencoVettureSovraffollate;
         public List<MonitoraggioVettureGrafico> ElencoVettureGrafico;
-        public FeedManager()
+        public FeedVehicleManager()
         {
             StatisticheAttuali = new Statistiche();
             ElencoAggregatoVetture = new List<ExtendedVehicleInfo>();
@@ -62,62 +58,6 @@ namespace AtacFeed
             AnomaliaGTFS = new List<ErroriGTFS>();
             ElencoVettureSovraffollate = new List<RunTimeValueAlert>();
             ElencoVettureGrafico = new List<MonitoraggioVettureGrafico>();
-        }
-
-        public void LeggiFeed(string url)
-        {
-            try
-            {
-                WebRequest request = WebRequest.Create(url);
-                request.Timeout = 10000;
-                WebResponse response = request.GetResponse();
-                var stream = response.GetResponseStream();
-                LastReadFeed = Serializer.Deserialize<FeedMessage>(stream);
-            }
-            catch (Exception exc) {
-                LastReadFeed = null;
-                throw (exc);
-            }
-        }
-
-        public int ValidaFeed(FeedMessage feed)
-        {
-            int isValid = 0;
-            try
-            {
-                DateTime lastDate = t0.AddSeconds(LastValidFeed?.Header.Timestamp ?? 0).ToLocalTime();                
-                DateTime feedDate = t0.AddSeconds(feed?.Header.Timestamp ?? 0).ToLocalTime();
-                if (feed == null)
-                {
-                    Log.Error($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè NON LETTO");
-                    isValid = -1;
-                }
-                else if (feed.Entities.Count == 0)
-                {
-                    Log.Error($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè VUOTO");
-                    isValid = -2;
-                }
-                else if ( (LastValidFeed?.Header.Timestamp ?? 0) >= (feed?.Header.Timestamp ?? 0))
-                {
-                    Log.Error($"[{DateTime.Now:HH:mm:ss}] - Feed scartato in quanto ha il timestamp SUPERATO");
-                    isValid = -3;
-                }
-                else
-                {
-                    LastValidFeed = feed;
-                    LastDataFeedVehicle = feedDate;                    
-                    if (!FirstDataFeedVehicle.HasValue)
-                    {
-                        FirstDataFeedVehicle = feedDate;
-                    }
-                }
-            }
-            catch (Exception exc)
-            {                
-                Log.Error(exc, "Errore Generico");
-                isValid = -10;
-            }
-            return isValid;
         }
 
         public List<RunTimeValueAlert> GetBusPieni()
@@ -208,7 +148,7 @@ namespace AtacFeed
                                                     occupancyStatus: x.Vehicle.occupancy_status,
                                                     tripId: x.Vehicle.Trip?.TripId,
                                                     strict: filtroTripVuoti,
-                                                    data: LastDataFeedVehicle.Value,
+                                                    data: LastDataFeed.Value,
                                                     rimessa: x.DettagliVettura?.Rimessa,
                                                     euro: x.DettagliVettura?.Euro,
                                                     modello: x.DettagliVettura?.Modello,
@@ -335,10 +275,8 @@ namespace AtacFeed
             StatisticheAttuali.RilevatoPullmanTpl          = ElencoVetture.Where(x => x.TipoMezzoTrasporto == 4).Count();
             StatisticheAttuali.RilevatoAltroTpl            = ElencoVetture.Where(x => x.TipoMezzoTrasporto == -3).Count();
 
-
-            int giornosettimana = (int)LastDataFeedVehicle.Value.DayOfWeek;
-            TimeSpan oraFeed = LastDataFeedVehicle.Value.TimeOfDay;
-
+            int giornosettimana = (int)LastDataFeed.Value.DayOfWeek;
+            TimeSpan oraFeed = LastDataFeed.Value.TimeOfDay;
 
             if (GTFS_RSM.RegoleMonitoraggio?.Count > 0)
             {
@@ -353,14 +291,16 @@ namespace AtacFeed
                 .OrderByDescending(c => c.date);
                 
                 
-                IEnumerable<RegolaMonitoraggio> regoleApplicabili = from regoleLineeScoperte in GTFS_RSM.RegoleMonitoraggio
-                                                                    where regoleLineeScoperte.Giorno.Contains(giornosettimana.ToString())
-                                                                          && regoleLineeScoperte.Da < oraFeed
-                                                                          && oraFeed <= regoleLineeScoperte.A.GetValueOrDefault(oraFeed)
-                                                                    select regoleLineeScoperte;
+                IEnumerable<RegolaMonitoraggio> regoleApplicabili = from regolaMonitoraggio in GTFS_RSM.RegoleMonitoraggio
+                                                                    where regolaMonitoraggio.Giorno.Contains(giornosettimana.ToString())
+                                                                          && regolaMonitoraggio.Da < oraFeed
+                                                                          && oraFeed <= regolaMonitoraggio.A.GetValueOrDefault(oraFeed)
+                                                                    select regolaMonitoraggio;
 
                 IEnumerable<LineaMonitorata> lineeMonitorate = from regola in regoleApplicabili
-                                                               join vettura in vettureSuLinea on regola.Linea equals vettura.Linea into lrs
+                                                               join vettura in vettureSuLinea 
+                                                                    on regola.Linea equals vettura.Linea 
+                                                               into lrs
                                                                from lr in lrs.DefaultIfEmpty()
                                                                select new LineaMonitorata(
                                                                    oraPrimaViolazione: null,
@@ -378,13 +318,13 @@ namespace AtacFeed
 
                     if (lineaMonitorata.VettureRilevate < lineaMonitorata.VetturePreviste)
                     {
-                        lineaMonitorata.OraPrimaViolazione = LastDataFeedVehicle;
+                        lineaMonitorata.OraPrimaViolazione = LastDataFeed;
                     }
                     else
                     {
                         if (esiste != null && esiste.OraPrimaViolazione.HasValue)
                         {
-                            esiste.OraUltimaViolazione = LastDataFeedVehicle;
+                            esiste.OraUltimaViolazione = LastDataFeed;
                         }
                     }
 
@@ -470,7 +410,7 @@ namespace AtacFeed
             int busTotale = busLinea + busAttesa;
             MonitoraggioVettureGrafico nuovoMonitoraggio = new MonitoraggioVettureGrafico
             {
-                DateTime = LastDataFeedVehicle.Value,
+                DateTime = LastDataFeed.Value,
                 Aggregate = TotaleMatricola,
                 AggregateAtac = TotaleMatricolaAtac,
                 AggregateTPL = TotaleMatricolaTPL,
@@ -508,7 +448,7 @@ namespace AtacFeed
                             from vetturaRegolaAlert in VetturaRegolaAlert
                             where vetturaRegolaAlert.VetturaDa <= int.Parse(vettura.Matricola)
                                         && int.Parse(vettura.Matricola) <= vetturaRegolaAlert.VetturaA.GetValueOrDefault(vetturaRegolaAlert.VetturaDa.GetValueOrDefault(9999))
-                            select new ViolazioneAlert(LastDataFeedVehicle, null, vetturaRegolaAlert, vettura.Matricola)
+                            select new ViolazioneAlert(LastDataFeed, null, vetturaRegolaAlert, vettura.Matricola)
                             ).ToList();
 
                         List<ViolazioneAlert> violazioniLineaStar = (
@@ -519,7 +459,7 @@ namespace AtacFeed
                             where vetturaRegolaAlert.VetturaDa <= int.Parse(vettura.Matricola)
                                         && int.Parse(vettura.Matricola) <= vetturaRegolaAlert.VetturaA.GetValueOrDefault(vetturaRegolaAlert.VetturaDa.GetValueOrDefault(9999))
                             select new ViolazioneAlert(
-                                    LastDataFeedVehicle,
+                                    LastDataFeed,
                                     null,
                                     new RegolaAlert(vettura.Linea, vetturaRegolaAlert.Giorno, vetturaRegolaAlert.Da, vetturaRegolaAlert.Da
                                     , vetturaRegolaAlert.VetturaDa, vetturaRegolaAlert.VetturaA),
@@ -534,7 +474,7 @@ namespace AtacFeed
                                 .GroupBy(x => new { x.Linea, x.Giorno, x.Da, x.A, x.VetturaDa, x.VetturaA })
                                 .Select(group =>
                                     new ViolazioneAlert(
-                                        LastDataFeedVehicle,
+                                        LastDataFeed,
                                         null,
                                         new RegolaAlert(group.Key.Linea,
                                                         group.Key.Giorno,
@@ -553,7 +493,7 @@ namespace AtacFeed
                                 .GroupBy(x => x.Linea)
                                 .Select(group =>
                                     new ViolazioneAlert(
-                                        LastDataFeedVehicle.Value,
+                                        LastDataFeed.Value,
                                         null,
                                         group.Key,
                                         string.Join(", ", group.Select(bn => bn.Violazione).ToList())
@@ -707,8 +647,9 @@ namespace AtacFeed
             GTFS_RSM = new GTFS_RSM(path);
         }
 
-        public void ResetAcquisizione()
+        public override void Reset()
         {
+            base.Reset();
             ElencoLineeMonitorate.Clear();
             ElencoAggregatoVetture.Clear();
             ElencoPrecedente.Clear();
@@ -729,8 +670,7 @@ namespace AtacFeed
             foreach (var alert in GTFS_RSM.AlertsDaControllare)
             {
                 alert.ViolazioniAlert.Clear();
-            }
-            LastValidFeed = null;
+            }            
         }
     }
 }

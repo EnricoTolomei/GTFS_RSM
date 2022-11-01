@@ -2,7 +2,6 @@
 using System;
 using System.Globalization;
 using static AtacFeed.TransitRealtime;
-//using TransitRealtime;
 
 namespace AtacFeed
 {
@@ -94,11 +93,8 @@ namespace AtacFeed
         [Index(21)]
         public DateTime? PartenzaEffettiva { get; set; }
 
-
-
         public ExtendedVehicleInfo(string idVettura, string matricola, string licensePlate, string routeId, string linea, string gestore, uint? directionId, uint currentStopSequence, VehiclePosition.CongestionLevel congestionLevel, VehiclePosition.OccupancyStatus occupancyStatus, string tripId, bool strict, DateTime data, string rimessa, string euro, string modello, float latitude, float longitude, VehiclePosition.VehicleStopStatus inTransitTo, int tipoMezzoTrasporto, double distanzaPercorsa = 0, bool superStrictMode = false,
-            string nomeFermata = "", string destinazione="", string dataProgrammata = "", string oraProgrammata = ""
-            )
+                                   string nomeFermata = "", string destinazione = "", string dataProgrammata = "", string oraProgrammata = "")
         {
             CultureInfo provider = CultureInfo.InvariantCulture;
 

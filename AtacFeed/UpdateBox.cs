@@ -64,7 +64,7 @@ namespace AtacFeed
             }
             return ExistNewerVersion;
         }
-        public async Task<bool?> CheckGTFS(bool clickPerformed=false)
+        public async Task<bool?> CheckGTFS(bool clickPerformed = false)
         {
             try
             {
@@ -148,7 +148,8 @@ namespace AtacFeed
             return ExistNewerCSV;
         }
 
-        public async Task<Version> GetLatestVersionAsync(bool clickPerformed=false) {
+        public async Task<Version> GetLatestVersionAsync(bool clickPerformed = false)
+        {
             Version version = new Version();
             try
             {
@@ -175,7 +176,7 @@ namespace AtacFeed
             }
             return version;
         }
-        public async Task<string> GetLatestGtfsMd5Async(bool clickPerformed=false)
+        public async Task<string> GetLatestGtfsMd5Async(bool clickPerformed = false)
         {
             string vers = string.Empty;
             try
@@ -393,6 +394,29 @@ namespace AtacFeed
             buttonRestart.Visible = esito;
             labelResultConfUpdate.Visible = true;
             labelResultConfUpdate.Text = esito ? "Il download è terminato.\n\rLa configurazione sarà utilizzata al prossimo riavvio del monitoraggio": $"Si è verificato un errore durante l'aggiornamento dei files.{Environment.NewLine}Riprovare più tardi.";
+        }
+
+        public async Task<bool?> TaskCheckUpdate(bool download = false, bool forceDownload = false)
+        {
+            bool? existNewConf = await CheckCSV();
+            bool? existNewGTFS = string.IsNullOrEmpty(UrlMD5) ? null : await CheckGTFS();
+            bool? existNewVersion = await CheckVersion();
+
+            if (forceDownload || (download && existNewConf.GetValueOrDefault(false)))
+            {
+                await DownloadCSV(false);
+            }
+
+            if (forceDownload || (download && existNewGTFS.GetValueOrDefault(false)))
+            {
+                await DownloadGTFS(false);
+            }
+
+            return !existNewVersion.HasValue || !existNewGTFS.HasValue || !existNewGTFS.HasValue
+                        ? null
+                        : existNewGTFS.HasValue
+                            ? existNewConf.GetValueOrDefault(false) || existNewGTFS.GetValueOrDefault(false)
+                            : existNewGTFS;
         }
     }
 }

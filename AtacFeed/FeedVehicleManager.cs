@@ -1,9 +1,6 @@
-﻿using ProtoBuf;
-using Serilog;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using static AtacFeed.TransitRealtime;
 
 namespace AtacFeed
@@ -60,10 +57,7 @@ namespace AtacFeed
             ElencoVettureGrafico = new List<MonitoraggioVettureGrafico>();
         }
 
-        public List<RunTimeValueAlert> GetBusPieni()
-        {
-
-            return ElencoVetture
+        public List<RunTimeValueAlert> GetBusPieni() => ElencoVetture
                 .Where(x => x.OccupancyStatus >= VehiclePosition.OccupancyStatus.Full)
                 .Select(x => new RunTimeValueAlert(
                     x.TripId,
@@ -76,7 +70,6 @@ namespace AtacFeed
                     x.UltimaVolta)
                 )
                 .ToList();
-        }        
         public Exception ElaboraUltimoFeedValido(string filtroLinea, bool filtroTripVuoti, bool filtroTuttoPercorso, bool raggruppalineaRegola, bool nonRaggruppare)
         {
             Exception ecc = null;
@@ -92,7 +85,7 @@ namespace AtacFeed
                 var routeId = GTFS_RSM.StaticData.Trips.Where(x => x.Id == entity.Vehicle.Trip.TripId).FirstOrDefault();
                 entity.Vehicle.Trip.RouteId = routeId?.RouteId?? string.Empty;
             }
-
+            var ff = GTFS_RSM.StaticData.Routes.Where(x => x.ShortName== "543").FirstOrDefault();
             ElencoVetture = (from fe in FeedEntities
                                  .GroupJoin(
                                      inner: GTFS_RSM.ElencoLineaAgenzia,
@@ -109,11 +102,10 @@ namespace AtacFeed
                                      outerKeySelector: z => z.Vehicle.StopId,
                                      innerKeySelector: y => y.Code,
                                      resultSelector: (z, y) => (z.Linea, z.Vehicle, z.DettagliVettura, NomeFermata: y.FirstOrDefault()))
-                             from trip in GTFS_RSM.Trips
-                               .Where(x => x.Direction == (GTFS.Entities.Enumerations.DirectionType)(fe.Vehicle.Trip?.DirectionId)
-                                           && (fe.Vehicle.Trip?.RouteId == x.RouteId))
-                               .DefaultIfEmpty()
-                             select (fe.Linea, fe.Vehicle, fe.DettagliVettura, fe.NomeFermata, trip?.Headsign )
+                             from trip in GTFS_RSM.StaticData.Trips
+                                            .Where(x =>  x.Id==fe.Vehicle.Trip?.TripId)
+                                            .DefaultIfEmpty()
+                             select (fe.Linea, fe.Vehicle, fe.DettagliVettura, fe.NomeFermata, trip?.Headsign, trip?.Direction )
                              )
                              .Select(x =>
                              {
@@ -136,13 +128,10 @@ namespace AtacFeed
                                                     matricola: x.Vehicle.Vehicle?.Label.Trim(),
                                                     licensePlate: x.Vehicle.Vehicle?.LicensePlate,
                                                     routeId: x.Vehicle.Trip?.RouteId,
-                                                    linea:
-                                                        //x.Linea?.Route.ShortName,
-                                                        //string.IsNullOrEmpty(x.Linea?.Route.LongName) ? x.Linea?.Route.ShortName : x.Linea?.Route.ShortName + " - " + x.Linea?.Route.LongName,
-                                                        //string.IsNullOrEmpty(x.Linea?.Route.ShortName) ? x.Linea?.Route.LongName : x.Linea?.Route.ShortName,
-                                                        linea,
+                                                    linea: linea,
                                                     gestore: x.DettagliVettura?.Gestore ?? x.Linea?.Agency.Name,
-                                                    directionId: x.Vehicle.Trip?.DirectionId,
+                                                    //directionId: x.Vehicle.Trip?.DirectionId,
+                                                    directionId: (uint?)x.Direction,
                                                     currentStopSequence: x.Vehicle.CurrentStopSequence,
                                                     congestionLevel: x.Vehicle.congestion_level,
                                                     occupancyStatus: x.Vehicle.occupancy_status,

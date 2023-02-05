@@ -10,7 +10,7 @@ namespace AtacFeed
     {
         public static readonly DateTime t0 = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         protected FeedMessage LastReadFeed { get; set; }
-        protected FeedMessage LastValidFeed { get; set; }
+        public FeedMessage LastValidFeed { get; set; }
         public DateTime? LastDataFeed;
         public DateTime? FirstDataFeed;
         public int LastValidationResultCode { get; set; } = -20;

@@ -30,6 +30,9 @@ namespace AtacFeed
         [Index(6)]
         public uint? DirectionId { get; set; }
 
+        [Index(6)]
+        public string Destinazione { get; set; }
+
         [Index(7)]
         public uint CurrentStopSequence { get; set; }
 
@@ -83,9 +86,6 @@ namespace AtacFeed
 
         [Ignore]
         public string NomeFermata { get; set; }
-
-        [Ignore]
-        public string Destinazione { get; set; }
 
         [Index(22)] 
         public DateTime? PartenzaProgrammata { get; set; }

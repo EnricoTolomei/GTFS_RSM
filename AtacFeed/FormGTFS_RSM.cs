@@ -6,7 +6,6 @@ using GTFS.Entities;
 using OfficeOpenXml;
 using OfficeOpenXml.Drawing.Chart;
 using OfficeOpenXml.Table;
-using ProtoBuf;
 using ScottPlot;
 using System;
 using System.Collections.Generic;
@@ -53,7 +52,7 @@ namespace AtacFeed
                 textBox1.Clear();
                 textBox2.Clear();
                 string routeID = comboBox1.SelectedValue?.ToString() ?? "-1";
-                if (DataResetMonitoraggio.HasValue && DateTime.Now > DataResetMonitoraggio.GetValueOrDefault())
+                if ( (checkResetSempre.Visible && checkResetSempre.Checked) || (DataResetMonitoraggio.HasValue && DateTime.Now > DataResetMonitoraggio.GetValueOrDefault()))
                 {
                     RestartFile();
                     DataResetMonitoraggio = DataResetMonitoraggio.GetValueOrDefault(DateTime.MinValue).AddDays(1);
@@ -95,7 +94,6 @@ namespace AtacFeed
                         textBox1.AppendText($"{exc.Message} {Environment.NewLine}{Environment.NewLine}");
                     }
                 }
-
 
                 bool feedAvailable = GetValidFeed() == 0;
                 labelLetture.Text = NumeroLetture.ToString();
@@ -362,58 +360,63 @@ namespace AtacFeed
 
                     if (!string.IsNullOrEmpty(urlTrip.Text) && checkFeedTrip.Checked)
                     {
-                        WebRequest req = WebRequest.Create(urlTrip.Text);
-                        FeedMessage feedTrip = Serializer.Deserialize<FeedMessage>(req.GetResponse().GetResponseStream());
-                        foreach (FeedEntity entity in feedTrip.Entities)
+                        BaseFeedManager bfm = new BaseFeedManager();
+                        if (bfm.LeggiFeedValido(urlTrip.Text) == 0)
                         {
-                            if (entity.TripUpdate.Vehicle != null && entity.TripUpdate.Trip != null && (entity.TripUpdate.Trip.RouteId == routeID))
+                            //WebRequest req = WebRequest.Create(urlTrip.Text);
+                            //FeedMessage feedTrip = Serializer.Deserialize<FeedMessage>(req.GetResponse().GetResponseStream());
+                            FeedMessage feedTrip = bfm.LastValidFeed;
+                            foreach (FeedEntity entity in feedTrip.Entities)
                             {
-                                urlTripList.Add(entity.TripUpdate.Vehicle.Id);
+                                if (entity.TripUpdate.Vehicle != null && entity.TripUpdate.Trip != null && (entity.TripUpdate.Trip.RouteId == routeID))
+                                {
+                                    urlTripList.Add(entity.TripUpdate.Vehicle.Id);
+                                }
                             }
+                            textBox1.AppendText(string.Join(Environment.NewLine, urlTripList));
+                            textBox1.AppendText(Environment.NewLine);
+
+                            int numVettureFeedTrip = feedTrip.Entities
+                                .Where(x => x.TripUpdate.Vehicle != null && !string.IsNullOrEmpty(x.TripUpdate.Vehicle.Id))
+                                .Count();
+                            int numVettureTPLFeedTrip = feedTrip.Entities
+                                .Where(x => x.TripUpdate.Vehicle != null && !string.IsNullOrEmpty(x.TripUpdate.Vehicle.Id) && x.TripUpdate.Vehicle.Id.Length > 4)
+                                .Count();
+
+                            textBox1.AppendText($"Totale Vetture Rilevate sul Feed Trip: {numVettureFeedTrip}{Environment.NewLine}");
+
+                            textBox1.AppendText($"\tATAC {numVettureFeedTrip - numVettureTPLFeedTrip}\tTPL {numVettureTPLFeedVehicle}{Environment.NewLine}");
+
+                            List<FeedEntity> soloVehicle = FeedVehicleManager.FeedEntities
+                                .Where(vehicle => !feedTrip.Entities.Any(trip => vehicle.Vehicle.Vehicle.Label == trip.TripUpdate.Vehicle?.Label))
+                                .ToList();
+
+
+                            List<FeedEntity> soloTrip = feedTrip.Entities
+                                .Where(trip => !FeedVehicleManager.FeedEntities.Any(vehicle => vehicle.Vehicle.Vehicle.Label == trip.TripUpdate.Vehicle.Label))
+                                .ToList();
+                            IEnumerable<string> tripDuplicatiFeedTrip = from trip in feedTrip.Entities
+                                                                        group trip by trip.TripUpdate.Trip.TripId into grp
+                                                                        where grp.Count() > 1
+                                                                        select grp.Key;
+                            foreach (FeedEntity trip in soloTrip)
+                            {
+                                textBox2.AppendText($"Solo sul Feed Trip: {trip.TripUpdate.Vehicle.Label}" + Environment.NewLine);
+                            }
+
+                            foreach (FeedEntity vehicle in soloVehicle)
+                            {
+                                textBox2.AppendText($"Solo sul Feed Vehicle: {vehicle.Vehicle.Vehicle.Label}" + Environment.NewLine);
+                            }
+                            foreach (string tripDuplicato in tripDuplicatiFeedTrip)
+                            {
+                                textBox2.AppendText($"Trip Duplicato sul Feed Trip: {tripDuplicato}" + Environment.NewLine);
+                                var dup = feedTrip.Entities.Where(x => x.TripUpdate.Trip.TripId == tripDuplicato).ToList();
+                            }
+
+                            textBox2.AppendText($"Vetture rilevate solo sul feed Trip: {soloTrip.Count}" + Environment.NewLine);
+                            textBox2.AppendText($"Vetture rilevate solo sul feed Vehicle: {soloVehicle.Count}" + Environment.NewLine);
                         }
-                        textBox1.AppendText(string.Join(Environment.NewLine, urlTripList));
-                        textBox1.AppendText(Environment.NewLine);
-
-                        int numVettureFeedTrip = feedTrip.Entities
-                            .Where(x => x.TripUpdate.Vehicle != null && !string.IsNullOrEmpty(x.TripUpdate.Vehicle.Id))
-                            .Count();
-                        int numVettureTPLFeedTrip = feedTrip.Entities
-                            .Where(x => x.TripUpdate.Vehicle != null && !string.IsNullOrEmpty(x.TripUpdate.Vehicle.Id) && x.TripUpdate.Vehicle.Id.Length > 4)
-                            .Count();
-
-                        textBox1.AppendText($"Totale Vetture Rilevate sul Feed Trip: {numVettureFeedTrip}{Environment.NewLine}");
-
-                        textBox1.AppendText($"\tATAC {numVettureFeedTrip - numVettureTPLFeedTrip}\tTPL {numVettureTPLFeedVehicle}{Environment.NewLine}");
-
-                        List<FeedEntity> soloVehicle = FeedVehicleManager.FeedEntities
-                            .Where(vehicle => !feedTrip.Entities.Any(trip => vehicle.Vehicle.Vehicle.Label == trip.TripUpdate.Vehicle?.Label))
-                            .ToList();
-
-
-                        List<FeedEntity> soloTrip = feedTrip.Entities
-                            .Where(trip => !FeedVehicleManager.FeedEntities.Any(vehicle => vehicle.Vehicle.Vehicle.Label == trip.TripUpdate.Vehicle.Label))
-                            .ToList();
-                        IEnumerable<string> tripDuplicatiFeedTrip = from trip in feedTrip.Entities
-                                                                    group trip by trip.TripUpdate.Trip.TripId into grp
-                                                                    where grp.Count() > 1
-                                                                    select grp.Key;
-                        foreach (FeedEntity trip in soloTrip)
-                        {
-                            textBox2.AppendText($"Solo sul Feed Trip: {trip.TripUpdate.Vehicle.Label}" + Environment.NewLine);
-                        }
-
-                        foreach (FeedEntity vehicle in soloVehicle)
-                        {
-                            textBox2.AppendText($"Solo sul Feed Vehicle: {vehicle.Vehicle.Vehicle.Label}" + Environment.NewLine);
-                        }
-                        foreach (string tripDuplicato in tripDuplicatiFeedTrip)
-                        {
-                            textBox2.AppendText($"Trip Duplicato sul Feed Trip: {tripDuplicato}" + Environment.NewLine);
-                            var dup = feedTrip.Entities.Where(x => x.TripUpdate.Trip.TripId == tripDuplicato).ToList();
-                        }
-
-                        textBox2.AppendText($"Vetture rilevate solo sul feed Trip: {soloTrip.Count}" + Environment.NewLine);
-                        textBox2.AppendText($"Vetture rilevate solo sul feed Vehicle: {soloVehicle.Count}" + Environment.NewLine);
                     }
                 }
                 if (ecc!=null)
@@ -670,6 +673,7 @@ namespace AtacFeed
             checkMD5.Checked = Properties.Settings.Default.CheckMD5;
             checkDettagliVettura.Checked = Properties.Settings.Default.CheckDettagliVettura;
             checkTuttoPercorso.Visible = Properties.Settings.Default.ExtraSetting;
+            checkResetSempre.Visible = Properties.Settings.Default.ExtraSetting;
             urlAlert.Visible = true; // Properties.Settings.Default.ExtraSetting;
             labelAlert.Visible = true; // Properties.Settings.Default.ExtraSetting;
             
@@ -1365,17 +1369,6 @@ namespace AtacFeed
         {
             bindingSourceAttuale.Filter = advancedDataGridView2.FilterString;
         }
-        /*
-        private void AdvancedDataGridView2_SortStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.SortEventArgs e)
-        {
-            bindingSourceAttuale.Sort = advancedDataGridView2.SortString;
-        }
-
-        private void AdvancedDataGridView2_FilterStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.FilterEventArgs e)
-        {
-            bindingSourceAttuale.Filter = advancedDataGridView2.FilterString;
-        }
-        */
         #endregion
 
         private void UrlMD5_GTFS_Statico_TextChanged(object sender, EventArgs e)

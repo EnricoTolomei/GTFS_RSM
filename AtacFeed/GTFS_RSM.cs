@@ -15,7 +15,6 @@ namespace AtacFeed
     public class GTFS_RSM
     {
         public GTFSFeed StaticData { get; set; }
-        public List<Trip> Trips { get; set; }
         public List<LineaAgenzia> ElencoLineaAgenzia { get; set; }
         public IEnumerable<DettagliVettura> ElencoDettagliVettura { get; set; }
         public GTFS_RSM(string pathGTFSStatico, bool usaDettagliVettura=true)
@@ -36,12 +35,7 @@ namespace AtacFeed
             }
 
             StaticData = reader.Read(pathGTFSStatico);
-
-            Trips = StaticData.Trips
-                        .Select(trip => new Trip { RouteId = trip.RouteId, Headsign = trip.Headsign, Direction = trip.Direction })
-                        .Distinct()
-                        .ToList();
-
+            
             ElencoLineaAgenzia = (from linea in StaticData.Routes
                                   join agenzia in StaticData.Agencies on linea.AgencyId equals agenzia.Id
                                   select new LineaAgenzia(linea, agenzia)

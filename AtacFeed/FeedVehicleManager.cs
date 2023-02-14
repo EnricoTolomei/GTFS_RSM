@@ -131,7 +131,7 @@ namespace AtacFeed
                                                     linea: linea,
                                                     gestore: x.DettagliVettura?.Gestore ?? x.Linea?.Agency.Name,
                                                     //directionId: x.Vehicle.Trip?.DirectionId,
-                                                    directionId: (uint?)x.Direction,
+                                                    directionId: (uint?)x.Direction ?? x.Vehicle.Trip?.DirectionId,
                                                     currentStopSequence: x.Vehicle.CurrentStopSequence,
                                                     congestionLevel: x.Vehicle.congestion_level,
                                                     occupancyStatus: x.Vehicle.occupancy_status,

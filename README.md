@@ -2,7 +2,7 @@
 Monitoraggio Vetture tramite Feed GTFS di 
 [Roma Servizi Mobilità](https://romamobilita.it/it/tecnologie/open-data)
 
-Il programma  acquisice periodicamente il feed GTFS dai server di Roma Servizi Mobilità (il feed è aggiornato ogni 30 secondi) e registra le varie informazioni; oltre a monitorare la situazione in tempo reale effettua la somma in maniera progressiva tutti gli autobus che entrano via via in servizio, in modo che a fine giornata possiamo sapere il totale dei mezzi che ATAC e TPL hanno messo in strada.
+Il programma  acquisice periodicamente il feed GTFS dai server di Roma Servizi Mobilità (il feed è aggiornato ogni 30 secondi) e registra le varie informazioni; oltre a monitorare la situazione in tempo reale effettua la somma in maniera progressiva di tutti gli autobus che entrano via via in servizio, in modo che a fine giornata possiamo sapere il totale dei mezzi che ATAC e TPL hanno messo in strada.
 
 [Link per il download](https://github.com/EnricoTolomei/GTFS_RSM/releases/latest)
 

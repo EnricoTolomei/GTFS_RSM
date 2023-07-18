@@ -947,8 +947,7 @@ namespace AtacFeed
         private async Task SaveAs(FileInfo outputFile, FileInfo altFileName)
         {            
             if (checkXlsx.Checked)
-            {
-                Thread.Sleep(900000);
+            {                
                 using (ExcelPackage excel = new ExcelPackage(outputFile))
                 {
                     try

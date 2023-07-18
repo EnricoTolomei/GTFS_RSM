@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AtacFeed
 {
-    internal class FeedAlertManager: BaseFeedManager
+    internal class FeedAlertManager : BaseFeedManager
     {
         public List<Avviso> Avvisi => LastValidFeed.Entities
                                         .Where(x => !x.IsDeleted)
@@ -20,9 +20,6 @@ namespace AtacFeed
                                             cause: x.Alert?.cause.ToString(),
                                             effect: x.Alert?.effect.ToString()))
                                         .ToList()
-            ?? null
-            
-            
-            ;
+                                    ?? null;
     }
 }

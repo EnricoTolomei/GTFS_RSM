@@ -69,7 +69,7 @@ namespace AtacFeed
                 else if (DateTime.Now > DataCheckUpdate.GetValueOrDefault())
                 {
                     CheckUpdate(download: checkMD5.Checked);
-                    DataCheckUpdate = DateTime.Now.AddHours(8);
+                    DataCheckUpdate = DateTime.Now.AddHours(8);                    
                 }
                 #endregion
 
@@ -350,9 +350,13 @@ namespace AtacFeed
                     foreach (var alert in FeedVehicleManager.GTFS_RSM.AlertsDaControllare)
                     {
                         if (checkBoxStorico.Checked)
+                        {
                             (tabMainForm.TabPages[alert.Name].Controls[alert.Name] as DataGridView).DataSource = alert.ViolazioniAlert.ToList();
+                        }
                         else
+                        {
                             (tabMainForm.TabPages[alert.Name].Controls[alert.Name] as DataGridView).DataSource = FeedVehicleManager.ViolazioniAlertAttuali.ToList();
+                        }
                     }
 
                     //_ = ExportGrid();
@@ -365,8 +369,6 @@ namespace AtacFeed
                         BaseFeedManager bfm = new BaseFeedManager();
                         if (bfm.LeggiFeedValido(urlTrip.Text) == 0)
                         {
-                            //WebRequest req = WebRequest.Create(urlTrip.Text);
-                            //FeedMessage feedTrip = Serializer.Deserialize<FeedMessage>(req.GetResponse().GetResponseStream());
                             FeedMessage feedTrip = bfm.LastValidFeed;
                             foreach (FeedEntity entity in feedTrip.Entities)
                             {
@@ -798,7 +800,7 @@ namespace AtacFeed
                     DataGridViewTextBoxColumn columnOraUltimaViolazione = new DataGridViewTextBoxColumn();
 
                     myNewdataGridVetture.Columns.AddRange(new DataGridViewColumn[] {
-                                    columnLinea
+                                     columnLinea
                                     ,columnGiorno
                                     ,columnDa
                                     ,columnA
@@ -1302,6 +1304,10 @@ namespace AtacFeed
             {
                 buttonVerificaAggiornamenti.Image = Properties.Resources.rosso;
             }
+            //else
+            //{
+            //    buttonVerificaAggiornamenti.Image = Properties.Resources.verde;
+            //}
         }
 
         private async Task ExportGrid()
@@ -1323,9 +1329,13 @@ namespace AtacFeed
         {
             DateTime t0;
             if (FeedVehicleManager.ElencoVettureGrafico.Count == 0)
+            {
                 t0 = DateTime.Now;
+            }
             else
+            {
                 t0 = FeedVehicleManager.ElencoVettureGrafico[FeedVehicleManager.ElencoVettureGrafico.Count - 1].DateTime;
+            }
             if (FeedVehicleManager.ElencoVettureGrafico.Count < 100000)
             {
                 Random rand = new Random(0);

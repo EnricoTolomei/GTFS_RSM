@@ -1,5 +1,0 @@
-agency_id,agency_name,agency_url,agency_timezone,agency_lang,agency_phone,agency_fare_url
-OP1,ATAC,http://www.atac.roma.it,Europe/Rome,it,06 57003,
-OP2,RomaTPL,http://romatpl.it,Europe/Rome,it,06 57003,
-OP3,Trenitalia,http://www.trenitalia.com/,Europe/Rome,it,,
-1,astral,http://www.astral.com,Europe/Rome,it,,

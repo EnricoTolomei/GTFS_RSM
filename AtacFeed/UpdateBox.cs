@@ -68,7 +68,7 @@ namespace AtacFeed
         {
             try
             {
-                Log.Information("CheckGTFS - Inizio Check");                
+                Log.Information("CheckGTFS - Inizio Check");
                 if (clickPerformed)
                 {
                     label3.Text = string.Empty;
@@ -81,29 +81,34 @@ namespace AtacFeed
                 {
                     actualVersion = File.ReadAllText(filepath);
                 }
+                string updateText, confResulut, text3 = string.Empty;
+
+                if (string.IsNullOrEmpty(latestVersion))
+                {
+                    updateText = "Impossibile determinare ultima versione disponibile sul server";
+                    text3 = "File MD5 di controllo non scaricato";
+                    confResulut = "E' comunque possibile procedere con il download dell'ultima versione rilasciata.";
+                    ExistNewerGTFS = null;
+                }
+                else if (actualVersion != latestVersion)
+                {
+                    updateText = "E' disponibile una nuova versione dei file GFTS statico";
+                    confResulut = "E' consigliabile recuperare gli ultimi file di configurazione rilasciati";
+                    ExistNewerGTFS = true;
+                }
+                else
+                {
+                    updateText = "I file di configurazione sono aggiornati";
+                    confResulut = "E' comunque possibile reimpostare i file con l'ultima versione rilasciata.";
+                    ExistNewerGTFS = false;
+                }
                 if (clickPerformed)
                 {
-                    if (string.IsNullOrEmpty(latestVersion))
-                    {
-                        labelUpdateGTFS.Text = "Impossibile determinare ultima versione disponibile sul server";
-                        label3.Text = "File MD5 di controllo non scaricato";
-                        labelConfResult.Text = "E' comunque possibile procedere con il download dell'ultima versione rilasciata.";
-                        ExistNewerGTFS = null;
-                    }
-                    else if (actualVersion != latestVersion)
-                    {
-                        labelUpdateGTFS.Text = "E' disponibile una nuova versione dei file GFTS statico";
-                        labelConfResult.Text = "E' consigliabile recuperare gli ultimi file di configurazione rilasciati";
-                        ExistNewerGTFS = true;
-                    }
-                    else
-                    {
-                        labelUpdateGTFS.Text = "I file di configurazione sono aggiornati";
-                        labelConfResult.Text = "E' comunque possibile reimpostare i file con l'ultima versione rilasciata.";
-                        ExistNewerGTFS = false;
-                    }
+                    labelUpdateGTFS.Text = updateText;
+                    labelConfResult.Text = confResulut;
+                    label3.Text = text3;
                 }
-                Log.Information("CheckGTFS - Fine Check con {ExistNewerGTFS}", ExistNewerGTFS);
+                Log.Information("CheckGTFS Fine Check con {ExistNewerGTFS}", ExistNewerGTFS);
             }
             catch (Exception exc)
             {

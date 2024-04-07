@@ -17,7 +17,8 @@ namespace AtacFeed
         public int RilevatoAltroTpl { get; set; }
         public List<ServizioRaggruppato> ServizioRaggruppato { get; set; }
     }
-    public class ServizioRaggruppato { 
+    public class ServizioRaggruppato
+    {
         public string Agenzia { get; set; }
 
         public string Servizio { get; set; }
@@ -25,6 +26,5 @@ namespace AtacFeed
         public RouteTypeExtended Tipo { get; set; }
 
         public int Num { get; set; }
-
     }
 }

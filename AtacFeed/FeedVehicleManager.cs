@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
 using static AtacFeed.TransitRealtime;
 
 namespace AtacFeed
@@ -17,6 +18,18 @@ namespace AtacFeed
         public List<ErroriGTFS> AnomaliaGTFS;
 
         public List<ExtendedVehicleInfo> VettureSenzaMatricola() => ElencoVetture.Where(x => string.IsNullOrEmpty(x.Matricola) || string.IsNullOrEmpty(x.IdVettura)).ToList();
+        public List<Tuple<string, string, int>> MatricoleDuplicate() => 
+            [.. ElencoVetture.GroupBy(x => new { x.Matricola, x.Gestore})
+                             .Select(x => new Tuple<string, string, int>(
+                                                x.Key.Matricola,
+                                                x.Key.Gestore,
+                                                x.Count()
+                                    )
+                             )
+                            .Where(e => e.Item3 > 1)
+                            .OrderBy(e=> e.Item2)
+                            .ThenBy(e => e.Item1)];
+
         public List<string> LineeAnomale() => FeedEntities.Select(x => x.Vehicle.Trip?.RouteId).Distinct().OrderBy(q => q).Where(p => !GTFS_RSM.ElencoLineaAgenzia.Any(p2 => p2.Route.Id == p)).ToList();
         
         
@@ -49,16 +62,15 @@ namespace AtacFeed
         public FeedVehicleManager()
         {
             StatisticheAttuali = new Statistiche();
-            ElencoAggregatoVetture = new List<ExtendedVehicleInfo>();
-            ElencoPrecedente = new List<ExtendedVehicleInfo>();
-            ElencoLineeMonitorate = new List<LineaMonitorata>();
-            AnomaliaGTFS = new List<ErroriGTFS>();
-            ElencoVettureSovraffollate = new List<RunTimeValueAlert>();
-            ElencoVettureGrafico = new List<MonitoraggioVettureGrafico>();
+            ElencoAggregatoVetture = [];
+            ElencoPrecedente = [];
+            ElencoLineeMonitorate = [];
+            AnomaliaGTFS = [];
+            ElencoVettureSovraffollate = [];
+            ElencoVettureGrafico = [];
         }
 
-        public List<RunTimeValueAlert> GetBusPieni() => ElencoVetture
-                .Where(x => x.OccupancyStatus >= VehiclePosition.OccupancyStatus.Full)
+        public List<RunTimeValueAlert> GetBusPieni() => ElencoVetture.Where(x => x.OccupancyStatus >= VehiclePosition.OccupancyStatus.Full)
                 .Select(x => new RunTimeValueAlert(
                     x.TripId,
                     x.Linea,
@@ -82,11 +94,11 @@ namespace AtacFeed
             // Saniamo FeedEntities con RouteId null, recuperandolo tramite Routes
             foreach (FeedEntity entity in FeedEntities.Where(v=> string.IsNullOrEmpty(v.Vehicle.Trip?.RouteId)))
             {
-                var routeId = GTFS_RSM.StaticData.Trips.Where(x => x.Id == entity.Vehicle.Trip.TripId).FirstOrDefault();
+                var routeId = GTFS_RSM.StaticData.Trips.FirstOrDefault(x => x.Id == entity.Vehicle.Trip.TripId);
                 entity.Vehicle.Trip.RouteId = routeId?.RouteId?? string.Empty;
             }
-            var ff = GTFS_RSM.StaticData.Routes.Where(x => x.ShortName== "543").FirstOrDefault();
-            ElencoVetture = (from fe in FeedEntities
+            var ff = GTFS_RSM.StaticData.Routes.FirstOrDefault(x => x.ShortName== "543");
+            ElencoVetture = [.. (from fe in FeedEntities
                                  .GroupJoin(
                                      inner: GTFS_RSM.ElencoLineaAgenzia,
                                      outerKeySelector: v => v.Vehicle.Trip?.RouteId,
@@ -124,38 +136,37 @@ namespace AtacFeed
                                  }
 
                                  return new ExtendedVehicleInfo(
-                                                    idVettura: x.Vehicle.Vehicle?.Id,
-                                                    matricola: x.Vehicle.Vehicle?.Label.Trim(),
-                                                    licensePlate: x.Vehicle.Vehicle?.LicensePlate,
-                                                    routeId: x.Vehicle.Trip?.RouteId,
-                                                    linea: linea,
-                                                    gestore: x.DettagliVettura?.Gestore ?? x.Linea?.Agency.Name,
-                                                    //directionId: x.Vehicle.Trip?.DirectionId,
-                                                    directionId: (uint?)x.Direction ?? x.Vehicle.Trip?.DirectionId,
-                                                    currentStopSequence: x.Vehicle.CurrentStopSequence,
-                                                    congestionLevel: x.Vehicle.congestion_level,
-                                                    occupancyStatus: x.Vehicle.occupancy_status,
-                                                    tripId: x.Vehicle.Trip?.TripId,
-                                                    strict: filtroTripVuoti,
-                                                    data: LastDataFeed.Value,
-                                                    rimessa: x.DettagliVettura?.Rimessa,
-                                                    euro: x.DettagliVettura?.Euro,
-                                                    modello: x.DettagliVettura?.Modello,
-                                                    latitude: x.Vehicle.Position?.Latitude ?? 0,
-                                                    longitude: x.Vehicle.Position?.Longitude ?? 0,
-                                                    inTransitTo: x.Vehicle.CurrentStatus,
-                                                    tipoMezzoTrasporto: x.DettagliVettura?.TipoMezzoTrasporto.GetValueOrDefault(0) ?? (string.Equals(x.Linea?.Agency.Name, "atac", StringComparison.OrdinalIgnoreCase) ? (x.Linea?.Route.Type == GTFS.Entities.Enumerations.RouteTypeExtended.TramService ? -1 : -2) : -3),
-                                                    distanzaPercorsa: x.Vehicle.Position?.Odometer ?? 0,
-                                                    superStrictMode: filtroTuttoPercorso,
-                                                    nomeFermata: x.NomeFermata?.Name,
-                                                    destinazione: x.Headsign,
-                                                    dataProgrammata: x.Vehicle.Trip?.StartDate,
-                                                    oraProgrammata: x.Vehicle.Trip?.StartTime
-                                    );
+                                     idVettura: x.Vehicle.Vehicle?.Id,
+                                     matricola: x.Vehicle.Vehicle?.Label.Trim(),
+                                     licensePlate: x.Vehicle.Vehicle?.LicensePlate,
+                                     routeId: x.Vehicle.Trip?.RouteId,
+                                     linea: linea,
+                                     gestore: x.DettagliVettura?.Gestore ?? x.Linea?.Agency.Name,
+                                     //directionId: x.Vehicle.Trip?.DirectionId,
+                                     directionId: (uint?)x.Direction ?? x.Vehicle.Trip?.DirectionId,
+                                     currentStopSequence: x.Vehicle.CurrentStopSequence,
+                                     congestionLevel: x.Vehicle.congestion_level,
+                                     occupancyStatus: x.Vehicle.occupancy_status,
+                                     tripId: x.Vehicle.Trip?.TripId,
+                                     strict: filtroTripVuoti,
+                                     data: LastDataFeed.Value,
+                                     rimessa: x.DettagliVettura?.Rimessa,
+                                     euro: x.DettagliVettura?.Euro,
+                                     modello: x.DettagliVettura?.Modello,
+                                     latitude: x.Vehicle.Position?.Latitude ?? 0,
+                                     longitude: x.Vehicle.Position?.Longitude ?? 0,
+                                     inTransitTo: x.Vehicle.CurrentStatus,
+                                     tipoMezzoTrasporto: x.DettagliVettura?.TipoMezzoTrasporto.GetValueOrDefault(0) ?? (string.Equals(x.Linea?.Agency.Name, "atac", StringComparison.OrdinalIgnoreCase) ? (x.Linea?.Route.Type == GTFS.Entities.Enumerations.RouteTypeExtended.TramService ? -1 : -2) : -3),
+                                     distanzaPercorsa: x.Vehicle.Position?.Odometer ?? 0,
+                                     superStrictMode: filtroTuttoPercorso,
+                                     nomeFermata: x.NomeFermata?.Name,
+                                     destinazione: x.Headsign,
+                                     dataProgrammata: x.Vehicle.Trip?.StartDate,
+                                     oraProgrammata: x.Vehicle.Trip?.StartTime
+                                );
                              })
                              .Distinct()
-                             .OrderBy(x => x.IdVettura)
-                             .ToList();
+                             .OrderBy(x => x.IdVettura)];
             foreach (ExtendedVehicleInfo vettura in ElencoVetture)
             {
                 var presente = ElencoAggregatoVetture
@@ -210,7 +221,7 @@ namespace AtacFeed
             //        Num = grp.Count()
             //    };
 
-            List<ServizioRaggruppato> group_RouteType2 = ElencoVetture
+            List<ServizioRaggruppato> group_RouteType2 = [.. ElencoVetture
                 .Join(
                     GTFS_RSM.StaticData.Routes,
                     outerKeySelector: v => v.RouteId,
@@ -231,24 +242,30 @@ namespace AtacFeed
                     Num = x.Count()
                 })
                 .OrderBy(x=> x.Agenzia)
-                .ThenByDescending(x=> x.Num)
-                .ToList();
+                .ThenByDescending(x=> x.Num)];
                 ;
             StatisticheAttuali.ServizioRaggruppato = group_RouteType2;
             
-            TotaleMatricola = ElencoAggregatoVetture.Select(i => i.Matricola?.Trim()).Distinct().Count();
+            TotaleMatricola = ElencoAggregatoVetture.Select(i => i.Matricola?.Trim())
+                                                    .Distinct()
+                                                    .Count();
 
             IEnumerable<(string Matricola, int TipoMezzoTrasporto)> elencoAggregatoAtac = ElencoAggregatoVetture
-                .Where(i => i.TipoMezzoTrasporto == 0 || i.TipoMezzoTrasporto == 1 || i.TipoMezzoTrasporto == 2 || i.TipoMezzoTrasporto == 5 || i.TipoMezzoTrasporto == 6 || i.TipoMezzoTrasporto == -2)
+                .Where(i => i.TipoMezzoTrasporto == 0 
+                            || i.TipoMezzoTrasporto == 1 
+                            || i.TipoMezzoTrasporto == 2 
+                            || i.TipoMezzoTrasporto == 5 
+                            || i.TipoMezzoTrasporto == 6 
+                            || i.TipoMezzoTrasporto == -2)
                 .Select(i => (Matricola: i.Matricola.Trim(), i.TipoMezzoTrasporto))
                 .Distinct();
             TotaleMatricolaAtac = elencoAggregatoAtac.Count();
 
             IEnumerable<(string Matricola, int TipoMezzoTrasporto)> elencoAggregatoTPL =
                 ElencoAggregatoVetture
-                .Where(i => i.TipoMezzoTrasporto == 3 || i.TipoMezzoTrasporto == 4 || i.TipoMezzoTrasporto == -3)
-                .Select(i => (Matricola: i.Matricola?.Trim(), i.TipoMezzoTrasporto))
-                .Distinct();
+                    .Where(i => i.TipoMezzoTrasporto == 3 || i.TipoMezzoTrasporto == 4 || i.TipoMezzoTrasporto == -3)
+                    .Select(i => (Matricola: i.Matricola?.Trim(), i.TipoMezzoTrasporto))
+                    .Distinct();
             TotaleMatricolaTPL = elencoAggregatoTPL.Count();
             
             TotaleIdVettura = ElencoAggregatoVetture.Select(i => i.IdVettura).Distinct().Count();
@@ -301,9 +318,8 @@ namespace AtacFeed
                 foreach (var lineaMonitorata in lineeMonitorate)
                 {
                     LineaMonitorata esiste = ElencoLineeMonitorate
-                        .Where(x => x.Linea == lineaMonitorata.Linea
-                                    && x.OraUltimaViolazione.GetValueOrDefault() == lineaMonitorata.OraUltimaViolazione.GetValueOrDefault())
-                        .FirstOrDefault();
+                        .FirstOrDefault(x => x.Linea == lineaMonitorata.Linea
+                                            && x.OraUltimaViolazione.GetValueOrDefault() == lineaMonitorata.OraUltimaViolazione.GetValueOrDefault());
 
                     if (lineaMonitorata.VettureRilevate < lineaMonitorata.VetturePreviste)
                     {
@@ -318,9 +334,8 @@ namespace AtacFeed
                     }
 
                     LineaMonitorata presente = ElencoLineeMonitorate
-                        .Where(x => x.Linea == lineaMonitorata.Linea 
-                                    && x.OraUltimaViolazione.GetValueOrDefault() == lineaMonitorata.OraUltimaViolazione.GetValueOrDefault())
-                        .FirstOrDefault();
+                        .FirstOrDefault(x => x.Linea == lineaMonitorata.Linea 
+                                            && x.OraUltimaViolazione.GetValueOrDefault() == lineaMonitorata.OraUltimaViolazione.GetValueOrDefault());
                     if (presente != null)
                     {
                         ElencoLineeMonitorate.Remove(presente);
@@ -358,7 +373,7 @@ namespace AtacFeed
                 //.Except(partenzaAvanzata)
                 //.Where(x => x.CurrentStopSequence > 1)
                 //.ToList();
-                if (VettureRiagganciate.Count() > 0)
+                if (VettureRiagganciate.Count > 0)
                 {                    
                     foreach (ExtendedVehicleInfo errore in VettureRiagganciate)
                     {                        
@@ -377,7 +392,7 @@ namespace AtacFeed
                     where (act.CurrentStopSequence - prec.CurrentStopSequence > 2) || (act.CurrentStopSequence - prec.CurrentStopSequence < 0)
                     select new ErroriGTFS (act,  (int)(act.CurrentStopSequence - prec.CurrentStopSequence) )
                     ).ToList();
-                if (PercorsoAnomalo.Count() > 0)
+                if (PercorsoAnomalo.Count > 0)
                 {                    
                     foreach (var errore in PercorsoAnomalo)
                     {                                                
@@ -397,7 +412,7 @@ namespace AtacFeed
             int busLinea = listaMezziSuLinea.Count;
             int busAttesa = listaBusAttesa.Count;
             int busTotale = busLinea + busAttesa;
-            MonitoraggioVettureGrafico nuovoMonitoraggio = new MonitoraggioVettureGrafico
+            MonitoraggioVettureGrafico nuovoMonitoraggio = new()
             {
                 DateTime = LastDataFeed.Value,
                 Aggregate = TotaleMatricola,
@@ -405,7 +420,8 @@ namespace AtacFeed
                 AggregateTPL = TotaleMatricolaTPL,
                 Rilevate = busTotale,
                 Atac = StatisticheAttuali.RilevatoBusAtac + StatisticheAttuali.RilevatoTramAtac + StatisticheAttuali.RilevatoFilobusAtac + StatisticheAttuali.RilevatoMinibusElettrici + StatisticheAttuali.RilevatoFurgoncini + StatisticheAttuali.RilevatoAltroAtac, // busTotale - numVettureTPLFeedVehicle,
-                TPL = numVettureTPLFeedVehicle,
+                //TPL = numVettureTPLFeedVehicle,
+                TPL = StatisticheAttuali.RilevatoBusTpl + StatisticheAttuali.RilevatoPullmanTpl+ StatisticheAttuali.RilevatoAltroTpl,
                 Aggiunte = ElencoPrecedente.Count > 0 ? VettureAggiunte.Count : 0,
                 Tolte = VettureTolte.Count
             };
@@ -426,7 +442,7 @@ namespace AtacFeed
                                                                     .Select(grp => grp.First().Linea);
 
 
-                    ViolazioniAlertAttuali = new List<ViolazioneAlert>();
+                    ViolazioniAlertAttuali = [];
 
                     foreach (string linea in lineedaVerificareAlert)
                     {
@@ -437,8 +453,13 @@ namespace AtacFeed
                             from vetturaRegolaAlert in VetturaRegolaAlert
                             where vetturaRegolaAlert.VetturaDa <= int.Parse(vettura.Matricola)
                                         && int.Parse(vettura.Matricola) <= vetturaRegolaAlert.VetturaA.GetValueOrDefault(vetturaRegolaAlert.VetturaDa.GetValueOrDefault(9999))
-                            select new ViolazioneAlert(LastDataFeed, null, vetturaRegolaAlert, vettura.Matricola)
-                            ).ToList();
+                            select new ViolazioneAlert(
+                                oraPrimaViolazione: LastDataFeed, 
+                                oraUltimaViolazione: null, 
+                                regolaAlert: vetturaRegolaAlert, 
+                                vetturaSbagliata: vettura.Matricola
+                            )
+                        ).ToList();
 
                         List<ViolazioneAlert> violazioniLineaStar = (
                             from vettura in ElencoVetture
@@ -448,11 +469,18 @@ namespace AtacFeed
                             where vetturaRegolaAlert.VetturaDa <= int.Parse(vettura.Matricola)
                                         && int.Parse(vettura.Matricola) <= vetturaRegolaAlert.VetturaA.GetValueOrDefault(vetturaRegolaAlert.VetturaDa.GetValueOrDefault(9999))
                             select new ViolazioneAlert(
-                                    LastDataFeed,
-                                    null,
-                                    new RegolaAlert(vettura.Linea, vetturaRegolaAlert.Giorno, vetturaRegolaAlert.Da, vetturaRegolaAlert.Da
-                                    , vetturaRegolaAlert.VetturaDa, vetturaRegolaAlert.VetturaA),
-                                    vettura.Matricola)
+                                    oraPrimaViolazione: LastDataFeed,
+                                    oraUltimaViolazione: null,
+                                    regolaAlert: new RegolaAlert(
+                                        linea: vettura.Linea,
+                                        giorno: vetturaRegolaAlert.Giorno,
+                                        da: vetturaRegolaAlert.Da,
+                                        a: vetturaRegolaAlert.Da,
+                                        vetturaDa: vetturaRegolaAlert.VetturaDa,
+                                        vetturaA: vetturaRegolaAlert.VetturaA
+                                    ),
+                                    vetturaSbagliata: vettura.Matricola
+                                )
                             ).ToList();
 
                         ViolazioniAlertAttuali = ViolazioniAlertAttuali.Union(violazioniLineaStar).ToList();
@@ -463,15 +491,16 @@ namespace AtacFeed
                                 .GroupBy(x => new { x.Linea, x.Giorno, x.Da, x.A, x.VetturaDa, x.VetturaA })
                                 .Select(group =>
                                     new ViolazioneAlert(
-                                        LastDataFeed,
-                                        null,
-                                        new RegolaAlert(group.Key.Linea,
-                                                        group.Key.Giorno,
-                                                        group.Key.Da,
-                                                        group.Key.A,
-                                                        group.Key.VetturaDa,
-                                                        group.Key.VetturaA),
-                                        string.Join(", ", group.Select(bn => bn.Violazione).ToList())
+                                        oraPrimaViolazione: LastDataFeed,
+                                        oraUltimaViolazione: null,
+                                        regolaAlert: new RegolaAlert(
+                                                        linea: group.Key.Linea,
+                                                        giorno: group.Key.Giorno,
+                                                        da: group.Key.Da,
+                                                        a: group.Key.A,
+                                                        vetturaDa: group.Key.VetturaDa,
+                                                        vetturaA: group.Key.VetturaA),
+                                        vetturaSbagliata: string.Join(", ", group.Select(bn => bn.Violazione).ToList())
                                     )
                                 )
                                 .ToList();
@@ -482,10 +511,10 @@ namespace AtacFeed
                                 .GroupBy(x => x.Linea)
                                 .Select(group =>
                                     new ViolazioneAlert(
-                                        LastDataFeed.Value,
-                                        null,
-                                        group.Key,
-                                        string.Join(", ", group.Select(bn => bn.Violazione).ToList())
+                                        oraPrimaViolazione: LastDataFeed.Value,
+                                        oraUltimaViolazione: null,
+                                        linea: group.Key,
+                                        VetturaSbagliata: string.Join(", ", group.Select(bn => bn.Violazione).ToList())
                                     )
                                 )
                                 .ToList();
@@ -496,47 +525,42 @@ namespace AtacFeed
                             if (nonRaggruppare)
                             {
                                 ViolazioneAlert esisteNonRaggruppata = alert.ViolazioniAlert
-                                    .Where(x => x.Linea == violazione.Linea
-                                             && x.Giorno == violazione.Giorno
-                                             && x.Da == violazione.Da
-                                             && x.A == violazione.A
-                                             && x.VetturaDa == violazione.VetturaDa
-                                             && x.VetturaA == violazione.VetturaA
-                                             && x.Violazione == violazione.Violazione)
-                                    .FirstOrDefault();
-
+                                    .FirstOrDefault(x => x.Linea == violazione.Linea
+                                                        && x.Giorno == violazione.Giorno
+                                                        && x.Da == violazione.Da
+                                                        && x.A == violazione.A
+                                                        && x.VetturaDa == violazione.VetturaDa
+                                                        && x.VetturaA == violazione.VetturaA
+                                                        && x.Violazione == violazione.Violazione);
                                 if (esisteNonRaggruppata == null)
                                     alert.ViolazioniAlert.Add(violazione);
                             }
                             else if (raggruppalineaRegola)
                             {
                                 ViolazioneAlert esisteLineaRegola = alert.ViolazioniAlert
-                                        .Where(x => x.Linea == violazione.Linea
-                                                 && x.Giorno == violazione.Giorno
-                                                 && x.Da == violazione.Da
-                                                 && x.A == violazione.A
-                                                 && x.VetturaDa == violazione.VetturaDa
-                                                 && x.VetturaA == violazione.VetturaA)
-                                        .FirstOrDefault();
+                                    .FirstOrDefault(x => x.Linea == violazione.Linea
+                                                        && x.Giorno == violazione.Giorno
+                                                        && x.Da == violazione.Da
+                                                        && x.A == violazione.A
+                                                        && x.VetturaDa == violazione.VetturaDa
+                                                        && x.VetturaA == violazione.VetturaA);
                                 if (esisteLineaRegola == null)
                                     alert.ViolazioniAlert.Add(violazione);
                                 else
                                 {
-                                    List<string> vettureEsistenti = esisteLineaRegola.Violazione.Replace(" ", "").Split(',').ToList();
-                                    List<string> vettureNuove = violazione.Violazione.Split(',').ToList();
-                                    List<string> vettureAggiornate = vettureEsistenti
+                                    List<string> vettureEsistenti = [.. esisteLineaRegola.Violazione.Replace(" ", "").Split(',')];
+                                    List<string> vettureNuove = [.. violazione.Violazione.Split(',')];
+                                    List<string> vettureAggiornate = [.. vettureEsistenti
                                         .Union(vettureNuove)
                                         .OrderBy(q => q.Length)
-                                        .ThenBy(q => q)
-                                        .ToList();
+                                        .ThenBy(q => q)];
                                     esisteLineaRegola.Violazione = string.Join(", ", vettureAggiornate);
                                 }
                             }
                             else
                             {
                                 ViolazioneAlert esiste = alert.ViolazioniAlert
-                                .Where(x => x.Linea == violazione.Linea /*&& string.IsNullOrEmpty(x.Violazione)*/)
-                                .FirstOrDefault();
+                                    .FirstOrDefault(x => x.Linea == violazione.Linea /*&& string.IsNullOrEmpty(x.Violazione)*/);
 
                                 if (esiste == null)
                                 {
@@ -544,13 +568,12 @@ namespace AtacFeed
                                 }
                                 else
                                 {
-                                    List<string> vettureEsistenti = esiste.Violazione.Replace(" ", "").Split(',').ToList();
-                                    List<string> vettureNuove = violazione.Violazione.Split(',').ToList();
-                                    List<string> vettureAggiornate = vettureEsistenti
+                                    List<string> vettureEsistenti = [.. esiste.Violazione.Replace(" ", "").Split(',')];
+                                    List<string> vettureNuove = [.. violazione.Violazione.Split(',')];
+                                    List<string> vettureAggiornate = [.. vettureEsistenti
                                                                         .Union(vettureNuove)
                                                                         .OrderBy(q => q.Length)
-                                                                        .ThenBy(q => q)
-                                                                        .ToList();
+                                                                        .ThenBy(q => q)];
                                     esiste.Violazione = string.Join(", ", vettureAggiornate);
                                 }
                             }
@@ -559,8 +582,7 @@ namespace AtacFeed
                 }
             }
             catch (Exception exc) {
-                ecc = new Exception("Si è verificato un errore durante il controllo degli alert" ,exc);
-                
+                ecc = new Exception("Si è verificato un errore durante il controllo degli alert", exc);                
             }
             #endregion
             
@@ -571,11 +593,9 @@ namespace AtacFeed
             foreach (RunTimeValueAlert busPieno in listaBusPieni)
             {
                 RunTimeValueAlert presente = ElencoVettureSovraffollate
-                    .Where(x => x.TripID == busPieno.TripID
-                            && x.Matricola == busPieno.Matricola
-                            && (busPieno.PrimaFermata - x.UltimaFermata <= 1)
-                            )
-                    .FirstOrDefault();
+                    .FirstOrDefault(x => x.TripID == busPieno.TripID
+                                        && x.Matricola == busPieno.Matricola
+                                        && (busPieno.PrimaFermata - x.UltimaFermata <= 1));
                 if (presente != null)
                 {
                     ElencoVettureSovraffollate.Remove(presente);

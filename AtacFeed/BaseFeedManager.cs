@@ -1,8 +1,9 @@
 ﻿using ProtoBuf;
 using System;
 using static AtacFeed.TransitRealtime;
-using System.Net;
 using Serilog;
+using System.Net.Http;
+using System.IO;
 
 namespace AtacFeed
 {
@@ -17,19 +18,27 @@ namespace AtacFeed
 
         public void LeggiFeed(string url)
         {
+            
             try
             {
+                using HttpClient client = new();
+                client.Timeout = TimeSpan.FromSeconds(30);
+                using System.Threading.Tasks.Task<Stream> s = client.GetStreamAsync(url);
+                LastReadFeed = Serializer.Deserialize<FeedMessage>(s.Result);
+
+                /*
                 WebRequest request = WebRequest.Create(url);
                 request.Timeout = 10000;
                 WebResponse response = request.GetResponse();
                 var stream = response.GetResponseStream();
                 LastReadFeed = Serializer.Deserialize<FeedMessage>(stream);
+                */
             }
             catch (Exception exc)
             {
                 LastReadFeed = null;
                 Log.Error(exc, "LeggiFeed {@url} - {@message}", url, exc.Message);
-                throw (exc);
+                throw;
             }
         }
         public int ValidaFeed()

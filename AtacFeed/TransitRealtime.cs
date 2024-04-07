@@ -32,7 +32,7 @@ namespace AtacFeed
             public FeedHeader Header { get; set; }
 
             [ProtoBuf.ProtoMember(2, Name = @"entity")]
-            public List<FeedEntity> Entities { get; } = new List<FeedEntity>();
+            public List<FeedEntity> Entities { get; } = [];
 
         }
 
@@ -124,7 +124,7 @@ namespace AtacFeed
             public VehicleDescriptor Vehicle { get; set; }
 
             [ProtoBuf.ProtoMember(2, Name = @"stop_time_update")]
-            public List<StopTimeUpdate> StopTimeUpdates { get; } = new List<StopTimeUpdate>();
+            public List<StopTimeUpdate> StopTimeUpdates { get; } = [];
 
             [ProtoBuf.ProtoMember(4, Name = @"timestamp")]
             public ulong Timestamp
@@ -382,10 +382,10 @@ namespace AtacFeed
                 => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [ProtoBuf.ProtoMember(1, Name = @"active_period")]
-            public List<TimeRange> ActivePeriods { get; } = new List<TimeRange>();
+            public List<TimeRange> ActivePeriods { get; } = [];
 
             [ProtoBuf.ProtoMember(5, Name = @"informed_entity")]
-            public List<EntitySelector> InformedEntities { get; } = new List<EntitySelector>();
+            public List<EntitySelector> InformedEntities { get; } = [];
 
             [ProtoBuf.ProtoMember(6)]
             [System.ComponentModel.DefaultValue(Cause.UnknownCause)]
@@ -775,7 +775,7 @@ namespace AtacFeed
                 => ProtoBuf.Extensible.GetExtensionObject(ref __pbn__extensionData, createIfMissing);
 
             [ProtoBuf.ProtoMember(1, Name = @"translation")]
-            public List<Translation> Translations { get; } = new List<Translation>();
+            public List<Translation> Translations { get; } = [];
 
             [ProtoBuf.ProtoContract()]
             public partial class Translation : ProtoBuf.IExtensible

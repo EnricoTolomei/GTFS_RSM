@@ -126,7 +126,7 @@ namespace AtacFeed
             DateTime.TryParseExact(dataProgrammata, "yyyyMMdd", provider, DateTimeStyles.AssumeLocal, out DateTime dateTimePartenzaProgrammata);
             if (oraProgrammata.Length > 0)
             {
-                TimeSpan timestamp = new TimeSpan(
+                TimeSpan timestamp = new(
                     int.Parse(oraProgrammata.Split(':')[0]),    // hours
                     int.Parse(oraProgrammata.Split(':')[1]),    // minutes
                     0                                           // seconds

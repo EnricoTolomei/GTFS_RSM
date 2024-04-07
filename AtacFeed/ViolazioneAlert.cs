@@ -29,7 +29,7 @@ namespace AtacFeed
         public ViolazioneAlert(DateTime oraPrimaViolazione, DateTime? oraUltimaViolazione, string linea, string VetturaSbagliata)
         {
             OraPrimaViolazione = oraPrimaViolazione;
-            OraUltimaViolazione = OraUltimaViolazione;
+            OraUltimaViolazione = oraUltimaViolazione;
             Linea = linea;
             Giorno = "";
             Da = null;

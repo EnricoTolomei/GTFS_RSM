@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace AtacFeed
 {
-    public class ErroriGTFS : ExtendedVehicleInfo
+    public class ErroriGTFS(ExtendedVehicleInfo e, int delta) : ExtendedVehicleInfo(e.IdVettura, e.Matricola, e.LicensePlate, e.RouteId, e.Linea, e.Gestore, e.DirectionId, e.CurrentStopSequence, e.CongestionLevel, e.OccupancyStatus, e.TripId, true, e.PrimaVolta, e.Rimessa, e.Euro, e.Modello, e.Latitude, e.Longitude, e.InTransitTo, e.TipoMezzoTrasporto, e.DistanzaPercorsa, false)
     {
         [Index(1)]
         public new string Matricola { get => base.Matricola; set => base.Matricola = value; }
@@ -22,13 +22,7 @@ namespace AtacFeed
 
         [Index(4)]
         [Description("Fermate non monitorate")]
-        public int Delta { get; set; }        
-        
-
-        public ErroriGTFS(ExtendedVehicleInfo e, int delta) : base(e.IdVettura, e.Matricola, e.LicensePlate, e.RouteId, e.Linea, e.Gestore, e.DirectionId, e.CurrentStopSequence, e.CongestionLevel, e.OccupancyStatus, e.TripId, true, e.PrimaVolta, e.Rimessa, e.Euro, e.Modello, e.Latitude, e.Longitude, e.InTransitTo, e.TipoMezzoTrasporto, e.DistanzaPercorsa, false)
-        {
-            Delta = delta;
-        }
+        public int Delta { get; set; } = delta;
 
         public override bool Equals(object obj)
         {

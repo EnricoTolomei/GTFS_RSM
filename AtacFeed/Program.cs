@@ -21,7 +21,7 @@ namespace AtacFeed
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            FormGTFS_RSM formGTFS_RSM = new FormGTFS_RSM();
+            FormGTFS_RSM formGTFS_RSM = new();
             Application.Run(formGTFS_RSM);
 
             Log.Information("Uscita Programma");

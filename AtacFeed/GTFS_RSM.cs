@@ -1,7 +1,6 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
 using GTFS;
-using GTFS.Entities;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -27,11 +26,9 @@ namespace AtacFeed
                 string gtfsBck = Path.Combine(pathGTFSStatico, "GTFS_bck.zip");
                 pathGTFSStatico = gtfsStatico;
                 File.Copy(gtfsStatico, gtfsBck, true);
-                using (ZipArchive zipArchive = new ZipArchive(new FileStream(pathGTFSStatico, FileMode.Open, FileAccess.ReadWrite, FileShare.None), ZipArchiveMode.Update))
-                {
-                    ZipArchiveEntry entry = zipArchive.GetEntry("stop_times.txt");
-                    entry?.Delete();
-                }
+                using ZipArchive zipArchive = new(new FileStream(pathGTFSStatico, FileMode.Open, FileAccess.ReadWrite, FileShare.None), ZipArchiveMode.Update);
+                ZipArchiveEntry entry = zipArchive.GetEntry("stop_times.txt");
+                entry?.Delete();
             }
 
             StaticData = reader.Read(pathGTFSStatico);
@@ -41,14 +38,16 @@ namespace AtacFeed
                                   select new LineaAgenzia(linea, agenzia)
                                  ).ToList();
 
-            AlertsDaControllare = new List<AlertDaControllare>();
+            //AlertsDaControllare = new List<AlertDaControllare>();
+            AlertsDaControllare = [];
 
             LeggiDettagliVettura(usaDettagliVettura);
         }
 
         internal void LeggiDettagliVettura(bool usaDettagliVettura)
         {
-            ElencoDettagliVettura = new DettagliVettura[] { };
+            //ElencoDettagliVettura = new DettagliVettura[] { };
+            ElencoDettagliVettura = [];
             if (usaDettagliVettura)
             {
                 var config = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -63,11 +62,9 @@ namespace AtacFeed
                 string pathDettagli = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}DettagliVettura.csv";
                 if (File.Exists(pathDettagli))
                 {
-                    using (var readerDettagli = new StreamReader(pathDettagli))
-                    using (var csv = new CsvReader(readerDettagli, config))
-                    {
-                        ElencoDettagliVettura = csv.GetRecords<DettagliVettura>().ToList();
-                    }
+                    using var readerDettagli = new StreamReader(pathDettagli);
+                    using var csv = new CsvReader(readerDettagli, config);
+                    ElencoDettagliVettura = csv.GetRecords<DettagliVettura>().ToList();
                 }
             }
         }
@@ -77,7 +74,7 @@ namespace AtacFeed
         public List<AlertDaControllare> AlertsDaControllare;
         public int LeggiCriteriMediaPonderata(string file) {
             int result = 0;
-            FileInfo fileMediaPonderata = new FileInfo(file);
+            FileInfo fileMediaPonderata = new(file);
             if (fileMediaPonderata.Exists)
             {
                 var config = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -90,37 +87,31 @@ namespace AtacFeed
                     MissingFieldFound = null
                 };
 
-                using (var readerMediaPonderata = new StreamReader(fileMediaPonderata.FullName))
-                using (var csvMediaPonderata = new CsvReader(readerMediaPonderata, config))
+                using var readerMediaPonderata = new StreamReader(fileMediaPonderata.FullName);
+                using var csvMediaPonderata = new CsvReader(readerMediaPonderata, config);
+                CriteriMediaPonderata = csvMediaPonderata.GetRecords<CriterioMediaPonderata>().ToList();
+                if (CriteriMediaPonderata.Sum(x => x.Peso) != 1)
                 {
-                    CriteriMediaPonderata = csvMediaPonderata.GetRecords<CriterioMediaPonderata>().ToList();
-                    if (CriteriMediaPonderata.Sum(x => x.Peso) != 1)
-                    {
-                        result = -1;                        
-                    }
+                    result = -1;
                 }
             }
             return result;
         }
         public void LeggiRegoleMonitoraggio(string file)
-        {            
-            using (var readerTempoBonus = new StreamReader(file))
+        {
+            using var readerTempoBonus = new StreamReader(file);
+            var configTempoBonus = new CsvConfiguration(CultureInfo.InvariantCulture)
             {
-                var configTempoBonus = new CsvConfiguration(CultureInfo.InvariantCulture)
-                {
-                    Delimiter = ",",
-                    HeaderValidated = null,
-                    MissingFieldFound = null,
-                    TrimOptions = TrimOptions.Trim,
-                    PrepareHeaderForMatch = args => args.Header.Trim(),
-                    AllowComments = true
-                };
+                Delimiter = ",",
+                HeaderValidated = null,
+                MissingFieldFound = null,
+                TrimOptions = TrimOptions.Trim,
+                PrepareHeaderForMatch = args => args.Header.Trim(),
+                AllowComments = true
+            };
 
-                using (var csv = new CsvReader(readerTempoBonus, configTempoBonus))
-                {
-                    RegoleMonitoraggio = csv.GetRecords<RegolaMonitoraggio>().ToList();
-                }
-            }
+            using var csv = new CsvReader(readerTempoBonus, configTempoBonus);
+            RegoleMonitoraggio = csv.GetRecords<RegolaMonitoraggio>().ToList();
         }
         public bool LeggiAlertDaControllare(string pathAlert)
         {
@@ -149,7 +140,7 @@ namespace AtacFeed
                         {
                             csv.Context.RegisterClassMap<RegolaAlertMap>();
                             List<RegolaAlert> listaRegole = csv.GetRecords<RegolaAlert>().ToList();
-                            var alertGiaCensito = AlertsDaControllare.Where(x => x.Name == Path.GetFileNameWithoutExtension(item)).FirstOrDefault();
+                            var alertGiaCensito = AlertsDaControllare.FirstOrDefault(x => x.Name == Path.GetFileNameWithoutExtension(item));
                             if (alertGiaCensito != null)
                             {
                                 alertGiaCensito.RegoleAlert = listaRegole;
@@ -159,7 +150,8 @@ namespace AtacFeed
                                 AlertsDaControllare.Add(
                                     new AlertDaControllare{
                                         RegoleAlert = listaRegole,
-                                        ViolazioniAlert = new List<ViolazioneAlert>(),
+                                        //ViolazioniAlert = new List<ViolazioneAlert>(),
+                                        ViolazioniAlert = [],
                                         Name = Path.GetFileNameWithoutExtension(item)
                                     }
                                 );

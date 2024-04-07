@@ -2,15 +2,9 @@
 
 namespace AtacFeed
 {
-    public class LineaAgenzia
+    public class LineaAgenzia(Route route, Agency agency)
     {
-        public Route Route { get; set; }
-        public Agency Agency { get; set; }
-
-        public LineaAgenzia(Route route, Agency agency)
-        {
-            Route = route;
-            Agency = agency;
-        }
+        public Route Route { get; set; } = route;
+        public Agency Agency { get; set; } = agency;
     }
 }

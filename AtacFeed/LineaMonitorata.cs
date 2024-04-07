@@ -3,7 +3,7 @@ using System;
 
 namespace AtacFeed
 {
-    public class LineaMonitorata
+    public class LineaMonitorata(DateTime? oraPrimaViolazione, DateTime? oraUltimaViolazione, RegolaMonitoraggio regolaViolata, int vettureRilevate)
     {
         public string Linea { get { return RegolaViolata.Linea; } }
 
@@ -12,22 +12,14 @@ namespace AtacFeed
         public TimeSpan? A { get { return RegolaViolata.A; } }
         public int TempoBonus { get { return RegolaViolata.TempoBonus; } }
         public int? VetturePreviste { get { return RegolaViolata.VetturePreviste; } }
-        public int? VettureRilevate { get; set; }
+        public int? VettureRilevate { get; set; } = vettureRilevate;
 
-        public DateTime? OraPrimaViolazione { get; set; }
-        public DateTime? OraUltimaViolazione { get; set; }
+        public DateTime? OraPrimaViolazione { get; set; } = oraPrimaViolazione;
+        public DateTime? OraUltimaViolazione { get; set; } = oraUltimaViolazione;
 
-        [Ignore] 
-        public RegolaMonitoraggio RegolaViolata { get; set; }
+        [Ignore]
+        public RegolaMonitoraggio RegolaViolata { get; set; } = regolaViolata;
 
-        public LineaMonitorata(DateTime? oraPrimaViolazione, DateTime? oraUltimaViolazione, RegolaMonitoraggio regolaViolata, int vettureRilevate)
-        {
-            OraPrimaViolazione = oraPrimaViolazione;
-            OraUltimaViolazione = oraUltimaViolazione;
-            RegolaViolata = regolaViolata;
-            VettureRilevate = vettureRilevate;
-        }
-        
         public bool Equals(LineaMonitorata other)
         {
             if (other is null)

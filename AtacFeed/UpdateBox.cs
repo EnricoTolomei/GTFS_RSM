@@ -6,9 +6,13 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Security.Cryptography;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Shapes;
+using Path = System.IO.Path;
 
 namespace AtacFeed
 {
@@ -76,7 +80,7 @@ namespace AtacFeed
                 }
                 string latestVersion = await GetLatestGtfsMd5Async(clickPerformed);
                 string actualVersion = string.Empty;
-                string filepath = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}gtfs.zip.md5";
+                string filepath = $"Config{System.IO.Path.DirectorySeparatorChar}GTFS_Static{System.IO.Path.DirectorySeparatorChar}gtfs.zip.md5";
                 if (File.Exists(filepath))
                 {
                     actualVersion = File.ReadAllText(filepath);
@@ -127,8 +131,9 @@ namespace AtacFeed
                 string filepath = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}LatestVersion.txt";
                 if (File.Exists(filepath))
                 {
-                    string localVersion = File.ReadAllLines(filepath).FirstOrDefault();
-                    decimal.TryParse(localVersion, out actualVersion);
+                    string localVersion = File.ReadAllLines(filepath)
+                                              .FirstOrDefault();
+                    _ = decimal.TryParse(localVersion, out actualVersion);
                 }
                 if (clickPerformed)
                 {
@@ -155,10 +160,10 @@ namespace AtacFeed
 
         public async Task<Version> GetLatestVersionAsync(bool clickPerformed = false)
         {
-            Version version = new Version();
+            Version version = new();
             try
             {
-                Uri uri = new Uri("https://github.com/EnricoTolomei/GTFS_RSM");
+                Uri uri = new("https://github.com/EnricoTolomei/GTFS_RSM");
                 var github = new GitHubClient(new ProductHeaderValue("GTFS_RSM"), uri);
                 Release latastRelease = await github.Repository.Release.GetLatest("EnricoTolomei", "GTFS_RSM");
 
@@ -186,9 +191,29 @@ namespace AtacFeed
             string vers = string.Empty;
             try
             {
-                Uri uri = new Uri(UrlMD5);
+                Uri uri = new(UrlMD5);
                 string localVersion = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}/gtfs.zip.md5.new";
-                using (WebClient wc = new WebClient())
+                using (HttpClient httpClient = new())
+                {
+                    
+                    //if (clickPerformed)
+                    //{
+                    //    httpClient.Getstre += Wc_DownloadProgressChanged;
+                    //}
+                    
+                    
+                    Stream fileStream = await httpClient.GetStreamAsync(UrlMD5);
+
+
+
+                    using FileStream outputFileStream = new(localVersion, System.IO.FileMode.Create);
+                    await fileStream.CopyToAsync(outputFileStream);
+
+
+                    //await httpClient.DownloadFileTaskAsync(uri, localVersion);
+                }
+                /*
+                using (WebClient wc = new())
                 {
                     if (clickPerformed)
                     {
@@ -196,6 +221,7 @@ namespace AtacFeed
                     }
                     await wc.DownloadFileTaskAsync(uri, localVersion);
                 }
+                */
                 vers = File.ReadAllText(localVersion);
                 return vers;
             }
@@ -205,14 +231,14 @@ namespace AtacFeed
             }
             return vers;
         }
-        public async Task<decimal> GetLatestCsvVersionAsync()
+        public static async Task<decimal> GetLatestCsvVersionAsync()
         {
             decimal serverConfVersion = 0;
             try
             {
-                Uri uriVersion = new Uri("https://raw.githubusercontent.com/EnricoTolomei/GTFS_RSM/master/AtacFeed/Config/GTFS_Static/LatestVersion.txt");
+                Uri uriVersion = new("https://raw.githubusercontent.com/EnricoTolomei/GTFS_RSM/master/AtacFeed/Config/GTFS_Static/LatestVersion.txt");
                 string localVersion = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}LatestVersion.txt.new";
-                using (WebClient wc = new WebClient())
+                using (WebClient wc = new())
                 {
                     await wc.DownloadFileTaskAsync(uriVersion, localVersion);
                 }
@@ -309,13 +335,13 @@ namespace AtacFeed
             bool esitoDownload = false;
             try
             {
-                Uri uriDettagli = new Uri("https://raw.githubusercontent.com/EnricoTolomei/GTFS_RSM/master/AtacFeed/Config/GTFS_Static/DettagliVettura.csv");
-                Uri uriCriterioMedia = new Uri("https://raw.githubusercontent.com/EnricoTolomei/GTFS_RSM/master/AtacFeed/Config/CriterioMediaPonderata.txt");
+                Uri uriDettagli = new("https://raw.githubusercontent.com/EnricoTolomei/GTFS_RSM/master/AtacFeed/Config/GTFS_Static/DettagliVettura.csv");
+                Uri uriCriterioMedia = new("https://raw.githubusercontent.com/EnricoTolomei/GTFS_RSM/master/AtacFeed/Config/CriterioMediaPonderata.txt");
                 string localVersion = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}LatestVersion.txt.new";
                 string localDettagli = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}DettagliVettura.csv.new";
                 string localCriterioMedia = $"Config{Path.DirectorySeparatorChar}CriterioMediaPonderata.txt.new";
 
-                using (WebClient wc = new WebClient())
+                using (WebClient wc = new())
                 {
                     if (clickPerformed)
                     {
@@ -349,10 +375,12 @@ namespace AtacFeed
             bool esitoDownload = false;
             try
             {
-                Uri uriGTFS = new Uri(UrlGTFS);
+                Uri uriGTFS = new(UrlGTFS);
                 string localGTFS = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}GTFS.zip.new";
 
-                using (WebClient wc = new WebClient())
+
+                /*
+                using (WebClient wc = new())
                 {
                     if (clickPerformed)
                     {
@@ -360,6 +388,27 @@ namespace AtacFeed
                     }
                     await wc.DownloadFileTaskAsync(uriGTFS, localGTFS);
                 }
+                */
+
+
+
+                var client = new HttpClient();
+                
+                
+
+                // Setup your progress reporter
+                var progress = new Progress<float>();
+                if (clickPerformed)
+                {
+                    progress.ProgressChanged += Progress_ProgressChanged;
+                }
+               
+                // Use the provided extension method
+                using (var file = new FileStream(localGTFS, System.IO.FileMode.Create, FileAccess.Write, FileShare.None))
+                    await client.DownloadDataAsync(uriGTFS.ToString(), file, progress);
+
+
+
                 string localGTFSMD5 = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}gtfs.zip.md5.new";
                 if (File.Exists(localGTFSMD5))
                 {
@@ -377,6 +426,15 @@ namespace AtacFeed
             }
             return esitoDownload;
         }
+
+
+        void Progress_ProgressChanged(object sender, float progress)
+        {
+            // Do something with your progress
+            progressBar.Value = (int)progress;
+        }
+        /// ////////////////////////////////////////////////
+
 
         internal void ResetUI()
         {
@@ -424,4 +482,56 @@ namespace AtacFeed
                             : existNewGTFS;
         }
     }
+
+
+    public static class HttpClientProgressExtensions
+    {
+        public static async Task DownloadDataAsync(this HttpClient client, string requestUrl, Stream destination, IProgress<float> progress = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var response = await client.GetAsync(requestUrl, HttpCompletionOption.ResponseHeadersRead))
+            {
+                var contentLength = response.Content.Headers.ContentLength;
+                using (var download = await response.Content.ReadAsStreamAsync())
+                {
+                    // no progress... no contentLength... very sad
+                    if (progress is null || !contentLength.HasValue)
+                    {
+                        await download.CopyToAsync(destination);
+                        return;
+                    }
+                    // Such progress and contentLength much reporting Wow!
+                    var progressWrapper = new Progress<long>(totalBytes => progress.Report(GetProgressPercentage(totalBytes, contentLength.Value)));
+                    await download.CopyToAsync(destination, 81920, progressWrapper, cancellationToken);
+                }
+            }
+
+            float GetProgressPercentage(float totalBytes, float currentBytes) => (totalBytes / currentBytes) * 100f;
+        }
+
+        static async Task CopyToAsync(this Stream source, Stream destination, int bufferSize, IProgress<long> progress = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (bufferSize < 0)
+                throw new ArgumentOutOfRangeException(nameof(bufferSize));
+            if (source is null)
+                throw new ArgumentNullException(nameof(source));
+            if (!source.CanRead)
+                throw new InvalidOperationException($"'{nameof(source)}' is not readable.");
+            if (destination == null)
+                throw new ArgumentNullException(nameof(destination));
+            if (!destination.CanWrite)
+                throw new InvalidOperationException($"'{nameof(destination)}' is not writable.");
+
+            var buffer = new byte[bufferSize];
+            long totalBytesRead = 0;
+            int bytesRead;
+            while ((bytesRead = await source.ReadAsync(buffer, 0, buffer.Length, cancellationToken).ConfigureAwait(false)) != 0)
+            {
+                await destination.WriteAsync(buffer, 0, bytesRead, cancellationToken).ConfigureAwait(false);
+                totalBytesRead += bytesRead;
+                progress?.Report(totalBytesRead);
+            }
+        }
+    }
+
+
 }

@@ -2,6 +2,7 @@
 using CsvHelper.Configuration;
 using CsvHelper.Configuration.Attributes;
 using FastMember;
+using GTFS;
 using GTFS.Entities;
 using OfficeOpenXml;
 using OfficeOpenXml.Drawing.Chart;
@@ -16,7 +17,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static AtacFeed.TransitRealtime;
@@ -29,7 +29,7 @@ namespace AtacFeed
         private string fileName;
         private DateTime? DataResetMonitoraggio;
         private DateTime? DataCheckUpdate;
-        
+
         private readonly FeedVehicleManager FeedVehicleManager = new();
         private readonly FeedAlertManager FeedAlertManager = new();
 
@@ -53,7 +53,7 @@ namespace AtacFeed
                 textBox1.Clear();
                 textBox2.Clear();
                 string routeID = comboBox1.SelectedValue?.ToString() ?? "-1";
-                if ( (checkResetSempre.Visible && checkResetSempre.Checked) || (DataResetMonitoraggio.HasValue && DateTime.Now > DataResetMonitoraggio.GetValueOrDefault()))
+                if ((checkResetSempre.Visible && checkResetSempre.Checked) || (DataResetMonitoraggio.HasValue && DateTime.Now > DataResetMonitoraggio.GetValueOrDefault()))
                 {
                     RestartFile();
                     DataResetMonitoraggio = DataResetMonitoraggio.GetValueOrDefault(DateTime.MinValue).AddDays(1);
@@ -69,7 +69,7 @@ namespace AtacFeed
                 else if (DateTime.Now > DataCheckUpdate.GetValueOrDefault())
                 {
                     CheckUpdate(download: checkMD5.Checked);
-                    DataCheckUpdate = DateTime.Now.AddHours(8);                    
+                    DataCheckUpdate = DateTime.Now.AddHours(8);
                 }
                 #endregion
 
@@ -98,7 +98,7 @@ namespace AtacFeed
 
                 bool feedAvailable = GetValidFeed() == 0;
                 labelLetture.Text = NumeroLetture.ToString();
-                
+
                 if (feedAvailable)
                 {
                     DateTime lastDataFeedVehicle = FeedVehicleManager.LastDataFeed.Value;
@@ -220,10 +220,11 @@ namespace AtacFeed
                     List<Tuple<string, string, int>> matricoleDuplicate = FeedVehicleManager.MatricoleDuplicate();
                     if (matricoleDuplicate.Count > 0)
                     {
+                        textBox2.AppendText($"Matricola Duplicate{Environment.NewLine}");
                         List<string> gestori = [.. matricoleDuplicate.Select(x => x.Item2).Distinct()];
                         foreach (var gestore in gestori)
                         {
-                            textBox1.AppendText($"Gestore: {gestore}" + Environment.NewLine);
+                            textBox2.AppendText($" Gestore: {gestore}" + Environment.NewLine);
                             foreach (var servizio in matricoleDuplicate.Where(x => x.Item2 == gestore))
                             {
                                 textBox2.AppendText($"  Matricola\t{servizio.Item1}\tRilevata {servizio.Item3} volte" + Environment.NewLine);
@@ -240,10 +241,10 @@ namespace AtacFeed
                         string vetture = string.Empty;
                         foreach (ExtendedVehicleInfo vettura in vettureSenzaMatricola)
                         {
-                            vetture+= ($"IdVettura {vettura.IdVettura}\t Matricola:[{vettura.Matricola}]{Environment.NewLine}");
+                            vetture += ($"IdVettura {vettura.IdVettura}\t Matricola:[{vettura.Matricola}]{Environment.NewLine}");
                         }
                         textBox2.AppendText(vetture);
-                        textBox2.Select (start, vetture.Length);
+                        textBox2.Select(start, vetture.Length);
                         textBox2.SelectionColor = Color.DarkGray;
                         textBox2.SelectionIndent = 10;
                         textBox2.AppendText($"{Environment.NewLine}");
@@ -288,14 +289,15 @@ namespace AtacFeed
                         using var reader = ObjectReader.Create(FeedVehicleManager.ElencoVetture.OrderBy(x => x.Linea?.Length).ThenBy(x => x.Linea));
                         dtAttuale.Load(reader);
                     }
-                    else {
+                    else
+                    {
                         using var reader = ObjectReader.Create(FeedVehicleManager.ElencoVetture);
                         dtAttuale.Load(reader);
                     }
 
                     bindingSourceAttuale.DataSource = dtAttuale;
                     advancedDataGridView2.DataSource = bindingSourceAttuale;
-                    
+
                     List<string> urlTripList = [];
                     List<string> urlVehicleList = [];
                     //foreach (FeedEntity entity in FeedVehicleManager.FeedEntities)
@@ -324,15 +326,18 @@ namespace AtacFeed
 
                     var raggruppatoGestore = FeedVehicleManager.StatisticheAttuali.ServizioRaggruppato
                         .GroupBy(x => x.Agenzia)
-                        .Select(g => new {
+                        .Select(g => new
+                        {
                             Gestore = g.Key,
-                            Totale = g.Sum(x => x.Num)}
+                            Totale = g.Sum(x => x.Num)
+                        }
                     );
 
                     foreach (var gestore in raggruppatoGestore)
                     {
-                        textBox1.AppendText(Environment.NewLine+$"{gestore.Gestore} - {gestore.Totale}" + Environment.NewLine);
-                        foreach (var servizio in FeedVehicleManager.StatisticheAttuali.ServizioRaggruppato.Where(x => x.Agenzia == gestore.Gestore)) {
+                        textBox1.AppendText(Environment.NewLine + $"{gestore.Gestore} - {gestore.Totale}" + Environment.NewLine);
+                        foreach (var servizio in FeedVehicleManager.StatisticheAttuali.ServizioRaggruppato.Where(x => x.Agenzia == gestore.Gestore))
+                        {
                             textBox1.AppendText($"    {servizio.Servizio}\t{servizio.Num}" + Environment.NewLine);
                         }
                     }
@@ -433,8 +438,19 @@ namespace AtacFeed
                             textBox2.AppendText($"Vetture rilevate solo sul feed Vehicle: {soloVehicle.Count}" + Environment.NewLine);
                         }
                     }
+                    if (FeedVehicleManager.GTFS_RSM.OrarioProgrammato.Count > 0)
+                    {
+                        
+                        DataTable dtTabellato = new();
+                        using (var reader = ObjectReader.Create(FeedVehicleManager.GTFS_RSM.OrarioProgrammato))
+                        {
+                            dtTabellato.Load(reader);
+                        }
+                        bindingSourceProgrammato.DataSource = dtTabellato;
+                        dataGridView1.DataSource = bindingSourceProgrammato;
+                    }
                 }
-                if (ecc!=null)
+                if (ecc != null)
                 {
                     throw ecc;
                 }
@@ -445,7 +461,7 @@ namespace AtacFeed
                 Log.Error(ex, "Errore Generico");
             }
         }
-        
+
         private int GetValidFeed()
         {
             imgUrl1.Image = null;
@@ -455,17 +471,17 @@ namespace AtacFeed
                 new Tuple<string, PictureBox>(urlVehicle.Text, imgUrl1),
                 new Tuple<string, PictureBox>(urlVehicleRiserva.Text, imgUrl2)
             ];
-            tupleServer.RemoveAll( x=> string.IsNullOrEmpty(x.Item1));
+            tupleServer.RemoveAll(x => string.IsNullOrEmpty(x.Item1));
             tupleServer.ForEach(x => x.Item2.Refresh());
             int codeFeed = -5;
             NumeroLetture++;
-            foreach (Tuple<string,PictureBox> tupla in tupleServer)
+            foreach (Tuple<string, PictureBox> tupla in tupleServer)
             {
                 string url = tupla.Item1;
                 try
                 {
                     codeFeed = FeedVehicleManager.LeggiFeedValido(url);
-                    
+
                     if (codeFeed == 0)
                     {
                         tupla.Item2.Image = Properties.Resources.verde;
@@ -537,7 +553,7 @@ namespace AtacFeed
 
             dataGridViolazioni.Invalidate();
             dataGridViolazioni.DataSource = null;
-            
+
             GridAvvisi.Invalidate();
             GridAvvisi.DataSource = null;
 
@@ -551,9 +567,9 @@ namespace AtacFeed
             plotAtac.Reset();
 
             NumeroFeedValidi = 0;
-            NumeroLetture= 0;
+            NumeroLetture = 0;
         }
-        
+
         private void ButtonPlayPause_Click(object sender, EventArgs e)
         {
             if (!checkCSV.Checked && !checkXlsx.Checked)
@@ -601,7 +617,7 @@ namespace AtacFeed
                 }
             }
         }
-        
+
         private void AggiornaScottPlot()
         {
             if (FeedVehicleManager.ElencoVettureGrafico.Count > 0)
@@ -609,7 +625,7 @@ namespace AtacFeed
                 Render(plotAtac, plotTPL);
             }
         }
-        
+
         public void Render(FormsPlot pltATAC, FormsPlot pltTPL)
         {
             var culture = CultureInfo.CreateSpecificCulture("it");
@@ -627,7 +643,7 @@ namespace AtacFeed
             var istAtac = pltATAC.Plot.AddSignalXY(tempo, serieAtac, color: Color.FromArgb(137, 8, 39), label: "Istantanee");
             istAtac.LineWidth = 2;
             istAtac.MarkerSize = 2;
-            
+
             pltATAC.Plot.SetCulture(culture);
             pltATAC.Plot.XAxis.DateTimeFormat(true);
             //pltATAC.Plot.XAxis.TickLabelFormat("dd-MM HH:mm:ss", dateTimeFormat: true);            
@@ -636,14 +652,14 @@ namespace AtacFeed
             pltATAC.Plot.Title("Monitoraggio vetture ATAC");
             pltATAC.Plot.AxisAuto();
             pltATAC.Render();
-            
+
             pltTPL.Plot.Clear();
             var serieTPL = (from elenco in FeedVehicleManager.ElencoVettureGrafico select (double)elenco.TPL).ToArray();
             var serieAggregateTPL = (from elenco in FeedVehicleManager.ElencoVettureGrafico select (double)(elenco.AggregateTPL)).ToArray();
             var plotSignalAggragatoTPL = pltTPL.Plot.AddSignalXY(tempo, serieAggregateTPL, color: Color.FromArgb(231, 109, 20), label: "Aggregate");
             plotSignalAggragatoTPL.LineWidth = 3;
             plotSignalAggragatoTPL.MarkerSize = 3;
-            var plotSignalActualTPL = pltTPL.Plot.AddSignalXY(tempo, serieTPL, color: Color.FromArgb(4, 65, 136),  label: "Istantanee");
+            var plotSignalActualTPL = pltTPL.Plot.AddSignalXY(tempo, serieTPL, color: Color.FromArgb(4, 65, 136), label: "Istantanee");
             plotSignalActualTPL.LineWidth = 2;
             plotSignalActualTPL.MarkerSize = 2;
             pltTPL.Plot.SetCulture(culture);
@@ -653,9 +669,9 @@ namespace AtacFeed
             pltTPL.Plot.Legend(location: Alignment.UpperLeft);
             pltTPL.Plot.Title("Monitoraggio vetture TPL");
             pltTPL.Plot.AxisAuto();
-            pltTPL.Render();            
+            pltTPL.Render();
         }
-        
+
         private void Form1_Load(object sender, EventArgs e)
         {
             Version actualVersion = Assembly.GetExecutingAssembly().GetName().Version;
@@ -691,7 +707,7 @@ namespace AtacFeed
             checkResetSempre.Visible = Properties.Settings.Default.ExtraSetting;
             urlAlert.Visible = true; // Properties.Settings.Default.ExtraSetting;
             labelAlert.Visible = true; // Properties.Settings.Default.ExtraSetting;
-            
+
             int totalSeconds = Properties.Settings.Default.DeltaTSec;
             minuti.Value = totalSeconds / 60;
             secondi.Value = totalSeconds % 60;
@@ -711,10 +727,10 @@ namespace AtacFeed
                     tabMainForm.TabPages.Remove(tabMonitoraggio);
                     Log.Information("Rimosso tab RegoleMonitoraggio");
                 }
-            }            
+            }
             LeggiRegoleAlertDaFile();
         }
-        
+
         private void LeggiFileConfigurazione()
         {
             //FeedVehicleManager.LeggiGTFS($"Config{Path.DirectorySeparatorChar}GTFS_Static");
@@ -760,15 +776,15 @@ namespace AtacFeed
             comboBox1.DataSource = alternativa;
             comboBox1.ValueMember = "Id";
             comboBox1.DisplayMember = "ShortName";
-            
+
             try
             {
-                FeedVehicleManager.GTFS_RSM.LeggiRegoleMonitoraggio($"Config{Path.DirectorySeparatorChar}MonitoraggioLinee{Path.DirectorySeparatorChar}RegoleMonitoraggio_yes.txt");                
+                FeedVehicleManager.GTFS_RSM.LeggiRegoleMonitoraggio($"Config{Path.DirectorySeparatorChar}MonitoraggioLinee{Path.DirectorySeparatorChar}RegoleMonitoraggio_yes.txt");
             }
             catch
             {
                 Log.Information("Nessuna RegoleMonitoraggio");
-            }            
+            }
         }
 
         private void LeggiRegoleAlertDaFile()
@@ -872,7 +888,7 @@ namespace AtacFeed
 
                     myNewTabItem.Controls.Add(myNewdataGridVetture);
                     tabMainForm.TabPages.Add(myNewTabItem);
-                    
+
                     myNewdataGridVetture.Invalidate();
                     myNewdataGridVetture.Invalidate();
                     myNewdataGridVetture.DataSource = null;
@@ -933,7 +949,7 @@ namespace AtacFeed
                 .FirstOrDefault(r => r.Checked);
             Properties.Settings.Default.RadioRaggruppamento = radioRaggruppamento.Name;
             Properties.Settings.Default.CheckSovraffollamento = checkSovraffollamento.Checked;
-            Properties.Settings.Default.CheckMD5 =checkMD5.Checked ;
+            Properties.Settings.Default.CheckMD5 = checkMD5.Checked;
             Properties.Settings.Default.CheckDettagliVettura = checkDettagliVettura.Checked;
             Properties.Settings.Default.Save();
         }
@@ -958,7 +974,7 @@ namespace AtacFeed
         }
 
         private async Task SaveAs(FileInfo outputFile, FileInfo altFileName)
-        {            
+        {
             if (checkXlsx.Checked)
             {
                 using ExcelPackage excel = new(outputFile);
@@ -1062,6 +1078,12 @@ namespace AtacFeed
                             excelSheetName = "Sovraffollamneto";
                             ElaboraSheet(excel, excelSheetName, FeedVehicleManager.ElencoVettureSovraffollate);
                         }
+
+                        if (FeedVehicleManager.GTFS_RSM.OrarioProgrammato.Count > 0)
+                        {
+                            excelSheetName = "OrarioProgrammato";
+                            ElaboraSheet(excel, excelSheetName, FeedVehicleManager.GTFS_RSM.OrarioProgrammato);
+                        }
                     }
 
                     excelSheetName = "Avvisi";
@@ -1099,7 +1121,7 @@ namespace AtacFeed
                 };
                 using var csv = new CsvWriter(writer, config);
                 await csv.WriteRecordsAsync(FeedVehicleManager.ElencoAggregatoVetture);
-            }            
+            }
         }
         /*
         private async Task<bool> SaveAs(FileInfo outputFile)
@@ -1250,7 +1272,7 @@ namespace AtacFeed
         private static void ElaboraSheet<T>(ExcelPackage excel, string excelSheetName, List<T> record, List<string> ammessi = null, string dateFormat = "")
         {
             foreach (ExcelWorksheet sheet in excel.Workbook.Worksheets)
-            {                
+            {
                 if (sheet.Name == excelSheetName)
                 {
                     excel.Workbook.Worksheets.Delete(excelSheetName);
@@ -1259,13 +1281,13 @@ namespace AtacFeed
             }
 
             ExcelWorksheet workSheet = excel.Workbook.Worksheets.Add(excelSheetName);
-            
+
             PropertyInfo[] membersToInclude = typeof(T)
                 .GetProperties(BindingFlags.Instance | BindingFlags.Public)
                 .Where(p => !Attribute.IsDefined(p, typeof(IgnoreAttribute))
                             && (ammessi == null || ammessi.Contains(p.Name)))
                 .ToArray();
-            
+
             ExcelRangeBase range = workSheet.Cells[1, 1].LoadFromCollection(
                 record
                 , true
@@ -1281,7 +1303,7 @@ namespace AtacFeed
                 {
                     workSheet.Column(colNumber).Style.Numberformat.Format = string.IsNullOrEmpty(dateFormat) ? "MM/dd/yyyy HH:mm:ss" : dateFormat;
                 }
-                else if (exportedProperty.PropertyType == typeof(TimeSpan) || exportedProperty.PropertyType == typeof(TimeSpan?) )
+                else if (exportedProperty.PropertyType == typeof(TimeSpan) || exportedProperty.PropertyType == typeof(TimeSpan?))
                 {
                     workSheet.Column(colNumber).Style.Numberformat.Format = "HH:mm:ss";
                 }
@@ -1318,7 +1340,7 @@ namespace AtacFeed
         private async Task ExportGrid()
         {
             try
-            {                
+            {
                 FileInfo file = new($"OUTPUT{Path.DirectorySeparatorChar}{fileName}.xlsx");
                 FileInfo altFileName = new($"OUTPUT{Path.DirectorySeparatorChar}{fileName}.xlsx.bck");
                 await SaveAs(file, altFileName);
@@ -1413,7 +1435,7 @@ namespace AtacFeed
         }
 
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
-        {            
+        {
             if ((sender as TabControl).SelectedTab == tabMonitoraggio && FeedVehicleManager.LastDataFeed.HasValue)
             {
                 Colora();
@@ -1422,7 +1444,7 @@ namespace AtacFeed
 
         private async void ResetAcquisizioneAsync(object sender, EventArgs e)
         {
-            await Task.Run(() => UpdateBox.TaskCheckUpdate(forceDownload:true));
+            await Task.Run(() => UpdateBox.TaskCheckUpdate(forceDownload: true));
             RestartFile();
         }
 
@@ -1492,7 +1514,7 @@ namespace AtacFeed
             labelAltroAtac.Text = "---";
             labelPonderatiATAC.Text = "---";
             labelPonderatiTPL.Text = "---";
-            
+
             textBox1.Clear();
             textBox2.Clear();
             textBox3.Clear();
@@ -1500,8 +1522,8 @@ namespace AtacFeed
             imgUrl1.Image = null;
             imgUrl2.Image = null;
             UpdateBox.ResetUI();
-            
-            buttonVerificaAggiornamenti.Image= Properties.Resources.available_updates_16;
+
+            buttonVerificaAggiornamenti.Image = Properties.Resources.available_updates_16;
             Refresh();
         }
 
@@ -1551,5 +1573,11 @@ namespace AtacFeed
         {
             bindingSourceAvvisi.Sort = GridAvvisi.SortString;
         }
+
+        private void GridAvvisi_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
     }
 }

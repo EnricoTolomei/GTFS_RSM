@@ -35,6 +35,11 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGTFS_RSM));
             timerAcquisizione = new System.Windows.Forms.Timer(components);
             button3 = new System.Windows.Forms.Button();
@@ -110,6 +115,14 @@
             bindingSourceAttuale = new System.Windows.Forms.BindingSource(components);
             tabPage1 = new System.Windows.Forms.TabPage();
             GridAvvisi = new Zuby.ADGV.AdvancedDataGridView();
+            dataGridViewTextBoxColumn25 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn26 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn27 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn28 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            dataGridViewTextBoxColumn32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             tabMonitoraggio = new System.Windows.Forms.TabPage();
             dataGridViolazioni = new System.Windows.Forms.DataGridView();
             tabGrigliaAttuale = new System.Windows.Forms.TabPage();
@@ -146,6 +159,27 @@
             partenzaEffettivaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             tabGrigliaFiltrata = new System.Windows.Forms.TabPage();
             advancedDataGridView1 = new Zuby.ADGV.AdvancedDataGridView();
+            IdVettura = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            matricolaDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            lineaDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            gestoreDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            directionIdDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            Destinazione = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            currentStopSequenceDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            NomeFermata = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            occupancyStatusDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            tripIdDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            primaVoltaDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ultimaVoltaDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            rimessaDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            euroDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            modelloDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            latitudeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            longitudeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            inTransitToDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            tipoMezzoTrasportoDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            PartenzaProgrammata = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            PartenzaEffettiva = new System.Windows.Forms.DataGridViewTextBoxColumn();
             tabGrafico = new System.Windows.Forms.TabPage();
             tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             plotAtac = new ScottPlot.FormsPlot();
@@ -202,27 +236,15 @@
             textBox2 = new System.Windows.Forms.RichTextBox();
             textBox1 = new System.Windows.Forms.TextBox();
             tabMainForm = new System.Windows.Forms.TabControl();
-            IdVettura = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            matricolaDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            lineaDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            gestoreDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            directionIdDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            Destinazione = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            currentStopSequenceDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            NomeFermata = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            occupancyStatusDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            tripIdDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            primaVoltaDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ultimaVoltaDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            rimessaDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            euroDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            modelloDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            latitudeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            longitudeDataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            inTransitToDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            tipoMezzoTrasportoDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            PartenzaProgrammata = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            PartenzaEffettiva = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            tabPage2 = new System.Windows.Forms.TabPage();
+            dataGridView1 = new System.Windows.Forms.DataGridView();
+            bindingSourceProgrammato = new System.Windows.Forms.BindingSource(components);
+            lineaDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            direzioneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            partenzaPrevistaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            partenzaRilevataDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            tipoTrasportoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            tripIDDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)lineaMonitorataBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)extendedVehicleInfoBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceAvvisi).BeginInit();
@@ -248,6 +270,9 @@
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel3.SuspendLayout();
             tabMainForm.SuspendLayout();
+            tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourceProgrammato).BeginInit();
             SuspendLayout();
             // 
             // timerAcquisizione
@@ -1108,6 +1133,10 @@
             // 
             extendedVehicleInfoBindingSource.DataSource = typeof(ExtendedVehicleInfo);
             // 
+            // bindingSourceAvvisi
+            // 
+            bindingSourceAvvisi.DataSource = typeof(Avviso);
+            // 
             // tabPage1
             // 
             tabPage1.Controls.Add(GridAvvisi);
@@ -1123,12 +1152,14 @@
             // 
             GridAvvisi.AllowUserToAddRows = false;
             GridAvvisi.AllowUserToDeleteRows = false;
+            GridAvvisi.AllowUserToOrderColumns = true;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
             GridAvvisi.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             GridAvvisi.AutoGenerateColumns = false;
-            GridAvvisi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            GridAvvisi.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             GridAvvisi.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             GridAvvisi.ColumnHeadersHeight = 29;
+            GridAvvisi.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { dataGridViewTextBoxColumn25, dataGridViewTextBoxColumn26, dataGridViewTextBoxColumn27, dataGridViewTextBoxColumn28, dataGridViewTextBoxColumn29, dataGridViewTextBoxColumn30, dataGridViewTextBoxColumn31, dataGridViewTextBoxColumn32 });
             GridAvvisi.DataSource = bindingSourceAvvisi;
             GridAvvisi.Dock = System.Windows.Forms.DockStyle.Fill;
             GridAvvisi.FilterAndSortEnabled = true;
@@ -1146,6 +1177,96 @@
             GridAvvisi.TabIndex = 0;
             GridAvvisi.SortStringChanged += GridAvvisi_SortStringChanged;
             GridAvvisi.FilterStringChanged += GridAvvisi_FilterStringChanged;
+            GridAvvisi.CellContentClick += GridAvvisi_CellContentClick;
+            // 
+            // dataGridViewTextBoxColumn25
+            // 
+            dataGridViewTextBoxColumn25.DataPropertyName = "Id";
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridViewTextBoxColumn25.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewTextBoxColumn25.FillWeight = 20F;
+            dataGridViewTextBoxColumn25.HeaderText = "Id";
+            dataGridViewTextBoxColumn25.MinimumWidth = 24;
+            dataGridViewTextBoxColumn25.Name = "dataGridViewTextBoxColumn25";
+            dataGridViewTextBoxColumn25.ReadOnly = true;
+            dataGridViewTextBoxColumn25.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // dataGridViewTextBoxColumn26
+            // 
+            dataGridViewTextBoxColumn26.DataPropertyName = "ValidoDal";
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridViewTextBoxColumn26.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewTextBoxColumn26.FillWeight = 50F;
+            dataGridViewTextBoxColumn26.HeaderText = "ValidoDal";
+            dataGridViewTextBoxColumn26.MinimumWidth = 24;
+            dataGridViewTextBoxColumn26.Name = "dataGridViewTextBoxColumn26";
+            dataGridViewTextBoxColumn26.ReadOnly = true;
+            dataGridViewTextBoxColumn26.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // dataGridViewTextBoxColumn27
+            // 
+            dataGridViewTextBoxColumn27.DataPropertyName = "ValidoAl";
+            dataGridViewTextBoxColumn27.FillWeight = 50F;
+            dataGridViewTextBoxColumn27.HeaderText = "ValidoAl";
+            dataGridViewTextBoxColumn27.MinimumWidth = 24;
+            dataGridViewTextBoxColumn27.Name = "dataGridViewTextBoxColumn27";
+            dataGridViewTextBoxColumn27.ReadOnly = true;
+            dataGridViewTextBoxColumn27.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // dataGridViewTextBoxColumn28
+            // 
+            dataGridViewTextBoxColumn28.DataPropertyName = "LineeCoinvolte";
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridViewTextBoxColumn28.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewTextBoxColumn28.FillWeight = 60F;
+            dataGridViewTextBoxColumn28.HeaderText = "LineeCoinvolte";
+            dataGridViewTextBoxColumn28.MinimumWidth = 24;
+            dataGridViewTextBoxColumn28.Name = "dataGridViewTextBoxColumn28";
+            dataGridViewTextBoxColumn28.ReadOnly = true;
+            dataGridViewTextBoxColumn28.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // dataGridViewTextBoxColumn29
+            // 
+            dataGridViewTextBoxColumn29.DataPropertyName = "Titolo";
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridViewTextBoxColumn29.DefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewTextBoxColumn29.FillWeight = 80F;
+            dataGridViewTextBoxColumn29.HeaderText = "Titolo";
+            dataGridViewTextBoxColumn29.MinimumWidth = 24;
+            dataGridViewTextBoxColumn29.Name = "dataGridViewTextBoxColumn29";
+            dataGridViewTextBoxColumn29.ReadOnly = true;
+            dataGridViewTextBoxColumn29.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // dataGridViewTextBoxColumn30
+            // 
+            dataGridViewTextBoxColumn30.DataPropertyName = "Descrizione";
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            dataGridViewTextBoxColumn30.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewTextBoxColumn30.HeaderText = "Descrizione";
+            dataGridViewTextBoxColumn30.MinimumWidth = 24;
+            dataGridViewTextBoxColumn30.Name = "dataGridViewTextBoxColumn30";
+            dataGridViewTextBoxColumn30.ReadOnly = true;
+            dataGridViewTextBoxColumn30.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // dataGridViewTextBoxColumn31
+            // 
+            dataGridViewTextBoxColumn31.DataPropertyName = "Cause";
+            dataGridViewTextBoxColumn31.FillWeight = 50F;
+            dataGridViewTextBoxColumn31.HeaderText = "Cause";
+            dataGridViewTextBoxColumn31.MinimumWidth = 24;
+            dataGridViewTextBoxColumn31.Name = "dataGridViewTextBoxColumn31";
+            dataGridViewTextBoxColumn31.ReadOnly = true;
+            dataGridViewTextBoxColumn31.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // dataGridViewTextBoxColumn32
+            // 
+            dataGridViewTextBoxColumn32.DataPropertyName = "Effect";
+            dataGridViewTextBoxColumn32.FillWeight = 60F;
+            dataGridViewTextBoxColumn32.HeaderText = "Effect";
+            dataGridViewTextBoxColumn32.MinimumWidth = 24;
+            dataGridViewTextBoxColumn32.Name = "dataGridViewTextBoxColumn32";
+            dataGridViewTextBoxColumn32.ReadOnly = true;
+            dataGridViewTextBoxColumn32.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // tabMonitoraggio
             // 
@@ -1246,9 +1367,9 @@
             // dataGridViewTextBoxColumn23
             // 
             dataGridViewTextBoxColumn23.DataPropertyName = "PartenzaProgrammata";
-            dataGridViewCellStyle2.Format = "t";
-            dataGridViewCellStyle2.NullValue = null;
-            dataGridViewTextBoxColumn23.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle7.Format = "t";
+            dataGridViewCellStyle7.NullValue = null;
+            dataGridViewTextBoxColumn23.DefaultCellStyle = dataGridViewCellStyle7;
             dataGridViewTextBoxColumn23.HeaderText = "PartenzaProgrammata";
             dataGridViewTextBoxColumn23.MinimumWidth = 24;
             dataGridViewTextBoxColumn23.Name = "dataGridViewTextBoxColumn23";
@@ -1258,9 +1379,9 @@
             // dataGridViewTextBoxColumn24
             // 
             dataGridViewTextBoxColumn24.DataPropertyName = "PartenzaEffettiva";
-            dataGridViewCellStyle3.Format = "t";
-            dataGridViewCellStyle3.NullValue = null;
-            dataGridViewTextBoxColumn24.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle8.Format = "t";
+            dataGridViewCellStyle8.NullValue = null;
+            dataGridViewTextBoxColumn24.DefaultCellStyle = dataGridViewCellStyle8;
             dataGridViewTextBoxColumn24.HeaderText = "PartenzaEffettiva";
             dataGridViewTextBoxColumn24.MinimumWidth = 24;
             dataGridViewTextBoxColumn24.Name = "dataGridViewTextBoxColumn24";
@@ -1514,14 +1635,14 @@
             advancedDataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             advancedDataGridView1.BackgroundColor = System.Drawing.SystemColors.Control;
             advancedDataGridView1.CausesValidation = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            advancedDataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            advancedDataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             advancedDataGridView1.ColumnHeadersHeight = 26;
             advancedDataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { IdVettura, matricolaDataGridViewTextBoxColumn1, lineaDataGridViewTextBoxColumn1, gestoreDataGridViewTextBoxColumn1, directionIdDataGridViewTextBoxColumn1, Destinazione, currentStopSequenceDataGridViewTextBoxColumn1, NomeFermata, occupancyStatusDataGridViewTextBoxColumn2, tripIdDataGridViewTextBoxColumn1, primaVoltaDataGridViewTextBoxColumn1, ultimaVoltaDataGridViewTextBoxColumn1, rimessaDataGridViewTextBoxColumn1, euroDataGridViewTextBoxColumn1, modelloDataGridViewTextBoxColumn1, latitudeDataGridViewTextBoxColumn1, longitudeDataGridViewTextBoxColumn1, inTransitToDataGridViewTextBoxColumn2, tipoMezzoTrasportoDataGridViewTextBoxColumn2, PartenzaProgrammata, PartenzaEffettiva });
             advancedDataGridView1.DataSource = extendedVehicleInfoBindingSource;
@@ -1541,6 +1662,201 @@
             advancedDataGridView1.TabIndex = 0;
             advancedDataGridView1.SortStringChanged += AdvancedDataGridView1_SortStringChanged;
             advancedDataGridView1.FilterStringChanged += AdvancedDataGridView1_FilterStringChanged;
+            // 
+            // IdVettura
+            // 
+            IdVettura.DataPropertyName = "IdVettura";
+            IdVettura.HeaderText = "IdVettura";
+            IdVettura.MinimumWidth = 24;
+            IdVettura.Name = "IdVettura";
+            IdVettura.ReadOnly = true;
+            IdVettura.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // matricolaDataGridViewTextBoxColumn1
+            // 
+            matricolaDataGridViewTextBoxColumn1.DataPropertyName = "Matricola";
+            matricolaDataGridViewTextBoxColumn1.HeaderText = "Matricola";
+            matricolaDataGridViewTextBoxColumn1.MinimumWidth = 24;
+            matricolaDataGridViewTextBoxColumn1.Name = "matricolaDataGridViewTextBoxColumn1";
+            matricolaDataGridViewTextBoxColumn1.ReadOnly = true;
+            matricolaDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // lineaDataGridViewTextBoxColumn1
+            // 
+            lineaDataGridViewTextBoxColumn1.DataPropertyName = "Linea";
+            lineaDataGridViewTextBoxColumn1.HeaderText = "Linea";
+            lineaDataGridViewTextBoxColumn1.MinimumWidth = 24;
+            lineaDataGridViewTextBoxColumn1.Name = "lineaDataGridViewTextBoxColumn1";
+            lineaDataGridViewTextBoxColumn1.ReadOnly = true;
+            lineaDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // gestoreDataGridViewTextBoxColumn1
+            // 
+            gestoreDataGridViewTextBoxColumn1.DataPropertyName = "Gestore";
+            gestoreDataGridViewTextBoxColumn1.HeaderText = "Gestore";
+            gestoreDataGridViewTextBoxColumn1.MinimumWidth = 24;
+            gestoreDataGridViewTextBoxColumn1.Name = "gestoreDataGridViewTextBoxColumn1";
+            gestoreDataGridViewTextBoxColumn1.ReadOnly = true;
+            gestoreDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // directionIdDataGridViewTextBoxColumn1
+            // 
+            directionIdDataGridViewTextBoxColumn1.DataPropertyName = "DirectionId";
+            directionIdDataGridViewTextBoxColumn1.HeaderText = "DirectionId";
+            directionIdDataGridViewTextBoxColumn1.MinimumWidth = 24;
+            directionIdDataGridViewTextBoxColumn1.Name = "directionIdDataGridViewTextBoxColumn1";
+            directionIdDataGridViewTextBoxColumn1.ReadOnly = true;
+            directionIdDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // Destinazione
+            // 
+            Destinazione.DataPropertyName = "Destinazione";
+            Destinazione.HeaderText = "Destinazione";
+            Destinazione.MinimumWidth = 24;
+            Destinazione.Name = "Destinazione";
+            Destinazione.ReadOnly = true;
+            Destinazione.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // currentStopSequenceDataGridViewTextBoxColumn1
+            // 
+            currentStopSequenceDataGridViewTextBoxColumn1.DataPropertyName = "CurrentStopSequence";
+            currentStopSequenceDataGridViewTextBoxColumn1.HeaderText = "CurrentStopSequence";
+            currentStopSequenceDataGridViewTextBoxColumn1.MinimumWidth = 24;
+            currentStopSequenceDataGridViewTextBoxColumn1.Name = "currentStopSequenceDataGridViewTextBoxColumn1";
+            currentStopSequenceDataGridViewTextBoxColumn1.ReadOnly = true;
+            currentStopSequenceDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // NomeFermata
+            // 
+            NomeFermata.DataPropertyName = "NomeFermata";
+            NomeFermata.HeaderText = "NomeFermata";
+            NomeFermata.MinimumWidth = 24;
+            NomeFermata.Name = "NomeFermata";
+            NomeFermata.ReadOnly = true;
+            NomeFermata.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // occupancyStatusDataGridViewTextBoxColumn2
+            // 
+            occupancyStatusDataGridViewTextBoxColumn2.DataPropertyName = "OccupancyStatus";
+            occupancyStatusDataGridViewTextBoxColumn2.HeaderText = "OccupancyStatus";
+            occupancyStatusDataGridViewTextBoxColumn2.MinimumWidth = 24;
+            occupancyStatusDataGridViewTextBoxColumn2.Name = "occupancyStatusDataGridViewTextBoxColumn2";
+            occupancyStatusDataGridViewTextBoxColumn2.ReadOnly = true;
+            occupancyStatusDataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // tripIdDataGridViewTextBoxColumn1
+            // 
+            tripIdDataGridViewTextBoxColumn1.DataPropertyName = "TripId";
+            tripIdDataGridViewTextBoxColumn1.HeaderText = "TripId";
+            tripIdDataGridViewTextBoxColumn1.MinimumWidth = 24;
+            tripIdDataGridViewTextBoxColumn1.Name = "tripIdDataGridViewTextBoxColumn1";
+            tripIdDataGridViewTextBoxColumn1.ReadOnly = true;
+            tripIdDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // primaVoltaDataGridViewTextBoxColumn1
+            // 
+            primaVoltaDataGridViewTextBoxColumn1.DataPropertyName = "PrimaVolta";
+            primaVoltaDataGridViewTextBoxColumn1.HeaderText = "PrimaVolta";
+            primaVoltaDataGridViewTextBoxColumn1.MinimumWidth = 24;
+            primaVoltaDataGridViewTextBoxColumn1.Name = "primaVoltaDataGridViewTextBoxColumn1";
+            primaVoltaDataGridViewTextBoxColumn1.ReadOnly = true;
+            primaVoltaDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // ultimaVoltaDataGridViewTextBoxColumn1
+            // 
+            ultimaVoltaDataGridViewTextBoxColumn1.DataPropertyName = "UltimaVolta";
+            ultimaVoltaDataGridViewTextBoxColumn1.HeaderText = "UltimaVolta";
+            ultimaVoltaDataGridViewTextBoxColumn1.MinimumWidth = 24;
+            ultimaVoltaDataGridViewTextBoxColumn1.Name = "ultimaVoltaDataGridViewTextBoxColumn1";
+            ultimaVoltaDataGridViewTextBoxColumn1.ReadOnly = true;
+            ultimaVoltaDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // rimessaDataGridViewTextBoxColumn1
+            // 
+            rimessaDataGridViewTextBoxColumn1.DataPropertyName = "Rimessa";
+            rimessaDataGridViewTextBoxColumn1.HeaderText = "Rimessa";
+            rimessaDataGridViewTextBoxColumn1.MinimumWidth = 24;
+            rimessaDataGridViewTextBoxColumn1.Name = "rimessaDataGridViewTextBoxColumn1";
+            rimessaDataGridViewTextBoxColumn1.ReadOnly = true;
+            rimessaDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // euroDataGridViewTextBoxColumn1
+            // 
+            euroDataGridViewTextBoxColumn1.DataPropertyName = "Euro";
+            euroDataGridViewTextBoxColumn1.HeaderText = "Euro";
+            euroDataGridViewTextBoxColumn1.MinimumWidth = 24;
+            euroDataGridViewTextBoxColumn1.Name = "euroDataGridViewTextBoxColumn1";
+            euroDataGridViewTextBoxColumn1.ReadOnly = true;
+            euroDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // modelloDataGridViewTextBoxColumn1
+            // 
+            modelloDataGridViewTextBoxColumn1.DataPropertyName = "Modello";
+            modelloDataGridViewTextBoxColumn1.HeaderText = "Modello";
+            modelloDataGridViewTextBoxColumn1.MinimumWidth = 24;
+            modelloDataGridViewTextBoxColumn1.Name = "modelloDataGridViewTextBoxColumn1";
+            modelloDataGridViewTextBoxColumn1.ReadOnly = true;
+            modelloDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // latitudeDataGridViewTextBoxColumn1
+            // 
+            latitudeDataGridViewTextBoxColumn1.DataPropertyName = "Latitude";
+            latitudeDataGridViewTextBoxColumn1.HeaderText = "Latitude";
+            latitudeDataGridViewTextBoxColumn1.MinimumWidth = 24;
+            latitudeDataGridViewTextBoxColumn1.Name = "latitudeDataGridViewTextBoxColumn1";
+            latitudeDataGridViewTextBoxColumn1.ReadOnly = true;
+            latitudeDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // longitudeDataGridViewTextBoxColumn1
+            // 
+            longitudeDataGridViewTextBoxColumn1.DataPropertyName = "Longitude";
+            longitudeDataGridViewTextBoxColumn1.HeaderText = "Longitude";
+            longitudeDataGridViewTextBoxColumn1.MinimumWidth = 24;
+            longitudeDataGridViewTextBoxColumn1.Name = "longitudeDataGridViewTextBoxColumn1";
+            longitudeDataGridViewTextBoxColumn1.ReadOnly = true;
+            longitudeDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // inTransitToDataGridViewTextBoxColumn2
+            // 
+            inTransitToDataGridViewTextBoxColumn2.DataPropertyName = "InTransitTo";
+            inTransitToDataGridViewTextBoxColumn2.HeaderText = "InTransitTo";
+            inTransitToDataGridViewTextBoxColumn2.MinimumWidth = 24;
+            inTransitToDataGridViewTextBoxColumn2.Name = "inTransitToDataGridViewTextBoxColumn2";
+            inTransitToDataGridViewTextBoxColumn2.ReadOnly = true;
+            inTransitToDataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // tipoMezzoTrasportoDataGridViewTextBoxColumn2
+            // 
+            tipoMezzoTrasportoDataGridViewTextBoxColumn2.DataPropertyName = "TipoMezzoTrasporto";
+            tipoMezzoTrasportoDataGridViewTextBoxColumn2.HeaderText = "TipoMezzoTrasporto";
+            tipoMezzoTrasportoDataGridViewTextBoxColumn2.MinimumWidth = 24;
+            tipoMezzoTrasportoDataGridViewTextBoxColumn2.Name = "tipoMezzoTrasportoDataGridViewTextBoxColumn2";
+            tipoMezzoTrasportoDataGridViewTextBoxColumn2.ReadOnly = true;
+            tipoMezzoTrasportoDataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // PartenzaProgrammata
+            // 
+            PartenzaProgrammata.DataPropertyName = "PartenzaProgrammata";
+            dataGridViewCellStyle10.Format = "t";
+            dataGridViewCellStyle10.NullValue = null;
+            PartenzaProgrammata.DefaultCellStyle = dataGridViewCellStyle10;
+            PartenzaProgrammata.HeaderText = "PartenzaProgrammata";
+            PartenzaProgrammata.MinimumWidth = 24;
+            PartenzaProgrammata.Name = "PartenzaProgrammata";
+            PartenzaProgrammata.ReadOnly = true;
+            PartenzaProgrammata.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            // 
+            // PartenzaEffettiva
+            // 
+            PartenzaEffettiva.DataPropertyName = "PartenzaEffettiva";
+            dataGridViewCellStyle11.Format = "t";
+            dataGridViewCellStyle11.NullValue = null;
+            PartenzaEffettiva.DefaultCellStyle = dataGridViewCellStyle11;
+            PartenzaEffettiva.HeaderText = "PartenzaEffettiva";
+            PartenzaEffettiva.MinimumWidth = 24;
+            PartenzaEffettiva.Name = "PartenzaEffettiva";
+            PartenzaEffettiva.ReadOnly = true;
+            PartenzaEffettiva.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
             // 
             // tabGrafico
             // 
@@ -2247,6 +2563,7 @@
             tabMainForm.Controls.Add(tabGrigliaAttuale);
             tabMainForm.Controls.Add(tabMonitoraggio);
             tabMainForm.Controls.Add(tabPage1);
+            tabMainForm.Controls.Add(tabPage2);
             tabMainForm.Location = new System.Drawing.Point(13, 13);
             tabMainForm.Margin = new System.Windows.Forms.Padding(4);
             tabMainForm.Name = "tabMainForm";
@@ -2255,200 +2572,69 @@
             tabMainForm.TabIndex = 27;
             tabMainForm.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
             // 
-            // IdVettura
+            // tabPage2
             // 
-            IdVettura.DataPropertyName = "IdVettura";
-            IdVettura.HeaderText = "IdVettura";
-            IdVettura.MinimumWidth = 24;
-            IdVettura.Name = "IdVettura";
-            IdVettura.ReadOnly = true;
-            IdVettura.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            tabPage2.Controls.Add(dataGridView1);
+            tabPage2.Location = new System.Drawing.Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            tabPage2.Size = new System.Drawing.Size(919, 753);
+            tabPage2.TabIndex = 8;
+            tabPage2.Text = "Corse Tabellate";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
-            // matricolaDataGridViewTextBoxColumn1
+            // dataGridView1
             // 
-            matricolaDataGridViewTextBoxColumn1.DataPropertyName = "Matricola";
-            matricolaDataGridViewTextBoxColumn1.HeaderText = "Matricola";
-            matricolaDataGridViewTextBoxColumn1.MinimumWidth = 24;
-            matricolaDataGridViewTextBoxColumn1.Name = "matricolaDataGridViewTextBoxColumn1";
-            matricolaDataGridViewTextBoxColumn1.ReadOnly = true;
-            matricolaDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            dataGridView1.AutoGenerateColumns = false;
+            dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] { lineaDataGridViewTextBoxColumn2, direzioneDataGridViewTextBoxColumn, partenzaPrevistaDataGridViewTextBoxColumn, partenzaRilevataDataGridViewTextBoxColumn, tipoTrasportoDataGridViewTextBoxColumn, tripIDDataGridViewTextBoxColumn2 });
+            dataGridView1.DataSource = bindingSourceProgrammato;
+            dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            dataGridView1.Location = new System.Drawing.Point(3, 3);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.Size = new System.Drawing.Size(913, 747);
+            dataGridView1.TabIndex = 0;
             // 
-            // lineaDataGridViewTextBoxColumn1
+            // bindingSourceProgrammato
             // 
-            lineaDataGridViewTextBoxColumn1.DataPropertyName = "Linea";
-            lineaDataGridViewTextBoxColumn1.HeaderText = "Linea";
-            lineaDataGridViewTextBoxColumn1.MinimumWidth = 24;
-            lineaDataGridViewTextBoxColumn1.Name = "lineaDataGridViewTextBoxColumn1";
-            lineaDataGridViewTextBoxColumn1.ReadOnly = true;
-            lineaDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            bindingSourceProgrammato.AllowNew = false;
+            bindingSourceProgrammato.DataSource = typeof(Programmato);
             // 
-            // gestoreDataGridViewTextBoxColumn1
+            // lineaDataGridViewTextBoxColumn2
             // 
-            gestoreDataGridViewTextBoxColumn1.DataPropertyName = "Gestore";
-            gestoreDataGridViewTextBoxColumn1.HeaderText = "Gestore";
-            gestoreDataGridViewTextBoxColumn1.MinimumWidth = 24;
-            gestoreDataGridViewTextBoxColumn1.Name = "gestoreDataGridViewTextBoxColumn1";
-            gestoreDataGridViewTextBoxColumn1.ReadOnly = true;
-            gestoreDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            lineaDataGridViewTextBoxColumn2.DataPropertyName = "Linea";
+            lineaDataGridViewTextBoxColumn2.HeaderText = "Linea";
+            lineaDataGridViewTextBoxColumn2.Name = "lineaDataGridViewTextBoxColumn2";
             // 
-            // directionIdDataGridViewTextBoxColumn1
+            // direzioneDataGridViewTextBoxColumn
             // 
-            directionIdDataGridViewTextBoxColumn1.DataPropertyName = "DirectionId";
-            directionIdDataGridViewTextBoxColumn1.HeaderText = "DirectionId";
-            directionIdDataGridViewTextBoxColumn1.MinimumWidth = 24;
-            directionIdDataGridViewTextBoxColumn1.Name = "directionIdDataGridViewTextBoxColumn1";
-            directionIdDataGridViewTextBoxColumn1.ReadOnly = true;
-            directionIdDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            direzioneDataGridViewTextBoxColumn.DataPropertyName = "Direzione";
+            direzioneDataGridViewTextBoxColumn.HeaderText = "Direzione";
+            direzioneDataGridViewTextBoxColumn.Name = "direzioneDataGridViewTextBoxColumn";
             // 
-            // Destinazione
+            // partenzaPrevistaDataGridViewTextBoxColumn
             // 
-            Destinazione.DataPropertyName = "Destinazione";
-            Destinazione.HeaderText = "Destinazione";
-            Destinazione.MinimumWidth = 24;
-            Destinazione.Name = "Destinazione";
-            Destinazione.ReadOnly = true;
-            Destinazione.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            partenzaPrevistaDataGridViewTextBoxColumn.DataPropertyName = "PartenzaPrevista";
+            partenzaPrevistaDataGridViewTextBoxColumn.HeaderText = "PartenzaPrevista";
+            partenzaPrevistaDataGridViewTextBoxColumn.Name = "partenzaPrevistaDataGridViewTextBoxColumn";
             // 
-            // currentStopSequenceDataGridViewTextBoxColumn1
+            // partenzaRilevataDataGridViewTextBoxColumn
             // 
-            currentStopSequenceDataGridViewTextBoxColumn1.DataPropertyName = "CurrentStopSequence";
-            currentStopSequenceDataGridViewTextBoxColumn1.HeaderText = "CurrentStopSequence";
-            currentStopSequenceDataGridViewTextBoxColumn1.MinimumWidth = 24;
-            currentStopSequenceDataGridViewTextBoxColumn1.Name = "currentStopSequenceDataGridViewTextBoxColumn1";
-            currentStopSequenceDataGridViewTextBoxColumn1.ReadOnly = true;
-            currentStopSequenceDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            partenzaRilevataDataGridViewTextBoxColumn.DataPropertyName = "PartenzaRilevata";
+            partenzaRilevataDataGridViewTextBoxColumn.HeaderText = "PartenzaRilevata";
+            partenzaRilevataDataGridViewTextBoxColumn.Name = "partenzaRilevataDataGridViewTextBoxColumn";
             // 
-            // NomeFermata
+            // tipoTrasportoDataGridViewTextBoxColumn
             // 
-            NomeFermata.DataPropertyName = "NomeFermata";
-            NomeFermata.HeaderText = "NomeFermata";
-            NomeFermata.MinimumWidth = 24;
-            NomeFermata.Name = "NomeFermata";
-            NomeFermata.ReadOnly = true;
-            NomeFermata.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            tipoTrasportoDataGridViewTextBoxColumn.DataPropertyName = "TipoTrasporto";
+            tipoTrasportoDataGridViewTextBoxColumn.HeaderText = "TipoTrasporto";
+            tipoTrasportoDataGridViewTextBoxColumn.Name = "tipoTrasportoDataGridViewTextBoxColumn";
             // 
-            // occupancyStatusDataGridViewTextBoxColumn2
+            // tripIDDataGridViewTextBoxColumn2
             // 
-            occupancyStatusDataGridViewTextBoxColumn2.DataPropertyName = "OccupancyStatus";
-            occupancyStatusDataGridViewTextBoxColumn2.HeaderText = "OccupancyStatus";
-            occupancyStatusDataGridViewTextBoxColumn2.MinimumWidth = 24;
-            occupancyStatusDataGridViewTextBoxColumn2.Name = "occupancyStatusDataGridViewTextBoxColumn2";
-            occupancyStatusDataGridViewTextBoxColumn2.ReadOnly = true;
-            occupancyStatusDataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // tripIdDataGridViewTextBoxColumn1
-            // 
-            tripIdDataGridViewTextBoxColumn1.DataPropertyName = "TripId";
-            tripIdDataGridViewTextBoxColumn1.HeaderText = "TripId";
-            tripIdDataGridViewTextBoxColumn1.MinimumWidth = 24;
-            tripIdDataGridViewTextBoxColumn1.Name = "tripIdDataGridViewTextBoxColumn1";
-            tripIdDataGridViewTextBoxColumn1.ReadOnly = true;
-            tripIdDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // primaVoltaDataGridViewTextBoxColumn1
-            // 
-            primaVoltaDataGridViewTextBoxColumn1.DataPropertyName = "PrimaVolta";
-            primaVoltaDataGridViewTextBoxColumn1.HeaderText = "PrimaVolta";
-            primaVoltaDataGridViewTextBoxColumn1.MinimumWidth = 24;
-            primaVoltaDataGridViewTextBoxColumn1.Name = "primaVoltaDataGridViewTextBoxColumn1";
-            primaVoltaDataGridViewTextBoxColumn1.ReadOnly = true;
-            primaVoltaDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // ultimaVoltaDataGridViewTextBoxColumn1
-            // 
-            ultimaVoltaDataGridViewTextBoxColumn1.DataPropertyName = "UltimaVolta";
-            ultimaVoltaDataGridViewTextBoxColumn1.HeaderText = "UltimaVolta";
-            ultimaVoltaDataGridViewTextBoxColumn1.MinimumWidth = 24;
-            ultimaVoltaDataGridViewTextBoxColumn1.Name = "ultimaVoltaDataGridViewTextBoxColumn1";
-            ultimaVoltaDataGridViewTextBoxColumn1.ReadOnly = true;
-            ultimaVoltaDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // rimessaDataGridViewTextBoxColumn1
-            // 
-            rimessaDataGridViewTextBoxColumn1.DataPropertyName = "Rimessa";
-            rimessaDataGridViewTextBoxColumn1.HeaderText = "Rimessa";
-            rimessaDataGridViewTextBoxColumn1.MinimumWidth = 24;
-            rimessaDataGridViewTextBoxColumn1.Name = "rimessaDataGridViewTextBoxColumn1";
-            rimessaDataGridViewTextBoxColumn1.ReadOnly = true;
-            rimessaDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // euroDataGridViewTextBoxColumn1
-            // 
-            euroDataGridViewTextBoxColumn1.DataPropertyName = "Euro";
-            euroDataGridViewTextBoxColumn1.HeaderText = "Euro";
-            euroDataGridViewTextBoxColumn1.MinimumWidth = 24;
-            euroDataGridViewTextBoxColumn1.Name = "euroDataGridViewTextBoxColumn1";
-            euroDataGridViewTextBoxColumn1.ReadOnly = true;
-            euroDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // modelloDataGridViewTextBoxColumn1
-            // 
-            modelloDataGridViewTextBoxColumn1.DataPropertyName = "Modello";
-            modelloDataGridViewTextBoxColumn1.HeaderText = "Modello";
-            modelloDataGridViewTextBoxColumn1.MinimumWidth = 24;
-            modelloDataGridViewTextBoxColumn1.Name = "modelloDataGridViewTextBoxColumn1";
-            modelloDataGridViewTextBoxColumn1.ReadOnly = true;
-            modelloDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // latitudeDataGridViewTextBoxColumn1
-            // 
-            latitudeDataGridViewTextBoxColumn1.DataPropertyName = "Latitude";
-            latitudeDataGridViewTextBoxColumn1.HeaderText = "Latitude";
-            latitudeDataGridViewTextBoxColumn1.MinimumWidth = 24;
-            latitudeDataGridViewTextBoxColumn1.Name = "latitudeDataGridViewTextBoxColumn1";
-            latitudeDataGridViewTextBoxColumn1.ReadOnly = true;
-            latitudeDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // longitudeDataGridViewTextBoxColumn1
-            // 
-            longitudeDataGridViewTextBoxColumn1.DataPropertyName = "Longitude";
-            longitudeDataGridViewTextBoxColumn1.HeaderText = "Longitude";
-            longitudeDataGridViewTextBoxColumn1.MinimumWidth = 24;
-            longitudeDataGridViewTextBoxColumn1.Name = "longitudeDataGridViewTextBoxColumn1";
-            longitudeDataGridViewTextBoxColumn1.ReadOnly = true;
-            longitudeDataGridViewTextBoxColumn1.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // inTransitToDataGridViewTextBoxColumn2
-            // 
-            inTransitToDataGridViewTextBoxColumn2.DataPropertyName = "InTransitTo";
-            inTransitToDataGridViewTextBoxColumn2.HeaderText = "InTransitTo";
-            inTransitToDataGridViewTextBoxColumn2.MinimumWidth = 24;
-            inTransitToDataGridViewTextBoxColumn2.Name = "inTransitToDataGridViewTextBoxColumn2";
-            inTransitToDataGridViewTextBoxColumn2.ReadOnly = true;
-            inTransitToDataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // tipoMezzoTrasportoDataGridViewTextBoxColumn2
-            // 
-            tipoMezzoTrasportoDataGridViewTextBoxColumn2.DataPropertyName = "TipoMezzoTrasporto";
-            tipoMezzoTrasportoDataGridViewTextBoxColumn2.HeaderText = "TipoMezzoTrasporto";
-            tipoMezzoTrasportoDataGridViewTextBoxColumn2.MinimumWidth = 24;
-            tipoMezzoTrasportoDataGridViewTextBoxColumn2.Name = "tipoMezzoTrasportoDataGridViewTextBoxColumn2";
-            tipoMezzoTrasportoDataGridViewTextBoxColumn2.ReadOnly = true;
-            tipoMezzoTrasportoDataGridViewTextBoxColumn2.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // PartenzaProgrammata
-            // 
-            PartenzaProgrammata.DataPropertyName = "PartenzaProgrammata";
-            dataGridViewCellStyle5.Format = "t";
-            dataGridViewCellStyle5.NullValue = null;
-            PartenzaProgrammata.DefaultCellStyle = dataGridViewCellStyle5;
-            PartenzaProgrammata.HeaderText = "PartenzaProgrammata";
-            PartenzaProgrammata.MinimumWidth = 24;
-            PartenzaProgrammata.Name = "PartenzaProgrammata";
-            PartenzaProgrammata.ReadOnly = true;
-            PartenzaProgrammata.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
-            // 
-            // PartenzaEffettiva
-            // 
-            PartenzaEffettiva.DataPropertyName = "PartenzaEffettiva";
-            dataGridViewCellStyle6.Format = "t";
-            dataGridViewCellStyle6.NullValue = null;
-            PartenzaEffettiva.DefaultCellStyle = dataGridViewCellStyle6;
-            PartenzaEffettiva.HeaderText = "PartenzaEffettiva";
-            PartenzaEffettiva.MinimumWidth = 24;
-            PartenzaEffettiva.Name = "PartenzaEffettiva";
-            PartenzaEffettiva.ReadOnly = true;
-            PartenzaEffettiva.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            tripIDDataGridViewTextBoxColumn2.DataPropertyName = "TripID";
+            tripIDDataGridViewTextBoxColumn2.HeaderText = "TripID";
+            tripIDDataGridViewTextBoxColumn2.Name = "tripIDDataGridViewTextBoxColumn2";
             // 
             // FormGTFS_RSM
             // 
@@ -2555,6 +2741,9 @@
             tableLayoutPanel3.ResumeLayout(false);
             tableLayoutPanel3.PerformLayout();
             tabMainForm.ResumeLayout(false);
+            tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSourceProgrammato).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -2859,6 +3048,24 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tipoMezzoTrasportoDataGridViewTextBoxColumn2;
         private System.Windows.Forms.DataGridViewTextBoxColumn partenzaProgrammataDataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn partenzaEffettivaDataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn25;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn26;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn27;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn28;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn29;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn30;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn31;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn32;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.BindingSource bindingSourceProgrammato;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lineaDataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn direzioneDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn partenzaPrevistaDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn partenzaRilevataDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tipoTrasportoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tripIDDataGridViewTextBoxColumn2;
+        //private System.Windows.Forms.BindingSource bindingSourceProgrammato;
     }
 }
 

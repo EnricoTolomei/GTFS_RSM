@@ -120,7 +120,7 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.Collections.Immutable" Version="8.0.0" />
-    <PackageReference Include="System.Drawing.Common" Version="8.0.3" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.4" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
     <PackageReference Include="EntityFramework" Version="6.4.4" />
@@ -131,11 +131,11 @@
     <PackageReference Include="System.ServiceModel.Federation" Version="8.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="CsvHelper" Version="31.0.2" />
+    <PackageReference Include="CsvHelper" Version="32.0.1" />
     <PackageReference Include="EPPlus" Version="4.5.3.3" />
     <PackageReference Include="FastMember" Version="1.5.0" />
     <PackageReference Include="GTFS" Version="3.0.0-pre005" />
-    <PackageReference Include="Octokit" Version="10.0.0" />
+    <PackageReference Include="Octokit" Version="11.0.0" />
     <PackageReference Include="protobuf-net" Version="3.2.30" />
     <PackageReference Include="protobuf-net.Core" Version="3.2.30" />
     <PackageReference Include="ScottPlot" Version="4.1.65" />

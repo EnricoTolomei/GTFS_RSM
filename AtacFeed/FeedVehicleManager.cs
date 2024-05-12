@@ -399,6 +399,25 @@ namespace AtacFeed
                         AnomaliaGTFS.Add(errore);
                     }
                 }
+
+            }
+
+
+            if (GTFS_RSM.OrarioProgrammato.Count > 0)
+            {
+                foreach (var aggiunta in VettureAggiunte)
+                {
+
+                    var programmato = GTFS_RSM.OrarioProgrammato
+                            .Where(x => x.TripID == aggiunta.TripId)
+                            .FirstOrDefault();
+                    if (programmato != null)
+                    {
+                        //programmato.PartenzaRilevata = GTFS.Entities.TimeOfDay.FromString(aggiunta.PartenzaEffettiva.ToString());
+                        programmato.PartenzaRilevata = GTFS.Entities.TimeOfDay.FromDateTime(aggiunta.PartenzaProgrammata.GetValueOrDefault());
+                        
+                    }
+                }
             }
 
             int numVettureTPLFeedVehicle = ElencoVetture
@@ -676,7 +695,7 @@ namespace AtacFeed
             PonderateTPL = 0;
             AnomaliaGTFS.Clear();
             ElencoVettureGrafico.Clear();
-            foreach (var alert in GTFS_RSM.AlertsDaControllare)
+            foreach (var alert in GTFS_RSM?.AlertsDaControllare)
             {
                 alert.ViolazioniAlert.Clear();
             }            

@@ -32,7 +32,7 @@ namespace AtacFeed
         {
             if (other is null)
                 return false;
-            return this.Linea == other.Linea && (this.OraUltimaViolazione.GetValueOrDefault(DateTime.MaxValue) == other.OraUltimaViolazione.GetValueOrDefault(DateTime.MaxValue));
+            return Linea == other.Linea && (OraUltimaViolazione.GetValueOrDefault(DateTime.MaxValue) == other.OraUltimaViolazione.GetValueOrDefault(DateTime.MaxValue));
         }
 
         public override bool Equals(object obj) => Equals(obj as LineaMonitorata);

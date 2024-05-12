@@ -12,12 +12,12 @@ namespace AtacFeed
         public string Giorno { get; set; }
         public TimeSpan? Da { get; set; }
         public TimeSpan? A { get; set; }
-        public int? VetturaDa { get; set; }
-        public int? VetturaA { get; set; }
+        public string VetturaDa { get; set; }
+        public string VetturaA { get; set; }
 
         public RegolaAlert() { }
 
-        public RegolaAlert(string linea, string giorno, TimeSpan? da, TimeSpan? a, int? vetturaDa, int? vetturaA)
+        public RegolaAlert(string linea, string giorno, TimeSpan? da, TimeSpan? a, string vetturaDa, string vetturaA)
         {
             Linea = linea;
             Giorno = giorno;

@@ -435,8 +435,9 @@ namespace AtacFeed
                             join regolaAlert in regoleAlertApplicabili on vettura.Linea equals regolaAlert.Linea
                                 into VetturaRegolaAlert
                             from vetturaRegolaAlert in VetturaRegolaAlert
-                            where vetturaRegolaAlert.VetturaDa <= int.Parse(vettura.Matricola)
-                                        && int.Parse(vettura.Matricola) <= vetturaRegolaAlert.VetturaA.GetValueOrDefault(vetturaRegolaAlert.VetturaDa.GetValueOrDefault(9999))
+                            where Convert.ToInt32(vetturaRegolaAlert.VetturaDa,16) <= Convert.ToInt32(vettura.Matricola, 16)
+                                        //&& int.Parse(vettura.Matricola) <= vetturaRegolaAlert.VetturaA.GetValueOrDefault(vetturaRegolaAlert.VetturaDa.GetValueOrDefault(9999))
+                                        && Convert.ToInt32(vettura.Matricola,16) <= Convert.ToInt32(vetturaRegolaAlert.VetturaA, 16)
                             select new ViolazioneAlert(LastDataFeed, null, vetturaRegolaAlert, vettura.Matricola)
                             ).ToList();
 
@@ -445,8 +446,9 @@ namespace AtacFeed
                             join regolaAlert in regoleAlertApplicabili on "*" equals regolaAlert.Linea
                                 into VetturaRegolaAlert
                             from vetturaRegolaAlert in VetturaRegolaAlert
-                            where vetturaRegolaAlert.VetturaDa <= int.Parse(vettura.Matricola)
-                                        && int.Parse(vettura.Matricola) <= vetturaRegolaAlert.VetturaA.GetValueOrDefault(vetturaRegolaAlert.VetturaDa.GetValueOrDefault(9999))
+                            where Convert.ToInt32(vetturaRegolaAlert.VetturaDa, 16) <= Convert.ToInt32(vettura.Matricola, 16)
+                                        //&& Convert.ToInt32(vettura.Matricola, 16) <= vetturaRegolaAlert.VetturaA.GetValueOrDefault(vetturaRegolaAlert.VetturaDa.GetValueOrDefault(9999))
+                                        && Convert.ToInt32(vettura.Matricola, 16) <= Convert.ToInt32(vetturaRegolaAlert.VetturaA, 16)
                             select new ViolazioneAlert(
                                     LastDataFeed,
                                     null,

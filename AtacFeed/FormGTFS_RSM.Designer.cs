@@ -238,13 +238,13 @@
             tabMainForm = new System.Windows.Forms.TabControl();
             tabPage2 = new System.Windows.Forms.TabPage();
             dataGridView1 = new System.Windows.Forms.DataGridView();
-            bindingSourceProgrammato = new System.Windows.Forms.BindingSource(components);
             lineaDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             direzioneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             partenzaPrevistaDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             partenzaRilevataDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             tipoTrasportoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             tripIDDataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            bindingSourceProgrammato = new System.Windows.Forms.BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)lineaMonitorataBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)extendedVehicleInfoBindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)bindingSourceAvvisi).BeginInit();
@@ -2595,11 +2595,6 @@
             dataGridView1.Size = new System.Drawing.Size(913, 747);
             dataGridView1.TabIndex = 0;
             // 
-            // bindingSourceProgrammato
-            // 
-            bindingSourceProgrammato.AllowNew = false;
-            bindingSourceProgrammato.DataSource = typeof(Programmato);
-            // 
             // lineaDataGridViewTextBoxColumn2
             // 
             lineaDataGridViewTextBoxColumn2.DataPropertyName = "Linea";
@@ -2635,6 +2630,11 @@
             tripIDDataGridViewTextBoxColumn2.DataPropertyName = "TripID";
             tripIDDataGridViewTextBoxColumn2.HeaderText = "TripID";
             tripIDDataGridViewTextBoxColumn2.Name = "tripIDDataGridViewTextBoxColumn2";
+            // 
+            // bindingSourceProgrammato
+            // 
+            bindingSourceProgrammato.AllowNew = false;
+            bindingSourceProgrammato.DataSource = typeof(Programmato);
             // 
             // FormGTFS_RSM
             // 

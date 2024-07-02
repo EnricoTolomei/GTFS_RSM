@@ -438,7 +438,7 @@ namespace AtacFeed
                             textBox2.AppendText($"Vetture rilevate solo sul feed Vehicle: {soloVehicle.Count}" + Environment.NewLine);
                         }
                     }
-                    if (FeedVehicleManager.GTFS_RSM.OrarioProgrammato.Count > 0)
+                    if (FeedVehicleManager.GTFS_RSM.OrarioProgrammato?.Count > 0)
                     {
                         
                         DataTable dtTabellato = new();
@@ -1079,7 +1079,7 @@ namespace AtacFeed
                             ElaboraSheet(excel, excelSheetName, FeedVehicleManager.ElencoVettureSovraffollate);
                         }
 
-                        if (FeedVehicleManager.GTFS_RSM.OrarioProgrammato.Count > 0)
+                        if (FeedVehicleManager.GTFS_RSM.OrarioProgrammato?.Count > 0)
                         {
                             excelSheetName = "OrarioProgrammato";
                             ElaboraSheet(excel, excelSheetName, FeedVehicleManager.GTFS_RSM.OrarioProgrammato);

@@ -403,7 +403,7 @@ namespace AtacFeed
             }
 
 
-            if (GTFS_RSM.OrarioProgrammato.Count > 0)
+            if (GTFS_RSM.OrarioProgrammato?.Count > 0)
             {
                 foreach (var aggiunta in VettureAggiunte)
                 {

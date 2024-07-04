@@ -435,9 +435,8 @@ namespace AtacFeed
                             join regolaAlert in regoleAlertApplicabili on vettura.Linea equals regolaAlert.Linea
                                 into VetturaRegolaAlert
                             from vetturaRegolaAlert in VetturaRegolaAlert
-                            where Convert.ToInt32(vetturaRegolaAlert.VetturaDa,16) <= Convert.ToInt32(vettura.Matricola, 16)
-                                        //&& int.Parse(vettura.Matricola) <= vetturaRegolaAlert.VetturaA.GetValueOrDefault(vetturaRegolaAlert.VetturaDa.GetValueOrDefault(9999))
-                                        && Convert.ToInt32(vettura.Matricola,16) <= Convert.ToInt32(vetturaRegolaAlert.VetturaA, 16)
+                            where MatricolaToHexValue(vetturaRegolaAlert.VetturaDa) <= MatricolaToHexValue(vettura.Matricola)                                        
+                                        && MatricolaToHexValue(vettura.Matricola) <= MatricolaToHexValue(vetturaRegolaAlert.VetturaA)
                             select new ViolazioneAlert(LastDataFeed, null, vetturaRegolaAlert, vettura.Matricola)
                             ).ToList();
 
@@ -446,9 +445,9 @@ namespace AtacFeed
                             join regolaAlert in regoleAlertApplicabili on "*" equals regolaAlert.Linea
                                 into VetturaRegolaAlert
                             from vetturaRegolaAlert in VetturaRegolaAlert
-                            where Convert.ToInt32(vetturaRegolaAlert.VetturaDa, 16) <= Convert.ToInt32(vettura.Matricola, 16)
+                            where MatricolaToHexValue(vetturaRegolaAlert.VetturaDa) <= MatricolaToHexValue(vettura.Matricola)
                                         //&& Convert.ToInt32(vettura.Matricola, 16) <= vetturaRegolaAlert.VetturaA.GetValueOrDefault(vetturaRegolaAlert.VetturaDa.GetValueOrDefault(9999))
-                                        && Convert.ToInt32(vettura.Matricola, 16) <= Convert.ToInt32(vetturaRegolaAlert.VetturaA, 16)
+                                        && MatricolaToHexValue(vettura.Matricola) <= MatricolaToHexValue(vetturaRegolaAlert.VetturaA)
                             select new ViolazioneAlert(
                                     LastDataFeed,
                                     null,
@@ -625,6 +624,13 @@ namespace AtacFeed
             return ecc;
         }
 
+        private int  MatricolaToHexValue(string matricola)
+        {
+            return Convert.ToInt32(matricola
+                        .Replace('A', 'A')
+                        .Replace('R', 'B')
+                        ,16);
+        }
 
         public List<string> TripDuplicati() => (from trip in FeedEntities
                                                 where trip.Vehicle.Trip?.TripId != null

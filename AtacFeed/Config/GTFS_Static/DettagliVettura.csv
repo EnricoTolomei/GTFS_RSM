@@ -1,66 +1,129 @@
 Gestore;Matricola;Euro;Rimessa;Modello;TipoMezzoTrasporto
-Roma TPL;21;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;53;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;57;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;80;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;99;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;100;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;103;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;106;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;109;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;113;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;118;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;121;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;122;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;123;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;132;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;133;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;135;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;137;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;138;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;139;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;165;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;196;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;208;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;241;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;242;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;258;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;260;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;265;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;268;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;280;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;288;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;301;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;308;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;328;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;350;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;351;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;352;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;353;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;354;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;355;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;356;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;357;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;363;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;365;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;378;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;379;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;381;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;382;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;383;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;384;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;385;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;387;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;388;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;389;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;392;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;450;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;451;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;605;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;879;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;903;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;913;DIESEL;Roma TPL;BUS RomaTPL;4
-Roma TPL;914;DIESEL;Roma TPL;BUS RomaTPL;4
+Roma TPL;19;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
+Roma TPL;20;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
+Roma TPL;21;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
+Roma TPL;22;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
+Roma TPL;436;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Roma TPL;499;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Roma TPL;752;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
+Roma TPL;753;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Roma TPL;754;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Roma TPL;875;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Roma TPL;876;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Roma TPL;877;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Roma TPL;991;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Roma TPL;992;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Roma TPL;993;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Atac;0101;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0102;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0103;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0104;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0105;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0106;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0107;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0108;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0109;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0110;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0111;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0112;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0113;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0114;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0115;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0116;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0117;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0118;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0119;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0120;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0121;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0122;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0123;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0124;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0125;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0126;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0127;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0128;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0129;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0130;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0131;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0132;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0133;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0134;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0135;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0136;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0137;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0138;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0139;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0140;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0141;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0142;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0143;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0144;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0145;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0146;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0147;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0148;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0149;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0150;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0151;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0152;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0153;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0154;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0155;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0156;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0157;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0158;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0159;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0160;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0161;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0162;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0163;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0164;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0165;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0166;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0167;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0168;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0169;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0170;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0171;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0172;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0173;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0174;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0175;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0176;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0177;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0178;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0179;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0180;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0181;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0182;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0183;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0184;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0185;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0186;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0187;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0188;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0189;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0190;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0191;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0192;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0193;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0194;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0195;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0196;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0197;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0198;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0199;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0200;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0201;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0202;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0203;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0204;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0205;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0206;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0207;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0208;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0209;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0210;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0241;Diesel Euro6;Magliana;BUS - IVECO INDCAR MOBI CITY;0
 Atac;0242;Diesel Euro6;Magliana;BUS - IVECO INDCAR MOBI CITY;0
 Atac;0243;Diesel Euro6;Magliana;BUS - IVECO INDCAR MOBI CITY;0
@@ -86,210 +149,84 @@ Atac;0262;Diesel Euro6;Grottarossa;BUS - IVECO INDCAR MOBI CITY;0
 Atac;0263;Diesel Euro6;Grottarossa;BUS - IVECO INDCAR MOBI CITY;0
 Atac;0264;Diesel Euro6;Grottarossa;BUS - IVECO INDCAR MOBI CITY;0
 Atac;0265;Diesel Euro6;Grottarossa;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0266;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0266;Diesel Euro6;Grottarossa;BUS - IVECO INDCAR MOBI CITY;0
 Atac;0267;Diesel Euro6;Grottarossa;BUS - IVECO INDCAR MOBI CITY;0
 Atac;0268;Diesel Euro6;Grottarossa;BUS - IVECO INDCAR MOBI CITY;0
 Atac;0269;Diesel Euro6;Grottarossa;BUS - IVECO INDCAR MOBI CITY;0
 Atac;0270;Diesel Euro6;Grottarossa;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0271;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0272;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0273;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0274;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0275;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0276;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0277;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0278;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0279;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0280;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0281;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0282;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0283;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0284;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0285;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0286;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0287;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0288;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0289;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0290;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0291;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0292;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0293;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0294;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0295;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0296;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0297;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0298;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0299;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0300;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0301;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0302;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0303;Diesel Euro6;#;BUS - IVECO INDCAR MOBI CITY;0
-Atac;0401;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0402;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0403;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0404;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0405;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0406;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0407;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0408;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0409;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0410;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0411;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0412;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0413;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0414;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0415;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0416;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0417;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0418;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0419;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0420;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0421;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0422;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0423;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0424;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0425;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0426;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0427;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0428;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0429;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0430;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0431;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0432;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0433;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0434;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0435;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0436;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0437;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0438;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0439;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0440;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0441;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0442;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0443;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0444;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0445;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0446;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0447;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0448;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0449;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0450;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0451;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0452;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0453;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0454;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0455;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0456;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0457;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0458;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0459;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0460;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0461;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0463;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0464;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0465;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0467;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0468;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0469;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0470;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0471;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0472;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0473;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0475;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0476;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0477;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0478;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0479;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0480;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0482;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0483;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0484;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0485;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0486;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0487;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0488;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0489;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0490;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0491;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0492;Diesel Euro5;TorSapienza;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0493;Diesel Euro5;Acilia;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0494;Diesel Euro5;Acilia;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0495;Diesel Euro5;Acilia;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0496;Diesel Euro5;Acilia;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0497;Diesel Euro5;Acilia;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0498;Diesel Euro5;Grottarossa;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0499;Diesel Euro5;Grottarossa;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0500;Diesel Euro5;Grottarossa;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0501;Diesel Euro5;Grottarossa;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0502;Diesel Euro5;Grottarossa;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0503;Diesel Euro5;Grottarossa;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0504;Diesel Euro5;Grottarossa;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0505;Diesel Euro5;Grottarossa;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0506;Diesel Euro5;Grottarossa;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0507;Diesel Euro5;Grottarossa;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0508;Diesel Euro5;Grottarossa;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0509;Diesel Euro5;Grottarossa;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0510;Diesel Euro5;Grottarossa;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0511;Diesel Euro5;Grottarossa;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0512;Diesel Euro5;Magliana;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0513;Diesel Euro5;Acilia;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0514;Diesel Euro5;Magliana;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0515;Diesel Euro5;Magliana;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0516;Diesel Euro5;Magliana;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0517;Diesel Euro5;Magliana;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0518;Diesel Euro5;Magliana;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0519;Diesel Euro5;Magliana;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0520;Diesel Euro5;Magliana;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0521;Diesel Euro5;Magliana;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0522;Diesel Euro5;Acilia;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0523;Diesel Euro5;Acilia;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0524;Diesel Euro5;Acilia;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0525;Diesel Euro5;Acilia;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0526;Diesel Euro5;Acilia;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0527;Diesel Euro5;Acilia;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0528;Diesel Euro5;Acilia;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0530;Diesel Euro5;Acilia;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0531;Diesel Euro5;Acilia;BUS - IRISBUS CITELIS 3p 18m;0
-Atac;0551;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0552;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0553;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0554;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0555;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0556;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0557;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0558;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0559;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0560;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0561;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0562;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0563;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0564;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0565;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0566;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0567;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0568;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0569;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0570;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
-Atac;0571;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0572;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0573;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0574;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0575;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0576;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0577;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0578;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0579;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0580;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0581;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0582;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0583;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0584;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0585;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0586;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0587;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0588;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0589;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
-Atac;0590;Diesel Euro6;TorSapienza;BUS - IVECO URBANWAY 18 m;0
+Atac;0271;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0272;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0273;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0274;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0275;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0276;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0277;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0278;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0279;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0280;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0281;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0282;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0283;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0284;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0285;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0286;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0287;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0288;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0289;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0290;Diesel Euro6;Magliana;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0291;Diesel Euro6;Magliana;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0292;Diesel Euro6;Magliana;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0293;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0294;Diesel Euro6;Acilia;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0295;Diesel Euro6;Magliana;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0296;Diesel Euro6;Magliana;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0297;Diesel Euro6;Grottarossa;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0298;Diesel Euro6;Grottarossa;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0299;Diesel Euro6;Magliana;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0300;Diesel Euro6;Magliana;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0301;Diesel Euro6;Magliana;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0302;Diesel Euro6;Grottarossa;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0303;Diesel Euro6;Grottarossa;BUS - IVECO INDCAR MOBI CITY;0
+Atac;0551;Diesel Euro6;Magliana;BUS - IVECO URBANWAY 18 m;0
+Atac;0552;Diesel Euro6;Magliana;BUS - IVECO URBANWAY 18 m;0
+Atac;0553;Diesel Euro6;Magliana;BUS - IVECO URBANWAY 18 m;0
+Atac;0554;Diesel Euro6;Magliana;BUS - IVECO URBANWAY 18 m;0
+Atac;0555;Diesel Euro6;Magliana;BUS - IVECO URBANWAY 18 m;0
+Atac;0556;Diesel Euro6;Magliana;BUS - IVECO URBANWAY 18 m;0
+Atac;0557;Diesel Euro6;Acilia;BUS - IVECO URBANWAY 18 m;0
+Atac;0558;Diesel Euro6;Acilia;BUS - IVECO URBANWAY 18 m;0
+Atac;0559;Diesel Euro6;Acilia;BUS - IVECO URBANWAY 18 m;0
+Atac;0560;Diesel Euro6;Acilia;BUS - IVECO URBANWAY 18 m;0
+Atac;0561;Diesel Euro6;Acilia;BUS - IVECO URBANWAY 18 m;0
+Atac;0562;Diesel Euro6;Acilia;BUS - IVECO URBANWAY 18 m;0
+Atac;0563;Diesel Euro6;Acilia;BUS - IVECO URBANWAY 18 m;0
+Atac;0564;Diesel Euro6;Acilia;BUS - IVECO URBANWAY 18 m;0
+Atac;0565;Diesel Euro6;Acilia;BUS - IVECO URBANWAY 18 m;0
+Atac;0566;Diesel Euro6;Acilia;BUS - IVECO URBANWAY 18 m;0
+Atac;0567;Diesel Euro6;Acilia;BUS - IVECO URBANWAY 18 m;0
+Atac;0568;Diesel Euro6;Acilia;BUS - IVECO URBANWAY 18 m;0
+Atac;0569;Diesel Euro6;Acilia;BUS - IVECO URBANWAY 18 m;0
+Atac;0570;Diesel Euro6;Acilia;BUS - IVECO URBANWAY 18 m;0
+Atac;0571;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
+Atac;0572;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
+Atac;0573;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
+Atac;0574;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
+Atac;0575;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
+Atac;0576;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
+Atac;0577;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
+Atac;0578;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
+Atac;0579;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
+Atac;0580;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 18 m;0
+Atac;0581;Diesel Euro6;Magliana;BUS - IVECO URBANWAY 18 m;0
+Atac;0582;Diesel Euro6;Magliana;BUS - IVECO URBANWAY 18 m;0
+Atac;0583;Diesel Euro6;Magliana;BUS - IVECO URBANWAY 18 m;0
+Atac;0584;Diesel Euro6;Magliana;BUS - IVECO URBANWAY 18 m;0
+Atac;0585;Diesel Euro6;Magliana;BUS - IVECO URBANWAY 18 m;0
+Atac;0586;Diesel Euro6;Magliana;BUS - IVECO URBANWAY 18 m;0
+Atac;0587;Diesel Euro6;Magliana;BUS - IVECO URBANWAY 18 m;0
+Atac;0588;Diesel Euro6;Magliana;BUS - IVECO URBANWAY 18 m;0
+Atac;0589;Diesel Euro6;Magliana;BUS - IVECO URBANWAY 18 m;0
+Atac;0590;Diesel Euro6;Magliana;BUS - IVECO URBANWAY 18 m;0
 Atac;0633;Elettrico;Trastevere;MINIBUS ELETTRICO - TECNOBUS GULLIVER U520ESP;5
 Atac;0635;Elettrico;Trastevere;MINIBUS ELETTRICO - TECNOBUS GULLIVER U520ESP;5
 Atac;0638;Elettrico;Trastevere;MINIBUS ELETTRICO - TECNOBUS GULLIVER U520ESP;5
@@ -459,36 +396,6 @@ Atac;0841;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
 Atac;0842;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
 Atac;0843;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
 Atac;0844;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0815;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0816;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0817;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0818;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0819;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0820;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0821;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0822;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0823;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0824;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0825;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0826;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0827;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0828;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0829;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0830;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0831;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0832;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0833;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0834;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0835;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0836;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0837;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0838;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0839;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0840;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0841;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0842;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0843;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0844;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
 Atac;0845;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
 Atac;0846;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
 Atac;0847;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
@@ -545,24 +452,24 @@ Atac;0897;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
 Atac;0898;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
 Atac;0899;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
 Atac;0900;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0901;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0902;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0903;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0904;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0905;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0906;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0907;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0908;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0909;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0910;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0911;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0912;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0913;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0914;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0915;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0916;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0917;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
-Atac;0918;Metroferro;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0901;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0902;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0903;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0904;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0905;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0906;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0907;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0908;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0909;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0910;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0911;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0912;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0913;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0914;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0915;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0916;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0917;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
+Atac;0918;Ibrido;Portonaccio;BUS - MERCEDES CITARO C2 HYBRID;0
 Atac;1301;Diesel Euro6;Acilia;BUS - IIA CITYMOOD 10.6M;0
 Atac;1302;Diesel Euro6;Acilia;BUS - IIA CITYMOOD 10.6M;0
 Atac;1303;Diesel Euro6;Acilia;BUS - IIA CITYMOOD 10.6M;0
@@ -658,11 +565,11 @@ Atac;2172;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 2p;0
 Atac;2173;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 2p;0
 Atac;2174;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 2p;0
 Atac;2175;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 2p;0
-Atac;2201;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2202;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2203;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2204;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2205;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2201;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2202;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2203;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2204;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2205;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2206;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2207;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2208;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
@@ -678,21 +585,21 @@ Atac;2217;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2218;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2219;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2220;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2221;Diesel Euro6;Magliana;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2222;Diesel Euro6;Magliana;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2223;Diesel Euro6;Magliana;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2224;Diesel Euro6;Magliana;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2225;Diesel Euro6;Magliana;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2226;Diesel Euro6;Magliana;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2227;Diesel Euro6;Magliana;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2228;Diesel Euro6;Magliana;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2229;Diesel Euro6;Magliana;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2230;Diesel Euro6;Magliana;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2231;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2232;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2233;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2234;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2235;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2221;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2222;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2223;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2224;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2225;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2226;Diesel Euro6;Acilia;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2227;Diesel Euro6;Acilia;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2228;Diesel Euro6;Acilia;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2229;Diesel Euro6;Acilia;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2230;Diesel Euro6;Acilia;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2231;Diesel Euro6;Acilia;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2232;Diesel Euro6;Acilia;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2233;Diesel Euro6;Acilia;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2234;Diesel Euro6;Acilia;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2235;Diesel Euro6;Acilia;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2236;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2237;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2238;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
@@ -875,6 +782,28 @@ Atac;2552;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2553;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2554;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2555;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2556;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2557;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2558;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2559;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2560;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2561;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2562;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2563;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2564;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2565;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2566;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2567;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2568;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2569;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2570;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2571;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2572;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2573;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2574;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2575;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2576;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2577;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2601;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 2p;0
 Atac;2602;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 2p;0
 Atac;2603;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 2p;0
@@ -1490,7 +1419,7 @@ Atac;3379;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 12 m;0
 Atac;3380;Diesel Euro6;Grottarossa;BUS - IVECO URBANWAY 12 m;0
 Atac;3381;Diesel Euro6;TorVergata;BUS - IVECO URBANWAY 12 m;0
 Atac;3382;Diesel Euro6;TorVergata;BUS - IVECO URBANWAY 12 m;0
-Atac;3383;Diesel Euro6;TorVergatao;BUS - IVECO URBANWAY 12 m;0
+Atac;3383;Diesel Euro6;TorVergata;BUS - IVECO URBANWAY 12 m;0
 Atac;3384;Diesel Euro6;TorVergata;BUS - IVECO URBANWAY 12 m;0
 Atac;3385;Diesel Euro6;TorVergata;BUS - IVECO URBANWAY 12 m;0
 Atac;3386;Diesel Euro6;TorVergata;BUS - IVECO URBANWAY 12 m;0
@@ -2375,25 +2304,25 @@ Roma TPL;9676;TPL.Diesel Euro5;Roma TPL;BUS - BREDA AVANCITY Normale;3
 Roma TPL;9677;TPL.Diesel Euro5;Roma TPL;BUS - BREDA AVANCITY Normale;3
 Roma TPL;9678;TPL.Diesel Euro5;Roma TPL;BUS - BREDA AVANCITY Normale;3
 Roma TPL;9679;TPL.Diesel Euro5;Roma TPL;BUS - BREDA AVANCITY Normale;3
-Roma TPL;9680;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9681;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9682;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9683;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9684;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9685;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9686;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9687;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9688;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9689;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9690;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9692;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9693;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9694;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9695;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9696;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9697;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9698;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9699;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
+Roma TPL;9680;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Roma TPL;9681;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Roma TPL;9682;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Roma TPL;9683;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Roma TPL;9684;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Roma TPL;9685;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Roma TPL;9686;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Roma TPL;9687;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+Roma TPL;9688;TPL.Diesel Euro5;Roma TPL;BUS - SOLARIS URBINO III Normale;3
+Roma TPL;9689;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA MD9 Corto;3
+Roma TPL;9690;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA MD9 Corto;3
+Roma TPL;9692;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
+Roma TPL;9693;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
+Roma TPL;9694;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
+Roma TPL;9695;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
+Roma TPL;9696;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
+Roma TPL;9697;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
+Roma TPL;9698;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
+Roma TPL;9699;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
 Roma TPL;9700;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9701;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9702;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
@@ -2424,6 +2353,7 @@ Roma TPL;9728;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9729;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9730;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9731;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
+Roma TPL;9732;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9733;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9734;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9735;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
@@ -2566,25 +2496,25 @@ Roma TPL;9874;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9875;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9877;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9878;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
-Roma TPL;9880;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9881;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9882;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9883;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9884;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9885;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9886;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9887;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9888;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9889;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9890;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9891;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9892;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9893;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9894;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9895;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9896;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9898;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9899;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
+Roma TPL;9880;TPL.Diesel Euro5;Roma TPL;BUS - MERCEDES SPRINTER Corto;3
+Roma TPL;9881;TPL.Diesel Euro5;Roma TPL;BUS - MERCEDES SPRINTER Corto;3
+Roma TPL;9882;TPL.Diesel Euro5;Roma TPL;BUS - MERCEDES SPRINTER Corto;3
+Roma TPL;9883;TPL.Diesel Euro5;Roma TPL;BUS - MERCEDES SPRINTER Corto;3
+Roma TPL;9884;TPL.Diesel Euro5;Roma TPL;BUS - MERCEDES SPRINTER Corto;3
+Roma TPL;9885;TPL.Diesel Euro5;Roma TPL;BUS - MERCEDES SPRINTER Corto;3
+Roma TPL;9886;TPL.Diesel Euro5;Roma TPL;BUS - MERCEDES SPRINTER Corto;3
+Roma TPL;9887;TPL.Diesel Euro5;Roma TPL;BUS - MERCEDES SPRINTER Corto;3
+Roma TPL;9888;TPL.Diesel Euro5;Roma TPL;BUS - MERCEDES SPRINTER Corto;3
+Roma TPL;9889;TPL.Diesel Euro5;Roma TPL;BUS - MERCEDES SPRINTER Corto;3
+Roma TPL;9890;TPL.Diesel Euro5;Roma TPL;BUS - INDCAR CYTIOS Corto;3
+Roma TPL;9891;TPL.Diesel Euro5;Roma TPL;BUS - INDCAR CYTIOS Corto;3
+Roma TPL;9892;TPL.Diesel Euro5;Roma TPL;BUS - INDCAR CYTIOS Corto;3
+Roma TPL;9893;TPL.Diesel Euro6;Roma TPL;BUS - BMC NEOCITY Corto;3
+Roma TPL;9894;TPL.Diesel Euro6;Roma TPL;BUS - BMC NEOCITY Corto;3
+Roma TPL;9895;TPL.Diesel Euro6;Roma TPL;BUS - TEMSA MD9 Corto;3
+Roma TPL;9896;TPL.Diesel Euro6;Roma TPL;BUS - TEMSA MD9 Corto;3
+Roma TPL;9898;TPL.Diesel Euro6;Roma TPL;BUS - MERCEDES CITARO C2K Corto;3
+Roma TPL;9899;TPL.Diesel Euro6;Roma TPL;BUS - MERCEDES CITARO C2K Corto;3
 Roma TPL;9900;TPL.Diesel Euro6;Roma TPL;BUS - IVECO URBANWAY Normale;3
 Roma TPL;9901;TPL.Diesel Euro6;Roma TPL;BUS - IVECO URBANWAY Normale;3
 Roma TPL;9902;TPL.Diesel Euro6;Roma TPL;BUS - IVECO URBANWAY Normale;3
@@ -2641,8 +2571,8 @@ Roma TPL;9958;TPL.Diesel Euro6;Roma TPL;BUS - IVECO URBANWAY Normale;3
 Roma TPL;9959;TPL.Diesel Euro6;Roma TPL;BUS - IVECO URBANWAY Normale;3
 Roma TPL;9960;TPL.Diesel Euro6;Roma TPL;BUS - IVECO URBANWAY Normale;3
 Roma TPL;9962;TPL.Diesel Euro6;Roma TPL;BUS - IVECO URBANWAY Normale;3
-Roma TPL;9963;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
-Roma TPL;9964;TPL.Diesel;Roma TPL;BUS - Roma TPL;3
+Roma TPL;9963;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
+Roma TPL;9964;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
 Roma TPL;9968;TPL.Diesel Euro6;Roma TPL;BUS - INDCAR CYTIOS Corto;3
 Roma TPL;9969;TPL.Diesel Euro6;Roma TPL;BUS - INDCAR CYTIOS Corto;3
 Roma TPL;9970;TPL.Diesel Euro6;Roma TPL;BUS - INDCAR CYTIOS Corto;3
@@ -2674,3 +2604,202 @@ Roma TPL;9995;TPL.Diesel Euro6;Roma TPL;BUS - INDCAR CYTIOS Corto;3
 Roma TPL;9996;TPL.Diesel Euro6;Roma TPL;BUS - INDCAR CYTIOS Corto;3
 Roma TPL;9997;TPL.Diesel Euro6;Roma TPL;BUS - INDCAR CYTIOS Corto;3
 Roma TPL;9998;IBRIDO;Roma TPL;BUS - KING LONG IBRIDO;3
+Roma TPL;9999;ELETTRICO;Roma TPL;BUS - KING LONG ELETTRICO;3
+Troiani;A350;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A351;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A352;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A354;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A355;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A356;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A357;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A363;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;3
+Troiani;A365;Diesel Euro5;Troiani;BUS - MERCEDES CITARO FACELIFT Normale;3
+Troiani;A378;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
+Troiani;A379;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
+Troiani;A380;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
+Troiani;A381;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
+Troiani;A382;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
+Troiani;A383;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
+Troiani;A384;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
+Troiani;A385;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
+Troiani;A386;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
+Troiani;A387;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
+Troiani;A388;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
+Troiani;A389;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
+Troiani;A390;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
+Troiani;A391;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
+Troiani;A442;Diesel Euro6;Troiani;BUS - TEMSA AVENUE PLUS Normale;0
+Troiani;A443;Diesel Euro6;Troiani;BUS - TEMSA AVENUE PLUS Normale;0
+Troiani;A444;Diesel Euro6;Troiani;BUS - TEMSA AVENUE PLUS Normale;0
+Troiani;A445;Diesel Euro6;Troiani;BUS - TEMSA AVENUE PLUS Normale;0
+Troiani;A446;Diesel Euro6;Troiani;BUS - TEMSA AVENUE PLUS Normale;0
+Troiani;A447;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;0
+Troiani;A450;Diesel Euro5;Troiani;BUS - MERCEDES CITARO FACELIFT LOW-ENTRY Normale;3
+Troiani;A451;Diesel Euro5;Troiani;BUS - MERCEDES CITARO FACELIFT Normale;3
+Troiani;A453;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;0
+Troiani;A454;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;0
+Troiani;A455;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;0
+Troiani;A456;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;0
+Troiani;A457;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;0
+Troiani;A458;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;0
+Troiani;A463;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
+Troiani;A464;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
+Troiani;A465;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
+Troiani;A471;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A472;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A473;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A474;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A475;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A476;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A477;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A478;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A479;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A480;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A481;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
+Troiani;A500;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A501;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A502;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A503;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A504;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A505;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A506;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A507;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A508;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A509;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A510;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A511;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A512;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A513;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A514;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A515;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A516;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A517;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A518;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A519;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A520;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A521;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A522;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A523;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A524;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A525;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A526;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A527;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A528;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A529;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A530;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A531;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A532;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A533;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A534;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A535;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A536;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A537;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A538;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A539;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
+Troiani;A540;Diesel Euro6;Troiani;BUS - TEMSA LF Normale;3
+Troiani;A541;Diesel Euro6;Troiani;BUS - TEMSA LF Normale;3
+Riccitelli;R341;Diesel Euro5;Riccitelli;BUS - MERCEDES CITARO FACELIFT LOW-ENTRY Normale;0
+Riccitelli;R342;Diesel Euro5;Riccitelli;BUS - MERCEDES CITARO FACELIFT LOW-ENTRY Normale;0
+Riccitelli;R343;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
+Riccitelli;R344;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
+Riccitelli;R345;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
+Riccitelli;R346;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
+Riccitelli;R347;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
+Riccitelli;R348;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
+Riccitelli;R349;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
+Riccitelli;R350;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
+Riccitelli;R351;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Corto;0
+Riccitelli;R352;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Corto;0
+Riccitelli;R353;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
+Riccitelli;R354;Diesel Euro6;Riccitelli;BUS - IVECO EVADYS Normale;0
+Riccitelli;R355;Diesel Euro6;Riccitelli;BUS - IVECO EVADYS Normale;0
+Riccitelli;R356;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
+Riccitelli;R357;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
+Riccitelli;R358;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
+Riccitelli;R359;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
+Riccitelli;R360;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
+Riccitelli;R361;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
+Riccitelli;R362;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
+Riccitelli;R363;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
+Riccitelli;R365;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Corto;0
+Riccitelli;R366;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
+Riccitelli;R367;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Corto;0
+Riccitelli;R368;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
+Riccitelli;R369;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
+Riccitelli;R370;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
+Riccitelli;R371;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
+Riccitelli;R372;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
+Riccitelli;R373;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
+Riccitelli;R374;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
+Riccitelli;R375;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
+Riccitelli;R376;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
+Riccitelli;R377;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
+Riccitelli;R378;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
+Riccitelli;R400;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R401;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R402;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R403;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R404;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R405;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R406;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R407;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R408;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R409;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R410;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R411;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R412;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R413;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R414;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R415;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R416;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R417;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R418;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+Riccitelli;R419;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
+SAP;7700;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7701;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7702;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7703;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7704;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7705;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7706;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7707;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7708;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7709;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7710;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7711;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7712;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7713;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7714;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7715;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7716;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7717;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7718;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7719;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7720;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7721;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7722;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7723;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7724;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7725;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7726;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7727;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7728;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7729;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7730;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7731;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7732;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7733;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7734;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7735;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7736;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7737;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7738;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7739;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7740;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7741;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7742;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7743;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7744;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+SAP;7401;ELETTRICO;SAP;BUS - KING LONG ELETTRICO;3
+SAP;7402;ELETTRICO;SAP;BUS - KING LONG ELETTRICO;3
+SAP;7403;ELETTRICO;SAP;BUS - KING LONG ELETTRICO;3

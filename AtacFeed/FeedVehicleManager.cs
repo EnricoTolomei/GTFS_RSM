@@ -129,7 +129,7 @@ namespace AtacFeed
                                                     licensePlate: x.Vehicle.Vehicle?.LicensePlate,
                                                     routeId: x.Vehicle.Trip?.RouteId,
                                                     linea: linea,
-                                                    gestore: x.DettagliVettura?.Gestore ?? x.Linea?.Agency.Name,
+                                                    gestore: x.DettagliVettura?.Gestore ?? x.Linea?.Agency.Name.ToUpper(),
                                                     //directionId: x.Vehicle.Trip?.DirectionId,
                                                     directionId: (uint?)x.Direction ?? x.Vehicle.Trip?.DirectionId,
                                                     currentStopSequence: x.Vehicle.CurrentStopSequence,

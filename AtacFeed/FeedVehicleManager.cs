@@ -85,7 +85,7 @@ namespace AtacFeed
                 var routeId = GTFS_RSM.StaticData.Trips.Where(x => x.Id == entity.Vehicle.Trip.TripId).FirstOrDefault();
                 entity.Vehicle.Trip.RouteId = routeId?.RouteId?? string.Empty;
             }
-            var ff = GTFS_RSM.StaticData.Routes.Where(x => x.ShortName== "543").FirstOrDefault();
+            //var ff = GTFS_RSM.StaticData.Routes.Where(x => x.ShortName== "246").FirstOrDefault();
             ElencoVetture = (from fe in FeedEntities
                                  .GroupJoin(
                                      inner: GTFS_RSM.ElencoLineaAgenzia,

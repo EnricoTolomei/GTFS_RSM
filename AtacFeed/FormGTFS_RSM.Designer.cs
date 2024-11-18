@@ -230,6 +230,10 @@
             this.textBox2 = new System.Windows.Forms.RichTextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.tabMainForm = new System.Windows.Forms.TabControl();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.plotGTFS = new ScottPlot.FormsPlot();
+            this.advancedDataGridView3 = new Zuby.ADGV.AdvancedDataGridView();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.GridAvvisi = new Zuby.ADGV.AdvancedDataGridView();
             this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -241,6 +245,7 @@
             this.titoloDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descrizioneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSourceAvvisi = new System.Windows.Forms.BindingSource(this.components);
+            this.lineaAgenziaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSourceAttuale = new System.Windows.Forms.BindingSource(this.components);
             this.tabMonitoraggio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViolazioni)).BeginInit();
@@ -263,9 +268,16 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tabMainForm.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView3)).BeginInit();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GridAvvisi)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceAvvisi)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lineaAgenziaBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceAttuale)).BeginInit();
             this.SuspendLayout();
             // 
@@ -431,9 +443,9 @@
             this.label15.Location = new System.Drawing.Point(1076, 181);
             this.label15.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(35, 18);
+            this.label15.Size = new System.Drawing.Size(85, 18);
             this.label15.TabIndex = 37;
-            this.label15.Text = "TPL";
+            this.label15.Text = "Altri Gestori";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelTPL
@@ -544,9 +556,9 @@
             this.label18.Location = new System.Drawing.Point(1077, 505);
             this.label18.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(42, 16);
+            this.label18.Size = new System.Drawing.Size(85, 16);
             this.label18.TabIndex = 45;
-            this.label18.Text = "# TPL";
+            this.label18.Text = "# Altri Gestori";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label14
@@ -784,7 +796,7 @@
             // button4
             // 
             this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(613, 0);
+            this.button4.Location = new System.Drawing.Point(1088, 856);
             this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(133, 28);
@@ -840,9 +852,9 @@
             this.label22.Location = new System.Drawing.Point(1077, 603);
             this.label22.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(42, 16);
+            this.label22.Size = new System.Drawing.Size(85, 16);
             this.label22.TabIndex = 45;
-            this.label22.Text = "# TPL";
+            this.label22.Text = "# Altri Gestori";
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // labelPonderatiTPL
@@ -2527,6 +2539,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabMainForm.Controls.Add(this.tabImpostazioni);
+            this.tabMainForm.Controls.Add(this.tabPage2);
             this.tabMainForm.Controls.Add(this.tabGrafico);
             this.tabMainForm.Controls.Add(this.tabGrigliaFiltrata);
             this.tabMainForm.Controls.Add(this.tabGrigliaAttuale);
@@ -2539,6 +2552,64 @@
             this.tabMainForm.Size = new System.Drawing.Size(1053, 922);
             this.tabMainForm.TabIndex = 27;
             this.tabMainForm.SelectedIndexChanged += new System.EventHandler(this.TabControl1_SelectedIndexChanged);
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.splitContainer1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1045, 893);
+            this.tabPage2.TabIndex = 8;
+            this.tabPage2.Text = "Statistiche GTFS STATIC";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.plotGTFS);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.advancedDataGridView3);
+            this.splitContainer1.Size = new System.Drawing.Size(1039, 887);
+            this.splitContainer1.SplitterDistance = 272;
+            this.splitContainer1.TabIndex = 0;
+            // 
+            // plotGTFS
+            // 
+            this.plotGTFS.AutoSize = true;
+            this.plotGTFS.BackColor = System.Drawing.SystemColors.Control;
+            this.plotGTFS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.plotGTFS.Location = new System.Drawing.Point(0, 0);
+            this.plotGTFS.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.plotGTFS.Name = "plotGTFS";
+            this.plotGTFS.Size = new System.Drawing.Size(1039, 272);
+            this.plotGTFS.TabIndex = 0;
+            // 
+            // advancedDataGridView3
+            // 
+            this.advancedDataGridView3.AllowUserToAddRows = false;
+            this.advancedDataGridView3.AllowUserToDeleteRows = false;
+            this.advancedDataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.advancedDataGridView3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.advancedDataGridView3.FilterAndSortEnabled = true;
+            this.advancedDataGridView3.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.advancedDataGridView3.Location = new System.Drawing.Point(0, 0);
+            this.advancedDataGridView3.Name = "advancedDataGridView3";
+            this.advancedDataGridView3.ReadOnly = true;
+            this.advancedDataGridView3.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.advancedDataGridView3.RowHeadersWidth = 51;
+            this.advancedDataGridView3.RowTemplate.Height = 24;
+            this.advancedDataGridView3.Size = new System.Drawing.Size(1039, 611);
+            this.advancedDataGridView3.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.advancedDataGridView3.TabIndex = 0;
             // 
             // tabPage1
             // 
@@ -2697,6 +2768,10 @@
             // 
             this.bindingSourceAvvisi.DataSource = typeof(AtacFeed.Avviso);
             // 
+            // lineaAgenziaBindingSource
+            // 
+            this.lineaAgenziaBindingSource.DataSource = typeof(AtacFeed.LineaAgenzia);
+            // 
             // bindingSourceAttuale
             // 
             this.bindingSourceAttuale.DataSource = typeof(AtacFeed.ExtendedVehicleInfo);
@@ -2802,9 +2877,17 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel3.PerformLayout();
             this.tabMainForm.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.advancedDataGridView3)).EndInit();
             this.tabPage1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.GridAvvisi)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceAvvisi)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lineaAgenziaBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceAttuale)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -3065,6 +3148,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn titoloDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn descrizioneDataGridViewTextBoxColumn;
         private System.Windows.Forms.CheckBox checkResetSempre;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private ScottPlot.FormsPlot plotGTFS;
+        private Zuby.ADGV.AdvancedDataGridView advancedDataGridView3;
+        private System.Windows.Forms.BindingSource lineaAgenziaBindingSource;
     }
 }
 

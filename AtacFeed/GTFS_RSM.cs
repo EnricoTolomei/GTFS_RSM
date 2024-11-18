@@ -31,6 +31,8 @@ namespace AtacFeed
                 {
                     ZipArchiveEntry entry = zipArchive.GetEntry("stop_times.txt");
                     entry?.Delete();
+                    entry = zipArchive.GetEntry("shapes.txt");
+                    entry?.Delete();
                 }
             }
 

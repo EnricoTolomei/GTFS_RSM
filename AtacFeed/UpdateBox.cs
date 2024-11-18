@@ -113,7 +113,7 @@ namespace AtacFeed
             catch (Exception exc)
             {
                 Log.Error(exc, "UPS");
-            }
+            }            
             return ExistNewerGTFS;
         }
 

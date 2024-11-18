@@ -19,5 +19,6 @@ namespace AtacFeed
                                             effect: x.Alert?.effect.ToString()))
                                         .ToList()
                                     ?? null;
+        public bool DiversoDaPrecedente => LastValidFeed?.Entities.Any(p => !(PrevValidFeed?.Entities.Any(p2 => p2.Id == p.Id) ?? false))  ?? true; 
     }
 }

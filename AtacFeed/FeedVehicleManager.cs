@@ -626,7 +626,10 @@ namespace AtacFeed
 
         private int  MatricolaToHexValue(string matricola)
         {
-            return Convert.ToInt32(matricola
+            
+            return string.IsNullOrEmpty(matricola)
+                ? 0 
+                : Convert.ToInt32(matricola
                         .Replace('A', 'A')
                         .Replace('R', 'B')
                         ,16);

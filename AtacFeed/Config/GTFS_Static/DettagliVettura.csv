@@ -2,7 +2,7 @@ Gestore;Matricola;Euro;Rimessa;Modello;TipoMezzoTrasporto
 BIS;19;TPL.Diesel Euro5;BIS;BUS - VDL CITEA LLE120 Normale;3
 Roma TPL;20;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
 Roma TPL;21;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
-Roma TPL;22;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
+BIS;22;TPL.Diesel Euro5;BIS;BUS - VDL CITEA LLE120 Normale;3
 BIS;436;TPL.Diesel Euro5;BIS;BUS - VDL CITEA SLF120 Normale;3
 SAP;499;TPL.Diesel Euro5;SAP;BUS - VDL CITEA SLF120 Normale;3
 SAP;752;TPL.Diesel Euro5;SAP;BUS - VDL CITEA LLE120 Normale;3
@@ -10,7 +10,7 @@ Roma TPL;753;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
 Roma TPL;754;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
 Roma TPL;875;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
 Roma TPL;876;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
-Roma TPL;877;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
+BIS;877;TPL.Diesel Euro5;BIS;BUS - VDL CITEA SLF120 Normale;3
 SAP;991;TPL.Diesel Euro5;SAP;BUS - VDL CITEA SLF120 Normale;3
 Roma TPL;992;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
 Roma TPL;993;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA SLF120 Normale;3
@@ -565,11 +565,11 @@ Atac;2172;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 2p;0
 Atac;2173;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 2p;0
 Atac;2174;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 2p;0
 Atac;2175;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 2p;0
-Atac;2201;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2202;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2203;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2204;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2205;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2201;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2202;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2203;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2204;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2205;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2206;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2207;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2208;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
@@ -585,11 +585,11 @@ Atac;2217;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2218;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2219;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2220;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2221;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2222;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2223;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2224;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2225;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2221;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2222;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2223;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2224;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2225;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2226;Diesel Euro6;Acilia;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2227;Diesel Euro6;Acilia;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2228;Diesel Euro6;Acilia;BUS - IIA CITYMOOD 12M DIESEL 3p;0
@@ -738,25 +738,25 @@ Atac;2508;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2509;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2510;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2511;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2512;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2512;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2513;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2514;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2515;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2515;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2516;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2517;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2518;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2519;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2520;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2520;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2521;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2522;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2522;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2523;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2524;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2525;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2526;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2527;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2524;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2525;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2526;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2527;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2528;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2529;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2530;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2530;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2531;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2532;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2533;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
@@ -779,21 +779,21 @@ Atac;2549;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2550;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2551;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2552;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2553;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2554;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2555;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2556;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2557;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2558;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2559;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2560;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2553;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2554;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2555;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2556;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2557;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2558;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2559;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2560;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2561;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2562;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2563;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2564;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2565;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2566;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
-Atac;2567;Metano Euro6;TorPagnotta;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2565;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2566;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
+Atac;2567;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2568;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2569;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
 Atac;2570;Metano Euro6;TorSapienza;BUS - IIA CITYMOOD 12M CNG 3p;0
@@ -978,26 +978,26 @@ Atac;2774;Diesel Euro6;Magliana;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2775;Diesel Euro6;Magliana;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2776;Diesel Euro6;Magliana;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2777;Diesel Euro6;Magliana;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2778;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2779;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2780;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2781;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2782;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2783;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2784;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2785;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2786;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2787;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2788;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2789;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2790;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2791;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2792;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2793;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2794;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2795;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2796;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
-Atac;2797;Diesel Euro6;TorSapienza;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2778;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2779;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2780;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2781;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2782;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2783;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2784;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2785;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2786;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2787;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2788;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2789;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2790;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2791;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2792;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2793;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2794;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2795;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2796;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
+Atac;2797;Diesel Euro6;TorVergata;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2798;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2799;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
 Atac;2800;Diesel Euro6;Grottarossa;BUS - IIA CITYMOOD 12M DIESEL 3p;0
@@ -1542,6 +1542,45 @@ Atac;3557;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
 Atac;3558;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
 Atac;3559;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
 Atac;3560;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3561;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3562;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3563;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3564;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3565;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3566;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3567;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3568;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3569;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3570;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3571;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3572;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3573;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3574;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3575;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3576;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3577;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3578;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3579;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3580;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3581;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3582;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3583;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3584;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3585;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3586;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3587;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3588;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3589;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3590;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3591;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3592;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3593;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3594;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3595;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3596;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3597;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3598;Metano Euro5;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3599;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
 Atac;4103;Metano Euro4;TorPagnotta;BUS - IRISBUS 491.12.27 CURSOR CNG (ZF);0
 Atac;4104;Metano Euro4;TorPagnotta;BUS - IRISBUS 491.12.27 CURSOR CNG (ZF);0
 Atac;4105;Metano Euro4;TorPagnotta;BUS - IRISBUS 491.12.27 CURSOR CNG (ZF);0
@@ -2222,7 +2261,7 @@ BIS;9513;TPL.Diesel Euro5;BIS;BUS - BREDA AVANCITY Normale;3
 Roma TPL;9514;TPL.Diesel Euro5;Roma TPL;BUS - BREDA AVANCITY Normale;3
 Roma TPL;9515;TPL.Diesel Euro5;Roma TPL;BUS - BREDA AVANCITY Normale;3
 Roma TPL;9516;TPL.Diesel Euro5;Roma TPL;BUS - BREDA AVANCITY Normale;3
-Roma TPL;9517;TPL.Diesel Euro5;Roma TPL;BUS - BREDA AVANCITY Normale;3
+Tuscia;9517;TPL.Diesel Euro5;Tuscia;BUS - BREDA AVANCITY Normale;3
 BIS;9519;TPL.Diesel Euro5;BIS;BUS - BREDA AVANCITY Normale;3
 BIS;9520;TPL.Diesel Euro5;BIS;BUS - BREDA AVANCITY Normale;3
 Roma TPL;9521;TPL.Diesel Euro5;Roma TPL;BUS - BREDA AVANCITY Normale;3
@@ -2281,7 +2320,7 @@ SAP;9578;TPL.Diesel Euro5;SAP;BUS - BREDA AVANCITY Normale;3
 Roma TPL;9579;TPL.Diesel Euro5;Roma TPL;BUS - BREDA AVANCITY Normale;3
 Roma TPL;9580;TPL.Diesel Euro5;Roma TPL;BUS - BREDA AVANCITY Normale;3
 Roma TPL;9581;TPL.Diesel Euro5;Roma TPL;BUS - BREDA AVANCITY Normale;3
-BIS;9583;TPL.Diesel Euro5;BIS;BUS - BREDA AVANCITY Normale;3
+SAP;9583;TPL.Diesel Euro5;SAP;BUS - BREDA AVANCITY Normale;3
 Roma TPL;9584;TPL.Diesel Euro5;Roma TPL;BUS - BREDA AVANCITY Normale;3
 Tuscia;9585;TPL.Diesel Euro5;Tuscia;BUS - BREDA AVANCITY Normale;3
 Roma TPL;9586;TPL.Diesel Euro5;Roma TPL;BUS - BREDA AVANCITY Normale;3
@@ -2336,7 +2375,7 @@ Roma TPL;9645;TPL.Diesel Euro5;Roma TPL;BUS - BREDA VIVACITY Corto;3
 BIS;9646;TPL.Diesel Euro5;BIS;BUS - BREDA VIVACITY Corto;3
 Roma TPL;9647;TPL.Diesel Euro5;Roma TPL;BUS - BREDA VIVACITY Corto;3
 Roma TPL;9648;TPL.Diesel Euro5;Roma TPL;BUS - BREDA VIVACITY Corto;3
-SAP;9649;TPL.Diesel Euro5;SAP;BUS - BREDA VIVACITY Corto;3
+BIS;9649;TPL.Diesel Euro5;BIS;BUS - BREDA VIVACITY Corto;3
 Roma TPL;9650;TPL.Diesel Euro5;Roma TPL;BUS - BREDA VIVACITY Corto;3
 BIS;9651;TPL.Diesel Euro5;BIS;BUS - BREDA VIVACITY Corto;3
 Roma TPL;9652;TPL.Diesel Euro5;Roma TPL;BUS - BREDA VIVACITY Corto;3
@@ -2383,7 +2422,7 @@ Tuscia;9696;TPL.Diesel Euro5;Tuscia;BUS - VDL CITEA LLE120 Normale;3
 BIS;9697;TPL.Diesel Euro5;BIS;BUS - VDL CITEA LLE120 Normale;3
 Roma TPL;9698;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
 Roma TPL;9699;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
-SAP;9700;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
+BIS;9700;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 BIS;9701;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9702;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 SAP;9703;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
@@ -2399,23 +2438,23 @@ BIS;9713;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9714;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 BIS;9715;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9716;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
-SAP;9717;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
+BIS;9717;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 BIS;9718;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 BIS;9720;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9721;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 BIS;9722;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 BIS;9723;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
-SAP;9724;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
+BIS;9724;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9725;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
-SAP;9726;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
+BIS;9726;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 BIS;9727;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 BIS;9728;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
-Roma TPL;9729;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
+SAP;9729;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9730;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 SAP;9731;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
 SAP;9732;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
 BIS;9733;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
-SAP;9734;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
+BIS;9734;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 SAP;9735;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
 SAP;9736;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
 SAP;9737;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
@@ -2424,7 +2463,7 @@ Roma TPL;9740;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9741;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 BIS;9742;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9743;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
-Roma TPL;9744;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
+BIS;9744;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 SAP;9745;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9746;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9747;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
@@ -2457,7 +2496,7 @@ BIS;9774;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 BIS;9775;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 SAP;9776;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
 BIS;9777;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
-Roma TPL;9778;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
+SAP;9778;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
 SAP;9779;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9780;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9781;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
@@ -2496,7 +2535,7 @@ Roma TPL;9813;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9814;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9815;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 SAP;9816;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
-Roma TPL;9818;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
+SAP;9818;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
 SAP;9819;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
 BIS;9820;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 SAP;9821;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
@@ -2534,7 +2573,7 @@ Roma TPL;9852;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 SAP;9853;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9854;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 SAP;9855;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
-Roma TPL;9856;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
+SAP;9856;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
 SAP;9857;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
 SAP;9858;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
 SAP;9859;TPL.Diesel Euro5;SAP;BUS - TEMSA AVENUE LF Normale;3
@@ -2557,10 +2596,10 @@ Roma TPL;9875;TPL.Diesel Euro5;Roma TPL;BUS - TEMSA AVENUE LF Normale;3
 BIS;9877;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 BIS;9878;TPL.Diesel Euro5;BIS;BUS - TEMSA AVENUE LF Normale;3
 Roma TPL;9880;TPL.Diesel Euro5;Roma TPL;BUS - MERCEDES SPRINTER Corto;3
-Roma TPL;9881;TPL.Diesel Euro5;Roma TPL;BUS - MERCEDES SPRINTER Corto;3
-BIS;9882;TPL.Diesel Euro5;BIS;BUS - MERCEDES SPRINTER Corto;3
-BIS;9883;TPL.Diesel Euro5;BIS;BUS - MERCEDES SPRINTER Corto;3
-BIS;9884;TPL.Diesel Euro5;BIS;BUS - MERCEDES SPRINTER Corto;3
+BIS;9881;TPL.Diesel Euro5;BIS;BUS - MERCEDES SPRINTER Corto;3
+SAP;9882;TPL.Diesel Euro5;SAP;BUS - MERCEDES SPRINTER Corto;3
+SAP;9883;TPL.Diesel Euro5;SAP;BUS - MERCEDES SPRINTER Corto;3
+SAP;9884;TPL.Diesel Euro5;SAP;BUS - MERCEDES SPRINTER Corto;3
 Roma TPL;9885;TPL.Diesel Euro5;Roma TPL;BUS - MERCEDES SPRINTER Corto;3
 Roma TPL;9886;TPL.Diesel Euro5;Roma TPL;BUS - MERCEDES SPRINTER Corto;3
 Roma TPL;9887;TPL.Diesel Euro5;Roma TPL;BUS - MERCEDES SPRINTER Corto;3
@@ -2617,6 +2656,7 @@ BIS;9941;TPL.Diesel Euro6;BIS;BUS - IVECO URBANWAY Normale;3
 Roma TPL;9942;TPL.Diesel Euro6;Roma TPL;BUS - IVECO URBANWAY Normale;3
 BIS;9943;TPL.Diesel Euro6;BIS;BUS - IVECO URBANWAY Normale;3
 BIS;9944;TPL.Diesel Euro6;BIS;BUS - IVECO URBANWAY Normale;3
+BIS;9945;TPL.Diesel Euro6;BIS;BUS - IVECO URBANWAY Normale;3
 Tuscia;9946;TPL.Diesel Euro6;Tuscia;BUS - IVECO URBANWAY Normale;3
 Tuscia;9948;TPL.Diesel Euro6;Tuscia;BUS - IVECO URBANWAY Normale;3
 Roma TPL;9949;TPL.Diesel Euro6;Roma TPL;BUS - IVECO URBANWAY Normale;3
@@ -2632,9 +2672,9 @@ BIS;9959;TPL.Diesel Euro6;BIS;BUS - IVECO URBANWAY Normale;3
 Roma TPL;9960;TPL.Diesel Euro6;Roma TPL;BUS - IVECO URBANWAY Normale;3
 Roma TPL;9962;TPL.Diesel Euro6;Roma TPL;BUS - IVECO URBANWAY Normale;3
 Roma TPL;9963;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
-Roma TPL;9964;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
+Tuscia;9964;TPL.Diesel Euro5;Tuscia;BUS - VDL CITEA LLE120 Normale;3
 Roma TPL;9968;TPL.Diesel Euro6;Roma TPL;BUS - INDCAR CYTIOS Corto;3
-SAP;9969;TPL.Diesel Euro6;SAP;BUS - INDCAR CYTIOS Corto;3
+BIS;9969;TPL.Diesel Euro6;BIS;BUS - INDCAR CYTIOS Corto;3
 Roma TPL;9970;TPL.Diesel Euro6;Roma TPL;BUS - INDCAR CYTIOS Corto;3
 SAP;9971;TPL.Diesel Euro6;SAP;BUS - INDCAR CYTIOS Corto;3
 SAP;9972;TPL.Diesel Euro6;SAP;BUS - INDCAR CYTIOS Corto;3
@@ -2642,7 +2682,7 @@ SAP;9973;TPL.Diesel Euro6;SAP;BUS - INDCAR CYTIOS Corto;3
 SAP;9974;TPL.Diesel Euro6;SAP;BUS - INDCAR CYTIOS Corto;3
 Roma TPL;9975;TPL.Diesel Euro6;Roma TPL;BUS - INDCAR CYTIOS Corto;3
 SAP;9976;TPL.Diesel Euro6;SAP;BUS - INDCAR CYTIOS Corto;3
-SAP;9977;TPL.Diesel Euro6;SAP;BUS - INDCAR CYTIOS Corto;3
+BIS;9977;TPL.Diesel Euro6;BIS;BUS - INDCAR CYTIOS Corto;3
 BIS;9978;TPL.Diesel Euro6;BIS;BUS - INDCAR CYTIOS Corto;3
 BIS;9979;TPL.Diesel Euro6;BIS;BUS - INDCAR CYTIOS Corto;3
 BIS;9980;TPL.Diesel Euro6;BIS;BUS - INDCAR CYTIOS Corto;3
@@ -2725,6 +2765,9 @@ Troiani;A487;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
 Troiani;A488;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
 Troiani;A489;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
 Troiani;A490;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
+Troiani;A495;Diesel Euro6;Troiani;BUS - MERCEDES SPRINTER Corto;3
+Troiani;A496;Diesel Euro6;Troiani;BUS - MERCEDES SPRINTER Corto;3
+Troiani;A497;Diesel Euro6;Troiani;BUS - MERCEDES SPRINTER Corto;3
 Troiani;A500;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
 Troiani;A501;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
 Troiani;A502;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
@@ -2765,8 +2808,8 @@ Troiani;A536;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
 Troiani;A537;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
 Troiani;A538;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
 Troiani;A539;IBRIDO;Troiani;BUS - MERCEDES CITARO C2 HYBRID;3
-Troiani;A540;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
-Troiani;A541;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
+Troiani;A540;Diesel Euro6;Troiani;BUS - TEMSA LF 12 NORMALE;3
+Troiani;A541;Diesel Euro6;Troiani;BUS - TEMSA LF 12 NORMALE;3
 Troiani;A542;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
 Troiani;A543;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
 Troiani;A544;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3

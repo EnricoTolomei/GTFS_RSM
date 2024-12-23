@@ -876,101 +876,101 @@ namespace AtacFeed
 
         private void LeggiValidFeedNEW(string routeID, bool filtroTripVuoti, bool filtroTuttoPercorso, bool raggruppalineaRegola, bool nonoRaggruppare
 
-            , IProgress<Tuple<string, PictureBox,Bitmap>> progress)
+            , IProgress<Tuple<string, PictureBox, Bitmap>> progress)
         {
             try
             {
-            Tuple<string, PictureBox, Bitmap> tuplaReport = null;
-            List<Tuple<string, PictureBox>> tupleServer = new List<Tuple<string, PictureBox>>
+                Tuple<string, PictureBox, Bitmap> tuplaReport = null;
+                List<Tuple<string, PictureBox>> tupleServer = new List<Tuple<string, PictureBox>>
             {
                 new Tuple<string, PictureBox>(urlVehicle.Text, imgUrl1),
                 new Tuple<string, PictureBox>(urlVehicleRiserva.Text, imgUrl2)
             };
-            tupleServer.RemoveAll(x => string.IsNullOrEmpty(x.Item1));
-            //tupleServer.ForEach(x => x.Item2.Refresh());
+                tupleServer.RemoveAll(x => string.IsNullOrEmpty(x.Item1));
+                //tupleServer.ForEach(x => x.Item2.Refresh());
 
-            NumeroLetture++;
-            foreach (Tuple<string, PictureBox> tupla in tupleServer)
-            {
-                string url = tupla.Item1;
-                try
+                NumeroLetture++;
+                foreach (Tuple<string, PictureBox> tupla in tupleServer)
                 {
-                    FeedVehicleManager.LeggiFeedValido(url);
-                    string errorMsg = string.Empty;
-                    switch (FeedVehicleManager.CodeFeed)
+                    string url = tupla.Item1;
+                    try
                     {
-                        case 0:
-                            string filtroLinea = routeID == "-1" ? string.Empty : routeID;
-                            tuplaReport = new Tuple<string, PictureBox, Bitmap>(string.Empty, tupla.Item2, Properties.Resources.verde);
-                            FeedVehicleManager.ElaboraUltimoFeedValido(filtroLinea, filtroTripVuoti, filtroTuttoPercorso, raggruppalineaRegola, nonoRaggruppare);
-                            NumeroFeedValidi++;
-                            break;
-                        case -1:
-                            errorMsg = $"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè NON LETTO{Environment.NewLine}";
-                            tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
-                            break;
-                        case -2:
-                            errorMsg = $"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè VUOTO{Environment.NewLine}";
-                            tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
-                            break;
+                        FeedVehicleManager.LeggiFeedValido(url);
+                        string errorMsg = string.Empty;
+                        switch (FeedVehicleManager.CodeFeed)
+                        {
+                            case 0:
+                                string filtroLinea = routeID == "-1" ? string.Empty : routeID;
+                                tuplaReport = new Tuple<string, PictureBox, Bitmap>(string.Empty, tupla.Item2, Properties.Resources.verde);
+                                FeedVehicleManager.ElaboraUltimoFeedValido(filtroLinea, filtroTripVuoti, filtroTuttoPercorso, raggruppalineaRegola, nonoRaggruppare);
+                                NumeroFeedValidi++;
+                                break;
+                            case -1:
+                                errorMsg = $"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè NON LETTO{Environment.NewLine}";
+                                tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
+                                break;
+                            case -2:
+                                errorMsg = $"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè VUOTO{Environment.NewLine}";
+                                tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
+                                break;
 
-                        case -10:
-                            errorMsg = $"Errore Lettura Feed{Environment.NewLine}";
-                            tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
+                            case -10:
+                                errorMsg = $"Errore Lettura Feed{Environment.NewLine}";
+                                tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
+                                break;
+                            case -3:
+                                errorMsg = $"[{DateTime.Now:HH:mm:ss}] - Feed scartato in quanto ha il timestamp SUPERATO{Environment.NewLine}";
+                                tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.arancio);
+                                break;
+                        }
+
+                        if (progress != null && tuplaReport != null)
+                        {
+                            progress.Report(tuplaReport);
+                        }
+
+                        if (FeedVehicleManager.CodeFeed == 0)
+                        {
                             break;
-                        case -3:
-                            errorMsg = $"[{DateTime.Now:HH:mm:ss}] - Feed scartato in quanto ha il timestamp SUPERATO{Environment.NewLine}";
-                            tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.arancio);                            
-                            break;
+                        }
                     }
-                    
+                    catch (WebException ex) when ((ex.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        FeedVehicleManager.CodeFeed = -100;
+                        string errorMsg = $"{ex.Message}: {Environment.NewLine}Feed Non trovato al seguente indirizzo{Environment.NewLine}{ex.Response.ResponseUri}{Environment.NewLine}";
+                        tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
+                        Log.Error(ex, "Feed {UrlFeed} Non trovato ", ex.Response.ResponseUri);
+                    }
+                    catch (WebException ex) when (ex.Status == WebExceptionStatus.Timeout)
+                    {
+                        FeedVehicleManager.CodeFeed = -101;
+                        string errorMsg = $"{ex.Message} Problemi di connessione con il server{Environment.NewLine}";
+                        tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
+                        Log.Error(ex, "Errore Connessione Server {UrlRemoto}", url);
+                    }
+                    catch (WebException ex) when (ex.Status == WebExceptionStatus.NameResolutionFailure)
+                    {
+                        FeedVehicleManager.CodeFeed = -102;
+                        string errorMsg = $"{ex.Message}";
+                        tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
+                        Log.Error(ex, "Errore Connessione Server {UrlRemoto}", url);
+                    }
+                    catch (Exception ex)
+                    {
+                        FeedVehicleManager.CodeFeed = -103;
+                        string errorMsg = $"{ex.Message}";
+                        tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
+                        Log.Error(ex, "Errore : ", ex.Message);
+                    }
                     if (progress != null && tuplaReport != null)
                     {
                         progress.Report(tuplaReport);
                     }
-
-                    if (FeedVehicleManager.CodeFeed == 0)
-                    {
-                        break;
-                    }
                 }
-                catch (WebException ex) when ((ex.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
-                {
-                    FeedVehicleManager.CodeFeed = -100;
-                    string errorMsg = $"{ex.Message}: {Environment.NewLine}Feed Non trovato al seguente indirizzo{Environment.NewLine}{ex.Response.ResponseUri}{Environment.NewLine}";
-                    tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
-                    Log.Error(ex, "Feed {UrlFeed} Non trovato ", ex.Response.ResponseUri);
-                }
-                catch (WebException ex) when (ex.Status == WebExceptionStatus.Timeout)
-                {
-                    FeedVehicleManager.CodeFeed = -101;
-                    string errorMsg = $"{ex.Message} Problemi di connessione con il server{Environment.NewLine}";
-                    tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
-                    Log.Error(ex, "Errore Connessione Server {UrlRemoto}", url);
-                }
-                catch (WebException ex) when (ex.Status == WebExceptionStatus.NameResolutionFailure)
-                {
-                    FeedVehicleManager.CodeFeed = -102;
-                    string errorMsg = $"{ex.Message}";
-                    tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
-                    Log.Error(ex, "Errore Connessione Server {UrlRemoto}", url);
-                }
-                catch (Exception ex)
-                {
-                    FeedVehicleManager.CodeFeed = -103;
-                    string errorMsg = $"{ex.Message}";
-                    tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
-                    Log.Error(ex, "Errore : ", ex.Message);
-                }
-                if (progress != null && tuplaReport != null)
-                {
-                    progress.Report(tuplaReport);
-                }
-            }
                 FeedAlertManager.LeggiFeedValido(urlAlert.Text);
             }
             catch (Exception ex)
-            {                
+            {
                 Log.Error(ex, "Errore : ", ex.Message);
             }
         }
@@ -1114,7 +1114,7 @@ namespace AtacFeed
             pltTPL.Plot.YAxis.Label(label: "Vetture rilevate");
             pltTPL.Plot.YAxis.MinimumTickSpacing(1);
             pltTPL.Plot.Legend(location: Alignment.UpperLeft);
-            pltTPL.Plot.Title("Monitoraggio vetture TPL");
+            pltTPL.Plot.Title("Monitoraggio vetture altri gestori");
             pltTPL.Plot.AxisAuto();
             pltTPL.Render();            
         }
@@ -1643,9 +1643,9 @@ namespace AtacFeed
                         }
 
                         excelSheetName = "Avvisi";
-                        if (FeedAlertManager.LastValidationResultCode == 0)
+                        if (FeedAlertManager.Avvisi is List<Avviso> avvisi && FeedAlertManager.LastValidationResultCode == 0)
                         {                            
-                            ElaboraSheet(excel, excelSheetName, FeedAlertManager.Avvisi);
+                            ElaboraSheet(excel, excelSheetName, avvisi);
                         }
                         else if (FeedAlertManager.FirstDataFeed.HasValue)
                         {

@@ -632,6 +632,7 @@ namespace AtacFeed
                 : Convert.ToInt32(matricola
                         .Replace('A', 'A')
                         .Replace('R', 'B')
+                        .Replace('T', 'C')
                         ,16);
         }
 

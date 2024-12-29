@@ -3,6 +3,7 @@ BIS;19;TPL.Diesel Euro5;BIS;BUS - VDL CITEA LLE120 Normale;3
 Roma TPL;20;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
 Roma TPL;21;TPL.Diesel Euro5;Roma TPL;BUS - VDL CITEA LLE120 Normale;3
 BIS;22;TPL.Diesel Euro5;BIS;BUS - VDL CITEA LLE120 Normale;3
+BIS;414;TPL.Diesel Euro5;BIS;BUS - VDL CITEA LLE120 Normale;3
 BIS;436;TPL.Diesel Euro5;BIS;BUS - VDL CITEA SLF120 Normale;3
 SAP;499;TPL.Diesel Euro5;SAP;BUS - VDL CITEA SLF120 Normale;3
 SAP;752;TPL.Diesel Euro5;SAP;BUS - VDL CITEA LLE120 Normale;3
@@ -39,13 +40,13 @@ Atac;0122;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0123;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0124;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0125;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
-Atac;0126;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0126;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0127;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0128;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0129;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0130;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0131;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
-Atac;0132;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0132;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0133;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0134;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0135;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
@@ -88,16 +89,16 @@ Atac;0171;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0172;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0173;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0174;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
-Atac;0175;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0175;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0176;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
-Atac;0177;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
-Atac;0178;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
-Atac;0179;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
-Atac;0180;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
-Atac;0181;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
-Atac;0182;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
-Atac;0183;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
-Atac;0184;Ibrido;TorSapienza;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0177;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0178;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0179;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0180;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0181;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0182;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0183;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
+Atac;0184;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0185;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0186;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
 Atac;0187;Ibrido;Grottarossa;BUS - SOLARIS URBINO IV HYBRID;0
@@ -1581,6 +1582,39 @@ Atac;3596;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
 Atac;3597;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
 Atac;3598;Metano Euro5;TorPagnotta;BUS - SOLARIS URBINO CNG;0
 Atac;3599;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3600;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3601;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3602;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3603;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3604;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3605;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3606;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3607;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3608;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3609;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3610;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3611;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3612;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3613;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3614;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3615;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3616;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3617;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3618;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3619;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3620;Metano Euro6;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3621;Metano Euro7;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3622;Metano Euro8;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3623;Metano Euro9;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3624;Metano Euro10;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3625;Metano Euro11;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3626;Metano Euro12;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3627;Metano Euro13;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3628;Metano Euro14;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3629;Metano Euro15;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3630;Metano Euro16;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3631;Metano Euro17;TorPagnotta;BUS - SOLARIS URBINO CNG;0
+Atac;3632;Metano Euro18;TorPagnotta;BUS - SOLARIS URBINO CNG;0
 Atac;4103;Metano Euro4;TorPagnotta;BUS - IRISBUS 491.12.27 CURSOR CNG (ZF);0
 Atac;4104;Metano Euro4;TorPagnotta;BUS - IRISBUS 491.12.27 CURSOR CNG (ZF);0
 Atac;4105;Metano Euro4;TorPagnotta;BUS - IRISBUS 491.12.27 CURSOR CNG (ZF);0
@@ -2714,34 +2748,34 @@ Troiani;A356;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
 Troiani;A357;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
 Troiani;A363;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;3
 Troiani;A365;Diesel Euro5;Troiani;BUS - MERCEDES CITARO FACELIFT Normale;3
-Troiani;A378;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
-Troiani;A379;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
-Troiani;A380;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
-Troiani;A381;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
-Troiani;A382;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
-Troiani;A383;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
-Troiani;A384;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
-Troiani;A385;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
-Troiani;A386;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
-Troiani;A387;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
-Troiani;A388;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
-Troiani;A389;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
-Troiani;A390;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
-Troiani;A391;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;0
-Troiani;A442;Diesel Euro6;Troiani;BUS - TEMSA AVENUE PLUS Normale;0
-Troiani;A443;Diesel Euro6;Troiani;BUS - TEMSA AVENUE PLUS Normale;0
-Troiani;A444;Diesel Euro6;Troiani;BUS - TEMSA AVENUE PLUS Normale;0
-Troiani;A445;Diesel Euro6;Troiani;BUS - TEMSA AVENUE PLUS Normale;0
-Troiani;A446;Diesel Euro6;Troiani;BUS - TEMSA AVENUE PLUS Normale;0
-Troiani;A447;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;0
+Troiani;A378;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;3
+Troiani;A379;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;3
+Troiani;A380;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;3
+Troiani;A381;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;3
+Troiani;A382;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;3
+Troiani;A383;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;3
+Troiani;A384;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;3
+Troiani;A385;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;3
+Troiani;A386;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;3
+Troiani;A387;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;3
+Troiani;A388;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;3
+Troiani;A389;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;3
+Troiani;A390;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;3
+Troiani;A391;IBRIDO;Troiani;BUS - VOLVO 7900 IBRIDO;3
+Troiani;A442;Diesel Euro6;Troiani;BUS - TEMSA AVENUE PLUS Normale;3
+Troiani;A443;Diesel Euro6;Troiani;BUS - TEMSA AVENUE PLUS Normale;3
+Troiani;A444;Diesel Euro6;Troiani;BUS - TEMSA AVENUE PLUS Normale;3
+Troiani;A445;Diesel Euro6;Troiani;BUS - TEMSA AVENUE PLUS Normale;3
+Troiani;A446;Diesel Euro6;Troiani;BUS - TEMSA AVENUE PLUS Normale;3
+Troiani;A447;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
 Troiani;A450;Diesel Euro5;Troiani;BUS - MERCEDES CITARO FACELIFT LOW-ENTRY Normale;3
 Troiani;A451;Diesel Euro5;Troiani;BUS - MERCEDES CITARO FACELIFT Normale;3
-Troiani;A453;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;0
-Troiani;A454;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;0
-Troiani;A455;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;0
-Troiani;A456;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;0
-Troiani;A457;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;0
-Troiani;A458;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;0
+Troiani;A453;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
+Troiani;A454;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
+Troiani;A455;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
+Troiani;A456;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
+Troiani;A457;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
+Troiani;A458;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
 Troiani;A463;Diesel Euro5;Troiani;BUS - TEMSA AVENUE LF Normale;3
 Troiani;A464;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
 Troiani;A465;Diesel Euro6;Troiani;BUS - MERCEDES CITARO C2 Normale;3
@@ -2966,69 +3000,69 @@ Troiani;A709;ELETTRICO;Troiani;BUS - MERCEDES E-CITARO ELETTRICO ;3
 Troiani;A710;Diesel Euro6;Troiani;BUS - BMC NEOCITY Corto;3
 Troiani;A711;Diesel Euro6;Troiani;BUS - BMC NEOCITY Corto;3
 Troiani;A712;Diesel Euro6;Troiani;BUS - BMC NEOCITY Corto;3
-Riccitelli;R341;Diesel Euro5;Riccitelli;BUS - MERCEDES CITARO FACELIFT LOW-ENTRY Normale;0
-Riccitelli;R342;Diesel Euro5;Riccitelli;BUS - MERCEDES CITARO FACELIFT LOW-ENTRY Normale;0
-Riccitelli;R343;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
-Riccitelli;R344;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
-Riccitelli;R345;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
-Riccitelli;R346;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
-Riccitelli;R347;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
-Riccitelli;R348;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
-Riccitelli;R349;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
-Riccitelli;R350;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
-Riccitelli;R351;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Corto;0
-Riccitelli;R352;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Corto;0
-Riccitelli;R353;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
-Riccitelli;R354;Diesel Euro6;Riccitelli;BUS - IVECO EVADYS Normale;0
-Riccitelli;R355;Diesel Euro6;Riccitelli;BUS - IVECO EVADYS Normale;0
-Riccitelli;R356;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
-Riccitelli;R357;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
-Riccitelli;R358;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
-Riccitelli;R359;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
-Riccitelli;R360;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
-Riccitelli;R361;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
-Riccitelli;R362;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
-Riccitelli;R363;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
-Riccitelli;R365;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Corto;0
-Riccitelli;R366;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
-Riccitelli;R367;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Corto;0
-Riccitelli;R368;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
-Riccitelli;R369;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;0
-Riccitelli;R370;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
-Riccitelli;R371;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
-Riccitelli;R372;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
-Riccitelli;R373;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
-Riccitelli;R374;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
-Riccitelli;R375;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
-Riccitelli;R376;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
-Riccitelli;R377;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
-Riccitelli;R378;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;0
-Riccitelli;R400;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R401;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R402;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R403;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R404;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R405;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R406;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R407;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R408;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R409;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R410;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R411;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R412;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R413;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R414;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R415;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R416;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R417;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R418;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R419;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R420;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R421;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R422;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R423;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-Riccitelli;R424;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;0
-SAP;7700;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
+Riccitelli;R341;Diesel Euro5;Riccitelli;BUS - MERCEDES CITARO FACELIFT LOW-ENTRY Normale;3
+Riccitelli;R342;Diesel Euro5;Riccitelli;BUS - MERCEDES CITARO FACELIFT LOW-ENTRY Normale;3
+Riccitelli;R343;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;3
+Riccitelli;R344;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;3
+Riccitelli;R345;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;3
+Riccitelli;R346;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;3
+Riccitelli;R347;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;3
+Riccitelli;R348;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;3
+Riccitelli;R349;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;3
+Riccitelli;R350;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;3
+Riccitelli;R351;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Corto;3
+Riccitelli;R352;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Corto;3
+Riccitelli;R353;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;3
+Riccitelli;R354;Diesel Euro6;Riccitelli;BUS - IVECO EVADYS Normale;3
+Riccitelli;R355;Diesel Euro6;Riccitelli;BUS - IVECO EVADYS Normale;3
+Riccitelli;R356;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;3
+Riccitelli;R357;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;3
+Riccitelli;R358;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;3
+Riccitelli;R359;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;3
+Riccitelli;R360;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;3
+Riccitelli;R361;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;3
+Riccitelli;R362;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;3
+Riccitelli;R363;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;3
+Riccitelli;R365;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Corto;3
+Riccitelli;R366;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;3
+Riccitelli;R367;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Corto;3
+Riccitelli;R368;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;3
+Riccitelli;R369;Diesel Euro6;Riccitelli;BUS - IVECO CROSSWAY Normale;3
+Riccitelli;R370;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;3
+Riccitelli;R371;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;3
+Riccitelli;R372;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;3
+Riccitelli;R373;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;3
+Riccitelli;R374;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;3
+Riccitelli;R375;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;3
+Riccitelli;R376;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;3
+Riccitelli;R377;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;3
+Riccitelli;R378;Diesel Euro5;Riccitelli;BUS - MAN A78 Normale;3
+Riccitelli;R400;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R401;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R402;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R403;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R404;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R405;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R406;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R407;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R408;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R409;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R410;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R411;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R412;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R413;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R414;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R415;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R416;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R417;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R418;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R419;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R420;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R421;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R422;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R423;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;R424;Diesel Euro6;Riccitelli;BUS - SOLARIS URBINO III Normale;3
+Riccitelli;7700;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
 SAP;7701;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
 SAP;7702;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
 SAP;7703;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
@@ -3041,7 +3075,7 @@ SAP;7709;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
 SAP;7710;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
 SAP;7711;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
 SAP;7712;IBRIDO;SAP;BUS - KING LONG IBRIDO;3
-BIS;7713;IBRIDO;BIS;BUS - KING LONG IBRIDO;3
+SAP;7713;IBRIDO;BIS;BUS - KING LONG IBRIDO;3
 BIS;7714;IBRIDO;BIS;BUS - KING LONG IBRIDO;3
 BIS;7715;IBRIDO;BIS;BUS - KING LONG IBRIDO;3
 BIS;7716;IBRIDO;BIS;BUS - KING LONG IBRIDO;3
@@ -3076,3 +3110,80 @@ BIS;7744;IBRIDO;BIS;BUS - KING LONG IBRIDO;3
 BIS;7401;ELETTRICO;BIS;BUS - KING LONG ELETTRICO;3
 BIS;7402;ELETTRICO;BIS;BUS - KING LONG ELETTRICO;3
 BIS;7403;ELETTRICO;BIS;BUS - KING LONG ELETTRICO;3
+BIS;T2009;Diesel Euro6;Trotta;BUS - IVECO URBANWAY Normale;3
+Trotta;T2010;Diesel Euro6;Trotta;BUS - IVECO URBANWAY Normale;3
+Trotta;T2011;Diesel Euro6;Trotta;BUS - IVECO URBANWAY Normale;3
+Trotta;T2031;Metano Euro5;Trotta;BUS - IRISBUS CITELIS CNG ;3
+Trotta;T2032;Metano Euro5;Trotta;BUS - IRISBUS CITELIS CNG ;3
+Trotta;T2033;Metano Euro5;Trotta;BUS - IRISBUS CITELIS CNG ;3
+Trotta;T2034;Metano Euro5;Trotta;BUS - IRISBUS CITELIS CNG ;3
+Trotta;T2035;Metano Euro5;Trotta;BUS - IRISBUS CITELIS CNG ;3
+Trotta;T2036;Metano Euro5;Trotta;BUS - BREDA AVANCITY PLUS CNG;3
+Trotta;T2037;Metano Euro5;Trotta;BUS - BREDA AVANCITY PLUS CNG;3
+Trotta;T2038;Metano Euro5;Trotta;BUS - BREDA AVANCITY PLUS CNG;3
+Trotta;T2039;Metano Euro5;Trotta;BUS - BREDA AVANCITY PLUS CNG;3
+Trotta;T2040;Metano Euro5;Trotta;BUS - BREDA AVANCITY PLUS CNG;3
+Trotta;T2041;Metano Euro5;Trotta;BUS - BREDA AVANCITY PLUS CNG;3
+Trotta;T2042;Metano Euro5;Trotta;BUS - BREDA VIVACITY+ CNG;3
+Trotta;T2043;Metano Euro5;Trotta;BUS - BREDA VIVACITY+ CNG;3
+Trotta;T2044;Metano Euro5;Trotta;BUS - BREDA VIVACITY+ CNG;3
+Trotta;T2045;Metano Euro5;Trotta;BUS - BREDA VIVACITY+ CNG;3
+Trotta;T2046;Metano Euro5;Trotta;BUS - BREDA VIVACITY+ CNG;3
+Trotta;T2047;Metano Euro5;Trotta;BUS - BREDA VIVACITY+ CNG;3
+Trotta;T2085;Metano Euro6;Trotta;BUS - IIA CITYMOOD 10M CNG 3p;3
+Trotta;T2086;Metano Euro6;Trotta;BUS - IIA CITYMOOD 10M CNG 3p;3
+Trotta;T2087;Metano Euro6;Trotta;BUS - IIA CITYMOOD 10M CNG 3p;3
+Trotta;T2088;Metano Euro6;Trotta;BUS - IIA CITYMOOD 10M CNG 3p;3
+Trotta;T2089;Metano Euro6;Trotta;BUS - IIA CITYMOOD 10M CNG 3p;3
+Trotta;T2090;Metano Euro6;Trotta;BUS - IIA CITYMOOD 10M CNG 3p;3
+Trotta;T2091;Metano Euro6;Trotta;BUS - IIA CITYMOOD 10M CNG 3p;3
+Trotta;T2092;Metano Euro6;Trotta;BUS - IIA CITYMOOD 10M CNG 3p;3
+Trotta;T2093;Metano Euro6;Trotta;BUS - IIA CITYMOOD 10M CNG 3p;3
+Trotta;T2098;Diesel Euro6;Trotta;BUS - OTOKAR KENT C Normale;3
+Trotta;T2133;Diesel Euro6;Trotta;BUS - BMC PROCITY Normale;3
+Trotta;T2134;Diesel Euro6;Trotta;BUS - BMC PROCITY Normale;3
+Trotta;T2135;Diesel Euro6;Trotta;BUS - BMC PROCITY Normale;3
+Trotta;T2136;Diesel Euro6;Trotta;BUS - BMC PROCITY Normale;3
+Trotta;T2137;Diesel Euro6;Trotta;BUS - BMC PROCITY Normale;3
+Trotta;T2138;Diesel Euro6;Trotta;BUS - BMC PROCITY Normale;3
+Trotta;T2139;Diesel Euro6;Trotta;BUS - BMC PROCITY Normale;3
+Trotta;T2140;Diesel Euro6;Trotta;BUS - BMC PROCITY Corto;3
+Trotta;T2141;Diesel Euro6;Trotta;BUS - BMC PROCITY Corto;3
+Trotta;T2142;Diesel Euro6;Trotta;BUS - BMC PROCITY Corto;3
+Trotta;T2163;Diesel Euro5;Trotta;BUS - IRISBUS HEULIEZ GX127;3
+Trotta;T2165;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2166;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2167;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2168;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2169;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2170;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2171;Diesel Euro5;Trotta;BUS - OTOKAR KENT Normale;3
+Trotta;T2172;Diesel Euro5;Trotta;BUS - HEULIEZ GX127;3
+Trotta;T2173;Diesel Euro5;Trotta;BUS - HEULIEZ GX127;3
+Trotta;T2174;Diesel Euro5;Trotta;BUS - HEULIEZ GX327;3
+Trotta;T2175;Diesel Euro5;Trotta;BUS - HEULIEZ GX327;3
+Trotta;T2176;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2177;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2178;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2179;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2180;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2181;Diesel Euro5;Trotta;BUS - HEULIEZ GX127L;3
+Trotta;T2182;Diesel Euro5;Trotta;BUS - HEULIEZ GX127L;3
+Trotta;T2183;Diesel Euro5;Trotta;BUS - HEULIEZ GX127L;3
+Trotta;T2184;Diesel Euro5;Trotta;BUS - HEULIEZ GX127L;3
+Trotta;T2185;Diesel Euro5;Trotta;BUS - HEULIEZ GX127L;3
+Trotta;T2186;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2187;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2188;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2189;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2190;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2191;Diesel Euro5;Trotta;BUS - SOLARIS URBINO III Normale;3
+Trotta;T2192;Diesel Euro5;Trotta;BUS - SOLARIS URBINO III Normale;3
+Trotta;T2193;Diesel Euro5;Trotta;BUS - SOLARIS URBINO III Normale;3
+Trotta;T2194;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2195;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Normale;3
+Trotta;T2196;Diesel Euro5;Trotta;BUS - SETRA S415NF Normale;3
+Trotta;T2210;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Corto;3
+Trotta;T2211;Diesel Euro5;Trotta;BUS - MERCEDES CITARO FACELIFT Corto;3
+Trotta;T2212;Diesel Euro5;Trotta;BUS - SOLARIS URBINO III Normale;3
+Trotta;T2213;Diesel Euro5;Trotta;BUS - IRISBUS CITELIS Normale;3

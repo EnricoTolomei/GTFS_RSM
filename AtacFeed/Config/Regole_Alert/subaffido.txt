@@ -1,5 +1,7 @@
 ﻿#
 #   Regole per monitorare le linee in subaffido
 #
-Linea,	Giorno,		Da,	A,      VetturaDa,  VetturaA
-*,	0-1-2-3-4-5-6,  00:00,  23:59,  A000,       A999
+Linea,  Giorno,         Da,     A,      VetturaDa,  VetturaA
+*,      0-1-2-3-4-5-6,  00:00,  23:59,  A000,       A999
+*,      0-1-2-3-4-5-6,  00:00,  23:59,  R000,       R999
+*,      0-1-2-3-4-5-6,  00:00,  23:59,  T0000,      T9999

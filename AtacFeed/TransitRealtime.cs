@@ -368,7 +368,7 @@ namespace AtacFeed
                 NotAcceptingPassengers = 6,
                 [ProtoBuf.ProtoEnum(Name = @"NO_DATA_AVAILABLE")]
                 NoDataAvailable = 7,
-                [ProtoBuf.ProtoEnum(Name = @"NOT_BOARDABLE")] 
+                [ProtoBuf.ProtoEnum(Name = @"NOT_BOARDABLE")]
                 NotBoardable = 8,
             }
 
@@ -487,7 +487,7 @@ namespace AtacFeed
                 StopMoved = 9,
                 [ProtoBuf.ProtoEnum(Name = @"NO_EFFECT")]
                 NoEffect = 10,
-                [ProtoBuf.ProtoEnum(Name = @"ACCESSIBILITY_ISSUE")] 
+                [ProtoBuf.ProtoEnum(Name = @"ACCESSIBILITY_ISSUE")]
                 AccessibilityIssue = 11,
             }
 

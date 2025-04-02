@@ -1,8 +1,8 @@
 ﻿using ProtoBuf;
-using System;
-using static AtacFeed.TransitRealtime;
-using System.Net;
 using Serilog;
+using System;
+using System.Net;
+using static AtacFeed.TransitRealtime;
 
 namespace AtacFeed
 {
@@ -65,7 +65,7 @@ namespace AtacFeed
                     LastDataFeed = feedDate;
                     if (!FirstDataFeed.HasValue)
                     {
-                        FirstDataFeed= feedDate;
+                        FirstDataFeed = feedDate;
                     }
                 }
             }
@@ -78,13 +78,15 @@ namespace AtacFeed
             return LastValidationResultCode;
         }
 
-        public int LeggiFeedValido(string url) {
+        public int LeggiFeedValido(string url)
+        {
             LeggiFeed(url);
             CodeFeed = ValidaFeed();
             return CodeFeed;
         }
 
-        public virtual void Reset() {
+        public virtual void Reset()
+        {
             LastReadFeed = null;
             LastValidFeed = null;
             LastDataFeed = null;

@@ -10,20 +10,20 @@ namespace AtacFeed
 
         [Index(0)]
         public string IdVettura { get; set; }
-        
+
         [Index(1)]
         public string Matricola { get; set; }
 
         [Index(2)]
         [Ignore]
         public string LicensePlate { get; set; }
-        
-        [Index(3)] 
+
+        [Index(3)]
         public string RouteId { get; set; }
-        
+
         [Index(4)]
         public string Linea { get; set; }
-        
+
         [Index(5)]
         public string Gestore { get; set; }
 
@@ -39,7 +39,7 @@ namespace AtacFeed
         [Index(8)]
         [Ignore]
         public VehiclePosition.CongestionLevel CongestionLevel { get; set; }
-        
+
         [Index(9)]
         public VehiclePosition.OccupancyStatus OccupancyStatus { get; set; }
 
@@ -51,7 +51,7 @@ namespace AtacFeed
 
         [Ignore]
         private readonly bool SuperStrictMode;
-        
+
         [Index(11)]
         public DateTime PrimaVolta { get; set; }
 
@@ -67,7 +67,7 @@ namespace AtacFeed
         [Index(15)]
         public string Modello { get; set; }
 
-        [Index(16)]       
+        [Index(16)]
         public float Latitude { get; set; }
 
         [Index(17)]
@@ -87,7 +87,7 @@ namespace AtacFeed
         [Ignore]
         public string NomeFermata { get; set; }
 
-        [Index(22)] 
+        [Index(22)]
         public DateTime? PartenzaProgrammata { get; set; }
 
         [Index(21)]
@@ -142,16 +142,17 @@ namespace AtacFeed
                 return false;
 
             if (SuperStrictMode)
-                return Matricola == other.Matricola && (TripId == other.TripId) && (CurrentStopSequence == other.CurrentStopSequence) ;
+                return Matricola == other.Matricola && (TripId == other.TripId) && (CurrentStopSequence == other.CurrentStopSequence);
             else if (StrictMode)
-                return Matricola == other.Matricola && (TripId == other.TripId); 
+                return Matricola == other.Matricola && (TripId == other.TripId);
             else
                 return Matricola == other.Matricola;
         }
 
         public override bool Equals(object obj) => Equals(obj as ExtendedVehicleInfo);
-        
-        public override int GetHashCode() {
+
+        public override int GetHashCode()
+        {
             if (SuperStrictMode)
                 return (Matricola, TripId, CurrentStopSequence).GetHashCode();
             else if (StrictMode)

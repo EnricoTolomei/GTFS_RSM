@@ -1,17 +1,13 @@
 ﻿using CsvHelper.Configuration.Attributes;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AtacFeed
 {
     public class Avviso
     {
         public string Id { get; set; }
-        [Ignore] 
+        [Ignore]
         public bool IsDeleted { get; set; }
         public DateTime? ValidoDal { get; set; }
         public DateTime? ValidoAl { get; set; }
@@ -19,11 +15,11 @@ namespace AtacFeed
         public string LineeCoinvolte { get; set; }
         public string Titolo { get; set; }
         public string Descrizione { get; set; }
-        [Ignore] 
+        [Ignore]
         public string Url { get; set; }
-        [Description("Causa")] 
+        [Description("Causa")]
         public string Cause { get; set; }
-        [Description("Effetto")] 
+        [Description("Effetto")]
         public string Effect { get; set; }
 
         public Avviso(string id,

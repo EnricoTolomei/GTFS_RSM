@@ -5,12 +5,12 @@ namespace AtacFeed
 {
     public class ViolazioneAlert : RegolaAlert
     {
-        
+
         public string Violazione { get; set; }
 
-        [Ignore] 
+        [Ignore]
         public DateTime? OraPrimaViolazione { get; set; }
-        [Ignore] 
+        [Ignore]
         public DateTime? OraUltimaViolazione { get; set; }
 
         public ViolazioneAlert(DateTime? oraPrimaViolazione, DateTime? oraUltimaViolazione, RegolaAlert regolaAlert, string vetturaSbagliata)

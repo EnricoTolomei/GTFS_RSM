@@ -3,10 +3,8 @@ using Serilog;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Net;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -14,10 +12,10 @@ namespace AtacFeed
 {
     public partial class UpdateBox : Form
     {
-        public  UpdateBox()
+        public UpdateBox()
         {
             InitializeComponent();
-            buttonRestart.DialogResult = DialogResult.Yes;            
+            buttonRestart.DialogResult = DialogResult.Yes;
         }
 
         public static bool? ExistNewerVersion { get; set; }
@@ -58,7 +56,7 @@ namespace AtacFeed
                 }
                 Log.Information("CheckGTFS - Fine Check con {ExistNewerGTFS}", ExistNewerVersion);
             }
-            catch(Exception exc)
+            catch (Exception exc)
             {
                 Log.Error(exc, "UPS CheckVersion");
             }
@@ -113,7 +111,7 @@ namespace AtacFeed
             catch (Exception exc)
             {
                 Log.Error(exc, "UPS");
-            }            
+            }
             return ExistNewerGTFS;
         }
 
@@ -172,7 +170,8 @@ namespace AtacFeed
                     int.Parse(listStrLineElements?.ElementAtOrDefault(3) ?? "0")
                     );
             }
-            catch (Exception exc) {
+            catch (Exception exc)
+            {
                 Log.Error(exc, "ERRORE RECUPERO VERSIONE");
                 if (clickPerformed)
                 {
@@ -245,16 +244,16 @@ namespace AtacFeed
         }
 
         private void LinkHome_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {        
+        {
             Process.Start($"{Properties.Settings.Default.UrlHome}");
         }
 
         private void ButtonRestart_Click(object sender, EventArgs e)
-        {            
+        {
             DialogResult = DialogResult.Yes;
             Close();
         }
-        public async void Check(bool clickPerformed=false)
+        public async void Check(bool clickPerformed = false)
         {
             if (!NewGTFSDownloaded && !ExistNewerGTFS.GetValueOrDefault(false))
             {
@@ -270,7 +269,7 @@ namespace AtacFeed
             UpdateBox_Shown(null, null);
         }
         private void UpdateBox_Shown(object sender, EventArgs e)
-        {            
+        {
             if (!ExistNewerGTFS.HasValue)
             {
                 buttonAggiornaGTFS.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -371,8 +370,9 @@ namespace AtacFeed
                 NewGTFSDownloaded = true;
                 esitoDownload = true;
             }
-            catch (Exception exc) {
-                Log.Error(exc,"Errore Download GTFS");
+            catch (Exception exc)
+            {
+                Log.Error(exc, "Errore Download GTFS");
                 esitoDownload = false;
             }
             return esitoDownload;
@@ -381,24 +381,24 @@ namespace AtacFeed
         internal void ResetUI()
         {
             labelResultConfUpdate.Visible = false;
-            buttonRestart.Visible= false;
+            buttonRestart.Visible = false;
         }
 
         private async void ButtonAggiornaCSV_Click(object sender, EventArgs e)
-        {           
+        {
             progressBar.Value = 0;
             bool esito = await DownloadCSV(true);
             buttonRestart.Visible = esito;
-            labelResultConfUpdate.Visible= true;
+            labelResultConfUpdate.Visible = true;
             labelResultConfUpdate.Text = esito ? "Il download è terminato.\n\rLa configurazione sarà utilizzata al prossimo riavvio del monitoraggio" : $"Si è verificato un errore durante l'aggiornamento dei files.{Environment.NewLine}Riprovare più tardi.";
         }
         public async void ButtonAggiornaGTFS_Click(object sender, EventArgs e)
-        {            
+        {
             progressBar.Value = 0;
             bool esito = await DownloadGTFS(true);
             buttonRestart.Visible = esito;
             labelResultConfUpdate.Visible = true;
-            labelResultConfUpdate.Text = esito ? "Il download è terminato.\n\rLa configurazione sarà utilizzata al prossimo riavvio del monitoraggio": $"Si è verificato un errore durante l'aggiornamento dei files.{Environment.NewLine}Riprovare più tardi.";
+            labelResultConfUpdate.Text = esito ? "Il download è terminato.\n\rLa configurazione sarà utilizzata al prossimo riavvio del monitoraggio" : $"Si è verificato un errore durante l'aggiornamento dei files.{Environment.NewLine}Riprovare più tardi.";
         }
 
         public async Task<bool?> TaskCheckUpdate(bool download = false, bool forceDownload = false)

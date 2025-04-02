@@ -17,7 +17,7 @@ namespace AtacFeed
         public DateTime? OraPrimaViolazione { get; set; }
         public DateTime? OraUltimaViolazione { get; set; }
 
-        [Ignore] 
+        [Ignore]
         public RegolaMonitoraggio RegolaViolata { get; set; }
 
         public LineaMonitorata(DateTime? oraPrimaViolazione, DateTime? oraUltimaViolazione, RegolaMonitoraggio regolaViolata, int vettureRilevate)
@@ -27,7 +27,7 @@ namespace AtacFeed
             RegolaViolata = regolaViolata;
             VettureRilevate = vettureRilevate;
         }
-        
+
         public bool Equals(LineaMonitorata other)
         {
             if (other is null)

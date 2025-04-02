@@ -1,7 +1,6 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
 using GTFS;
-using GTFS.Entities;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -17,7 +16,7 @@ namespace AtacFeed
         public GTFSFeed StaticData { get; set; }
         public List<LineaAgenzia> ElencoLineaAgenzia { get; set; }
         public IEnumerable<DettagliVettura> ElencoDettagliVettura { get; set; }
-        public GTFS_RSM(string pathGTFSStatico, bool usaDettagliVettura=true)
+        public GTFS_RSM(string pathGTFSStatico, bool usaDettagliVettura = true)
         {
             var reader = new GTFSReader<GTFSFeed>();
             string gtfsStatico = Path.Combine(pathGTFSStatico, "GTFS.zip");
@@ -37,7 +36,7 @@ namespace AtacFeed
             }
 
             StaticData = reader.Read(pathGTFSStatico);
-            
+
             ElencoLineaAgenzia = (from linea in StaticData.Routes
                                   join agenzia in StaticData.Agencies on linea.AgencyId equals agenzia.Id
                                   select new LineaAgenzia(linea, agenzia)
@@ -77,7 +76,8 @@ namespace AtacFeed
         public List<CriterioMediaPonderata> CriteriMediaPonderata;
         public List<RegolaMonitoraggio> RegoleMonitoraggio;
         public List<AlertDaControllare> AlertsDaControllare;
-        public int LeggiCriteriMediaPonderata(string file) {
+        public int LeggiCriteriMediaPonderata(string file)
+        {
             int result = 0;
             FileInfo fileMediaPonderata = new FileInfo(file);
             if (fileMediaPonderata.Exists)
@@ -98,14 +98,14 @@ namespace AtacFeed
                     CriteriMediaPonderata = csvMediaPonderata.GetRecords<CriterioMediaPonderata>().ToList();
                     if (CriteriMediaPonderata.Sum(x => x.Peso) != 1)
                     {
-                        result = -1;                        
+                        result = -1;
                     }
                 }
             }
             return result;
         }
         public void LeggiRegoleMonitoraggio(string file)
-        {            
+        {
             using (var readerTempoBonus = new StreamReader(file))
             {
                 var configTempoBonus = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -159,7 +159,8 @@ namespace AtacFeed
                             else
                             {
                                 AlertsDaControllare.Add(
-                                    new AlertDaControllare{
+                                    new AlertDaControllare
+                                    {
                                         RegoleAlert = listaRegole,
                                         ViolazioniAlert = new List<ViolazioneAlert>(),
                                         Name = Path.GetFileNameWithoutExtension(item)
@@ -177,6 +178,6 @@ namespace AtacFeed
                 esito = true;
             }
             return esito && nessunErrore;
-        }       
+        }
     }
 }

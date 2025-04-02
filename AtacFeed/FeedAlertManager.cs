@@ -12,7 +12,7 @@ namespace AtacFeed
                                             id: x.Id,
                                             validoDal: t0.AddSeconds(x.Alert?.ActivePeriods?.FirstOrDefault()?.Start ?? 0).ToLocalTime(),
                                             validoAl: t0.AddSeconds(x.Alert?.ActivePeriods?.FirstOrDefault()?.End ?? 0).ToLocalTime(),
-                                            titolo: string.Join(Environment.NewLine, x.Alert?.HeaderText?.Translations?.Select(i => i.Text) ?? new List<string>() {""}),
+                                            titolo: string.Join(Environment.NewLine, x.Alert?.HeaderText?.Translations?.Select(i => i.Text) ?? new List<string>() { "" }),
                                             descrizione: string.Join(Environment.NewLine, x.Alert?.DescriptionText?.Translations?.Select(i => i.Text) ?? new List<string>() { "" }),
                                             lineeCoinvolte: string.Join(", " + Environment.NewLine, x.Alert?.InformedEntities?.Select(i => i.RouteId) ?? new List<string>() { "" }),
                                             cause: x.Alert?.cause.ToString(),

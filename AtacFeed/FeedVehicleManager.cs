@@ -629,15 +629,22 @@ namespace AtacFeed
 
         private int MatricolaToHexValue(string matricola)
         {
-
-            return string.IsNullOrEmpty(matricola)
-                ? 0
-                : Convert.ToInt32(matricola
-                        .Replace('A', 'A')
-                        .Replace('R', 'B')
-                        .Replace('T', 'C')
-                        .Replace('M', 'D')
-                        , 16);
+            //try
+            //{
+                return string.IsNullOrEmpty(matricola)
+                    ? 0
+                    : Convert.ToInt32(matricola
+                            .Replace('A', 'A')
+                            .Replace('R', 'B')
+                            .Replace('T', 'C')
+                            .Replace('M', 'D')
+                            .Replace('V', 'E')
+                            , 16);
+            //}
+            //catch (Exception)
+            //{
+            //    return 0;
+            //}
         }
 
         public List<string> TripDuplicati() => (from trip in FeedEntities

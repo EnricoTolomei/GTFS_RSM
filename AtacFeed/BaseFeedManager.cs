@@ -1,8 +1,9 @@
-﻿using ProtoBuf;
-using Serilog;
+﻿using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
+using ProtoBuf;
 using System;
 using System.Net;
 using static AtacFeed.TransitRealtime;
+using Log = Serilog.Log;
 
 namespace AtacFeed
 {
@@ -16,64 +17,91 @@ namespace AtacFeed
         public DateTime? FirstDataFeed;
         public int LastValidationResultCode { get; set; } = -20;
         public int CodeFeed { get; set; } = -1;
+
         public void LeggiFeed(string url)
         {
             try
             {
                 CodeFeed = 1;
-                WebRequest request = WebRequest.Create(url);
+
+                var request = WebRequest.Create(url);
                 request.Timeout = 10000;
-                WebResponse response = request.GetResponse();
-                var stream = response.GetResponseStream();
-                LastReadFeed = Serializer.Deserialize<FeedMessage>(stream);
+
+                using (var response = request.GetResponse())
+                using (var stream = response.GetResponseStream())
+                {
+                    if (stream == null)
+                    {
+                        LastReadFeed = null;
+                        CodeFeed = 0;
+                        Log.Error("LeggiFeed {Url} - Response stream is null", url);
+                        throw new InvalidOperationException("Response stream is null");
+                    }
+
+                    // Deserialize directly from the response stream and assign
+                    LastReadFeed = Serializer.Deserialize<FeedMessage>(stream);
+                }
             }
             catch (Exception exc)
             {
+                // Maintain prior behaviour: log, set state and rethrow preserving stack trace
                 LastReadFeed = null;
-                Log.Error(exc, "LeggiFeed {@url} - {@message}", url, exc.Message);
                 CodeFeed = 0;
-                throw (exc);
+                Log.Error(exc, "LeggiFeed {Url} - {Message}", url, exc.Message);
+                throw;
             }
         }
+
         public int ValidaFeed()
         {
-            int isValid;
+            int isValid = 0;
+
             try
             {
                 if (LastReadFeed == null)
                 {
-                    Log.Error($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè NON LETTO");
+                    Log.Error("[{Time}] - Feed Scartato perchè NON LETTO", DateTime.Now.ToString("HH:mm:ss"));
                     isValid = -1;
                 }
-                else if (LastReadFeed.Entities.Count == 0)
+                else if (LastReadFeed.Entities == null || LastReadFeed.Entities.Count == 0)
                 {
-                    Log.Error($"[{DateTime.Now:HH:mm:ss}] - Feed Scartato perchè VUOTO");
+                    Log.Error("[{Time}] - Feed Scartato perchè VUOTO", DateTime.Now.ToString("HH:mm:ss"));
                     isValid = -2;
-                }
-                else if ((LastValidFeed?.Header.Timestamp ?? 0) >= (LastReadFeed?.Header.Timestamp ?? 0))
-                {
-                    Log.Error($"[{DateTime.Now:HH:mm:ss}] - Feed scartato in quanto ha il timestamp SUPERATO");
-                    isValid = -3;
                 }
                 else
                 {
-                    isValid = 0;
-                    DateTime lastDate = t0.AddSeconds(LastValidFeed?.Header.Timestamp ?? 0).ToLocalTime();
-                    DateTime feedDate = t0.AddSeconds(LastReadFeed?.Header.Timestamp ?? 0).ToLocalTime();
-                    PrevValidFeed = LastValidFeed;
-                    LastValidFeed = LastReadFeed;
-                    LastDataFeed = feedDate;
-                    if (!FirstDataFeed.HasValue)
+                    // Compare timestamps as integers first (cheaper than DateTime conversions)
+                    ulong newTs = LastReadFeed.Header != null ? LastReadFeed.Header.Timestamp : 0;
+                    ulong prevTs = LastValidFeed != null && LastValidFeed.Header != null ? LastValidFeed.Header.Timestamp : 0;
+
+                    if (prevTs >= newTs)
                     {
-                        FirstDataFeed = feedDate;
+                        Log.Error("[{Time}] - Feed scartato in quanto ha il timestamp SUPERATO", DateTime.Now.ToString("HH:mm:ss"));
+                        isValid = -3;
+                    }
+                    else
+                    {
+                        // Valid feed: update references and timestamps once
+                        PrevValidFeed = LastValidFeed;
+                        LastValidFeed = LastReadFeed;
+
+                        DateTime feedDate = t0.AddSeconds(newTs).ToLocalTime();
+                        LastDataFeed = feedDate;
+                        if (!FirstDataFeed.HasValue)
+                        {
+                            FirstDataFeed = feedDate;
+                        }
+
+                        isValid = 0;
                     }
                 }
             }
             catch (Exception exc)
             {
-                Log.Error(exc, "Errore Generico");
+                Log.Error(exc, "Errore Generico in ValidaFeed");
                 isValid = -10;
             }
+
             LastValidationResultCode = isValid;
             return LastValidationResultCode;
         }
@@ -92,6 +120,7 @@ namespace AtacFeed
             LastDataFeed = null;
             FirstDataFeed = null;
             LastValidationResultCode = -20;
+            CodeFeed = -1;
         }
     }
 }

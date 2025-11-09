@@ -1,6 +1,8 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
 using GTFS;
+using GTFS.Entities;
+using GTFS.Entities.Collections;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -13,171 +15,235 @@ namespace AtacFeed
 {
     public class GTFS_RSM
     {
-        public GTFSFeed StaticData { get; set; }
-        public List<LineaAgenzia> ElencoLineaAgenzia { get; set; }
-        public IEnumerable<DettagliVettura> ElencoDettagliVettura { get; set; }
+        public GTFSFeed StaticData { get; private set; }
+        public List<LineaAgenzia> ElencoLineaAgenzia { get; private set; }
+        public IEnumerable<DettagliVettura> ElencoDettagliVettura { get; private set; }
+
+        // Configurazioni Csv riutilizzabili per evitare ricreazione ad ogni chiamata
+        private static readonly CsvConfiguration CsvConfigSemicolon = new CsvConfiguration(CultureInfo.InvariantCulture)
+        {
+            Delimiter = ";",
+            HeaderValidated = null,
+            MissingFieldFound = null,
+            TrimOptions = TrimOptions.Trim,
+            PrepareHeaderForMatch = args => args.Header.Trim(),
+            AllowComments = true
+        };
+
+        private static readonly CsvConfiguration CsvConfigComma = new CsvConfiguration(CultureInfo.InvariantCulture)
+        {
+            Delimiter = ",",
+            HeaderValidated = null,
+            MissingFieldFound = null,
+            TrimOptions = TrimOptions.Trim,
+            PrepareHeaderForMatch = args => args.Header.Trim(),
+            AllowComments = true
+        };
+
+        public List<CriterioMediaPonderata> CriteriMediaPonderata;
+        public List<RegolaMonitoraggio> RegoleMonitoraggio;
+        public List<AlertDaControllare> AlertsDaControllare;
+
         public GTFS_RSM(string pathGTFSStatico, bool usaDettagliVettura = true)
         {
-            var reader = new GTFSReader<GTFSFeed>();
-            string gtfsStatico = Path.Combine(pathGTFSStatico, "GTFS.zip");
+            if (string.IsNullOrWhiteSpace(pathGTFSStatico))
+                throw new ArgumentException(nameof(pathGTFSStatico));
 
-            if (File.Exists(gtfsStatico))
+            var reader = new GTFSReader<GTFSFeed>();
+            string gtfsZipPath = Path.Combine(pathGTFSStatico, "GTFS.zip");
+
+            // Se esiste GTFS.zip, applica backup e rimuovi file non necessari per ridurre memoria/tempo di parsing
+            if (File.Exists(gtfsZipPath))
             {
-                string gtfsBck = Path.Combine(pathGTFSStatico, "GTFS_bck.zip");
-                pathGTFSStatico = gtfsStatico;
-                File.Copy(gtfsStatico, gtfsBck, true);
-                using (ZipArchive zipArchive = new ZipArchive(new FileStream(pathGTFSStatico, FileMode.Open, FileAccess.ReadWrite, FileShare.None), ZipArchiveMode.Update))
+                try
                 {
-                    ZipArchiveEntry entry = zipArchive.GetEntry("stop_times.txt");
-                    entry?.Delete();
-                    entry = zipArchive.GetEntry("shapes.txt");
-                    entry?.Delete();
+                    string gtfsBck = Path.Combine(pathGTFSStatico, "GTFS_bck.zip");
+                    File.Copy(gtfsZipPath, gtfsBck, true);
+
+                    // Apri in modalità Update solo quando serve cancellare entry
+                    using (var fs = new FileStream(gtfsZipPath, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+                    using (var zipArchive = new ZipArchive(fs, ZipArchiveMode.Update))
+                    {
+                        // Se le entry non esistono il Delete non fa nulla: query solo due volte
+                        var stopTimes = zipArchive.GetEntry("stop_times.txt");
+                        stopTimes?.Delete();
+
+                        var shapes = zipArchive.GetEntry("shapes.txt");
+                        shapes?.Delete();
+                    }
                 }
+                catch (Exception ex)
+                {
+                    // Non bloccare la costruzione dell'oggetto per problemi nel backup/zip, ma loggare
+                    Log.Warning(ex, "Errore durante l'elaborazione del file GTFS.zip (backup/cancellazione entry)");
+                }
+
+                // Leggi dal file zip modificato
+                pathGTFSStatico = gtfsZipPath;
             }
 
-            StaticData = reader.Read(pathGTFSStatico);
+            // Carica i dati statici GTFS (il reader può essere pesante)
+            StaticData = reader.Read(pathGTFSStatico) ?? new GTFSFeed();
 
-            ElencoLineaAgenzia = (from linea in StaticData.Routes
-                                  join agenzia in StaticData.Agencies on linea.AgencyId equals agenzia.Id
-                                  select new LineaAgenzia(linea, agenzia)
-                                 ).ToList();
+            // Costruzione efficiente di ElencoLineaAgenzia evitando join LINQ costosi
+            ElencoLineaAgenzia = BuildLineaAgenzia(StaticData.Routes, StaticData.Agencies);
 
             AlertsDaControllare = new List<AlertDaControllare>();
 
             LeggiDettagliVettura(usaDettagliVettura);
         }
 
-        internal void LeggiDettagliVettura(bool usaDettagliVettura)
+        private static List<LineaAgenzia> BuildLineaAgenzia(IUniqueEntityCollection<Route> routes, IEnumerable<Agency> agencies)
         {
-            ElencoDettagliVettura = new DettagliVettura[] { };
-            if (usaDettagliVettura)
-            {
-                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-                {
-                    Delimiter = ";",
-                    HeaderValidated = null,
-                    MissingFieldFound = null,
-                    TrimOptions = TrimOptions.Trim,
-                    PrepareHeaderForMatch = args => args.Header.Trim(),
-                    AllowComments = true
-                };
-                string pathDettagli = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}DettagliVettura.csv";
-                if (File.Exists(pathDettagli))
-                {
-                    using (var readerDettagli = new StreamReader(pathDettagli))
-                    using (var csv = new CsvReader(readerDettagli, config))
-                    {
-                        ElencoDettagliVettura = csv.GetRecords<DettagliVettura>().ToList();
-                    }
-                }
-            }
-        }
+            if (routes == null) return new List<LineaAgenzia>();
 
-        public List<CriterioMediaPonderata> CriteriMediaPonderata;
-        public List<RegolaMonitoraggio> RegoleMonitoraggio;
-        public List<AlertDaControllare> AlertsDaControllare;
-        public int LeggiCriteriMediaPonderata(string file)
-        {
-            int result = 0;
-            FileInfo fileMediaPonderata = new FileInfo(file);
-            if (fileMediaPonderata.Exists)
-            {
-                var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-                {
-                    Delimiter = ",",
-                    HeaderValidated = null,
-                    TrimOptions = TrimOptions.Trim,
-                    PrepareHeaderForMatch = args => args.Header.Trim(),
-                    AllowComments = true,
-                    MissingFieldFound = null
-                };
+            // Creiamo un dizionario per lookup O(1) invece di join costosi
+            Dictionary<string, Agency> agencyById = agencies?.ToDictionary(a => a.Id) ?? new Dictionary<string, Agency>(0);
 
-                using (var readerMediaPonderata = new StreamReader(fileMediaPonderata.FullName))
-                using (var csvMediaPonderata = new CsvReader(readerMediaPonderata, config))
-                {
-                    CriteriMediaPonderata = csvMediaPonderata.GetRecords<CriterioMediaPonderata>().ToList();
-                    if (CriteriMediaPonderata.Sum(x => x.Peso) != 1)
-                    {
-                        result = -1;
-                    }
-                }
+            var result = new List<LineaAgenzia>();
+            foreach (var r in routes)
+            {
+                Agency ag = null;
+                if (!string.IsNullOrEmpty(r.AgencyId))
+                    agencyById.TryGetValue(r.AgencyId, out ag);
+
+                result.Add(new LineaAgenzia(r, ag));
             }
             return result;
         }
+
+        internal void LeggiDettagliVettura(bool usaDettagliVettura)
+        {
+            ElencoDettagliVettura = Array.Empty<DettagliVettura>();
+            if (!usaDettagliVettura)
+                return;
+
+            string pathDettagli = Path.Combine("Config", "GTFS_Static", "DettagliVettura.csv");
+            if (!File.Exists(pathDettagli))
+                return;
+
+            try
+            {
+                using (var readerDettagli = new StreamReader(pathDettagli))
+                using (var csv = new CsvReader(readerDettagli, CsvConfigSemicolon))
+                {
+                    // ToList permette di chiudere subito lo stream prima di ulteriori elaborazioni
+                    ElencoDettagliVettura = csv.GetRecords<DettagliVettura>().ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Errore durante la lettura di DettagliVettura.csv");
+                ElencoDettagliVettura = Array.Empty<DettagliVettura>();
+            }
+        }
+
+        public int LeggiCriteriMediaPonderata(string file)
+        {
+            if (string.IsNullOrWhiteSpace(file)) return -1;
+            var fi = new FileInfo(file);
+            if (!fi.Exists) return -1;
+
+            try
+            {
+                using (var readerMediaPonderata = new StreamReader(fi.FullName))
+                using (var csvMediaPonderata = new CsvReader(readerMediaPonderata, CsvConfigComma))
+                {
+                    CriteriMediaPonderata = csvMediaPonderata.GetRecords<CriterioMediaPonderata>().ToList();
+                    // Confronto con tolleranza per i double
+                    double sumPeso = CriteriMediaPonderata.Sum(x => x.Peso);
+                    if (Math.Abs(sumPeso - 1.0) > 1e-9)
+                        return -1;
+                }
+                return 0;
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Errore durante la lettura di CriteriMediaPonderata");
+                return -1;
+            }
+        }
+
         public void LeggiRegoleMonitoraggio(string file)
         {
-            using (var readerTempoBonus = new StreamReader(file))
-            {
-                var configTempoBonus = new CsvConfiguration(CultureInfo.InvariantCulture)
-                {
-                    Delimiter = ",",
-                    HeaderValidated = null,
-                    MissingFieldFound = null,
-                    TrimOptions = TrimOptions.Trim,
-                    PrepareHeaderForMatch = args => args.Header.Trim(),
-                    AllowComments = true
-                };
+            if (string.IsNullOrWhiteSpace(file) || !File.Exists(file))
+                return;
 
-                using (var csv = new CsvReader(readerTempoBonus, configTempoBonus))
+            try
+            {
+                using (var readerTempoBonus = new StreamReader(file))
+                using (var csv = new CsvReader(readerTempoBonus, CsvConfigComma))
                 {
                     RegoleMonitoraggio = csv.GetRecords<RegolaMonitoraggio>().ToList();
                 }
             }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Errore durante la lettura di RegoleMonitoraggio");
+                RegoleMonitoraggio = new List<RegolaMonitoraggio>();
+            }
         }
+
         public bool LeggiAlertDaControllare(string pathAlert)
         {
-            bool esito = false;
-            bool nessunErrore = true;
+            if (string.IsNullOrWhiteSpace(pathAlert) || !Directory.Exists(pathAlert))
+                return false;
 
-            if (Directory.Exists(pathAlert))
+            bool nessunErrore = true;
+            try
             {
-                string[] alertFiles = Directory.GetFiles(pathAlert, "*.txt");
-                foreach (string item in alertFiles)
+                var alertFiles = Directory.GetFiles(pathAlert, "*.txt");
+                if (alertFiles.Length == 0)
+                    return true;
+
+                // Per lookup rapido delle alerts già censite usiamo Dictionary temporaneo
+                var map = AlertsDaControllare?.ToDictionary(a => a.Name, StringComparer.OrdinalIgnoreCase)
+                          ?? new Dictionary<string, AlertDaControllare>(StringComparer.OrdinalIgnoreCase);
+
+                foreach (var file in alertFiles)
                 {
                     try
                     {
-                        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
-                        {
-                            Delimiter = ",",
-                            HeaderValidated = null,
-                            TrimOptions = TrimOptions.Trim,
-                            MissingFieldFound = null,
-                            AllowComments = true,
-                            PrepareHeaderForMatch = args => args.Header.Trim(),
-                        };
-
-                        using (var readerTempoBonus = new StreamReader(item))
-                        using (var csv = new CsvReader(readerTempoBonus, config))
+                        using (var reader = new StreamReader(file))
+                        using (var csv = new CsvReader(reader, CsvConfigComma))
                         {
                             csv.Context.RegisterClassMap<RegolaAlertMap>();
-                            List<RegolaAlert> listaRegole = csv.GetRecords<RegolaAlert>().ToList();
-                            var alertGiaCensito = AlertsDaControllare.Where(x => x.Name == Path.GetFileNameWithoutExtension(item)).FirstOrDefault();
-                            if (alertGiaCensito != null)
+                            var listaRegole = csv.GetRecords<RegolaAlert>().ToList();
+                            string name = Path.GetFileNameWithoutExtension(file);
+
+                            if (map.TryGetValue(name, out var existing))
                             {
-                                alertGiaCensito.RegoleAlert = listaRegole;
+                                existing.RegoleAlert = listaRegole;
                             }
                             else
                             {
-                                AlertsDaControllare.Add(
-                                    new AlertDaControllare
-                                    {
-                                        RegoleAlert = listaRegole,
-                                        ViolazioniAlert = new List<ViolazioneAlert>(),
-                                        Name = Path.GetFileNameWithoutExtension(item)
-                                    }
-                                );
+                                var newAlert = new AlertDaControllare
+                                {
+                                    RegoleAlert = listaRegole,
+                                    ViolazioniAlert = new List<ViolazioneAlert>(),
+                                    Name = name
+                                };
+                                map[name] = newAlert;
                             }
                         }
                     }
-                    catch (Exception exc)
+                    catch (Exception ex)
                     {
                         nessunErrore = false;
-                        Log.Error(exc, "Errore Generico");
+                        Log.Error(ex, "Errore durante la lettura dell'alert '{FileName}'", file);
                     }
                 }
-                esito = true;
+
+                // Sostituisci la collection originale con i risultati elaborati (preserva referenze se necessario)
+                AlertsDaControllare = map.Values.ToList();
             }
-            return esito && nessunErrore;
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Errore durante l'elaborazione dei file degli alert");
+                return false;
+            }
+
+            return nessunErrore;
         }
     }
 }

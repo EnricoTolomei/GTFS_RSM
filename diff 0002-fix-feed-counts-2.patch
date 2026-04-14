@@ -1,0 +1,108 @@
+*** Begin Patch
+*** Update File: AtacFeed/FormGTFS_RSM.cs
+@@
+         private async void TimerAcquisizione_Tick(object sender, EventArgs e)
+         {
+             try
+             {
+                 string routeID = comboBox1.SelectedValue?.ToString() ?? "-1";
+                 // prova primo feed vehicle
+                 try
+                 {
+                     await _feedManager.RefreshAsync(urlVehicle.Text, urlAlert.Text, routeID, CancellationToken.None);
+                 }
+                 catch
+                 {
+                     // fallback: prova urlVehicleRiserva se presente
+                     if (!string.IsNullOrEmpty(urlVehicleRiserva.Text))
+                     {
+                         try
+                         {
+                             await _feedManager.RefreshAsync(urlVehicleRiserva.Text, urlAlert.Text, routeID, CancellationToken.None);
+                         }
+                         catch (Exception exFallback)
+                         {
+                             Log.Error(exFallback, "Entrambi i feed vehicle falliti");
+                             // come prima: continua (AcquisizioneNEW verrà chiamato dagli eventi se c'è successo)
+                         }
+                     }
+                 }
+             }
+             catch (Exception ex)
+             {
+                 Log.Error(ex, "Errore in RefreshAsync");
+             }
+-
+-
+-            // Se il feed è stato scaricato ma VehicleManager non ha ancora popolato le liste,
+-            // forziamo l'elaborazione dell'ultimo feed valido prima di proseguire con la UI
+-            try
+-            {
+-                var vmPostRefresh = _feed_manager.VehicleManager;
+-                int lastValidEntities = vmPostRefresh?.LastValidFeed?.Entities?.Count ?? 0;
+-                int elencoCount = vmPostRefresh?.ElencoVetture?.Count ?? 0;
+-                Log.Information("Post-Refresh: LastValidFeed.Entities={LastValidEntities}, ElencoVetture={ElencoCount}", lastValidEntities, elencoCount);
+-
+-                if (lastValidEntities > 0 && elencoCount == 0 && vmPostRefresh != null)
+-                {
+-                    bool filtroTripVuoti = checkTripVuoti.Checked;
+-                    bool filtroTuttoPercorso = checkTuttoPercorso.Visible && checkTuttoPercorso.Checked;
+-                    bool raggruppalineaRegola = radioLineaRegola.Enabled && radioLineaRegola.Checked;
+-                    bool nonRaggruppare = radioNonRaggruppare.Checked;
+-
+-                    try
+-                    {
+-                        Log.Information("Forzo ElaboraUltimoFeedValido per costruire ElencoVetture (entities {Count})", lastValidEntities);
+-                        vmPostRefresh.ElaboraUltimoFeedValido(routeID, filtroTripVuoti, filtroTuttoPercorso, raggruppalineaRegola, nonRaggruppare);
+-                    }
+-                    catch (Exception exElab)
+-                    {
+-                        Log.Error(exElab, "Errore forzando ElaboraUltimoFeedValido");
+-                    }
+-                }
+-            }
+-            catch (Exception ex)
+-            {
+-                Log.Error(ex, "Errore diagnostico post-refresh");
+-            }
++            // aggiorna i contatori letture / feed validi UI (una sola lettura per tick)
++            try
++            {
++                NumeroLetture++;
++                var vmPostRefresh = _feedManager.VehicleManager;
++                if (vmPostRefresh != null && vmPostRefresh.CodeFeed == 0)
++                {
++                    NumeroFeedValidi++;
++                }
++                labelLetture.Text = NumeroLetture.ToString();
++                labelFeedLetti.Text = NumeroFeedValidi.ToString();
++
++                // Se il feed è stato scaricato (entità > 0) ma le liste non sono ancora elaborate,
++                // forziamo l'elaborazione dell'ultimo feed valido prima di proseguire con la UI
++                int lastValidEntities = vmPostRefresh?.LastValidFeed?.Entities?.Count ?? 0;
++                int elencoCount = vmPostRefresh?.ElencoVetture?.Count ?? 0;
++                Log.Information("Post-Refresh: LastValidFeed.Entities={LastValidEntities}, ElencoVetture={ElencoCount}", lastValidEntities, elencoCount);
++
++                if (lastValidEntities > 0 && elencoCount == 0 && vmPostRefresh != null)
++                {
++                    bool filtroTripVuoti = checkTripVuoti.Checked;
++                    bool filtroTuttoPercorso = checkTuttoPercorso.Visible && checkTuttoPercorso.Checked;
++                    bool raggruppalineaRegola = radioLineaRegola.Enabled && radioLineaRegola.Checked;
++                    bool nonRaggruppare = radioNonRaggruppare.Checked;
++                    string filtroLinea = routeID == "-1" ? string.Empty : routeID;
++                    try
++                    {
++                        Log.Information("Forzo ElaboraUltimoFeedValido per costruire ElencoVetture (entities {Count})", lastValidEntities);
++                        vmPostRefresh.ElaboraUltimoFeedValido(filtroLinea, filtroTripVuoti, filtroTuttoPercorso, raggruppalineaRegola, nonRaggruppare);
++                    }
++                    catch (Exception exElab)
++                    {
++                        Log.Error(exElab, "Errore forzando ElaboraUltimoFeedValido (timer)");
++                    }
++                }
++            }
++            catch (Exception exCnt)
++            {
++                Log.Error(exCnt, "Errore aggiornamento contatori post-refresh");
++            }
+*** End Patch

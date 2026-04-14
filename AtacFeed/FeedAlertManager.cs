@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AtacFeed
 {
-    internal class FeedAlertManager : BaseFeedManager
+    public class FeedAlertManager : BaseFeedManager
     {
         public List<Avviso> Avvisi => LastValidFeed.Entities
                                         .Where(x => !x.IsDeleted)

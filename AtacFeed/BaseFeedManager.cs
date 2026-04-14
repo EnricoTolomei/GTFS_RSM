@@ -1,5 +1,4 @@
-﻿using OfficeOpenXml.FormulaParsing.Excel.Functions.Math;
-using ProtoBuf;
+﻿using ProtoBuf;
 using System;
 using System.Net;
 using static AtacFeed.TransitRealtime;
@@ -9,6 +8,8 @@ namespace AtacFeed
 {
     public class BaseFeedManager
     {
+        private const int DefaultTimeoutMs = 10000;
+
         public static readonly DateTime t0 = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
         protected FeedMessage LastReadFeed { get; set; }
         public FeedMessage LastValidFeed { get; set; }
@@ -20,12 +21,19 @@ namespace AtacFeed
 
         public void LeggiFeed(string url)
         {
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                Log.Error("LeggiFeed chiamato con url vuoto");
+                LastReadFeed = null;
+                throw new ArgumentException("url non valido", nameof(url));
+            }
+
             try
             {
-                CodeFeed = 1;
-
-                var request = WebRequest.Create(url);
-                request.Timeout = 10000;
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.Timeout = DefaultTimeoutMs;
+                request.ReadWriteTimeout = DefaultTimeoutMs;
+                request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 
                 using (var response = request.GetResponse())
                 using (var stream = response.GetResponseStream())
@@ -33,22 +41,32 @@ namespace AtacFeed
                     if (stream == null)
                     {
                         LastReadFeed = null;
-                        CodeFeed = 0;
                         Log.Error("LeggiFeed {Url} - Response stream is null", url);
                         throw new InvalidOperationException("Response stream is null");
                     }
 
-                    // Deserialize directly from the response stream and assign
+                    // Deserialize directly from the response stream
                     LastReadFeed = Serializer.Deserialize<FeedMessage>(stream);
                 }
             }
+            catch (WebException wex)
+            {
+                LastReadFeed = null;
+                if (wex.Response is HttpWebResponse resp)
+                {
+                    Log.Error(wex, "LeggiFeed {Url} - WebException Status={Status} Code={StatusCode} Uri={Uri}", url, wex.Status, resp.StatusCode, resp.ResponseUri);
+                }
+                else
+                {
+                    Log.Error(wex, "LeggiFeed {Url} - WebException Status={Status}", url, wex.Status);
+                }
+                throw wex;
+            }
             catch (Exception exc)
             {
-                // Maintain prior behaviour: log, set state and rethrow preserving stack trace
                 LastReadFeed = null;
-                CodeFeed = 0;
                 Log.Error(exc, "LeggiFeed {Url} - {Message}", url, exc.Message);
-                throw;
+                throw exc;
             }
         }
 
@@ -58,33 +76,41 @@ namespace AtacFeed
 
             try
             {
+                string now = DateTime.Now.ToString("HH:mm:ss");
+
                 if (LastReadFeed == null)
                 {
-                    Log.Error("[{Time}] - Feed Scartato perchè NON LETTO", DateTime.Now.ToString("HH:mm:ss"));
+                    Log.Error("[{Time}] - Feed Scartato perchè NON LETTO", now);
                     isValid = -1;
                 }
                 else if (LastReadFeed.Entities == null || LastReadFeed.Entities.Count == 0)
                 {
-                    Log.Error("[{Time}] - Feed Scartato perchè VUOTO", DateTime.Now.ToString("HH:mm:ss"));
+                    Log.Error("[{Time}] - Feed Scartato perchè VUOTO", now);
                     isValid = -2;
                 }
                 else
                 {
-                    // Compare timestamps as integers first (cheaper than DateTime conversions)
-                    ulong newTs = LastReadFeed.Header != null ? LastReadFeed.Header.Timestamp : 0;
-                    ulong prevTs = LastValidFeed != null && LastValidFeed.Header != null ? LastValidFeed.Header.Timestamp : 0;
+                    // Leggi timestamp come long (compatibile con tipi protobuf comuni)
+                    long newTs = 0;
+                    long prevTs = 0;
+
+                    if (LastReadFeed.Header != null)
+                        newTs = (long)LastReadFeed.Header.Timestamp;
+
+                    if (LastValidFeed != null && LastValidFeed.Header != null)
+                        prevTs = (long)LastValidFeed.Header.Timestamp;
 
                     if (prevTs >= newTs)
                     {
-                        Log.Error("[{Time}] - Feed scartato in quanto ha il timestamp SUPERATO", DateTime.Now.ToString("HH:mm:ss"));
+                        Log.Error("[{Time}] - Feed scartato in quanto ha il timestamp SUPERATO {Time} >= {Time}", now, prevTs ,newTs);
                         isValid = -3;
                     }
                     else
                     {
-                        // Valid feed: update references and timestamps once
                         PrevValidFeed = LastValidFeed;
                         LastValidFeed = LastReadFeed;
 
+                        // Calcola LastDataFeed solo quando feed valido
                         DateTime feedDate = t0.AddSeconds(newTs).ToLocalTime();
                         LastDataFeed = feedDate;
                         if (!FirstDataFeed.HasValue)

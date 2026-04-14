@@ -1,0 +1,63 @@
+*** Begin Patch
+*** Update File: AtacFeed/FormGTFS_RSM.cs
+@@
+         private async void ButtonPlayPause_Click(object sender, EventArgs e)
+         {
+@@
+                 try
+                 {
+                     // usa facade per refresh
+                     await _feedManager.RefreshAsync(urlVehicle.Text, urlAlert.Text, routeID, CancellationToken.None);
+                 }
+                 catch (Exception ex)
+                 {
+                     Log.Error(ex, "Errore Refresh singolo, provo riserva");
+                     if (!string.IsNullOrEmpty(urlVehicleRiserva.Text))
+                     {
+                         try
+                         {
+                             await _feedManager.RefreshAsync(urlVehicleRiserva.Text, urlAlert.Text, routeID, CancellationToken.None);
+                         }
+                         catch (Exception rex)
+                         {
+                             Log.Error(rex, "Fallback riserva fallito");
+                         }
+                     }
+                 }
+-
+-                AcquisizioneNEW();
++                // aggiorna i contatori letture / feed validi UI
++                try
++                {
++                    NumeroLetture++;
++                    var vmAfter = _feedManager.VehicleManager;
++                    if (vmAfter != null && vmAfter.CodeFeed == 0)
++                    {
++                        NumeroFeedValidi++;
++                    }
++                    labelLetture.Text = NumeroLetture.ToString();
++                    labelFeedLetti.Text = NumeroFeedValidi.ToString();
++
++                    // se il feed è stato scaricato (entità > 0) ma le liste non sono ancora elaborate,
++                    // forziamo l'elaborazione per evitare alternanza valori/0
++                    if (vmAfter?.LastValidFeed?.Entities?.Count > 0 && (vmAfter.ElencoVetture == null || vmAfter.ElencoVetture.Count == 0))
++                    {
++                        try
++                        {
++                            string filtroLinea = routeID == "-1" ? string.Empty : routeID;
++                            vmAfter.ElaboraUltimoFeedValido(filtroLinea, filtroTripVuoti, filtroTuttoPercorso, raggruppalineaRegola, nonRaggruppare);
++                        }
++                        catch (Exception exElab)
++                        {
++                            Log.Error(exElab, "Errore forzando ElaboraUltimoFeedValido (single read)");
++                        }
++                    }
++                }
++                catch (Exception exCnt)
++                {
++                    Log.Error(exCnt, "Errore aggiornamento contatori dopo RefreshAsync");
++                }
++
++                AcquisizioneNEW();
+             }
+*** End Patch

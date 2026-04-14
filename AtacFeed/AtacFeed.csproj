@@ -187,6 +187,7 @@
     <Compile Include="ErroriGTFS.cs" />
     <Compile Include="ExtendedVehicleInfo.cs" />
     <Compile Include="FeedAlertManager.cs" />
+    <Compile Include="FeedGTFSManager.cs" />
     <Compile Include="FeedVehicleManager.cs" />
     <Compile Include="FormGTFS_RSM.cs">
       <SubType>Form</SubType>
@@ -288,6 +289,11 @@
     <Content Include="OUTPUT\readme.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\loading.gif" />
+    <None Include="Resources\lazy-loader.gif" />
+    <None Include="Resources\loader%28250%29.gif" />
+    <None Include="Resources\loading.png" />
+    <None Include="Resources\spinner-icon-12071.gif" />
     <None Include="Resources\circle-16 %287%29.png" />
     <None Include="Resources\circle-16 %286%29.png" />
     <None Include="Resources\circle-16 %285%29.png" />

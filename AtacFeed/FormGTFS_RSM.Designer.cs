@@ -108,8 +108,6 @@
             this.labelPullmanTPL = new System.Windows.Forms.Label();
             this.label36 = new System.Windows.Forms.Label();
             this.labelAltroTpl = new System.Windows.Forms.Label();
-            this.buttonVerificaAggiornamenti = new System.Windows.Forms.Button();
-            this.buttonPlayPause = new System.Windows.Forms.Button();
             this.labelLetture = new System.Windows.Forms.Label();
             this.label39 = new System.Windows.Forms.Label();
             this.tabMonitoraggio = new System.Windows.Forms.TabPage();
@@ -204,6 +202,7 @@
             this.checkTuttoPercorso = new System.Windows.Forms.CheckBox();
             this.checkTripDuplicati = new System.Windows.Forms.CheckBox();
             this.groupBoxServerRSM = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.checkDettagliVettura = new System.Windows.Forms.CheckBox();
             this.checkMD5 = new System.Windows.Forms.CheckBox();
             this.urlGTFS_Statico = new System.Windows.Forms.TextBox();
@@ -245,6 +244,8 @@
             this.titoloDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descrizioneDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bindingSourceAvvisi = new System.Windows.Forms.BindingSource(this.components);
+            this.buttonVerificaAggiornamenti = new System.Windows.Forms.Button();
+            this.buttonPlayPause = new System.Windows.Forms.Button();
             this.lineaAgenziaBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSourceAttuale = new System.Windows.Forms.BindingSource(this.components);
             this.tabMonitoraggio.SuspendLayout();
@@ -261,6 +262,7 @@
             this.groupBoxExport.SuspendLayout();
             this.groupBoxMonitoraggio.SuspendLayout();
             this.groupBoxServerRSM.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgUrl2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgUrl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondi)).BeginInit();
@@ -1087,36 +1089,6 @@
             this.labelAltroTpl.Text = "0";
             this.labelAltroTpl.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // buttonVerificaAggiornamenti
-            // 
-            this.buttonVerificaAggiornamenti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonVerificaAggiornamenti.Image = global::AtacFeed.Properties.Resources.available_updates_16;
-            this.buttonVerificaAggiornamenti.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonVerificaAggiornamenti.Location = new System.Drawing.Point(1077, 33);
-            this.buttonVerificaAggiornamenti.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonVerificaAggiornamenti.Name = "buttonVerificaAggiornamenti";
-            this.buttonVerificaAggiornamenti.Size = new System.Drawing.Size(144, 46);
-            this.buttonVerificaAggiornamenti.TabIndex = 49;
-            this.buttonVerificaAggiornamenti.Text = "   Verifica\r\n  Aggiornamenti";
-            this.buttonVerificaAggiornamenti.UseVisualStyleBackColor = true;
-            this.buttonVerificaAggiornamenti.Click += new System.EventHandler(this.Button1_Click);
-            // 
-            // buttonPlayPause
-            // 
-            this.buttonPlayPause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonPlayPause.BackgroundImage = global::AtacFeed.Properties.Resources.play;
-            this.buttonPlayPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.buttonPlayPause.FlatAppearance.BorderSize = 0;
-            this.buttonPlayPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonPlayPause.ForeColor = System.Drawing.Color.Black;
-            this.buttonPlayPause.Location = new System.Drawing.Point(1117, 791);
-            this.buttonPlayPause.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonPlayPause.Name = "buttonPlayPause";
-            this.buttonPlayPause.Size = new System.Drawing.Size(67, 57);
-            this.buttonPlayPause.TabIndex = 0;
-            this.buttonPlayPause.UseVisualStyleBackColor = true;
-            this.buttonPlayPause.Click += new System.EventHandler(this.ButtonPlayPause_Click);
-            // 
             // labelLetture
             // 
             this.labelLetture.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -1910,6 +1882,7 @@
             this.checkAnomalieGTFS.Text = "Includi anomalie GTFS";
             this.checkAnomalieGTFS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkAnomalieGTFS.UseVisualStyleBackColor = true;
+            this.checkAnomalieGTFS.CheckedChanged += new System.EventHandler(this.checkAnomalieGTFS_CheckedChanged);
             // 
             // checkAlert
             // 
@@ -1924,6 +1897,7 @@
             this.checkAlert.Text = "Includi gli alert";
             this.checkAlert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkAlert.UseVisualStyleBackColor = true;
+            this.checkAlert.CheckedChanged += new System.EventHandler(this.checkAlert_CheckedChanged);
             // 
             // checkSovraffollamento
             // 
@@ -2004,6 +1978,7 @@
             this.checkGrafico.Text = "Includi il grafico";
             this.checkGrafico.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.checkGrafico.UseVisualStyleBackColor = true;
+            this.checkGrafico.CheckedChanged += new System.EventHandler(this.checkGrafico_CheckedChanged);
             // 
             // groupBoxMonitoraggio
             // 
@@ -2201,6 +2176,7 @@
             this.groupBoxServerRSM.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBoxServerRSM.BackColor = System.Drawing.Color.Transparent;
+            this.groupBoxServerRSM.Controls.Add(this.pictureBox1);
             this.groupBoxServerRSM.Controls.Add(this.checkDettagliVettura);
             this.groupBoxServerRSM.Controls.Add(this.checkMD5);
             this.groupBoxServerRSM.Controls.Add(this.urlGTFS_Statico);
@@ -2231,6 +2207,17 @@
             this.groupBoxServerRSM.TabIndex = 26;
             this.groupBoxServerRSM.TabStop = false;
             this.groupBoxServerRSM.Text = "Impostazioni Provider GTFS";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Location = new System.Drawing.Point(743, 140);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(90, 60);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 64;
+            this.pictureBox1.TabStop = false;
             // 
             // checkDettagliVettura
             // 
@@ -2309,7 +2296,7 @@
             this.imgUrl2.Margin = new System.Windows.Forms.Padding(0);
             this.imgUrl2.Name = "imgUrl2";
             this.imgUrl2.Size = new System.Drawing.Size(21, 20);
-            this.imgUrl2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.imgUrl2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imgUrl2.TabIndex = 24;
             this.imgUrl2.TabStop = false;
             // 
@@ -2320,7 +2307,7 @@
             this.imgUrl1.Margin = new System.Windows.Forms.Padding(0);
             this.imgUrl1.Name = "imgUrl1";
             this.imgUrl1.Size = new System.Drawing.Size(21, 20);
-            this.imgUrl1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.imgUrl1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.imgUrl1.TabIndex = 23;
             this.imgUrl1.TabStop = false;
             // 
@@ -2362,7 +2349,7 @@
             // 
             this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(967, 186);
+            this.label6.Location = new System.Drawing.Point(974, 203);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(55, 16);
@@ -2373,7 +2360,7 @@
             // 
             this.label7.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(876, 186);
+            this.label7.Location = new System.Drawing.Point(883, 203);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 16);
@@ -2415,7 +2402,7 @@
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(879, 161);
+            this.label5.Location = new System.Drawing.Point(886, 178);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(71, 16);
@@ -2425,7 +2412,7 @@
             // secondi
             // 
             this.secondi.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.secondi.Location = new System.Drawing.Point(922, 183);
+            this.secondi.Location = new System.Drawing.Point(929, 200);
             this.secondi.Margin = new System.Windows.Forms.Padding(4);
             this.secondi.Maximum = new decimal(new int[] {
             59,
@@ -2444,7 +2431,7 @@
             // minuti
             // 
             this.minuti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.minuti.Location = new System.Drawing.Point(827, 183);
+            this.minuti.Location = new System.Drawing.Point(834, 200);
             this.minuti.Margin = new System.Windows.Forms.Padding(4);
             this.minuti.Name = "minuti";
             this.minuti.Size = new System.Drawing.Size(46, 22);
@@ -2768,6 +2755,36 @@
             // 
             this.bindingSourceAvvisi.DataSource = typeof(AtacFeed.Avviso);
             // 
+            // buttonVerificaAggiornamenti
+            // 
+            this.buttonVerificaAggiornamenti.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonVerificaAggiornamenti.Image = global::AtacFeed.Properties.Resources.available_updates_16;
+            this.buttonVerificaAggiornamenti.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonVerificaAggiornamenti.Location = new System.Drawing.Point(1077, 33);
+            this.buttonVerificaAggiornamenti.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonVerificaAggiornamenti.Name = "buttonVerificaAggiornamenti";
+            this.buttonVerificaAggiornamenti.Size = new System.Drawing.Size(144, 46);
+            this.buttonVerificaAggiornamenti.TabIndex = 49;
+            this.buttonVerificaAggiornamenti.Text = "   Verifica\r\n  Aggiornamenti";
+            this.buttonVerificaAggiornamenti.UseVisualStyleBackColor = true;
+            this.buttonVerificaAggiornamenti.Click += new System.EventHandler(this.Button1_Click);
+            // 
+            // buttonPlayPause
+            // 
+            this.buttonPlayPause.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonPlayPause.BackgroundImage = global::AtacFeed.Properties.Resources.play;
+            this.buttonPlayPause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.buttonPlayPause.FlatAppearance.BorderSize = 0;
+            this.buttonPlayPause.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonPlayPause.ForeColor = System.Drawing.Color.Black;
+            this.buttonPlayPause.Location = new System.Drawing.Point(1117, 791);
+            this.buttonPlayPause.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonPlayPause.Name = "buttonPlayPause";
+            this.buttonPlayPause.Size = new System.Drawing.Size(67, 57);
+            this.buttonPlayPause.TabIndex = 0;
+            this.buttonPlayPause.UseVisualStyleBackColor = true;
+            this.buttonPlayPause.Click += new System.EventHandler(this.ButtonPlayPause_Click);
+            // 
             // lineaAgenziaBindingSource
             // 
             this.lineaAgenziaBindingSource.DataSource = typeof(AtacFeed.LineaAgenzia);
@@ -2868,6 +2885,7 @@
             this.groupBoxMonitoraggio.PerformLayout();
             this.groupBoxServerRSM.ResumeLayout(false);
             this.groupBoxServerRSM.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgUrl2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgUrl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.secondi)).EndInit();
@@ -3153,6 +3171,7 @@
         private ScottPlot.FormsPlot plotGTFS;
         private Zuby.ADGV.AdvancedDataGridView advancedDataGridView3;
         private System.Windows.Forms.BindingSource lineaAgenziaBindingSource;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

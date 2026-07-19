@@ -630,7 +630,6 @@ namespace AtacFeed
         }
 
 
-
         public Exception ElaboraUltimoFeedValido(string filtroLinea, bool filtroTripVuoti, bool filtroTuttoPercorso, bool raggruppalineaRegola, bool nonRaggruppare)
         {
             Exception ecc = null;
@@ -1109,7 +1108,6 @@ namespace AtacFeed
 
             return ecc;
         }
-
 
         private int MatricolaToHexValue(string matricola)
         {

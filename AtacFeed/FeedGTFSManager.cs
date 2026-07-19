@@ -139,9 +139,6 @@ namespace AtacFeed
             CancellationToken cancellation = default
             )
         {
-
-
-
             cancellation.ThrowIfCancellationRequested();
             bool success = false;
             try
@@ -289,9 +286,6 @@ namespace AtacFeed
                     {
                         try
                         {
-
-
-                            //if ((checkResetSempre.Visible && checkResetSempre.Checked) || (DataResetMonitoraggio.HasValue && DateTime.Now > DataResetMonitoraggio.GetValueOrDefault()))
                             if ( DataResetMonitoraggio.HasValue && DateTime.Now > DataResetMonitoraggio.GetValueOrDefault())
                             {
                                 //RestartFile();
@@ -358,6 +352,21 @@ namespace AtacFeed
                 }
                 _pollingTask = null;
                 _cts = null;
+            }
+        }
+
+        /// <summary>
+        /// Indica se è in corso un monitoraggio automatico (polling).
+        /// Restituisce true quando esiste un task di polling attivo e non è stato cancellato.
+        /// </summary>
+        public bool IsMonitoring
+        {
+            get
+            {
+                lock (_sync)
+                {
+                    return _pollingTask != null && !_pollingTask.IsCompleted && _cts != null && !_cts.IsCancellationRequested;
+                }
             }
         }
 
@@ -561,7 +570,7 @@ namespace AtacFeed
 
                             if (exportSovraffollamento)
                             {
-                                excelSheetName = "Sovraffollamneto";
+                                excelSheetName = "Sovraffollamento";
                                 ElaboraSheet(excel, excelSheetName, VehicleManager.ElencoVettureSovraffollate);
                             }
                         }
@@ -646,7 +655,5 @@ namespace AtacFeed
 
             excel.Workbook.Worksheets.MoveToEnd(excelSheetName);
         }
-
-
     }
 }

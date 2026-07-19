@@ -72,12 +72,13 @@ namespace AtacFeed
                 if (IsHandleCreated)
                     BeginInvoke(new Action(() =>
                     {
-                        // esempio: mostrare stato nella statusbar / label
+                        // mostrare stato nella statusbar / label
                         textBox1.Text += $"{Environment.NewLine}Lettura feed in corso: {Path.GetFileName(args.Url)}{Environment.NewLine}";
-                        // opzionale: cambiare icona/spinner
-                        //imgUrl1.Image = Properties.Resources.spinner; // se hai una risorsa spinner
+                        // cambiare icona/spinner
                         if (args.IsRiserva)
+                        {
                             imgUrl2.Image = Resources.spinner;
+                        }
                         else
                         {
                             imgUrl1.Image = Resources.spinner;
@@ -95,26 +96,37 @@ namespace AtacFeed
                         {
                             //labelStatus.Text = $"Lettura completata: {Path.GetFileName(args.Url)} ({args.Timestamp:HH:mm:ss})";
                             if (args.IsRiserva)
+                            {
                                 imgUrl2.Image = Resources.verde; // esempio
+                            }
                             else
+                            {
                                 imgUrl1.Image = Resources.verde; // esempio
+                            }
                         }
                         else if (args.Error != null)
                         {
                             //labelStatus.Text = $"Lettura fallita: {Path.GetFileName(args.Url)} - {args.Error.Message}";
                             if (args.IsRiserva)
+                            {
                                 imgUrl2.Image = Resources.rosso; // esempio
+                            }
                             else
+                            {
                                 imgUrl1.Image = Resources.rosso; // esempio
+                            }
                         }
                         else
                         {
                             //labelStatus.Text = $"Lettura terminata (code {args.Code}): {Path.GetFileName(args.Url)}";
                             if (args.IsRiserva)
+                            {
                                 imgUrl2.Image = Resources.arancio; // esempio
+                            }
                             else
+                            {
                                 imgUrl1.Image = Resources.arancio; // esempio
-
+                            }
                         }
 
                     }));
@@ -155,7 +167,9 @@ namespace AtacFeed
                 var vm = _feedManager.VehicleManager;
                 // quick checks and delegate the heavy lifting
                 if (vm == null || vm.CodeFeed != 0)
+                {
                     return;
+                }
 
                 PopulateUIFromVehicleManager(vm);
             }
@@ -940,9 +954,12 @@ namespace AtacFeed
                     "Avviare il monitoraggio senza export dei dati?",
                     "Avvio Monitoraggio",
                     MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
+                    MessageBoxIcon.Question
+                );
                 if (dialog == DialogResult.No)
+                {
                     return;
+                }
             }
 
             int deltaMilliSec = (int)(1000 * (60 * minuti.Value + secondi.Value));
@@ -967,15 +984,10 @@ namespace AtacFeed
                         nonRaggruppare: nonRaggruppare,
                         cancellation: CancellationToken.None);
             }
-            else if (!timerAcquisizione.Enabled && deltaMilliSec > 0)
+            else if (!_feedManager.IsMonitoring && deltaMilliSec > 0)
             {
-                //TimerAcquisizione_Tick(this, EventArgs.Empty);
-
                 minuti.Enabled = false;
                 secondi.Enabled = false;
-                timerAcquisizione.Interval = deltaMilliSec;
-                timerAcquisizione.Enabled = true;
-                //timerAcquisizione.Start();
                 _feedManager.StartAutoRefresh(urlVehicle.Text, urlVehicleRiserva.Text, urlAlert.Text, filtroLinea, filtroTripVuoti, filtroTuttoPercorso, raggruppalineaRegola, nonRaggruppare, deltaMilliSec);
                 buttonPlayPause.BackgroundImage = Resources.pause;
                 comboBox1.Enabled = false;
@@ -986,8 +998,6 @@ namespace AtacFeed
             {
                 minuti.Enabled = true;
                 secondi.Enabled = true;
-                timerAcquisizione.Enabled = false;
-                //timerAcquisizione.Stop();
                 _feedManager.StopAutoRefresh();
                 buttonPlayPause.BackgroundImage = Resources.play;
                 comboBox1.Enabled = true;
@@ -1497,7 +1507,7 @@ namespace AtacFeed
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (timerAcquisizione.Enabled)
+            if (_feedManager.IsMonitoring)
             {
                 DialogResult dialog = MessageBox.Show("Interrompere il monitoraggio ed uscire", "Conferma Uscita", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (dialog == DialogResult.No)

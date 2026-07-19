@@ -16,6 +16,7 @@ namespace AtacFeed
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.File($"logs{Path.DirectorySeparatorChar}GTFS_RSM_.log", rollingInterval: RollingInterval.Day)
+                .WriteTo.Console()
                 .CreateLogger();
             Log.Information("Avvio Programma");
 

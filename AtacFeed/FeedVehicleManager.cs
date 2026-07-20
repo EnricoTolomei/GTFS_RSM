@@ -983,7 +983,8 @@ namespace AtacFeed
                         {
                             violazioni = (from vettura in ElencoVetture
                                           from regolaAlert in regoleAlertApplicabili.Where(ra => ra.Linea == linea)
-                                          where MatricolaToHexValue(regolaAlert.VetturaDa) <= MatricolaToHexValue(vettura.Matricola)
+                                          where vettura.Linea == linea
+                                                && MatricolaToHexValue(regolaAlert.VetturaDa) <= MatricolaToHexValue(vettura.Matricola)
                                                 && MatricolaToHexValue(vettura.Matricola) <= MatricolaToHexValue(regolaAlert.VetturaA)
                                           select new ViolazioneAlert(LastDataFeed, null, regolaAlert, vettura.Matricola))
                                          .ToList();

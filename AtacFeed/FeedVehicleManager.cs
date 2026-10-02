@@ -155,7 +155,7 @@ namespace AtacFeed
                                                     oraProgrammata: x.Vehicle.Trip?.StartTime
                                     );
                              })
-                             .Distinct()
+                             .Distinct(new ExtendedVehicleComparer(filtroTripVuoti, filtroTuttoPercorso))
                              .OrderBy(x => x.IdVettura)
                              .ToList();
             foreach (ExtendedVehicleInfo vettura in ElencoVetture)
@@ -808,7 +808,64 @@ namespace AtacFeed
                     }
                 }
                 ElencoVetture = dedupDict.Values.OrderBy(x => x.IdVettura).ToList();
+                // 6) Prepare lookup for aggregated existing vehicles to speed up updates
+                Func<ExtendedVehicleInfo, string> makeKey = e =>
+                    (e.Matricola ?? string.Empty).Trim()
+                    + "|" + (e.TripId ?? string.Empty)
+                    + (filtroTuttoPercorso ? "|" + e.CurrentStopSequence.ToString() : string.Empty);
 
+                var aggLookup = new Dictionary<string, ExtendedVehicleInfo>(StringComparer.OrdinalIgnoreCase);
+                foreach (var agg in ElencoAggregatoVetture)
+                {
+                    var key = makeKey(agg);
+                    ExtendedVehicleInfo cur;
+                    if (!aggLookup.TryGetValue(key, out cur) || (agg.UltimaVolta ?? DateTime.MinValue) > (cur.UltimaVolta ?? DateTime.MinValue))
+                        aggLookup[key] = agg;
+                }
+
+                // 7) Update per-vehicle details based on aggregated lookup (single pass)
+                foreach (var vettura in ElencoVetture)
+                {
+                    var lookupKey = makeKey(vettura);
+                    ExtendedVehicleInfo presente;
+                    if (aggLookup.TryGetValue(lookupKey, out presente))
+                    {
+                        if (presente.PartenzaEffettiva.HasValue)
+                            vettura.PartenzaEffettiva = presente.PartenzaEffettiva;
+                        else if (presente.CurrentStopSequence <= 1 &&
+                                 presente.InTransitTo == VehiclePosition.VehicleStopStatus.StoppedAt &&
+                                 vettura.CurrentStopSequence >= 1 &&
+                                 vettura.InTransitTo == VehiclePosition.VehicleStopStatus.InTransitTo)
+                        {
+                            vettura.PartenzaEffettiva = presente.UltimaVolta.GetValueOrDefault().AddSeconds((vettura.UltimaVolta.GetValueOrDefault() - presente.PrimaVolta).Seconds);
+                        }
+                        else if (presente.CurrentStopSequence <= 3 && ElencoAggregatoVetture.Count > 0 && presente.InTransitTo != VehiclePosition.VehicleStopStatus.StoppedAt)
+                        {
+                            vettura.PartenzaEffettiva = presente.PrimaVolta;
+                        }
+
+                        vettura.PrimaVolta = presente.PrimaVolta;
+                        vettura.OccupancyStatus = vettura.OccupancyStatus.CompareTo(presente.OccupancyStatus) >= 0 ? vettura.OccupancyStatus : presente.OccupancyStatus;
+                    }
+                }
+
+                // 8) Merge into ElencoAggregatoVetture: keep existing aggregated plus new ones (update by Matricola+TripId[+StopSeq])
+                var newAggDict = new Dictionary<string, ExtendedVehicleInfo>(StringComparer.OrdinalIgnoreCase);
+                // start from existing
+                foreach (var a in ElencoAggregatoVetture)
+                {
+                    var k = makeKey(a);
+                    newAggDict[k] = a;
+                }
+                // add/update with new values (prefer newer UltimaVolta)
+                foreach (var a in ElencoVetture)
+                {
+                    var k = makeKey(a);
+                    if (!newAggDict.TryGetValue(k, out ExtendedVehicleInfo cur) || (a.UltimaVolta ?? DateTime.MinValue) >= (cur.UltimaVolta ?? DateTime.MinValue))
+                        newAggDict[k] = a;
+                }
+                ElencoAggregatoVetture = newAggDict.Values.ToList();
+                /*
                 // 6) Prepare lookup for aggregated existing vehicles to speed up updates
                 var aggLookup = new Dictionary<string, ExtendedVehicleInfo>(StringComparer.OrdinalIgnoreCase);
                 foreach (var agg in ElencoAggregatoVetture)
@@ -861,6 +918,7 @@ namespace AtacFeed
                         newAggDict[k] = a;
                 }
                 ElencoAggregatoVetture = newAggDict.Values.ToList();
+                */
 
                 // 9) Statistiche and totals - use efficient counting
 

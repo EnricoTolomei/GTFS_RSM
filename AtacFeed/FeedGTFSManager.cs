@@ -264,7 +264,7 @@ namespace AtacFeed
         /// </summary>
         public void StartAutoRefresh(string urlVehicle, string urlVehicleRiserva, string urlAlert, string filtroLinea, bool filtroTripVuoti,
             bool filtroTuttoPercorso, bool raggruppalineaRegola, bool nonRaggruppare,
-            int intervalMilliseconds)
+            int intervalMilliseconds, bool forzaResetAcquisizione)
         {
             if (intervalMilliseconds <= 0)
                 throw new ArgumentOutOfRangeException("intervalMilliseconds");
@@ -286,7 +286,7 @@ namespace AtacFeed
                     {
                         try
                         {
-                            if ( DataResetMonitoraggio.HasValue && DateTime.Now > DataResetMonitoraggio.GetValueOrDefault())
+                            if (forzaResetAcquisizione || DataResetMonitoraggio.HasValue && DateTime.Now > DataResetMonitoraggio.GetValueOrDefault())
                             {
                                 //RestartFile();
                                 fileName = string.Empty;
@@ -295,7 +295,6 @@ namespace AtacFeed
                                 DataResetMonitoraggio = DataResetMonitoraggio.GetValueOrDefault(DateTime.MinValue).AddDays(1);
                                 Log.Information("Prossimo reset monitoraggio: {DataResetMonitoraggio:dd/MM/yyyy HH:mm:ss}", DataResetMonitoraggio);
                             }
-
 
                             await RefreshAsync(
                                 urlVehicle: urlVehicle,

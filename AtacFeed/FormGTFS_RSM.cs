@@ -969,6 +969,7 @@ namespace AtacFeed
             bool filtroTuttoPercorso = checkTuttoPercorso.Visible && checkTuttoPercorso.Checked;
             bool raggruppalineaRegola = radioLineaRegola.Enabled && radioLineaRegola.Checked;
             bool nonRaggruppare = radioNonRaggruppare.Checked;
+            bool forzaResetACquisizione = checkResetSempre.Visible && checkResetSempre.Checked;
             if (deltaMilliSec == 0)
             {
                 Log.Information("Acquisizione singola");
@@ -988,7 +989,7 @@ namespace AtacFeed
             {
                 minuti.Enabled = false;
                 secondi.Enabled = false;
-                _feedManager.StartAutoRefresh(urlVehicle.Text, urlVehicleRiserva.Text, urlAlert.Text, filtroLinea, filtroTripVuoti, filtroTuttoPercorso, raggruppalineaRegola, nonRaggruppare, deltaMilliSec);
+                _feedManager.StartAutoRefresh(urlVehicle.Text, urlVehicleRiserva.Text, urlAlert.Text, filtroLinea, filtroTripVuoti, filtroTuttoPercorso, raggruppalineaRegola, nonRaggruppare, deltaMilliSec, forzaResetACquisizione);
                 buttonPlayPause.BackgroundImage = Resources.pause;
                 comboBox1.Enabled = false;
                 buttonResetRegole.Enabled = false;

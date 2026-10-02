@@ -192,6 +192,7 @@
     <Compile Include="CriterioMediaPonderata.cs" />
     <Compile Include="DettagliVettura.cs" />
     <Compile Include="ErroriGTFS.cs" />
+    <Compile Include="ExtendedVehicleComparer.cs" />
     <Compile Include="ExtendedVehicleInfo.cs" />
     <Compile Include="FeedAlertManager.cs" />
     <Compile Include="FeedGTFSManager.cs" />

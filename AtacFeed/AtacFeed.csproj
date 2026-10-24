@@ -196,6 +196,7 @@
     <Compile Include="ExtendedVehicleInfo.cs" />
     <Compile Include="FeedAlertManager.cs" />
     <Compile Include="FeedGTFSManager.cs" />
+    <Compile Include="FeedMonitorSnapshot.cs" />
     <Compile Include="FeedVehicleManager.cs" />
     <Compile Include="FormGTFS_RSM.cs">
       <SubType>Form</SubType>

@@ -1,12 +1,6 @@
-﻿using AtacFeed.Properties;
-using CsvHelper;
-using CsvHelper.Configuration;
-using CsvHelper.Configuration.Attributes;
+using AtacFeed.Properties;
 using FastMember;
 using GTFS.Entities;
-using OfficeOpenXml;
-using OfficeOpenXml.Drawing.Chart;
-using OfficeOpenXml.Table;
 using ScottPlot;
 using System;
 using System.Collections.Generic;
@@ -30,6 +24,8 @@ namespace AtacFeed
         private string fileName;
         
         private DateTime? _lastProcessedFeedTimestamp;
+        private FeedMonitorSnapshot _currentSnapshot;
+        private FeedConfigurationDto _currentConfiguration;
         // Sostituiti i due manager con la facade
         private readonly FeedGTFSManager _feedManager = new FeedGTFSManager();
 
@@ -39,17 +35,13 @@ namespace AtacFeed
         {
             InitializeComponent();
 
-            // Subscription agli eventi del facade. UI thread marshal con BeginInvoke.
-            _feedManager.VehiclesUpdated += (s, e) =>
+            // La facade invia uno snapshot DTO; solo il form effettua il marshal sul thread UI.
+            _feedManager.SnapshotUpdated += (s, e) =>
             {
-                if (IsHandleCreated)
-                    BeginInvoke(new Action(UpdateUI));
+                if (IsHandleCreated && !IsDisposed)
+                    BeginInvoke(new Action(() => UpdateUI(e.Snapshot)));
             };
-            _feedManager.AlertsUpdated += (s, e) =>
-            {
-                //if (this.IsHandleCreated)
-                //    BeginInvoke(new Action(AcquisizioneNEW));
-            };
+            
             _feedManager.ErrorOccurred += (s, ex) =>
             {
                 if (IsHandleCreated)
@@ -59,14 +51,15 @@ namespace AtacFeed
                         Log.Error(ex, "Errore FeedGTFSManager");
                         // non bloccare l'UI con MessageBox automatico ma informare
                         textBox1.Text = ex.Message;
-                        //Log.Error( ex.Message, "Errore Feed");
-                        labelLetture.Text = _feedManager.NumeroLetture.ToString();
-                        labelFeedLetti.Text = _feedManager.NumeroFeedValidi.ToString();
-                        lblOraLettura.Text = _feedManager.VehicleManager.LastDataFeed?.ToString("HH:mm") ?? "--";
+                        FeedMonitorSnapshot snapshot = _feedManager.GetSnapshot();
+                        labelLetture.Text = snapshot.NumeroLetture.ToString();
+                        labelFeedLetti.Text = snapshot.NumeroFeedValidi.ToString();
+                        lblOraLettura.Text = snapshot.UltimoFeed?.ToString("HH:mm") ?? "--";
                         Log.Error("===> {Exception}", ex);
                     }));
                 }
             };
+            
             _feedManager.VehicleReadStarted += (s, args) =>
             {
                 if (IsHandleCreated)
@@ -137,797 +130,249 @@ namespace AtacFeed
                 if (IsHandleCreated)
                     BeginInvoke(new Action(() =>
                     {
-                        textBox1.Text += $"{Environment.NewLine} Inizio ELABORAZIONE FEED{Environment.NewLine}";
+                        //textBox1.Text += $"{Environment.NewLine} Inizio ELABORAZIONE FEED{Environment.NewLine}";
                         pictureBox1.Image = Resources.processing;
                     }));
 
             };
+
             _feedManager.VehicleElabCompleted += (s, args) =>
             {
                 if (IsHandleCreated)
                     BeginInvoke(new Action(() =>
                     {
-                        textBox1.Text += $"{Environment.NewLine} FINE  ELABORAZIONE FEED {Environment.NewLine}";
+                        //textBox1.Text += $"{Environment.NewLine} FINE  ELABORAZIONE FEED {Environment.NewLine}";
                         pictureBox1.Image = null;
 
                     }));
             };
         }
 
-        public void UpdateUI()
+        public void UpdateUI(FeedMonitorSnapshot snapshot)
         {
-            try
+            if (snapshot == null)
             {
-                labelLetture.Text = _feedManager.NumeroLetture.ToString();
-                labelFeedLetti.Text = _feedManager.NumeroFeedValidi.ToString();
-                lblOraLettura.Text = _feedManager.VehicleManager.LastDataFeed?.ToString("HH:mm") ?? "--";
-                textBox1.Clear();
-                textBox2.Clear();
-
-                var vm = _feedManager.VehicleManager;
-                // quick checks and delegate the heavy lifting
-                if (vm == null || vm.CodeFeed != 0)
-                {
-                    return;
-                }
-
-                PopulateUIFromVehicleManager(vm);
-            }
-            catch (Exception ex)
-            {
-                textBox1.AppendText(ex.Message);
-                Log.Error(ex, "Errore Generico");
-            }
-        }
-
-        // Consolidated UI population extracted from duplicated UpdateUI/AcquisizioneNEW logic
-        private void PopulateUIFromVehicleManager(FeedVehicleManager vm)
-        {
-            // Log diagnostico
-            Log.Information("AcquisizioneNEW START - VehicleManager null? {IsNull} LastValidFeedEntities={LastCount} ElencoVettureCount={ElencoCount} ElencoAggregatoCount={AggCount}",
-                vm == null,
-                vm?.LastValidFeed?.Entities?.Count ?? -1,
-                vm?.ElencoVetture?.Count ?? -1,
-                vm?.ElencoAggregatoVetture?.Count ?? -1);
-
-            // avoid reprocessing same timestamp
-            if (vm.LastDataFeed.HasValue && _lastProcessedFeedTimestamp.HasValue && vm.LastDataFeed.Value == _lastProcessedFeedTimestamp.Value)
-            {
-                Log.Information("AcquisizioneNEW: feed con timestamp {Ts} già processato, skip", vm.LastDataFeed.Value);
+                Log.Information("UpdateUI: Snapshot null");
                 return;
             }
-
-            DateTime lastDataFeedVehicle = vm.LastDataFeed.GetValueOrDefault();
-
-            // AlertManager snapshot
-            var alertMgr = _feedManager.AlertManager;
-            if (!string.IsNullOrWhiteSpace(urlAlert.Text))
-            {
-                try
-                {
-                    if ((alertMgr.CodeFeed == 0) && alertMgr.DiversoDaPrecedente)
-                    {
-                        var dtAvvisi = new DataTable();
-                        using (var reader = ObjectReader.Create(alertMgr.Avvisi))
-                        {
-                            dtAvvisi.Load(reader);
-                        }
-                        bindingSourceAvvisi.DataSource = dtAvvisi;
-                        GridAvvisi.DataSource = bindingSourceAvvisi;
-                    }
-                }
-                catch (Exception exc)
-                {
-                    textBox1.AppendText($"Feed Alert NON LETTO {Environment.NewLine}");
-                    textBox1.AppendText($"{exc.Message} {Environment.NewLine}{Environment.NewLine}");
-                }
-            }
-
-            // Linee anomale
-            var lineeAnomale = vm.LineeAnomale();
-            if (lineeAnomale != null && lineeAnomale.Count > 0)
-            {
-                textBox2.Text += $"Le seguenti linee {string.Join(", ", lineeAnomale)}{Environment.NewLine} NON sono riportate nel file statico routes.txt{Environment.NewLine}{Environment.NewLine}";
-            }
-
-            // Aggiunte/Tolte
-            if (vm.ElencoPrecedente != null && vm.ElencoPrecedente.Count > 0)
-            {
-                if (vm.VettureAggiunte != null && vm.VettureAggiunte.Count > 0)
-                {
-                    var sbA = new StringBuilder();
-                    foreach (var vettura in vm.VettureAggiunte)
-                    {
-                        sbA.AppendFormat("{0} - {1} rilevata alle {2:HH:mm:ss} {3}", vettura.IdVettura, vettura.Matricola, lastDataFeedVehicle, Environment.NewLine);
-                    }
-                    textBox3.AppendText(sbA.ToString());
-                }
-
-                if (vm.VettureTolte != null && vm.VettureTolte.Count > 0)
-                {
-                    var sbT = new StringBuilder();
-                    foreach (var vettura in vm.VettureTolte)
-                    {
-                        sbT.AppendFormat("{0} - {1} NON rilevata alle {2:HH:mm:ss} {3}", vettura.IdVettura, vettura.Matricola, lastDataFeedVehicle, Environment.NewLine);
-                    }
-                    textBox4.AppendText(sbT.ToString());
-                }
-
-                // Partenza avanzata
-                if (vm.PartenzaAvanzata != null && vm.PartenzaAvanzata.Any())
-                {
-                    textBox2.AppendText("Vetture con 'partenza avanzata'" + Environment.NewLine);
-                    foreach (var errore in vm.PartenzaAvanzata)
-                    {
-                        string line = $"Matricola {errore.Matricola} Linea {errore.Linea} Fermata {errore.CurrentStopSequence}{Environment.NewLine}";
-                        int start = textBox2.TextLength;
-                        textBox2.AppendText(line);
-                        textBox2.Select(start, line.Length);
-                        textBox2.SelectionColor = Color.CornflowerBlue;
-                        textBox2.SelectionIndent = 10;
-                        vm.AnomaliaGTFS.Add(new ErroriGTFS(errore, (int)errore.CurrentStopSequence));
-                    }
-                    textBox2.AppendText(Environment.NewLine);
-                }
-
-                // Riagganciate
-                if (vm.VettureRiagganciate != null && vm.VettureRiagganciate.Any())
-                {
-                    textBox2.AppendText("Vetture 'riagganciate'" + Environment.NewLine);
-                    foreach (var errore in vm.VettureRiagganciate)
-                    {
-                        string line = $"Matricola {errore.Matricola} Linea {errore.Linea} Fermata {errore.CurrentStopSequence}{Environment.NewLine}";
-                        int start = textBox2.TextLength;
-                        textBox2.AppendText(line);
-                        textBox2.Select(start, line.Length);
-                        textBox2.SelectionColor = Color.CornflowerBlue;
-                        textBox2.SelectionIndent = 10;
-
-                        uint ultimaFermataRilevata = vm.ElencoAggregatoVetture
-                                .Where(x => x.TripId == errore.TripId && x.Matricola == errore.Matricola)
-                                .Max(x => x.CurrentStopSequence);
-                        int delta = (int)(errore.CurrentStopSequence - ultimaFermataRilevata);
-                        vm.AnomaliaGTFS.Add(new ErroriGTFS(errore, delta));
-                    }
-                    textBox2.AppendText(Environment.NewLine);
-                }
-
-                // Percorso anomalo
-                if (vm.PercorsoAnomalo != null && vm.PercorsoAnomalo.Count > 0)
-                {
-                    textBox2.AppendText("Vetture con progressivo fermate 'bucato'" + Environment.NewLine);
-                    foreach (var errore in vm.PercorsoAnomalo)
-                    {
-                        string line = $"Matricola {errore.Matricola} Linea {errore.Linea} Fermata {errore.CurrentStopSequence} => 'balzo' di {errore.Delta}{Environment.NewLine}";
-                        int start = textBox2.TextLength;
-                        textBox2.AppendText(line);
-                        textBox2.Select(start, line.Length);
-                        if (errore.Delta < 0)
-                        {
-                            textBox2.SelectionColor = Color.OrangeRed;
-                            textBox2.SelectionFont = new Font(textBox2.SelectionFont, FontStyle.Bold);
-                        }
-                        else
-                        {
-                            textBox2.SelectionColor = Color.DarkOrange;
-                        }
-                        textBox2.SelectionIndent = 10;
-                    }
-                    textBox2.AppendText(Environment.NewLine);
-                }
-            }
-
-            // Trip duplicati
-            var tripDuplicatiFeedVehicle = vm.TripDuplicati();
-            if (tripDuplicatiFeedVehicle != null && tripDuplicatiFeedVehicle.Count > 0)
-            {
-                textBox2.AppendText("Trip Duplicati" + Environment.NewLine);
-                foreach (var tripDuplicato in tripDuplicatiFeedVehicle)
-                {
-                    var elencoVettureSuTripIdDuplicato = string.Join(", ", vm.FeedEntities.Where(x => x.Vehicle.Trip != null && x.Vehicle.Trip.TripId == tripDuplicato).Select(x => x.Vehicle.Vehicle.Label));
-                    string line = $"Trip {tripDuplicato}\tVetture:[{elencoVettureSuTripIdDuplicato}]{Environment.NewLine}";
-                    int start = textBox2.TextLength;
-                    textBox2.AppendText(line);
-                    textBox2.Select(start, line.Length);
-                    textBox2.SelectionColor = Color.Tomato;
-                    textBox2.SelectionIndent = 10;
-                }
-                textBox2.AppendText(Environment.NewLine);
-            }
-
-            // Vetture senza matricola
-            var vettureSenzaMatricola = vm.VettureSenzaMatricola();
-            if (vettureSenzaMatricola != null && vettureSenzaMatricola.Count > 0)
-            {
-                textBox2.AppendText("Vetture Senza Matricola" + Environment.NewLine);
-                int start = textBox2.TextLength;
-                var sb = new StringBuilder();
-                foreach (var vettura in vettureSenzaMatricola)
-                {
-                    sb.AppendFormat("IdVettura {0}\t Matricola:[{1}]{2}", vettura.IdVettura, vettura.Matricola, Environment.NewLine);
-                }
-                string vetture = sb.ToString();
-                textBox2.AppendText(vetture);
-                textBox2.Select(start, vetture.Length);
-                textBox2.SelectionColor = Color.DarkGray;
-                textBox2.SelectionIndent = 10;
-                textBox2.AppendText(Environment.NewLine);
-            }
-
-            textBox2.AppendText(Environment.NewLine);
-            textBox2.Select(0, 0);
-
-            labelTotaleRighe.Text = vm.ElencoAggregatoVetture.Count.ToString();
-            labelTotaleIdVettura.Text = vm.TotaleIdVettura.ToString();
-            labelTotaleMatricola.Text = vm.TotaleMatricola.ToString();
-
-            // Statistiche
-            var stat = vm.StatisticheAttuali ?? new Statistiche();
-            labelBusAtac.Text = stat.RilevatoBusAtac.ToString();
-            labelTramAtac.Text = stat.RilevatoTramAtac.ToString();
-            labelFilobusAtac.Text = stat.RilevatoFilobusAtac.ToString();
-            labelMiniBusEleAtac.Text = stat.RilevatoMinibusElettrici.ToString();
-            labelFurgoncinoAtac.Text = stat.RilevatoFurgoncini.ToString();
-            labelFerroAtac.Text = stat.RilevatoFerro.ToString();
-            labelAltroAtac.Text = stat.RilevatoAltroAtac.ToString();
-            labelBusTPL.Text = stat.RilevatoBusTpl.ToString();
-            labelPullmanTPL.Text = stat.RilevatoPullmanTpl.ToString();
-            labelAltroTpl.Text = stat.RilevatoAltroTpl.ToString();
-
-            labelTotaleMatricolaATAC.Text = vm.TotaleMatricolaAtac.ToString();
-            labelTotaleMatricolaTPL.Text = vm.TotaleMatricolaTPL.ToString();
-
-            // DataTable per grid principali - carica usando ObjectReader
-            var dt = new DataTable();
-            using (var reader = ObjectReader.Create(vm.ElencoAggregatoVetture))
-            {
-                dt.Load(reader);
-            }
-            extendedVehicleInfoBindingSource.DataSource = dt;
-            advancedDataGridView1.DataSource = extendedVehicleInfoBindingSource;
-
-            // Attuale - applica ordinamento se necessario evitando ToList doppio
-            var elencoAttuale = vm.ElencoVetture;
-            DataTable dtAttuale = new DataTable();
-            if (string.IsNullOrEmpty(bindingSourceAttuale.Sort))
-            {
-                using (var reader = ObjectReader.Create(elencoAttuale.OrderBy(x => x.Linea?.Length).ThenBy(x => x.Linea)))
-                {
-                    dtAttuale.Load(reader);
-                }
-            }
-            else
-            {
-                using (var reader = ObjectReader.Create(elencoAttuale))
-                {
-                    dtAttuale.Load(reader);
-                }
-            }
-            bindingSourceAttuale.DataSource = dtAttuale;
-            advancedDataGridView2.DataSource = bindingSourceAttuale;
-
-            // Liste e conteggi
-            var listaMezziSuLinea = vm.ElencoVetture.Where(x => x.TripId != null).ToList();
-            var listaBusAttesa = vm.ElencoVetture.Where(x => x.TripId == null).ToList();
-            int numVettureTPLFeedVehicle = vm.ElencoVetture.Count(i => i.TipoMezzoTrasporto == 3 || i.TipoMezzoTrasporto == 4 || i.TipoMezzoTrasporto == -3);
-
-            int busLinea = listaMezziSuLinea.Count;
-            int busAttesa = listaBusAttesa.Count;
-            int busTotale = busLinea + busAttesa;
-            textBox1.AppendText($"Totale Vetture Rilevate sul Feed Vehicle {busTotale}");
-
-            // Raggruppamento per gestore - cache StatisticheAttuali.ServizioRaggruppato
-            var sbGestori = new StringBuilder();
-            var raggruppatoGestore = vm.StatisticheAttuali?.ServizioRaggruppato ?? Enumerable.Empty<ServizioRaggruppato>();
-            var grouped = raggruppatoGestore.GroupBy(x => x.Agenzia).Select(g => new { Gestore = g.Key, Totale = g.Sum(x => x.Num) });
-
-            foreach (var gestore in grouped)
-            {
-                sbGestori.AppendLine();
-                sbGestori.AppendFormat("{0} - {1}{2}", gestore.Gestore, gestore.Totale, Environment.NewLine);
-                foreach (var servizio in raggruppatoGestore.Where(x => x.Agenzia == gestore.Gestore))
-                {
-                    sbGestori.AppendFormat("    {0}\t{1}{2}", servizio.Servizio, servizio.Num, Environment.NewLine);
-                }
-            }
-            textBox1.AppendText(sbGestori.ToString());
-
-            labelTPL.Text = numVettureTPLFeedVehicle.ToString();
-            labelAtac.Text = (busTotale - numVettureTPLFeedVehicle).ToString();
-            labelTot.Text = busTotale.ToString();
-
-            labelPonderatiATAC.Text = Math.Round(vm.PonderateAtac).ToString();
-            labelPonderatiTPL.Text = Math.Round(vm.PonderateTPL).ToString();
-
-            if (string.IsNullOrEmpty(fileName))
-            {
-                fileName = string.Format("Feed_{0:yyyy-MM-dd (HH_mm_ss)}", lastDataFeedVehicle);
-            }
-
-            if (vm.GTFS_RSM.RegoleMonitoraggio != null && vm.GTFS_RSM.RegoleMonitoraggio.Count > 0)
-            {
-                dataGridViolazioni.DataSource = vm.ViolazioniLeneeMonitorate();
-                if (tabMainForm.SelectedTab == tabMonitoraggio)
-                {
-                    Colora();
-                }
-            }
-
-            // Alert tabs - prendo snapshot da GTFS_RSM
-            var alerts = vm.GTFS_RSM?.AlertsDaControllare;
-            if (alerts != null)
-            {
-                foreach (var alert in alerts)
-                {
-                    var page = tabMainForm.TabPages[alert.Name];
-                    if (page == null) continue;
-                    var ctrl = page.Controls[alert.Name] as DataGridView;
-                    if (ctrl == null) continue;
-                    if (checkBoxStorico.Checked)
-                    {
-                        ctrl.DataSource = alert.ViolazioniAlert.ToList();
-                    }
-                    else
-                    {
-                        ctrl.DataSource = vm.ViolazioniAlertAttuali != null ? vm.ViolazioniAlertAttuali.ToList() : null;
-                    }
-                }
-            }
-
-            // Grafico
-            AggiornaScottPlot();
-
-            // Segnamo come processato questo timestamp (solo se abbiamo raggiunto il rendering)
+            
             try
             {
-                if (vm.LastDataFeed.HasValue)
-                    _lastProcessedFeedTimestamp = vm.LastDataFeed.Value;
-            }
-            catch
-            {
-                // ignore
-            }
-        }
-        private void AcquisizioneNEW()
-        {
-            try
-            {
+                Log.Information("UpdateUI called with snapshot: {Snapshot}", snapshot.UltimoFeed.ToString());
+                _currentSnapshot = snapshot;
+                labelLetture.Text = snapshot.NumeroLetture.ToString();
+                labelFeedLetti.Text = snapshot.NumeroFeedValidi.ToString();
+                lblOraLettura.Text = snapshot.UltimoFeed?.ToString("HH:mm") ?? "--";
                 textBox1.Clear();
                 textBox2.Clear();
-                string routeID = comboBox1.SelectedValue?.ToString() ?? "-1";
 
-                // Usa AlertManager tramite facade
-                var alertMgr = _feedManager.AlertManager;
-                if (!string.IsNullOrWhiteSpace(urlAlert.Text))
+                if (snapshot.CodiceFeedAvvisi == 0)
                 {
-                    try
-                    {
-                        if ((alertMgr.CodeFeed == 0) && alertMgr.DiversoDaPrecedente)
-                        {
-                            var dtAvvisi = new DataTable();
-                            using (var reader = ObjectReader.Create(alertMgr.Avvisi))
-                            {
-                                dtAvvisi.Load(reader);
-                            }
-                            bindingSourceAvvisi.DataSource = dtAvvisi;
-                            GridAvvisi.DataSource = bindingSourceAvvisi;
-                        }
-                    }
-                    catch (Exception exc)
-                    {
-                        textBox1.AppendText($"Feed Alert NON LETTO {Environment.NewLine}");
-                        textBox1.AppendText($"{exc.Message} {Environment.NewLine}{Environment.NewLine}");
-                    }
+                    bindingSourceAvvisi.DataSource = CreateDataTable(snapshot.Avvisi);
+                    GridAvvisi.DataSource = bindingSourceAvvisi;
                 }
 
-                // Usa VehicleManager tramite facade
-                var vm = _feedManager.VehicleManager;
-
-                // Log diagnostico: verifichiamo cosa c'è prima di procedere
-                Log.Information("AcquisizioneNEW START - VehicleManager null? {IsNull} LastValidFeedEntities={LastCount} ElencoVettureCount={ElencoCount} ElencoAggregatoCount={AggCount}",
-                    vm == null,
-                    vm?.LastValidFeed?.Entities?.Count ?? -1,
-                    vm?.ElencoVetture?.Count ?? -1,
-                    vm?.ElencoAggregatoVetture?.Count ?? -1);
-
-                bool feedAvailable = vm != null && vm.CodeFeed == 0;
-                labelLetture.Text = _feedManager.NumeroLetture.ToString();
-
-                if (!feedAvailable)
+                if (snapshot.CodiceFeedVeicoli != 0)
                     return;
 
-                DateTime lastDataFeedVehicle = vm.LastDataFeed.GetValueOrDefault();
-
-                // Evitiamo di processare più volte lo stesso feed: confronto per timestamp
-                if (vm.LastDataFeed.HasValue && _lastProcessedFeedTimestamp.HasValue && vm.LastDataFeed.Value == _lastProcessedFeedTimestamp.Value)
-                {
-                    Log.Information("AcquisizioneNEW: feed con timestamp {Ts} già processato, skip", vm.LastDataFeed.Value);
+                if (snapshot.UltimoFeed.HasValue && _lastProcessedFeedTimestamp.HasValue &&
+                    snapshot.UltimoFeed.Value == _lastProcessedFeedTimestamp.Value)
                     return;
-                }
 
-                // Linee anomale
-                var lineeAnomale = vm.LineeAnomale();
-                if (lineeAnomale != null && lineeAnomale.Count > 0)
-                {
-                    textBox2.Text = $"Le seguenti linee {string.Join(", ", lineeAnomale)}{Environment.NewLine} NON sono riportate nel file statico routes.txt{Environment.NewLine}{Environment.NewLine}";
-                }
-
-                // Aggiunte/Tolte: accumulo stringhe in StringBuilder per ridurre aggiornamenti UI ripetuti
-                if (vm.ElencoPrecedente != null && vm.ElencoPrecedente.Count > 0)
-                {
-                    if (vm.VettureAggiunte != null && vm.VettureAggiunte.Count > 0)
-                    {
-                        
-                        var sbA = new StringBuilder();
-                        foreach (var vettura in vm.VettureAggiunte)
-                        {
-                            sbA.AppendFormat("{0} - {1} rilevata alle {2:HH:mm:ss} {3}", vettura.IdVettura, vettura.Matricola, lastDataFeedVehicle, Environment.NewLine);
-                        }
-                        textBox3.AppendText(sbA.ToString());                                                
-                    }
-
-                    if (vm.VettureTolte != null && vm.VettureTolte.Count > 0)
-                    {
-                        var sbT = new StringBuilder();
-                        foreach (var vettura in vm.VettureTolte)
-                        {
-                            sbT.AppendFormat("{0} - {1} NON rilevata alle {2:HH:mm:ss} {3}", vettura.IdVettura, vettura.Matricola, lastDataFeedVehicle, Environment.NewLine);
-                        }
-                        textBox4.AppendText(sbT.ToString());
-                    }
-
-                    // Partenza avanzata
-                    if (vm.PartenzaAvanzata != null && vm.PartenzaAvanzata.Any())
-                    {
-                        textBox2.AppendText("Vetture con 'partenza avanzata'" + Environment.NewLine);
-                        foreach (var errore in vm.PartenzaAvanzata)
-                        {
-                            string line = $"Matricola {errore.Matricola} Linea {errore.Linea} Fermata {errore.CurrentStopSequence}{Environment.NewLine}";
-                            int start = textBox2.TextLength;
-                            textBox2.AppendText(line);
-                            textBox2.Select(start, line.Length);
-                            textBox2.SelectionColor = Color.CornflowerBlue;
-                            textBox2.SelectionIndent = 10;
-                            vm.AnomaliaGTFS.Add(new ErroriGTFS(errore, (int)errore.CurrentStopSequence));
-                        }
-                        textBox2.AppendText(Environment.NewLine);
-                    }
-
-                    // Riagganciate
-                    if (vm.VettureRiagganciate != null && vm.VettureRiagganciate.Any())
-                    {
-                        textBox2.AppendText("Vetture 'riagganciate'" + Environment.NewLine);
-                        foreach (var errore in vm.VettureRiagganciate)
-                        {
-                            string line = $"Matricola {errore.Matricola} Linea {errore.Linea} Fermata {errore.CurrentStopSequence}{Environment.NewLine}";
-                            int start = textBox2.TextLength;
-                            textBox2.AppendText(line);
-                            textBox2.Select(start, line.Length);
-                            textBox2.SelectionColor = Color.CornflowerBlue;
-                            textBox2.SelectionIndent = 10;
-
-                            uint ultimaFermataRilevata = vm.ElencoAggregatoVetture
-                                    .Where(x => x.TripId == errore.TripId && x.Matricola == errore.Matricola)
-                                    .Max(x => x.CurrentStopSequence);
-                            int delta = (int)(errore.CurrentStopSequence - ultimaFermataRilevata);
-                            vm.AnomaliaGTFS.Add(new ErroriGTFS(errore, delta));
-                        }
-                        textBox2.AppendText(Environment.NewLine);
-                    }
-
-                    // Percorso anomalo
-                    if (vm.PercorsoAnomalo != null && vm.PercorsoAnomalo.Count > 0)
-                    {
-                        textBox2.AppendText("Vetture con progressivo fermate 'bucato'" + Environment.NewLine);
-                        foreach (var errore in vm.PercorsoAnomalo)
-                        {
-                            string line = $"Matricola {errore.Matricola} Linea {errore.Linea} Fermata {errore.CurrentStopSequence} => 'balzo' di {errore.Delta}{Environment.NewLine}";
-                            int start = textBox2.TextLength;
-                            textBox2.AppendText(line);
-                            textBox2.Select(start, line.Length);
-                            if (errore.Delta < 0)
-                            {
-                                textBox2.SelectionColor = Color.OrangeRed;
-                                textBox2.SelectionFont = new Font(textBox2.SelectionFont, FontStyle.Bold);
-                            }
-                            else
-                            {
-                                textBox2.SelectionColor = Color.DarkOrange;
-                            }
-                            textBox2.SelectionIndent = 10;
-                        }
-                        textBox2.AppendText(Environment.NewLine);
-                    }
-                }
-
-                // Trip duplicati
-                var tripDuplicatiFeedVehicle = vm.TripDuplicati();
-                if (tripDuplicatiFeedVehicle != null && tripDuplicatiFeedVehicle.Count > 0)
-                {
-                    textBox2.AppendText("Trip Duplicati" + Environment.NewLine);
-                    foreach (var tripDuplicato in tripDuplicatiFeedVehicle)
-                    {
-                        var elencoVettureSuTripIdDuplicato = string.Join(", ", vm.FeedEntities.Where(x => x.Vehicle.Trip != null && x.Vehicle.Trip.TripId == tripDuplicato).Select(x => x.Vehicle.Vehicle.Label));
-                        string line = $"Trip {tripDuplicato}\tVetture:[{elencoVettureSuTripIdDuplicato}]{Environment.NewLine}";
-                        int start = textBox2.TextLength;
-                        textBox2.AppendText(line);
-                        textBox2.Select(start, line.Length);
-                        textBox2.SelectionColor = Color.Tomato;
-                        textBox2.SelectionIndent = 10;
-                    }
-                    textBox2.AppendText(Environment.NewLine);
-                }
-
-                // Vetture senza matricola
-                var vettureSenzaMatricola = vm.VettureSenzaMatricola();
-                if (vettureSenzaMatricola != null && vettureSenzaMatricola.Count > 0)
-                {
-                    textBox2.AppendText("Vetture Senza Matricola" + Environment.NewLine);
-                    int start = textBox2.TextLength;
-                    var sb = new StringBuilder();
-                    foreach (var vettura in vettureSenzaMatricola)
-                    {
-                        sb.AppendFormat("IdVettura {0}\t Matricola:[{1}]{2}", vettura.IdVettura, vettura.Matricola, Environment.NewLine);
-                    }
-                    string vetture = sb.ToString();
-                    textBox2.AppendText(vetture);
-                    textBox2.Select(start, vetture.Length);
-                    textBox2.SelectionColor = Color.DarkGray;
-                    textBox2.SelectionIndent = 10;
-                    textBox2.AppendText(Environment.NewLine);
-                }
-
-                textBox2.AppendText(Environment.NewLine);
-                textBox2.Select(0, 0);
-
-                labelTotaleRighe.Text = vm.ElencoAggregatoVetture.Count.ToString();
-                labelTotaleIdVettura.Text = vm.TotaleIdVettura.ToString();
-                labelTotaleMatricola.Text = vm.TotaleMatricola.ToString();
-
-                // Statistiche
-                var stat = vm.StatisticheAttuali ?? new Statistiche();
-                labelBusAtac.Text = stat.RilevatoBusAtac.ToString();
-                labelTramAtac.Text = stat.RilevatoTramAtac.ToString();
-                labelFilobusAtac.Text = stat.RilevatoFilobusAtac.ToString();
-                labelMiniBusEleAtac.Text = stat.RilevatoMinibusElettrici.ToString();
-                labelFurgoncinoAtac.Text = stat.RilevatoFurgoncini.ToString();
-                labelFerroAtac.Text = stat.RilevatoFerro.ToString();
-                labelAltroAtac.Text = stat.RilevatoAltroAtac.ToString();
-                labelBusTPL.Text = stat.RilevatoBusTpl.ToString();
-                labelPullmanTPL.Text = stat.RilevatoPullmanTpl.ToString();
-                labelAltroTpl.Text = stat.RilevatoAltroTpl.ToString();
-
-                labelTotaleMatricolaATAC.Text = vm.TotaleMatricolaAtac.ToString();
-                labelTotaleMatricolaTPL.Text = vm.TotaleMatricolaTPL.ToString();
-
-                // DataTable per grid principali - carica usando ObjectReader
-                var dt = new DataTable();
-                using (var reader = ObjectReader.Create(vm.ElencoAggregatoVetture))
-                {
-                    dt.Load(reader);
-                }
-                extendedVehicleInfoBindingSource.DataSource = dt;
-                advancedDataGridView1.DataSource = extendedVehicleInfoBindingSource;
-
-                // Attuale - applica ordinamento se necessario evitando ToList doppio
-                var elencoAttuale = vm.ElencoVetture;
-                DataTable dtAttuale = new DataTable();
-                if (string.IsNullOrEmpty(bindingSourceAttuale.Sort))
-                {
-                    using (var reader = ObjectReader.Create(elencoAttuale.OrderBy(x => x.Linea?.Length).ThenBy(x => x.Linea)))
-                    {
-                        dtAttuale.Load(reader);
-                    }
-                }
-                else
-                {
-                    using (var reader = ObjectReader.Create(elencoAttuale))
-                    {
-                        dtAttuale.Load(reader);
-                    }
-                }
-                bindingSourceAttuale.DataSource = dtAttuale;
-                advancedDataGridView2.DataSource = bindingSourceAttuale;
-
-                // Liste e conteggi
-                var listaMezziSuLinea = vm.ElencoVetture.Where(x => x.TripId != null).ToList();
-                var listaBusAttesa = vm.ElencoVetture.Where(x => x.TripId == null).ToList();
-                int numVettureTPLFeedVehicle = vm.ElencoVetture.Count(i => i.TipoMezzoTrasporto == 3 || i.TipoMezzoTrasporto == 4 || i.TipoMezzoTrasporto == -3);
-
-                int busLinea = listaMezziSuLinea.Count;
-                int busAttesa = listaBusAttesa.Count;
-                int busTotale = busLinea + busAttesa;
-                textBox1.AppendText($"Totale Vetture Rilevate sul Feed Vehicle {busTotale}");
-
-                // Raggruppamento per gestore - cache StatisticheAttuali.ServizioRaggruppato
-                var sbGestori = new StringBuilder();
-                var raggruppatoGestore = vm.StatisticheAttuali?.ServizioRaggruppato ?? Enumerable.Empty<ServizioRaggruppato>();
-                var grouped = raggruppatoGestore.GroupBy(x => x.Agenzia).Select(g => new { Gestore = g.Key, Totale = g.Sum(x => x.Num) });
-
-                foreach (var gestore in grouped)
-                {
-                    sbGestori.AppendLine();
-                    sbGestori.AppendFormat("{0} - {1}{2}", gestore.Gestore, gestore.Totale, Environment.NewLine);
-                    foreach (var servizio in raggruppatoGestore.Where(x => x.Agenzia == gestore.Gestore))
-                    {
-                        sbGestori.AppendFormat("    {0}\t{1}{2}", servizio.Servizio, servizio.Num, Environment.NewLine);
-                    }
-                }
-                textBox1.AppendText(sbGestori.ToString());
-
-                labelTPL.Text = numVettureTPLFeedVehicle.ToString();
-                labelAtac.Text = (busTotale - numVettureTPLFeedVehicle).ToString();
-                labelTot.Text = busTotale.ToString();
-
-                labelPonderatiATAC.Text = Math.Round(vm.PonderateAtac).ToString();
-                labelPonderatiTPL.Text = Math.Round(vm.PonderateTPL).ToString();
-
-                if (string.IsNullOrEmpty(fileName))
-                {
-                    fileName = string.Format("Feed_{0:yyyy-MM-dd (HH_mm_ss)}", lastDataFeedVehicle);
-                }
-
-                if (vm.GTFS_RSM.RegoleMonitoraggio != null && vm.GTFS_RSM.RegoleMonitoraggio.Count > 0)
-                {
-                    dataGridViolazioni.DataSource = vm.ViolazioniLeneeMonitorate();
-                    if (tabMainForm.SelectedTab == tabMonitoraggio)
-                    {
-                        Colora();
-                    }
-                }
-
-                // Alert tabs - prendo snapshot da GTFS_RSM
-                var alerts = vm.GTFS_RSM?.AlertsDaControllare;
-                if (alerts != null)
-                {
-                    foreach (var alert in alerts)
-                    {
-                        var page = tabMainForm.TabPages[alert.Name];
-                        if (page == null) continue;
-                        var ctrl = page.Controls[alert.Name] as DataGridView;
-                        if (ctrl == null) continue;
-                        if (checkBoxStorico.Checked)
-                        {
-                            ctrl.DataSource = alert.ViolazioniAlert.ToList();
-                        }
-                        else
-                        {
-                            ctrl.DataSource = vm.ViolazioniAlertAttuali != null ? vm.ViolazioniAlertAttuali.ToList() : null;
-                        }
-                    }
-                }
-
-                // Grafico
-                AggiornaScottPlot();
-
-                // Segnamo come processato questo timestamp (solo se abbiamo raggiunto il rendering)
-                try
-                {
-                    if (vm.LastDataFeed.HasValue)
-                        _lastProcessedFeedTimestamp = vm.LastDataFeed.Value;
-                }
-                catch
-                {
-                    // ignore
-                }
+                PopulateUIFromSnapshot(snapshot);
             }
             catch (Exception ex)
             {
                 textBox1.AppendText(ex.Message);
-                Log.Error(ex, "Errore Generico");
+                Log.Error(ex, "Errore durante la visualizzazione dello snapshot del feed");
             }
         }
 
-        // Mantengo LeggiValidFeedNEW per compatibilità, ma il polling ora può usare _feedManager.RefreshAsync
-        private void LeggiValidFeedNEW(string routeID, bool filtroTripVuoti, bool filtroTuttoPercorso, bool raggruppalineaRegola, bool nonRaggruppare
-            , IProgress<Tuple<string, PictureBox, Bitmap>> progress)
+        private void PopulateUIFromSnapshot(FeedMonitorSnapshot snapshot)
         {
-            try
+            DateTime lastDataFeed = snapshot.UltimoFeed.GetValueOrDefault();
+
+            if (snapshot.VeicoliAggiunti != null && snapshot.VeicoliAggiunti.Count > 0)
             {
-                Tuple<string, PictureBox, Bitmap> tuplaReport = null;
-                var tupleServer = new List<Tuple<string, PictureBox>>
+                var added = new StringBuilder();
+                foreach (VehicleSnapshotDto vehicle in snapshot.VeicoliAggiunti)
+                    added.AppendFormat("{0} - {1} rilevata alle {2:HH:mm:ss}{3}", vehicle.IdVettura, vehicle.Matricola, lastDataFeed, Environment.NewLine);
+                textBox3.AppendText(added.ToString());
+            }
+
+            if (snapshot.VeicoliRimossi != null && snapshot.VeicoliRimossi.Count > 0)
+            {
+                var removed = new StringBuilder();
+                foreach (VehicleSnapshotDto vehicle in snapshot.VeicoliRimossi)
+                    removed.AppendFormat("{0} - {1} NON rilevata alle {2:HH:mm:ss}{3}", vehicle.IdVettura, vehicle.Matricola, lastDataFeed, Environment.NewLine);
+                textBox4.AppendText(removed.ToString());
+            }
+
+            RenderFeedIssues(snapshot.ProblemiFeed);
+            RenderAnomalies(snapshot.AnomalieGtfs);
+
+            labelTotaleRighe.Text = snapshot.TotaleRighe.ToString();
+            labelTotaleIdVettura.Text = snapshot.TotaleIdVettura.ToString();
+            labelTotaleMatricola.Text = snapshot.TotaleMatricola.ToString();
+            labelTotaleMatricolaATAC.Text = snapshot.TotaleMatricolaAtac.ToString();
+            labelTotaleMatricolaTPL.Text = snapshot.TotaleMatricolaTpl.ToString();
+
+            FeedStatisticsDto statistics = snapshot.Statistiche ?? new FeedStatisticsDto();
+            labelBusAtac.Text = statistics.RilevatoBusAtac.ToString();
+            labelTramAtac.Text = statistics.RilevatoTramAtac.ToString();
+            labelFilobusAtac.Text = statistics.RilevatoFilobusAtac.ToString();
+            labelMiniBusEleAtac.Text = statistics.RilevatoMinibusElettrici.ToString();
+            labelFurgoncinoAtac.Text = statistics.RilevatoFurgoncini.ToString();
+            labelFerroAtac.Text = statistics.RilevatoFerro.ToString();
+            labelAltroAtac.Text = statistics.RilevatoAltroAtac.ToString();
+            labelBusTPL.Text = statistics.RilevatoBusTpl.ToString();
+            labelPullmanTPL.Text = statistics.RilevatoPullmanTpl.ToString();
+            labelAltroTpl.Text = statistics.RilevatoAltroTpl.ToString();
+
+            extendedVehicleInfoBindingSource.DataSource = CreateDataTable(snapshot.VeicoliAggregati);
+            advancedDataGridView1.DataSource = extendedVehicleInfoBindingSource;
+
+            IEnumerable<VehicleSnapshotDto> currentVehicles = snapshot.VeicoliAttuali ?? new List<VehicleSnapshotDto>();
+            if (string.IsNullOrEmpty(bindingSourceAttuale.Sort))
+                currentVehicles = currentVehicles.OrderBy(vehicle => vehicle.Linea?.Length).ThenBy(vehicle => vehicle.Linea);
+
+            bindingSourceAttuale.DataSource = CreateDataTable(currentVehicles);
+            advancedDataGridView2.DataSource = bindingSourceAttuale;
+
+            textBox1.AppendText($"Totale Vetture Rilevate sul Feed Vehicle {snapshot.TotaleVetture}{Environment.NewLine}");
+            var services = snapshot.ServiziPerGestore ?? new List<ServiceStatisticDto>();
+            var serviceText = new StringBuilder();
+            foreach (var agencyGroup in services.GroupBy(service => service.Gestore))
+            {
+                serviceText.AppendLine();
+                serviceText.AppendFormat("{0} - {1}{2}", agencyGroup.Key, agencyGroup.Sum(service => service.Numero), Environment.NewLine);
+                foreach (ServiceStatisticDto service in agencyGroup)
+                    serviceText.AppendFormat("    {0}\t{1}{2}", service.Servizio, service.Numero, Environment.NewLine);
+            }
+            textBox1.AppendText(serviceText.ToString());
+
+            labelTPL.Text = snapshot.TotaleVettureTpl.ToString();
+            labelAtac.Text = snapshot.TotaleVettureAtac.ToString();
+            labelTot.Text = snapshot.TotaleVetture.ToString();
+            labelPonderatiATAC.Text = Math.Round(snapshot.PonderateAtac).ToString();
+            labelPonderatiTPL.Text = Math.Round(snapshot.PonderateTpl).ToString();
+
+            if (string.IsNullOrEmpty(fileName))
+                fileName = string.Format("Feed_{0:yyyy-MM-dd (HH_mm_ss)}", lastDataFeed);
+
+            dataGridViolazioni.DataSource = snapshot.ViolazioniMonitoraggio;
+            if (tabMainForm.SelectedTab == tabMonitoraggio)
+                Colora();
+
+            foreach (AlertRuleGroupDto alert in snapshot.GruppiAlert ?? new List<AlertRuleGroupDto>())
+            {
+                TabPage page = tabMainForm.TabPages[alert.Nome];
+                DataGridView grid = page?.Controls[alert.Nome] as DataGridView;
+                if (grid == null)
+                    continue;
+
+                grid.DataSource = checkBoxStorico.Checked
+                    ? alert.ViolazioniStoriche.ToList()
+                    : alert.ViolazioniAttuali.ToList();
+            }
+
+            AggiornaScottPlot(snapshot.PuntiGrafico);
+            _lastProcessedFeedTimestamp = snapshot.UltimoFeed;
+        }
+
+        private static DataTable CreateDataTable<T>(IEnumerable<T> rows)
+        {
+            var table = new DataTable();
+            if (rows == null)
+                return table;
+
+            using (var reader = ObjectReader.Create(rows))
+                table.Load(reader);
+
+            return table;
+        }
+
+        private void RenderFeedIssues(IEnumerable<FeedIssueDto> issues)
+        {
+            if (issues == null)
+                return;
+
+            var missingRoutes = issues
+                .Where(issue => issue.Categoria == "Linea non presente nel GTFS statico")
+                .Select(issue => issue.Messaggio)
+                .ToList();
+            if (missingRoutes.Count > 0)
+                textBox2.AppendText($"Le seguenti linee {string.Join(", ", missingRoutes)}{Environment.NewLine} NON sono riportate nel file statico routes.txt{Environment.NewLine}{Environment.NewLine}");
+
+            foreach (FeedIssueDto issue in issues.Where(issue => issue.Categoria != "Linea non presente nel GTFS statico"))
+            {
+                string detail = string.IsNullOrWhiteSpace(issue.Dettaglio) ? string.Empty : $" [{issue.Dettaglio}]";
+                Color color = issue.Categoria == "Trip duplicato" ? Color.Tomato : Color.DarkGray;
+                AppendColoredLine(textBox2, $"{issue.Categoria}: {issue.Messaggio}{detail}", color);
+            }
+        }
+
+        private void RenderAnomalies(IEnumerable<VehicleAnomalyDto> anomalies)
+        {
+            if (anomalies == null)
+                return;
+
+            foreach (var category in anomalies.GroupBy(anomaly => anomaly.Categoria))
+            {
+                textBox2.AppendText(category.Key + Environment.NewLine);
+                foreach (VehicleAnomalyDto anomaly in category)
                 {
-                    new Tuple<string, PictureBox>(urlVehicle.Text, imgUrl1),
-                    new Tuple<string, PictureBox>(urlVehicleRiserva.Text, imgUrl2)
-                };
-                tupleServer.RemoveAll(x => string.IsNullOrEmpty(x.Item1));
+                    string message = $"Matricola {anomaly.Matricola} Linea {anomaly.Linea} Fermata {anomaly.Fermata}";
+                    if (category.Key == "Percorso anomalo")
+                        message += $" => 'balzo' di {anomaly.Delta}";
 
-                _feedManager.NumeroLetture++;
-                for (int i = 0; i < tupleServer.Count; i++)
-                {
-                    var tupla = tupleServer[i];
-                    string url = tupla.Item1;
-                    try
-                    {
-                        _feedManager.VehicleManager.LeggiFeedValido(url);
-                        string errorMsg = string.Empty;
-                        switch (_feedManager.VehicleManager.CodeFeed)
-                        {
-                            case 0:
-                                string filtroLinea = routeID == "-1" ? string.Empty : routeID;
-                                tuplaReport = new Tuple<string, PictureBox, Bitmap>(string.Empty, tupla.Item2, Properties.Resources.verde);
-                                _feedManager.VehicleManager.ElaboraUltimoFeedValido(filtroLinea, filtroTripVuoti, filtroTuttoPercorso, raggruppalineaRegola, nonRaggruppare);
-                                _feedManager.NumeroFeedValidi++;
-                                break;
-                            case -1:
-                                errorMsg = string.Format("[{0:HH:mm:ss}] - Feed Scartato perchè NON LETTO{1}", DateTime.Now, Environment.NewLine);
-                                tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
-                                break;
-                            case -2:
-                                errorMsg = string.Format("[{0:HH:mm:ss}] - Feed Scartato perchè VUOTO{1}", DateTime.Now, Environment.NewLine);
-                                tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
-                                break;
-                            case -10:
-                                errorMsg = "Errore Lettura Feed" + Environment.NewLine;
-                                tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
-                                break;
-                            case -3:
-                                errorMsg = string.Format("[{0:HH:mm:ss}] - Feed scartato in quanto ha il timestamp SUPERATO{1}", DateTime.Now, Environment.NewLine);
-                                tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.arancio);
-                                break;
-                        }
-
-                        if (progress != null && tuplaReport != null)
-                        {
-                            progress.Report(tuplaReport);
-                        }
-
-                        if (_feedManager.VehicleManager.CodeFeed == 0)
-                        {
-                            break;
-                        }
-                    }
-                    catch (WebException ex) when ((ex.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
-                    {
-                        _feedManager.VehicleManager.CodeFeed = -100;
-                        string errorMsg = string.Format("{0}: {1}{2}Feed Non trovato al seguente indirizzo{2}{3}{2}", ex.Message, Environment.NewLine, Environment.NewLine, ex.Response.ResponseUri);
-                        tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
-                        Log.Error(ex, "Feed {UrlFeed} Non trovato ", ex.Response.ResponseUri);
-                    }
-                    catch (WebException ex) when (ex.Status == WebExceptionStatus.Timeout)
-                    {
-                        _feedManager.VehicleManager.CodeFeed = -101;
-                        string errorMsg = ex.Message + " Problemi di connessione con il server" + Environment.NewLine;
-                        tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
-                        Log.Error(ex, "Errore Connessione Server {UrlRemoto}", url);
-                    }
-                    catch (WebException ex) when (ex.Status == WebExceptionStatus.NameResolutionFailure)
-                    {
-                        _feedManager.VehicleManager.CodeFeed = -102;
-                        string errorMsg = ex.Message;
-                        tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
-                        Log.Error(ex, "Errore Connessione Server {UrlRemoto}", url);
-                    }
-                    catch (Exception ex)
-                    {
-                        _feedManager.VehicleManager.CodeFeed = -103;
-                        string errorMsg = ex.Message;
-                        tuplaReport = new Tuple<string, PictureBox, Bitmap>(errorMsg, tupla.Item2, Properties.Resources.rosso);
-                        Log.Error(ex, "Errore : ", ex.Message);
-                    }
-                    if (progress != null && tuplaReport != null)
-                    {
-                        progress.Report(tuplaReport);
-                    }
+                    Color color = category.Key == "Percorso anomalo"
+                        ? (anomaly.Delta < 0 ? Color.OrangeRed : Color.DarkOrange)
+                        : Color.CornflowerBlue;
+                    AppendColoredLine(textBox2, message, color, category.Key == "Percorso anomalo" && anomaly.Delta < 0);
                 }
-                _feedManager.AlertManager.LeggiFeedValido(urlAlert.Text);
+                textBox2.AppendText(Environment.NewLine);
             }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "Errore : ", ex.Message);
-            }
+        }
+
+        private static void AppendColoredLine(RichTextBox textBox, string text, Color color, bool bold = false)
+        {
+            string line = text + Environment.NewLine;
+            int start = textBox.TextLength;
+            textBox.AppendText(line);
+            textBox.Select(start, line.Length);
+            textBox.SelectionColor = color;
+            if (bold)
+                textBox.SelectionFont = new Font(textBox.SelectionFont, FontStyle.Bold);
+            textBox.SelectionIndent = 10;
+            textBox.Select(textBox.TextLength, 0);
         }
 
         private void RestartFile()
         {
             ResetUI();
             fileName = string.Empty;
-            //_feedManager.Reset();
+            _feedManager.Reset();
+            _currentSnapshot = _feedManager.GetSnapshot();
+            _lastProcessedFeedTimestamp = null;
+            labelLetture.Text = _currentSnapshot.NumeroLetture.ToString();
+            labelFeedLetti.Text = _currentSnapshot.NumeroFeedValidi.ToString();
+            lblOraLettura.Text = "--";
+
+            FeedConfigurationDto configuration;
             if (UpdateBox.NewCSVDownloaded || UpdateBox.NewGTFSDownloaded)
             {
-                LeggiFileConfigurazione();
+                configuration = LeggiFileConfigurazione();
+                ApplicaRegoleMonitoraggio(configuration);
             }
-            LeggiRegoleAlertDaFile();
+            else
+            {
+                configuration = _feedManager.ReloadAlertConfiguration(
+                    Path.Combine("Config", "Regole_Alert"),
+                    Path.Combine("Config", "CriterioMediaPonderata.txt"));
+            _currentConfiguration = configuration;
+            }
+            ApplicaRegoleAlert(configuration);
 
             dataGridViolazioni.Invalidate();
             dataGridViolazioni.DataSource = null; 
@@ -945,7 +390,7 @@ namespace AtacFeed
             plotAtac.Reset();
         }
 
-        // Rendere async per usare RefreshAsync in acqusizione singola
+
         private void ButtonPlayPause_Click(object sender, EventArgs e)
         {
             if (!checkCSV.Checked && !checkXlsx.Checked)
@@ -963,7 +408,7 @@ namespace AtacFeed
             }
 
             int deltaMilliSec = (int)(1000 * (60 * minuti.Value + secondi.Value));
-            string routeID = comboBox1.SelectedValue?.ToString() ?? "-1";
+            string routeID = comboLineaMonitorata.SelectedValue?.ToString() ?? "-1";
             string filtroLinea = routeID == "-1" ? string.Empty : routeID;
             bool filtroTripVuoti = checkTripVuoti.Checked;
             bool filtroTuttoPercorso = checkTuttoPercorso.Visible && checkTuttoPercorso.Checked;
@@ -991,7 +436,7 @@ namespace AtacFeed
                 secondi.Enabled = false;
                 _feedManager.StartAutoRefresh(urlVehicle.Text, urlVehicleRiserva.Text, urlAlert.Text, filtroLinea, filtroTripVuoti, filtroTuttoPercorso, raggruppalineaRegola, nonRaggruppare, deltaMilliSec, forzaResetACquisizione);
                 buttonPlayPause.BackgroundImage = Resources.pause;
-                comboBox1.Enabled = false;
+                comboLineaMonitorata.Enabled = false;
                 buttonResetRegole.Enabled = false;
                 Log.Information("Acquisizione attiva");
             }
@@ -1001,7 +446,7 @@ namespace AtacFeed
                 secondi.Enabled = true;
                 _feedManager.StopAutoRefresh();
                 buttonPlayPause.BackgroundImage = Resources.play;
-                comboBox1.Enabled = true;
+                comboLineaMonitorata.Enabled = true;
                 buttonResetRegole.Enabled = true;
                 if (deltaMilliSec > 0)
                 {
@@ -1014,34 +459,34 @@ namespace AtacFeed
         private int _lastGraficoCount = 0;
         private DateTime? _lastGraficoTimestamp = null;
 
-        private void AggiornaScottPlot()
+        private void AggiornaScottPlot(IEnumerable<MonitorChartPointDto> points)
         {
-            var graf = _feedManager.VehicleManager.ElencoVettureGrafico;
+            var graf = points?.ToList();
             if (graf == null || graf.Count == 0) return;
 
             // deduplica per timestamp (Ticks) scegliendo il campione con Rilevate>0 se presente
             var deduped = graf
-                .GroupBy(x => x.DateTime.Ticks)
+                .GroupBy(x => x.DataOra.Ticks)
                 .Select(g =>
                 {
                     var nonZero = g.Where(v => v.Rilevate > 0).ToList();
                     return nonZero.Any() ? nonZero.Last() : g.Last();
                 })
-                .OrderBy(x => x.DateTime)
+                .OrderBy(x => x.DataOra)
                 .ToList();
 
             // se nulla è cambiato rispetto all'ultimo render, skip
-            if (deduped.Count == _lastGraficoCount && _lastGraficoTimestamp.HasValue && deduped.Last().DateTime == _lastGraficoTimestamp.Value)
+            if (deduped.Count == _lastGraficoCount && _lastGraficoTimestamp.HasValue && deduped.Last().DataOra == _lastGraficoTimestamp.Value)
                 return;
 
             _lastGraficoCount = deduped.Count;
-            _lastGraficoTimestamp = deduped.Last().DateTime;
+            _lastGraficoTimestamp = deduped.Last().DataOra;
 
             // render con la lista pulita
             RenderInternal(plotAtac, plotTPL, deduped);
         }
 
-        private void RenderInternal(FormsPlot pltATAC, FormsPlot pltTPL, List<MonitoraggioVettureGrafico> grafico)
+        private void RenderInternal(FormsPlot pltATAC, FormsPlot pltTPL, IList<MonitorChartPointDto> grafico)
         {
             var culture = CultureInfo.CreateSpecificCulture("it");
 
@@ -1055,11 +500,11 @@ namespace AtacFeed
             for (int i = 0; i < n; i++)
             {
                 var item = grafico[i];
-                tempo[i] = item.DateTime.ToOADate();
+                tempo[i] = item.DataOra.ToOADate();
                 serieAtac[i] = (double)item.Atac;
-                serieAggregateATAC[i] = (double)item.AggregateAtac;
-                serieTPL[i] = (double)item.TPL;
-                serieAggregateTPL[i] = (double)item.AggregateTPL;
+                serieAggregateATAC[i] = (double)item.AggregatoAtac;
+                serieTPL[i] = (double)item.Tpl;
+                serieAggregateTPL[i] = (double)item.AggregatoTpl;
             }
 
             pltATAC.Plot.Clear();
@@ -1098,7 +543,8 @@ namespace AtacFeed
         // mantiene compatibilità pubblica
         public void Render(FormsPlot pltATAC, FormsPlot pltTPL)
         {
-            var grafico = _feedManager.VehicleManager.ElencoVettureGrafico ?? new List<MonitoraggioVettureGrafico>();
+            var snapshot = _currentSnapshot ?? _feedManager.GetSnapshot();
+            var grafico = snapshot.PuntiGrafico ?? new List<MonitorChartPointDto>();
             RenderInternal(pltATAC, pltTPL, grafico);
         }
 
@@ -1148,109 +594,42 @@ namespace AtacFeed
             secondi.Value = totalSeconds % 60;
             #endregion
 
-            LeggiFileConfigurazione();
-
-            var vm = _feedManager.VehicleManager;
-            if (vm.GTFS_RSM != null && vm.GTFS_RSM.RegoleMonitoraggio != null && vm.GTFS_RSM.RegoleMonitoraggio.Count > 0)
-            {
-                dataGridViolazioni.DataSource = vm.GTFS_RSM.RegoleMonitoraggio;
-            }
-            else
-            {
-                if (tabMainForm.TabPages.Contains(tabMonitoraggio))
-                {
-                    tabMainForm.TabPages.Remove(tabMonitoraggio);
-                    Log.Information("Rimosso tab RegoleMonitoraggio");
-                }
-            }
-            LeggiRegoleAlertDaFile();
+            FeedConfigurationDto configuration = LeggiFileConfigurazione();
+            ApplicaRegoleMonitoraggio(configuration);
+            ApplicaRegoleAlert(configuration);
         }
 
-        private void LeggiFileConfigurazione()
+        private FeedConfigurationDto LeggiFileConfigurazione()
         {
-            bool usaDettagliVettura = checkDettagliVettura.Checked;
-            var vm = _feedManager.VehicleManager;
-            vm.GTFS_RSM = new GTFS_RSM(Path.Combine("Config", "GTFS_Static"), usaDettagliVettura);
+            FeedConfigurationDto configuration = _feedManager.LoadConfiguration(
+                Path.Combine("Config", "GTFS_Static"),
+                checkDettagliVettura.Checked,
+                Path.Combine("Config", "MonitoraggioLinee", "RegoleMonitoraggio_yes.txt"),
+                Path.Combine("Config", "Regole_Alert"),
+                Path.Combine("Config", "CriterioMediaPonderata.txt"));
+
             UpdateBox.ExistNewerGTFS = false;
             UpdateBox.ExistNewerCSV = false;
             UpdateBox.ExistNewerVersion = false;
             UpdateBox.NewCSVDownloaded = false;
             UpdateBox.NewGTFSDownloaded = false;
 
-            var routes = vm.GTFS_RSM.StaticData.Routes ?? Enumerable.Empty<Route>();
-            var elencoLinee = routes.OrderBy(k => k.ShortName).Distinct().ToList();
-
-            var fittizia = new Route { Id = "-1", ShortName = "    Tutte" };
-            elencoLinee.Insert(0, fittizia);
-
-            var alternativa = elencoLinee.Select(x =>
-            {
-                string linea = string.Empty;
-                if (x.ShortName == x.LongName || string.IsNullOrEmpty(x.LongName))
-                {
-                    linea = x.ShortName;
-                }
-                else if (string.IsNullOrEmpty(x.ShortName))
-                {
-                    linea = x.LongName;
-                }
-                else
-                {
-                    linea = x.ShortName + " - " + x.LongName;
-                }
-                return new Route { Id = x.Id, ShortName = linea };
-            }).Distinct().ToList();
-
-            comboBox1.DataSource = alternativa;
-            comboBox1.ValueMember = "Id";
-            comboBox1.DisplayMember = "ShortName";
-
-            var j = vm.GTFS_RSM.ElencoLineaAgenzia
-                .Where(x => !string.IsNullOrEmpty(x.Agency.Name))
-                .Select(lineaAgenzia => new
-                {
-                    Gestore = lineaAgenzia.Agency.Name,
-                    Linea = (lineaAgenzia.Route.ShortName == lineaAgenzia.Route.LongName || string.IsNullOrEmpty(lineaAgenzia.Route.LongName))
-                                ? lineaAgenzia.Route.ShortName
-                                : string.IsNullOrEmpty(lineaAgenzia.Route.ShortName)
-                                        ? lineaAgenzia.Route.LongName
-                                        : lineaAgenzia.Route.ShortName + " - " + lineaAgenzia.Route.LongName,
-                    TipoTrasporto = lineaAgenzia.Route.Type
-                })
-                .ToList();
+            comboLineaMonitorata.DataSource = configuration.LineeDisponibili.ToList();
+            comboLineaMonitorata.ValueMember = "Id";
+            comboLineaMonitorata.DisplayMember = "NomeVisualizzato";
 
             var dt = new DataTable();
-            using (var reader = ObjectReader.Create(j))
+            using (var reader = ObjectReader.Create(configuration.LineePerGestore))
             {
                 dt.Load(reader);
             }
             lineaAgenziaBindingSource.DataSource = dt;
             advancedDataGridView3.DataSource = dt;
 
-            int totCorseCensite = vm.GTFS_RSM.ElencoLineaAgenzia.Count();
-            var gr = j
-                .GroupBy(x => x.Gestore)
-                .Select(x => new
-                {
-                    A = x.Key,
-                    B = x.Count(),
-                    C = x.Count() / (decimal)totCorseCensite
-                });
-
-            var distribuzioneCorseGestoreGTFS = (
-                from agency in vm.GTFS_RSM.StaticData.Agencies
-                join g in gr on agency.Name equals g.A into grouped
-                from gg in grouped.DefaultIfEmpty()
-                select new
-                {
-                    gestore = gg?.A ?? agency.Name,
-                    numCorseGTFS = gg?.B ?? 0,
-                    percCorseGTFS = gg?.C ?? 0
-                }).ToList();
-
-            double[] values = distribuzioneCorseGestoreGTFS.Select(p => (double)p.numCorseGTFS).ToArray();
-            string[] labels = distribuzioneCorseGestoreGTFS.Select(p => p.gestore).ToArray();
-            string[] legendLabels = distribuzioneCorseGestoreGTFS.Select(p => string.Format("{0}: {1} su {2} ({3:P})", p.gestore, p.numCorseGTFS, totCorseCensite, p.percCorseGTFS)).ToArray();
+            double[] values = configuration.DistribuzioneGestori.Select(item => (double)item.NumeroCorse).ToArray();
+            string[] labels = configuration.DistribuzioneGestori.Select(item => item.Gestore).ToArray();
+            string[] legendLabels = configuration.DistribuzioneGestori.Select(item => string.Format(
+                "{0}: {1} su {2} ({3:P})", item.Gestore, item.NumeroCorse, item.TotaleCorse, item.PercentualeCorse)).ToArray();
 
             plotGTFS.Plot.Clear();
             var pie = plotGTFS.Plot.AddPie(values);
@@ -1267,32 +646,37 @@ namespace AtacFeed
                 dataBackground: Color.DarkGray);
             plotGTFS.Render();
 
-            try
+            return configuration;
+        }
+
+        private void ApplicaRegoleMonitoraggio(FeedConfigurationDto configuration)
+        {
+            if (configuration.RegoleMonitoraggio.Count > 0)
             {
-                vm.GTFS_RSM.LeggiRegoleMonitoraggio(Path.Combine("Config", "MonitoraggioLinee", "RegoleMonitoraggio_yes.txt"));
+                dataGridViolazioni.DataSource = configuration.RegoleMonitoraggio.ToList();
+                if (!tabMainForm.TabPages.Contains(tabMonitoraggio))
+                    tabMainForm.TabPages.Add(tabMonitoraggio);
             }
-            catch
+            else if (tabMainForm.TabPages.Contains(tabMonitoraggio))
             {
-                Log.Information("Nessuna RegoleMonitoraggio");
+                tabMainForm.TabPages.Remove(tabMonitoraggio);
+                Log.Information("Rimosso tab RegoleMonitoraggio");
             }
         }
 
-        private void LeggiRegoleAlertDaFile()
+        private void ApplicaRegoleAlert(FeedConfigurationDto configuration)
         {
-            string pathAlert = Path.Combine("Config", "Regole_Alert");
-            var vm = _feedManager.VehicleManager;
-            bool esitoAlert = vm.GTFS_RSM.LeggiAlertDaControllare(pathAlert);
-            if (esitoAlert)
+            if (configuration.LetturaAlertRiuscita)
             {
                 // Creazione tab dinamica: minimizzo allocazioni temporanee
-                foreach (var alert in vm.GTFS_RSM.AlertsDaControllare)
+                foreach (var alert in configuration.GruppiAlert)
                 {
-                    if (tabMainForm.TabPages.ContainsKey(alert.Name))
+                    if (tabMainForm.TabPages.ContainsKey(alert.Nome))
                     {
-                        tabMainForm.TabPages.RemoveByKey(alert.Name);
+                        tabMainForm.TabPages.RemoveByKey(alert.Nome);
                     }
 
-                    var myNewTabItem = new TabPage { Text = alert.Name, Name = alert.Name };
+                    var myNewTabItem = new TabPage { Text = alert.Nome, Name = alert.Nome };
                     var myNewdataGridVetture = new DataGridView
                     {
                         AllowUserToAddRows = false,
@@ -1304,7 +688,7 @@ namespace AtacFeed
                         ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize,
                         Dock = DockStyle.Fill,
                         Location = new Point(3, 3),
-                        Name = alert.Name,
+                        Name = alert.Nome,
                         ReadOnly = true
                     };
 
@@ -1329,10 +713,10 @@ namespace AtacFeed
                     myNewTabItem.Controls.Add(myNewdataGridVetture);
                     tabMainForm.TabPages.Add(myNewTabItem);
 
-                    myNewdataGridVetture.DataSource = alert.RegoleAlert;
+                    myNewdataGridVetture.DataSource = alert.Regole.ToList();
                 }
 
-                if (vm.GTFS_RSM.AlertsDaControllare.Count > 0)
+                if (configuration.GruppiAlert.Count > 0)
                 {
                     labelRaggruppaAlert.Visible = true;
                     radioLinea.Visible = true;
@@ -1352,115 +736,12 @@ namespace AtacFeed
                 checkBoxStorico.Visible = false;
             }
 
-            int esito = vm.GTFS_RSM.LeggiCriteriMediaPonderata(Path.Combine("Config", "CriterioMediaPonderata.txt"));
-            if (esito == -1)
+            if (configuration.EsitoCriteriMediaPonderata == -1)
             {
                 MessageBox.Show(text: "La somma dei pesi dei campioni deve essere 1", caption: "Attenzione", buttons: MessageBoxButtons.OK, icon: MessageBoxIcon.Error);
             }
         }
-
-        private async void TimerAcquisizione_Tick(object sender, EventArgs e)
-        {
-            /*
-            string routeID = comboBox1.SelectedValue?.ToString() ?? "-1";
-            FeedVehicleManager vmPostRefresh = null;
-
-            try
-            {
-                // prova primo feed vehicle
-                try
-                {
-                    await _feedManager.RefreshAsync(urlVehicle.Text, urlAlert.Text, routeID, CancellationToken.None);
-                }
-                catch
-                {
-                    // fallback: prova urlVehicleRiserva se presente
-                    if (!string.IsNullOrEmpty(urlVehicleRiserva.Text))
-                    {
-                        try
-                        {
-                            await _feedManager.RefreshAsync(urlVehicleRiserva.Text, urlAlert.Text, routeID, CancellationToken.None);
-                        }
-                        catch (Exception exFallback)
-                        {
-                            Log.Error(exFallback, "Entrambi i feed vehicle falliti");
-                            // come prima: continua (AcquisizioneNEW verrà chiamato dagli eventi se c'è successo)
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Log.Error(ex, "Errore in RefreshAsync");
-            }
-
-            // aggiorna i contatori letture / feed validi UI (una sola lettura per tick)
-            try
-            {
-                NumeroLetture++;
-                vmPostRefresh = _feedManager.VehicleManager;
-                if (vmPostRefresh != null && vmPostRefresh.CodeFeed == 0)
-                {
-                    NumeroFeedValidi++;
-                }
-                labelLetture.Text = NumeroLetture.ToString();
-                labelFeedLetti.Text = NumeroFeedValidi.ToString();
-
-                // Se il feed è stato scaricato (entità > 0) ma le liste non sono ancora elaborate,
-                // forziamo l'elaborazione dell'ultimo feed valido prima di proseguire con la UI
-                int lastValidEntities = vmPostRefresh?.LastValidFeed?.Entities?.Count ?? 0;
-                int elencoCount = vmPostRefresh?.ElencoVetture?.Count ?? 0;
-                Log.Information("Post-Refresh: LastValidFeed.Entities={LastValidEntities}, ElencoVetture={ElencoCount}", lastValidEntities, elencoCount);
-
-                if (lastValidEntities > 0 && elencoCount == 0 && vmPostRefresh != null)
-                {
-                    bool filtroTripVuoti = checkTripVuoti.Checked;
-                    bool filtroTuttoPercorso = checkTuttoPercorso.Visible && checkTuttoPercorso.Checked;
-                    bool raggruppalineaRegola = radioLineaRegola.Enabled && radioLineaRegola.Checked;
-                    bool nonRaggruppare = radioNonRaggruppare.Checked;
-                    string filtroLinea = routeID == "-1" ? string.Empty : routeID;
-                    try
-                    {
-                        Log.Information("Forzo ElaboraUltimoFeedValido per costruire ElencoVetture (entities {Count})", lastValidEntities);
-                        vmPostRefresh.ElaboraUltimoFeedValido(filtroLinea, filtroTripVuoti, filtroTuttoPercorso, raggruppalineaRegola, nonRaggruppare);
-                    }
-                    catch (Exception exElab)
-                    {
-                        Log.Error(exElab, "Errore forzando ElaboraUltimoFeedValido (timer)");
-                    }
-                }
-            }
-            catch (Exception exCnt)
-            {
-                Log.Error(exCnt, "Errore aggiornamento contatori post-refresh");
-            }
-
-
-            // diagnostica se il feed risulta vuoto
-            var vmDiag = _feedManager.VehicleManager;
-            int? entitiesCount = vmDiag?.LastValidFeed?.Entities?.Count;
-            Log.Information("After RefreshAsync: LastValidFeed entities count = {Count}", entitiesCount ?? -1);
-            if ((entitiesCount ?? 0) == 0)
-            {
-                // salva raw dal primo URL e dalla riserva per confronto
-                _ = DebugSaveRawFeedAsync(urlVehicle.Text, "vehicle_debug");
-                if (!string.IsNullOrEmpty(urlVehicleRiserva.Text))
-                    _ = DebugSaveRawFeedAsync(urlVehicleRiserva.Text, "vehicle_reserva_debug");
-            }
-            await Task.Run(() => ExportGrid());
-
-            // invochiamo AcquisizioneNEW solo se l'elenco è stato costruito
-            if (vmPostRefresh?.ElencoVetture != null && vmPostRefresh.ElencoVetture.Count > 0)
-            {
-                if (this.IsHandleCreated)
-                    BeginInvoke(new Action(AcquisizioneNEW));
-            }
-            else
-            {
-                Log.Information("Acquisizione singola: elenco vetture non ancora costruito, attendo evento");
-            }
-            */
-        }
+        
         private void SalvaImpostazioni(object sender, EventArgs e)
         {
             Properties.Settings.Default.UrlGTFS_Statico = urlGTFS_Statico.Text;
@@ -1526,223 +807,21 @@ namespace AtacFeed
             _feedManager?.Dispose();
         }
 
-
-        private async Task SaveAs(FileInfo outputFile, FileInfo altFileName)
-        {
-            if (checkXlsx.Checked)
-            {
-                using (ExcelPackage excel = new ExcelPackage(outputFile))
-                {
-                    try
-                    {
-                        string excelSheetName;
-                        var vm = _feedManager.VehicleManager;
-                        var am = _feedManager.AlertManager;
-                        if (vm.LastValidationResultCode == 0)
-                        {
-                            excelSheetName = "Feed";
-                            ElaboraSheet(excel, excelSheetName, vm.ElencoAggregatoVetture);
-
-                            if (checkGrafico.Checked)
-                            {
-                                var existing = excel.Workbook.Worksheets[excelSheetName];
-                                // remove "Grafico" if exists
-                                var grafSheet = excel.Workbook.Worksheets["Grafico"];
-                                if (grafSheet != null) excel.Workbook.Worksheets.Delete("Grafico");
-
-                                ExcelWorksheet workSheet = excel.Workbook.Worksheets.Add("Grafico");
-                                PropertyInfo[] membersToInclude = typeof(MonitoraggioVettureGrafico)
-                                    .GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                                    .Where(p => !Attribute.IsDefined(p, typeof(IgnoreAttribute)))
-                                    .ToArray();
-
-                                int colNumber = 2;
-                                ExcelRangeBase range = workSheet.Cells[32, colNumber].LoadFromCollection(
-                                    vm.ElencoVettureGrafico
-                                    , true
-                                    , TableStyles.Medium2
-                                    , BindingFlags.Public | BindingFlags.Instance
-                                    , membersToInclude);
-
-                                foreach (PropertyInfo exportedProperty in membersToInclude)
-                                {
-                                    if (exportedProperty.PropertyType == typeof(DateTime) || exportedProperty.PropertyType == typeof(DateTime?))
-                                    {
-                                        workSheet.Column(colNumber).Style.Numberformat.Format = "HH:mm:ss";
-                                    }
-                                    colNumber++;
-                                }
-
-                                workSheet.Cells.AutoFitColumns();
-
-                                ExcelLineChart lineChartATAC = workSheet.Drawings.AddChart("lineChartATAC", eChartType.Line) as ExcelLineChart;
-                                ExcelLineChart lineChartTPL = workSheet.Drawings.AddChart("lineChartTPL", eChartType.Line) as ExcelLineChart;
-                                lineChartATAC.Title.Text = string.Format("Vetture Rilevate ATAC {0:dd-MM-yyyy [HH:mm:ss}-{1:HH:mm:ss}] ", vm.FirstDataFeed, vm.LastDataFeed);
-                                lineChartTPL.Title.Text = string.Format("Vetture Rilevate  TPL {0:dd-MM-yyyy [HH:mm:ss}-{1:HH:mm:ss}] ", vm.FirstDataFeed, vm.LastDataFeed);
-
-                                ExcelRangeBase rangeLabel = range.Offset(1, 0, vm.ElencoVettureGrafico.Count, 1);
-                                ExcelRangeBase range1 = range.Offset(1, 2, vm.ElencoVettureGrafico.Count, 1);
-                                ExcelRangeBase range2 = range.Offset(1, 4, vm.ElencoVettureGrafico.Count, 1);
-                                ExcelRangeBase range3 = range.Offset(1, 3, vm.ElencoVettureGrafico.Count, 1);
-                                ExcelRangeBase range4 = range.Offset(1, 5, vm.ElencoVettureGrafico.Count, 1);
-
-                                lineChartATAC.Series.Add(range1, rangeLabel);
-                                lineChartATAC.Series.Add(range2, rangeLabel);
-                                lineChartTPL.Series.Add(range3, rangeLabel);
-                                lineChartTPL.Series.Add(range4, rangeLabel);
-
-                                lineChartATAC.Series[0].Header = "Aggregate";
-                                lineChartATAC.Series[1].Header = "Istantanee";
-                                lineChartTPL.Series[0].Header = "Aggregate";
-                                lineChartTPL.Series[1].Header = "Istantanee";
-
-                                lineChartATAC.Legend.Position = eLegendPosition.Right;
-                                lineChartATAC.SetSize(900, 250);
-                                lineChartATAC.SetPosition(0, 3, 0, 3);
-                                lineChartTPL.Legend.Position = eLegendPosition.Right;
-                                lineChartTPL.SetSize(900, 250);
-                                lineChartTPL.SetPosition(14, 3, 0, 3);
-                            }
-
-                            if (tabMainForm.TabPages.Contains(tabMonitoraggio) && checkMonitoraggio.Checked)
-                            {
-                                excelSheetName = "Monitoraggio Linee";
-                                List<LineaMonitorata> violazioniLineaMonitorata = vm.ElencoLineeMonitorate.Where(x => x.OraPrimaViolazione.HasValue).ToList();
-                                ElaboraSheet(excel, excelSheetName, violazioniLineaMonitorata);
-                            }
-
-                            if (checkAlert.Checked && checkAlert.Enabled)
-                            {
-                                foreach (AlertDaControllare alertDaControllare in vm.GTFS_RSM.AlertsDaControllare)
-                                {
-                                    excelSheetName = alertDaControllare.Name;
-                                    ElaboraSheet(excel, excelSheetName, alertDaControllare.ViolazioniAlert, dateFormat: "HH:mm:ss");
-                                }
-                            }
-
-                            if (checkAnomalieGTFS.Checked)
-                            {
-                                excelSheetName = "AnomalieGTFS";
-                                List<string> ammessi = new List<string> { "Matricola", "Linea", "PrimaVolta", "TripId", "CurrentStopSequence", "Delta" };
-                                ElaboraSheet(excel, excelSheetName, vm.AnomaliaGTFS, ammessi);
-                            }
-
-                            if (checkSovraffollamento.Checked)
-                            {
-                                excelSheetName = "Sovraffollamneto";
-                                ElaboraSheet(excel, excelSheetName, vm.ElencoVettureSovraffollate);
-                            }
-                        }
-
-                        excelSheetName = "Avvisi";
-                        if (am.LastValidationResultCode == 0 && am.Avvisi is List<Avviso> avvisi)
-                        {
-                            ElaboraSheet(excel, excelSheetName, avvisi);
-                        }
-                        else if (am.FirstDataFeed.HasValue)
-                        {
-                            excel.Workbook.Worksheets.MoveToEnd(excelSheetName);
-                        }
-                        try
-                        {
-                            excel.Save();
-                            altFileName.Delete();
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.Error("{Exception}", ex);
-                            excel.SaveAs(altFileName);
-                        }
-                    }
-                    catch (Exception exc)
-                    {
-                        Log.Error("{Exception}", exc);
-                    }
-                }
-            }
-
-            if (checkCSV.Checked)
-            {
-                using (var writer = new StreamWriter(Path.Combine("OUTPUT", fileName + ".csv")))
-                {
-                    var config = new CsvConfiguration(CultureInfo.InvariantCulture) { Delimiter = ";" };
-                    using (var csv = new CsvWriter(writer, config))
-                    {
-                        await csv.WriteRecordsAsync(_feedManager.VehicleManager.ElencoAggregatoVetture);
-                    }
-                }
-            }
-        }
-
-        private void ElaboraSheet<T>(ExcelPackage excel, string excelSheetName, List<T> record, List<string> ammessi = null, string dateFormat = "")
-        {
-            var existing = excel.Workbook.Worksheets[excelSheetName];
-            if (existing != null) excel.Workbook.Worksheets.Delete(excelSheetName);
-
-            ExcelWorksheet workSheet = excel.Workbook.Worksheets.Add(excelSheetName);
-
-            PropertyInfo[] membersToInclude = typeof(T)
-                .GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                .Where(p => !Attribute.IsDefined(p, typeof(IgnoreAttribute))
-                            && (ammessi == null || ammessi.Contains(p.Name)))
-                .ToArray();
-
-            ExcelRangeBase range = workSheet.Cells[1, 1].LoadFromCollection(
-                record
-                , true
-                , TableStyles.Medium2
-                , BindingFlags.Public | BindingFlags.Instance
-                , membersToInclude);
-
-            int colNumber = 1;
-
-            foreach (PropertyInfo exportedProperty in membersToInclude)
-            {
-                if (exportedProperty.PropertyType == typeof(DateTime) || exportedProperty.PropertyType == typeof(DateTime?))
-                {
-                    workSheet.Column(colNumber).Style.Numberformat.Format = string.IsNullOrEmpty(dateFormat) ? "MM/dd/yyyy HH:mm:ss" : dateFormat;
-                }
-                else if (exportedProperty.PropertyType == typeof(TimeSpan) || exportedProperty.PropertyType == typeof(TimeSpan?))
-                {
-                    workSheet.Column(colNumber).Style.Numberformat.Format = "HH:mm:ss";
-                }
-
-                colNumber++;
-            }
-            workSheet.Cells.AutoFitColumns();
-
-            excel.Workbook.Worksheets.MoveToEnd(excelSheetName);
-        }
-
-        private async void CheckUpdate(bool download = false, bool forceDownload = false)
-        {
-            bool? newVersion = await Task.Run(() => UpdateBox.TaskCheckUpdate(download, forceDownload));
-
-            if (UpdateBox.NewGTFSDownloaded || UpdateBox.NewCSVDownloaded)
-            {
-                buttonVerificaAggiornamenti.Image = Properties.Resources.giallo;
-            }
-            else if (!newVersion.HasValue)
-            {
-                buttonVerificaAggiornamenti.Image = Properties.Resources.arancio;
-            }
-            else if (newVersion.Value)
-            {
-                buttonVerificaAggiornamenti.Image = Properties.Resources.rosso;
-            }
-        }
-
         private void Random(object sender, EventArgs e)
         {
+            _currentSnapshot = _currentSnapshot ?? _feedManager.GetSnapshot();
+            if (_currentSnapshot.PuntiGrafico == null)
+                _currentSnapshot.PuntiGrafico = new List<MonitorChartPointDto>();
+
             DateTime t0;
-            var graf = _feedManager.VehicleManager.ElencoVettureGrafico;
+            IList<MonitorChartPointDto> graf = _currentSnapshot.PuntiGrafico;
             if (graf.Count == 0)
             {
                 t0 = DateTime.Now;
             }
             else
             {
-                t0 = graf[graf.Count - 1].DateTime;
+                t0 = graf[graf.Count - 1].DataOra;
             }
             if (graf.Count < 100000)
             {
@@ -1758,20 +837,22 @@ namespace AtacFeed
                     if (aggregate < rilevate)
                         aggregate = rilevate;
                     int tolte = rand.Next(0, 10);
-                    var nuovoMonitoraggio = new MonitoraggioVettureGrafico
+                    var nuovoMonitoraggio = new MonitorChartPointDto
                     {
-                        DateTime = t0.AddSeconds(i * 30),
-                        Aggregate = aggregate,
+                        DataOra = t0.AddSeconds(i * 30),
+                        TotaleAggregato = aggregate,
+                        AggregatoAtac = aggregate * atac / Math.Max(rilevate, 1),
+                        AggregatoTpl = aggregate * tpl / Math.Max(rilevate, 1),
                         Rilevate = rilevate,
                         Atac = atac,
-                        TPL = tpl,
+                        Tpl = tpl,
                         Aggiunte = aggiunte,
-                        Tolte = tolte
+                        Rimosse = tolte
                     };
                     graf.Add(nuovoMonitoraggio);
                 }
             }
-            AggiornaScottPlot();
+            AggiornaScottPlot(graf);
         }
 
         private void CheckXlsx_CheckedChanged(object sender, EventArgs e)
@@ -1783,16 +864,28 @@ namespace AtacFeed
 
         public void Colora()
         {
+            if (_currentSnapshot == null || dataGridViolazioni.DataSource == null)
+                return;
+
             dataGridViolazioni.SuspendLayout();
-            var dataSource = (IEnumerable<LineaMonitorata>)dataGridViolazioni.DataSource;
-            int rowCount = dataGridViolazioni.RowCount;
+            var dataSource = dataGridViolazioni.DataSource as IEnumerable<MonitorViolationDto>;
+            if (dataSource == null)
+            {
+                dataGridViolazioni.ResumeLayout();
+                return;
+            }
+
+            List<MonitorViolationDto> violations = dataSource.ToList();
+            int rowCount = Math.Min(dataGridViolazioni.RowCount, violations.Count);
             for (int i = 0; i < rowCount; i++)
             {
                 DataGridViewRow row = dataGridViolazioni.Rows[i];
-                var riga = dataSource.ElementAt(i);
-                if (riga.VettureRilevate < riga.VetturePreviste)
+                MonitorViolationDto riga = violations[i];
+                if (riga.VettureRilevate.HasValue && riga.VetturePreviste.HasValue &&
+                    riga.VettureRilevate.Value < riga.VetturePreviste.Value)
                 {
-                    TimeSpan span = riga.OraUltimaViolazione.GetValueOrDefault(_feedManager.VehicleManager.LastDataFeed.GetValueOrDefault()) - riga.OraPrimaViolazione.GetValueOrDefault(DateTime.MinValue);
+                    DateTime end = riga.OraUltimaViolazione ?? _currentSnapshot.UltimoFeed ?? DateTime.MinValue;
+                    TimeSpan span = end - riga.OraPrimaViolazione.GetValueOrDefault(DateTime.MinValue);
                     double totalMinutes = span.TotalMinutes;
                     if (totalMinutes < riga.TempoBonus)
                     {
@@ -1816,7 +909,7 @@ namespace AtacFeed
 
         private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if ((sender as TabControl).SelectedTab == tabMonitoraggio && _feedManager.VehicleManager.LastDataFeed.HasValue)
+            if ((sender as TabControl)?.SelectedTab == tabMonitoraggio && _currentSnapshot?.UltimoFeed.HasValue == true)
             {
                 Colora();
             }
@@ -1835,7 +928,6 @@ namespace AtacFeed
 
         private void RileggiRegole(object sender, EventArgs e)
         {
-            LeggiRegoleAlertDaFile();
             RestartFile();
         }
 
@@ -1941,7 +1033,7 @@ namespace AtacFeed
 
         private void CheckDettagliVettura_CheckedChanged(object sender, EventArgs e)
         {
-            _feedManager.VehicleManager.GTFS_RSM?.LeggiDettagliVettura(checkDettagliVettura.Checked);
+            _feedManager.ConfigureVehicleDetails(checkDettagliVettura.Checked);
         }
 
         private void GridAvvisi_FilterStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.FilterEventArgs e)

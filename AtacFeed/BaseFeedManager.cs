@@ -102,7 +102,8 @@ namespace AtacFeed
 
                     if (prevTs >= newTs)
                     {
-                        Log.Error("[{Time}] - Feed scartato in quanto ha il timestamp SUPERATO {Time} >= {Time}", now, prevTs ,newTs);
+                        Log.Error("[{Time}] - Manager: {ManagerType} - Feed scartato in quanto ha il timestamp SUPERATO {Time} >= {Time}.",
+                            now, GetType().FullName, prevTs, newTs);
                         isValid = -3;
                     }
                     else

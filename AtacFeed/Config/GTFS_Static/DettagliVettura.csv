@@ -2194,6 +2194,7 @@ BIS/Tuscia;7548;ELETTRICO;Costi;BUS - KING LONG PEV12;3
 BIS/Tuscia;7549;ELETTRICO;Costi;BUS - KING LONG PEV12;3
 BIS/Tuscia;7550;ELETTRICO;Costi;BUS - KING LONG PEV12;3
 BIS/Tuscia;7551;ELETTRICO;Costi;BUS - KING LONG PEV12;3
+BIS/Tuscia;7560;ELETTRICO;Maglianella;BUS - KING LONG PEV12;3
 BIS/Tuscia;7564;ELETTRICO;Maglianella;BUS - KING LONG PEV12;3
 BIS/Tuscia;7566;ELETTRICO;Maglianella;BUS - KING LONG PEV12;3
 BIS/Tuscia;7567;ELETTRICO;Maglianella;BUS - KING LONG PEV12;3
@@ -2307,36 +2308,36 @@ BIS/Tuscia;7741;IBRIDO;Maglianella;BUS - KING LONG E10;3
 BIS/Tuscia;7742;IBRIDO;Maglianella;BUS - KING LONG E10;3
 BIS/Tuscia;7743;IBRIDO;Maglianella;BUS - KING LONG E10;3
 BIS/Tuscia;7744;IBRIDO;Maglianella;BUS - KING LONG E10;3
-BIS/Tuscia;7801;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7802;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7803;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7804;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7805;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7806;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7807;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7808;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7809;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7810;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7811;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7812;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7813;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7814;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7815;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7816;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7817;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7818;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7819;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7820;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7821;ELETTRICO;Maglianella;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7822;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7823;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7824;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7825;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7826;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7827;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7828;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7829;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
-BIS/Tuscia;7830;ELETTRICO;;BUS-Fiat Ducato Clickbus;3
+BIS/Tuscia;7801;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7802;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7803;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7804;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7805;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7806;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7807;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7808;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7809;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7810;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7811;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7812;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7813;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7814;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7815;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7816;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7817;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7818;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7819;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7820;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7821;ELETTRICO;Maglianella;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7822;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7823;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7824;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7825;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7826;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7827;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7828;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7829;ELETTRICO;;BUS-Fiat Ducato Maxi;3
+BIS/Tuscia;7830;ELETTRICO;;BUS-Fiat Ducato Maxi;3
 Atac;8501;Filobus;Montesacro;FILOBUS - SOLARIS GANZ TROLLINO 18mt;2
 Atac;8503;Filobus;Montesacro;FILOBUS - SOLARIS GANZ TROLLINO 18mt;2
 Atac;8504;Filobus;Montesacro;FILOBUS - SOLARIS GANZ TROLLINO 18mt;2
@@ -2420,83 +2421,83 @@ Atac;9027;TRAM;PortaMaggiore;TRAM - SOCIMI;1
 Atac;9028;TRAM;PortaMaggiore;TRAM - SOCIMI;1
 Atac;9031;TRAM;PortaMaggiore;TRAM - SOCIMI;1
 Atac;9034;TRAM;PortaMaggiore;TRAM - SOCIMI;1
-Atac;9101;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9103;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9104;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9105;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9106;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9107;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9108;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9109;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9110;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9111;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9112;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9113;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9114;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9115;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9116;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9117;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9118;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9119;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9120;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9121;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9122;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9123;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9124;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9125;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9126;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9127;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9128;TRAM;PortaMaggiore;TRAM - ROMA 1 TIPO FIAT 72550;1
-Atac;9201;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9202;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9203;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9204;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9205;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9206;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9207;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9208;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72550;1
-Atac;9209;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72550;1
-Atac;9210;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72550;1
-Atac;9211;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72550;1
-Atac;9212;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9213;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9214;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9215;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9216;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9217;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9218;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9219;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9220;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9221;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9222;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9223;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9224;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9225;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9226;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9227;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9228;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9229;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9230;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9231;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9232;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9233;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9234;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9235;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9236;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9237;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9238;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9239;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9240;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9241;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9242;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72551;1
-Atac;9243;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72550;1
-Atac;9244;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72550;1
-Atac;9245;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72550;1
-Atac;9246;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72550;1
-Atac;9247;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72550;1
-Atac;9248;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72550;1
-Atac;9249;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72550;1
-Atac;9250;TRAM;PortaMaggiore;TRAM - ROMA 2 TIPO FIAT 72550;1
+Atac;9101;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9103;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9104;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9105;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9106;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9107;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9108;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9109;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9110;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9111;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9112;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9113;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9114;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9115;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9116;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9117;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9118;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9119;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9120;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9121;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9122;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9123;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9124;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9125;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9126;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9127;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9128;TRAM;PortaMaggiore;TRAM - FIAT 72550 Cityway Roma I;1
+Atac;9201;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9202;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9203;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9204;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9205;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9206;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9207;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9208;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9209;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9210;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9211;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9212;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9213;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9214;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9215;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9216;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9217;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9218;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9219;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9220;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9221;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9222;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9223;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9224;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9225;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9226;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9227;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9228;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9229;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9230;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9231;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9232;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9233;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9234;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9235;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9236;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9237;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9238;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9239;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9240;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9241;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9242;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9243;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9244;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9245;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9246;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9247;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9248;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9249;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
+Atac;9250;TRAM;PortaMaggiore;TRAM - FIAT 72551 Cityway Roma II;1
 BIS/Tuscia;9600;TPL.Diesel Euro5;BIS/Tuscia;BUS - BREDA VIVACITY Corto;3
 BIS/Tuscia;9601;TPL.Diesel Euro5;BIS/Tuscia;BUS - BREDA VIVACITY Corto;3
 BIS/Tuscia;9609;TPL.Diesel Euro5;BIS/Tuscia;BUS - BREDA VIVACITY Corto;3
@@ -2988,48 +2989,83 @@ BIS/Tuscia;M204;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
 BIS/Tuscia;M206;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
 BIS/Tuscia;M258;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
 BIS/Tuscia;M428;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
-Cilia/Miccolis;75301;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;7
-Cilia/Miccolis;75302;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;7
-Cilia/Miccolis;75303;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;7
-Cilia/Miccolis;75304;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;7
-Cilia/Miccolis;75305;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;7
-Cilia/Miccolis;75306;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;7
-Cilia/Miccolis;75307;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;7
-Cilia/Miccolis;75308;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;7
-Cilia/Miccolis;75309;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;7
-Cilia/Miccolis;75310;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;7
-Cilia/Miccolis;75311;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;7
-Cilia/Miccolis;75312;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;7
-Cilia/Miccolis;75313;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;7
-Cilia/Miccolis;75314;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;7
-Cilia/Miccolis;75315;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75316;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75317;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75318;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75319;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75320;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75321;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75322;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75323;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75324;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75325;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75326;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75327;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75328;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75329;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75330;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75331;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75332;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75333;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75334;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75335;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75336;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75337;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75338;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75339;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75340;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75341;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75342;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75343;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75344;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
-Cilia/Miccolis;75345;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;7
+Cilia/Miccolis;75301;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;3
+Cilia/Miccolis;75302;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;3
+Cilia/Miccolis;75303;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;3
+Cilia/Miccolis;75304;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;3
+Cilia/Miccolis;75305;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;3
+Cilia/Miccolis;75306;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;3
+Cilia/Miccolis;75307;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;3
+Cilia/Miccolis;75308;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;3
+Cilia/Miccolis;75309;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;3
+Cilia/Miccolis;75310;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;3
+Cilia/Miccolis;75311;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;3
+Cilia/Miccolis;75312;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;3
+Cilia/Miccolis;75313;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;3
+Cilia/Miccolis;75314;IBRIDO;Pisana;BUS - MERCEDES CITARO C2 HYBRID;3
+Cilia/Miccolis;75315;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75316;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75317;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75318;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75319;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75320;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75321;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75322;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75323;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75324;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75325;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75326;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75327;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75328;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75329;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75330;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75331;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75332;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75333;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75334;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75335;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75336;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75337;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75338;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75339;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75340;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75341;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75342;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75343;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75344;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+Cilia/Miccolis;75345;Diesel Euro 6;Pisana;BUS - ISUZU CITYPORT Normale;3
+BIS/Tuscia;19;TPL.Diesel Euro5;BIS/Tuscia;BUS - VDL CITEA LLE120 Normale;3
+ATR;20;TPL.Diesel Euro5;ATR;BUS - VDL CITEA LLE120 Normale;3
+BIS/Tuscia;22;TPL.Diesel Euro5;BIS/Tuscia;BUS - VDL CITEA LLE120 Normale;3
+BIS/Tuscia;204;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;206;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;258;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;259;TPL.Diesel Euro6;Maglianella;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;260;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;261;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;262;TPL.Diesel Euro6;Maglianella;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;263;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;286;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;407;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;409;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;410;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;411;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;412;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;413;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;414;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;428;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;436;TPL.Diesel Euro5;BIS/Tuscia;BUS - VDL CITEA SLF120 Normale;3
+BIS/Tuscia;454;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+ATR;499;TPL.Diesel Euro5;ATR;BUS - VDL CITEA SLF120 Normale;3
+BIS/Tuscia;550;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;551;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+BIS/Tuscia;552;TPL.Diesel Euro6;BIS/Tuscia;BUS - MERCEDES SPRINTER Corto;3
+ATR;752;TPL.Diesel Euro5;ATR;BUS - VDL CITEA LLE120 Normale;3
+BIS/Tuscia;753;TPL.Diesel Euro5;BIS/Tuscia;BUS - VDL CITEA SLF120 Normale;3
+BIS/Tuscia;754;TPL.Diesel Euro5;BIS/Tuscia;BUS - VDL CITEA SLF120 Normale;3
+BIS/Tuscia;875;TPL.Diesel Euro5;BIS/Tuscia;BUS - VDL CITEA SLF120 Normale;3
+BIS/Tuscia;876;TPL.Diesel Euro5;BIS/Tuscia;BUS - VDL CITEA SLF120 Normale;3
+BIS/Tuscia;877;TPL.Diesel Euro5;BIS/Tuscia;BUS - VDL CITEA SLF120 Normale;3
+BIS/Tuscia;948;TPL.Diesel Euro6;Maglianella;BUS - MERCEDES SPRINTER Corto;3
+ATR;991;TPL.Diesel Euro5;ATR;BUS - VDL CITEA SLF120 Normale;3
+BIS/Tuscia;993;TPL.Diesel Euro5;BIS/Tuscia;BUS - VDL CITEA SLF120 Normale;3

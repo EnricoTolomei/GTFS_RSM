@@ -235,7 +235,11 @@
       <DependentUpon>UpdateBox.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="AtacFeed_TemporaryKey.pfx" />
-    <None Include="Config\GTFS_Static\DettagliVettura.csv">
+    <None Include="Config\CityDefaults.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Config\GTFS_Static\DettagliVettura.csv" />
+    <None Include="Config\GTFS_Static\DettagliVettura_Roma.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Config\GTFS_Static\GTFS.zip">

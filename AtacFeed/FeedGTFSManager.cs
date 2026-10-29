@@ -313,15 +313,20 @@ namespace AtacFeed
         /// <summary>
         /// Carica i dati statici e le configurazioni correlate, restituendo solo dati di presentazione.
         /// </summary>
-        public FeedConfigurationDto LoadConfiguration(
-            string staticDataPath,
-            bool usaDettagliVettura,
-            string monitorRulesFile,
-            string alertRulesPath,
-            string weightedCriteriaFile)
+        public FeedConfigurationDto LoadConfiguration(string suffixDettagliVettura)
         {
+            string monitorRulesFile = Path.Combine("Config", "MonitoraggioLinee", "RegoleMonitoraggio_yes.txt");
+            string alertRulesPath = Path.Combine("Config", "Regole_Alert");
+            string weightedCriteriaFile = Path.Combine("Config", "CriterioMediaPonderata.txt");
             var vehicleManager = _vehicleManager;
-            vehicleManager.GTFS_RSM = new GTFS_RSM(staticDataPath, usaDettagliVettura);
+            try
+            {
+                vehicleManager.GTFS_RSM = new GTFS_RSM(Path.Combine("Config", "GTFS_Static"), suffixDettagliVettura);
+            }
+            catch (Exception ex)
+            {
+                Log.Information(ex, "Nessun GTFS statico");
+            }
 
             try
             {
@@ -340,9 +345,9 @@ namespace AtacFeed
         /// <summary>
         /// Aggiorna i dettagli vettura secondo l'opzione selezionata nella UI.
         /// </summary>
-        public void ConfigureVehicleDetails(bool enabled)
+        public void ConfigureVehicleDetails(string suffixDettagliVettura)
         {
-            _vehicleManager?.GTFS_RSM?.LeggiDettagliVettura(enabled);
+            _vehicleManager?.GTFS_RSM?.LeggiDettagliVettura(suffixDettagliVettura);
         }
 
         public FeedConfigurationDto ReloadAlertConfiguration(string alertRulesPath, string weightedCriteriaFile)

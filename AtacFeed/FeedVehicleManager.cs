@@ -759,13 +759,42 @@ namespace AtacFeed
                         }
                     }
 
+
+                    // 1. Estrai i due valori gestore (gestendo i possibili null)
+                    string gestoreDettagli = dettagli?.Gestore;
+                    string gestoreLinea = lineaObj?.Agency?.Name?.ToUpper();
+
+                    // 2. Determina il valore finale in base alla tua logica di business
+                    string gestoreFinale = null;
+
+                    if (!string.IsNullOrEmpty(gestoreDettagli) && !string.IsNullOrEmpty(gestoreLinea))
+                    {
+                        // Se sono diversi (senza considerare maiuscole/minuscole), mostrali entrambi
+                        if (!string.Equals(gestoreDettagli, gestoreLinea, StringComparison.OrdinalIgnoreCase))
+                        {
+                            gestoreFinale = $"{gestoreDettagli} ({gestoreLinea})";
+                        }
+                        else
+                        {
+                            gestoreFinale = gestoreDettagli; // Sono uguali, usane uno
+                        }
+                    }
+                    else
+                    {
+                        // Se uno dei due è null, usa quello disponibile (fallback con l'operatore coalescing ??)
+                        gestoreFinale = gestoreDettagli ?? gestoreLinea;
+                    }
+
+
+
                     var ev = new ExtendedVehicleInfo(
                         idVettura: vehiclePos?.Vehicle?.Id,
                         matricola: mat,
                         licensePlate: vehiclePos?.Vehicle?.LicensePlate,
                         routeId: routeId,
                         linea: linea,
-                        gestore: dettagli?.Gestore ?? lineaObj?.Agency?.Name?.ToUpper(),
+                        //gestore: dettagli?.Gestore ?? lineaObj?.Agency?.Name?.ToUpper(),
+                        gestore: gestoreFinale,
                         directionId: (uint?)trip?.Direction ?? vehiclePos?.Trip?.DirectionId,
                         currentStopSequence: vehiclePos?.CurrentStopSequence ?? 0,
                         congestionLevel: vehiclePos?.congestion_level ?? VehiclePosition.CongestionLevel.UnknownCongestionLevel,

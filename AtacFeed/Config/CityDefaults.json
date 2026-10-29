@@ -1,0 +1,22 @@
+{
+  "Roma": {
+    "UrlVehicle": "https://romamobilita.it/sites/default/files/rome_rtgtfs_vehicle_positions_feed.pb",
+    "UrlTrip": "https://romamobilita.it/sites/default/files/rome_rtgtfs_trip_updates_feed.pb",
+    "UrlAlert": "https://romamobilita.it/sites/default/files/rome_rtgtfs_service_alerts_feed.pb",
+    "UrlVehicleRiserva": "https://dati.comune.roma.it/catalog/dataset/a7dadb4a-66ae-4eff-8ded-a102064702ba/resource/d2b123d6-8d2d-4dee-9792-f535df3dc166/download/rome_vehicle_positions.pb",
+    "UrlGTFSStatico": "https://romamobilita.it/sites/default/files/rome_static_gtfs.zip",
+    "UrlMD5GTFSStatico": "https://romamobilita.it/sites/default/files/rome_static_gtfs.zip.md5",
+    "UrlDettagliVettura": "https://raw.githubusercontent.com/EnricoTolomei/GTFS_RSM/master/AtacFeed/Config/GTFS_Static/DettagliVettura_Roma.csv",
+    "DettagliVettura": true
+  },
+  "Torino": {
+    "UrlVehicle": "https://percorsieorari.gtt.to.it/das_gtfsrt/vehicle_position.aspx",
+    "UrlTrip": "",
+    "UrlAlert": "",
+    "UrlVehicleRiserva": "",
+    "UrlGTFSStatico": "https://proxy.busone.app/gtt/gtfs.zip",
+    "UrlMD5GTFSStatico": "https://www.vbb.de/fileadmin/user_upload/VBB_GTFS.zip.md5",
+    "UrlDettagliVettura": "",
+    "DettagliVettura": false
+  }
+}

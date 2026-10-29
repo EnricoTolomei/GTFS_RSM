@@ -24,6 +24,8 @@ namespace AtacFeed
 
         public string UrlMD5 { get; set; }
         public string UrlGTFS { get; set; }
+        public string UrlDettagliVettura { get; set; }
+        public string CityName { get; set; }
         public bool NewCSVDownloaded { get; set; }
         public bool NewGTFSDownloaded { get; set; }
 
@@ -308,10 +310,8 @@ namespace AtacFeed
             bool esitoDownload = false;
             try
             {
-                Uri uriDettagli = new Uri("https://raw.githubusercontent.com/EnricoTolomei/GTFS_RSM/master/AtacFeed/Config/GTFS_Static/DettagliVettura.csv");
                 Uri uriCriterioMedia = new Uri("https://raw.githubusercontent.com/EnricoTolomei/GTFS_RSM/master/AtacFeed/Config/CriterioMediaPonderata.txt");
                 string localVersion = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}LatestVersion.txt.new";
-                string localDettagli = $"Config{Path.DirectorySeparatorChar}GTFS_Static{Path.DirectorySeparatorChar}DettagliVettura.csv.new";
                 string localCriterioMedia = $"Config{Path.DirectorySeparatorChar}CriterioMediaPonderata.txt.new";
 
                 using (WebClient wc = new WebClient())
@@ -320,15 +320,13 @@ namespace AtacFeed
                     {
                         wc.DownloadProgressChanged += Wc_DownloadProgressChanged;
                     }
-                    await wc.DownloadFileTaskAsync(uriDettagli, localDettagli);
                     await wc.DownloadFileTaskAsync(uriCriterioMedia, localCriterioMedia);
                 }
 
+                await DownloadCityVehicleDetails(clickPerformed);
+
                 File.Copy(localVersion, Path.GetDirectoryName(localVersion) + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(localVersion), true);
                 File.Delete(localVersion);
-
-                File.Copy(localDettagli, Path.GetDirectoryName(localDettagli) + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(localDettagli), true);
-                File.Delete(localDettagli);
 
                 File.Copy(localCriterioMedia, Path.GetDirectoryName(localCriterioMedia) + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(localCriterioMedia), true);
                 File.Delete(localCriterioMedia);
@@ -344,6 +342,11 @@ namespace AtacFeed
         }
 
         public async Task<bool> DownloadGTFS(bool clickPerformed)
+        {
+            return await DownloadGTFS(clickPerformed, true);
+        }
+
+        private async Task<bool> DownloadGTFS(bool clickPerformed, bool downloadVehicleDetails)
         {
             bool esitoDownload = false;
             try
@@ -368,6 +371,13 @@ namespace AtacFeed
                 File.Copy(localGTFS, Path.GetDirectoryName(localGTFS) + Path.DirectorySeparatorChar + Path.GetFileNameWithoutExtension(localGTFS), true);
                 File.Delete(localGTFS);
                 NewGTFSDownloaded = true;
+
+                if (downloadVehicleDetails && !string.IsNullOrWhiteSpace(UrlDettagliVettura))
+                {
+                    if (await DownloadCityVehicleDetails(clickPerformed))
+                        NewCSVDownloaded = true;
+                }
+
                 esitoDownload = true;
             }
             catch (Exception exc)
@@ -376,6 +386,39 @@ namespace AtacFeed
                 esitoDownload = false;
             }
             return esitoDownload;
+        }
+
+        private async Task<bool> DownloadCityVehicleDetails(bool clickPerformed)
+        {
+            if (string.IsNullOrWhiteSpace(UrlDettagliVettura) || string.IsNullOrWhiteSpace(CityName))
+                return false;
+
+            string directory = Path.Combine("Config", "GTFS_Static");
+            string localPath = Path.Combine(directory, $"DettagliVettura_{CityName}.csv");
+            string temporaryPath = localPath + ".new";
+
+            try
+            {
+                using (var wc = new WebClient())
+                {
+                    if (clickPerformed)
+                        wc.DownloadProgressChanged += Wc_DownloadProgressChanged;
+
+                    await wc.DownloadFileTaskAsync(new Uri(UrlDettagliVettura), temporaryPath);
+                }
+
+                File.Copy(temporaryPath, localPath, true);
+                File.Delete(temporaryPath);
+                return true;
+            }
+            catch (Exception exc)
+            {
+                if (File.Exists(temporaryPath))
+                    File.Delete(temporaryPath);
+
+                Log.Warning(exc, "Download dettagli vettura non riuscito per la città {CityName}", CityName);
+                return false;
+            }
         }
 
         internal void ResetUI()
@@ -407,14 +450,15 @@ namespace AtacFeed
             bool? existNewGTFS = string.IsNullOrEmpty(UrlMD5) ? null : await CheckGTFS();
             bool? existNewVersion = await CheckVersion();
 
+            bool csvDownloaded = false;
             if (forceDownload || (download && existNewConf.GetValueOrDefault(false)))
             {
-                await DownloadCSV(false);
+                csvDownloaded = await DownloadCSV(false);
             }
 
             if (forceDownload || (download && existNewGTFS.GetValueOrDefault(false)))
             {
-                await DownloadGTFS(false);
+                await DownloadGTFS(false, !csvDownloaded);
             }
 
             return !existNewVersion.HasValue || !existNewGTFS.HasValue || !existNewGTFS.HasValue

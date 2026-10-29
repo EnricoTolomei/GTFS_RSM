@@ -85,7 +85,7 @@
             this.groupBox3.Size = new System.Drawing.Size(811, 122);
             this.groupBox3.TabIndex = 7;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "File di configurazione - DettagliVettura.csv";
+            this.groupBox3.Text = "File di configurazione - dettagli flotta per città";
             // 
             // labelUpdateCSV
             // 

@@ -44,7 +44,7 @@ namespace AtacFeed
         public List<RegolaMonitoraggio> RegoleMonitoraggio;
         public List<AlertDaControllare> AlertsDaControllare;
 
-        public GTFS_RSM(string pathGTFSStatico, bool usaDettagliVettura = true)
+        public GTFS_RSM(string pathGTFSStatico, string suffixDettagliVettura = "")
         {
             if (string.IsNullOrWhiteSpace(pathGTFSStatico))
                 throw new ArgumentException(nameof(pathGTFSStatico));
@@ -90,7 +90,7 @@ namespace AtacFeed
 
             AlertsDaControllare = new List<AlertDaControllare>();
 
-            LeggiDettagliVettura(usaDettagliVettura);
+            LeggiDettagliVettura(suffixDettagliVettura);
         }
 
         private static List<LineaAgenzia> BuildLineaAgenzia(IUniqueEntityCollection<Route> routes, IEnumerable<Agency> agencies)
@@ -112,13 +112,13 @@ namespace AtacFeed
             return result;
         }
 
-        internal void LeggiDettagliVettura(bool usaDettagliVettura)
+        internal void LeggiDettagliVettura(string suffixDettagliVettura="")
         {
             ElencoDettagliVettura = Array.Empty<DettagliVettura>();
-            if (!usaDettagliVettura)
+            if (string.IsNullOrEmpty(suffixDettagliVettura))
                 return;
 
-            string pathDettagli = Path.Combine("Config", "GTFS_Static", "DettagliVettura.csv");
+            string pathDettagli = Path.Combine("Config", "GTFS_Static", $"DettagliVettura_{suffixDettagliVettura}.csv");
             if (!File.Exists(pathDettagli))
                 return;
 
@@ -133,7 +133,7 @@ namespace AtacFeed
             }
             catch (Exception ex)
             {
-                Log.Error(ex, "Errore durante la lettura di DettagliVettura.csv");
+                Log.Error(ex, "Errore durante la lettura di DettagliVettura_{City}.csv", suffixDettagliVettura);
                 ElencoDettagliVettura = Array.Empty<DettagliVettura>();
             }
         }

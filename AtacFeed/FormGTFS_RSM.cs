@@ -1,6 +1,7 @@
 using AtacFeed.Properties;
 using FastMember;
 using GTFS.Entities;
+using Newtonsoft.Json;
 using ScottPlot;
 using System;
 using System.Collections.Generic;
@@ -21,8 +22,139 @@ namespace AtacFeed
 {
     public partial class FormGTFS_RSM : Form
     {
+        private Dictionary<string, CityDefaults> cityDefaults;
+        private bool isApplyingCityDefaults;
+
+        private sealed class CityDefaults
+        {
+            public string UrlVehicle { get; set; }
+            public string UrlTrip { get; set; }
+            public string UrlAlert { get; set; }
+            public string UrlVehicleRiserva { get; set; }
+            public string UrlGTFSStatico { get; set; }
+            public string UrlMD5GTFSStatico { get; set; }
+            public string UrlDettagliVettura { get; set; }
+            public bool? DettagliVettura { get; set; }
+        }
+
+        private static Dictionary<string, CityDefaults> LoadCityDefaults()
+        {
+            string configPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Config", "CityDefaults.json");
+            if (!File.Exists(configPath))
+            {
+                return new Dictionary<string, CityDefaults>(StringComparer.OrdinalIgnoreCase);
+            }
+
+            string json = File.ReadAllText(configPath);
+            var defaults = JsonConvert.DeserializeObject<Dictionary<string, CityDefaults>>(json);
+            return defaults ?? new Dictionary<string, CityDefaults>(StringComparer.OrdinalIgnoreCase);
+        }
+
+        private void InitializeCitySelector()
+        {
+            cityDefaults = LoadCityDefaults();
+            comboCitta.Items.AddRange(cityDefaults.Keys.OrderBy(x => x).ToArray());
+            comboCitta.Items.Add("Personalizzato");
+            
+            urlVehicle.TextChanged += UrlVehicle_TextChanged;
+            urlTrip.TextChanged += UrlTrip_TextChanged;
+            urlAlert.TextChanged += UrlAlert_TextChanged;
+            urlVehicleRiserva.TextChanged += UrlVehicleRiserva_TextChanged;
+            urlGTFS_Statico.TextChanged += UrlGTFS_Statico_TextChanged;
+            urlMD5_GTFS_Statico.TextChanged += UrlMD5_GTFS_Statico_TextChanged;            
+        }
+
+        private void ComboCitta_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var selectedCity = comboCitta.SelectedItem as string;
+            if (string.IsNullOrWhiteSpace(selectedCity) || selectedCity.Equals("Personalizzato", StringComparison.OrdinalIgnoreCase))
+            {
+                UpdateCityVehicleDetailsDownloadSettings();
+                return;
+            }
+
+            if (!cityDefaults.TryGetValue(selectedCity, out var defaults))
+                return;
+
+            isApplyingCityDefaults = true;
+            try
+            {
+                urlVehicle.Text = defaults.UrlVehicle;
+                urlTrip.Text = defaults.UrlTrip;
+                urlAlert.Text = defaults.UrlAlert;
+                urlVehicleRiserva.Text = defaults.UrlVehicleRiserva;
+                urlGTFS_Statico.Text = defaults.UrlGTFSStatico;
+                urlMD5_GTFS_Statico.Text = defaults.UrlMD5GTFSStatico;
+                checkDettagliVettura.Checked = defaults.DettagliVettura?? false;
+            }
+            finally
+            {
+                isApplyingCityDefaults = false;
+            }
+
+            UpdateBox.UrlGTFS = urlGTFS_Statico.Text;
+            UpdateBox.UrlMD5 = urlMD5_GTFS_Statico.Text;
+            UpdateCityVehicleDetailsDownloadSettings();
+        }
+
+        private void UpdateCityVehicleDetailsDownloadSettings()
+        {
+            string selectedCity = comboCitta.SelectedItem?.ToString();
+            UpdateBox.CityName = selectedCity;
+
+            if (!checkDettagliVettura.Checked ||
+                string.IsNullOrWhiteSpace(selectedCity) ||
+                !cityDefaults.TryGetValue(selectedCity, out var defaults))
+            {
+                UpdateBox.UrlDettagliVettura = null;
+                return;
+            }
+
+            UpdateBox.UrlDettagliVettura = defaults.UrlDettagliVettura;
+        }
+
+        private void UrlVehicle_TextChanged(object sender, EventArgs e)
+        {
+            if (!isApplyingCityDefaults && comboCitta.SelectedItem != null)
+                comboCitta.SelectedItem = "Personalizzato";
+        }
+
+        private void UrlTrip_TextChanged(object sender, EventArgs e)
+        {
+            if (!isApplyingCityDefaults && comboCitta.SelectedItem != null)
+                comboCitta.SelectedItem = "Personalizzato";
+        }
+
+        private void UrlAlert_TextChanged(object sender, EventArgs e)
+        {
+            if (!isApplyingCityDefaults && comboCitta.SelectedItem != null)
+                comboCitta.SelectedItem = "Personalizzato";
+        }
+
+        private void UrlVehicleRiserva_TextChanged(object sender, EventArgs e)
+        {
+            if (!isApplyingCityDefaults && comboCitta.SelectedItem != null)
+                comboCitta.SelectedItem = "Personalizzato";
+        }
+
+        private void SetSelectedCityFromCurrentUrls()
+        {
+            var matchingCity = cityDefaults
+                .Where(kvp => kvp.Value.UrlVehicle == urlVehicle.Text &&
+                    kvp.Value.UrlTrip == urlTrip.Text &&
+                    kvp.Value.UrlAlert == urlAlert.Text &&
+                    kvp.Value.UrlVehicleRiserva == urlVehicleRiserva.Text &&
+                    kvp.Value.UrlGTFSStatico == urlGTFS_Statico.Text &&
+                    kvp.Value.UrlMD5GTFSStatico == urlMD5_GTFS_Statico.Text &&
+                    kvp.Value.DettagliVettura == checkDettagliVettura.Checked)
+                .Select(kvp => kvp.Key)
+                .FirstOrDefault();
+
+            comboCitta.SelectedItem = matchingCity ?? "Personalizzato";
+        }
+
         private string fileName;
-        
+
         private DateTime? _lastProcessedFeedTimestamp;
         private FeedMonitorSnapshot _currentSnapshot;
         private FeedConfigurationDto _currentConfiguration;
@@ -32,8 +164,9 @@ namespace AtacFeed
         private readonly UpdateBox UpdateBox = new UpdateBox();
 
         public FormGTFS_RSM()
-        {
+        {            
             InitializeComponent();
+            InitializeCitySelector();
 
             // La facade invia uno snapshot DTO; solo il form effettua il marshal sul thread UI.
             _feedManager.SnapshotUpdated += (s, e) =>
@@ -562,6 +695,7 @@ namespace AtacFeed
             urlVehicle.Text = Properties.Settings.Default.UrlVehicle;
             urlTrip.Text = Properties.Settings.Default.UrlTrip;
             urlAlert.Text = Properties.Settings.Default.UrlAlert;
+            SetSelectedCityFromCurrentUrls();
             checkTripDuplicati.Checked = Properties.Settings.Default.Duplicati;
             checkTripVuoti.Checked = Properties.Settings.Default.Vuote;
             checkCSV.Checked = Properties.Settings.Default.SalvaCSV;
@@ -584,6 +718,7 @@ namespace AtacFeed
             checkSovraffollamento.Checked = Properties.Settings.Default.CheckSovraffollamento;
             checkMD5.Checked = Properties.Settings.Default.CheckMD5;
             checkDettagliVettura.Checked = Properties.Settings.Default.CheckDettagliVettura;
+            UpdateCityVehicleDetailsDownloadSettings();
             checkTuttoPercorso.Visible = Properties.Settings.Default.ExtraSetting;
             checkResetSempre.Visible = Properties.Settings.Default.ExtraSetting;
             urlAlert.Visible = true;
@@ -601,13 +736,9 @@ namespace AtacFeed
 
         private FeedConfigurationDto LeggiFileConfigurazione()
         {
+            string selectedCity = comboCitta.SelectedItem?.ToString();
             FeedConfigurationDto configuration = _feedManager.LoadConfiguration(
-                Path.Combine("Config", "GTFS_Static"),
-                checkDettagliVettura.Checked,
-                Path.Combine("Config", "MonitoraggioLinee", "RegoleMonitoraggio_yes.txt"),
-                Path.Combine("Config", "Regole_Alert"),
-                Path.Combine("Config", "CriterioMediaPonderata.txt"));
-
+                suffixDettagliVettura: checkDettagliVettura.Checked ? selectedCity : "");
             UpdateBox.ExistNewerGTFS = false;
             UpdateBox.ExistNewerCSV = false;
             UpdateBox.ExistNewerVersion = false;
@@ -1023,17 +1154,26 @@ namespace AtacFeed
 
         private void UrlMD5_GTFS_Statico_TextChanged(object sender, EventArgs e)
         {
+            if (!isApplyingCityDefaults && comboCitta.SelectedItem != null)
+                comboCitta.SelectedItem = "Personalizzato";
+
             UpdateBox.UrlMD5 = urlMD5_GTFS_Statico.Text;
         }
 
         private void UrlGTFS_Statico_TextChanged(object sender, EventArgs e)
         {
+            if (!isApplyingCityDefaults && comboCitta.SelectedItem != null)
+                comboCitta.SelectedItem = "Personalizzato";
+
             UpdateBox.UrlGTFS = urlGTFS_Statico.Text;
         }
 
         private void CheckDettagliVettura_CheckedChanged(object sender, EventArgs e)
         {
-            _feedManager.ConfigureVehicleDetails(checkDettagliVettura.Checked);
+            string selectedCity = comboCitta.SelectedItem?.ToString();
+            bool isConfiguredCity = !string.IsNullOrWhiteSpace(selectedCity) && cityDefaults.ContainsKey(selectedCity);
+            _feedManager.ConfigureVehicleDetails(checkDettagliVettura.Checked && isConfiguredCity ? selectedCity : "");
+            UpdateCityVehicleDetailsDownloadSettings();
         }
 
         private void GridAvvisi_FilterStringChanged(object sender, Zuby.ADGV.AdvancedDataGridView.FilterEventArgs e)
